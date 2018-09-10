@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Account" representedClassName="Account" syncable="YES">
+        <attribute name="iconAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAccount" attributeType="String" syncable="YES"/>
+        <attribute name="sumAccount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="iconCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameCategory" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES">
+        <attribute name="corAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateTransaction" attributeType="Date" minDateTimeInterval="558291180" maxDateTimeInterval="873910500" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="iconTransaction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAccount" attributeType="String" syncable="YES"/>
+        <attribute name="nameCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sumTransaction" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeTransaction" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Category" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Transaction" positionX="-36" positionY="36" width="128" height="150"/>
+    </elements>
+</model>
