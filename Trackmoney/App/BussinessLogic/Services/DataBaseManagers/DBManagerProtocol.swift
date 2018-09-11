@@ -5,8 +5,7 @@ import CoreData
 protocol DBManagerProtocol {
         
     func create(message: [MessageKeyType: Any]) -> Bool
-    func getAllObject() -> [NSManagedObject]?
-    func getOneObject(message: [MessageKeyType: Any]) -> NSManagedObject?
+    func get() -> [NSManagedObject]?
     func change(message: [MessageKeyType: Any]) -> Bool
     func delete(message: [MessageKeyType: Any]) -> Bool
     

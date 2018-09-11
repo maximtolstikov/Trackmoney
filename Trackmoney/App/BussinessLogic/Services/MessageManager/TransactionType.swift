@@ -1,6 +1,6 @@
 // Для перечесления типов Транзакций
 
-enum MessageTransactionType: Int16 {
+enum TransactionType: Int16 {
     
     case expense
     case income

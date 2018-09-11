@@ -1,6 +1,7 @@
 // Для тестирования методов класса CategoryDBManager
 
 //swiftlint:disable sorted_imports
+//swiftlint:disable force_unwrapping
 
 
 import UIKit
@@ -43,7 +44,7 @@ class CategoryDBManagerTest: XCTestCase {
     func testGetAllCategory() {
         
         _ = manager?.create(message: message!)
-        let result = manager?.getAllObject()
+        let result = manager?.get()
         XCTAssertFalse((result?.isEmpty)!)
         _ = manager?.delete(message: message!)
         
@@ -53,7 +54,7 @@ class CategoryDBManagerTest: XCTestCase {
     func testGetOneCategory() {
         
         _ = manager?.create(message: message!)
-        let result = manager?.getOneObject(message: message!)
+        let result = manager?.getOneObject(for: message![.nameCategory] as! String)
         XCTAssertNotNil(result)
         _ = manager?.delete(message: message!)
         

@@ -5,9 +5,10 @@
 //  Created by Maxim Tolstikov on 10/09/2018.
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
+//swiftlint:disable force_cast
 
-import UIKit
 import CoreData
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,19 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let managerA = AccountDBManager()
-        let resultA = managerA.getAllObject()
+        let resultA = managerA.get()
         let accounts = resultA as! [Account]
         
         print("A: \(accounts)")
         
         let managerC = CategoryDBManager()
-        let resultC = managerC.getAllObject()
+        let resultC = managerC.get()
         let categories = resultC as! [Category]
         
         print("C: \(categories)")
         
         let managerT = TransactionDBManager()
-        let result = managerT.getAllObject()
+        let result = managerT.get()
         let transactions = result as! [Transaction]
         
         print("T: \(transactions)")

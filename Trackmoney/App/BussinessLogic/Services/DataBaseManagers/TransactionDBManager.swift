@@ -10,35 +10,22 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     
     func create(message: [MessageKeyType: Any]) -> Bool {
         
-        let trasaction = Transaction(context: context)
-        trasaction.dateTransaction = message[.dateTransaction] as! NSDate
-        trasaction.sumTransaction = message[.sumTransaction] as! Int32
-        trasaction.typeTransaction = message[.typeTransaction] as! Int16
-        trasaction.nameAccount = message[.nameAccount] as! String
-        //TODO: сделать обязательную иконку у транзакции
-        if mManager.isExistValue(for: .nameCategory, in: message) {
-            trasaction.iconTransaction = message[.iconTransaction] as? String
+        guard let transaction = CreateTransaction(
+            context: context,
+            mManager: mManager,
+            message: message
+            ) else {
+                assertionFailure()
+                return false
         }
-//        if mManager.isExistValue(for: .nameCategory, in: message) {
-//            trasaction.coreAccount = message[.nameCategory] as? String
-//        }
-//        if mManager.isExistValue(for: .corAccount, in: message) {
-//            trasaction.coreAccount = message[.corAccount] as? String
-//        }
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        return transaction.execute()
         
     }
     
     
     //TODO: переделать на получение по порциям
-    func getAllObject() -> [NSManagedObject]? {
+    func get() -> [NSManagedObject]? {
         
         var resultRequest = [Transaction]()
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -55,13 +42,11 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     
     
     // Возвращает транзакцию по времяни
-    func getOneObject(message: [MessageKeyType: Any]) -> NSManagedObject? {
-        
-        guard let date = message[.dateTransaction] else { return nil }
+    func getOneObject(for date: NSDate) -> Transaction? {
         
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(
-            format: "dateTransaction = %@", date as! NSDate)
+            format: "dateTransaction = %@", date)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -113,25 +98,19 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     
     func delete(message: [MessageKeyType: Any]) -> Bool {
         
-        guard let transaction = getOneObject(message: message) else {
+        guard let transaction = getOneObject(
+            for: message[.dateTransaction] as! NSDate),
+            let deletTransaction = DeleteTransaction(
+                context: context,
+                transaction: transaction) else {
             assertionFailure()
             return false
         }
         
-        //TODO: сдесь нужен итератор по Транзакциям в бэкграунде
-        
-        context.delete(transaction)
-        
-        do {
-            try context.save()
-            return true
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        return deletTransaction.execute()
         
     }
-    
+
     
     
 //    //TODO: изменить получение порциями

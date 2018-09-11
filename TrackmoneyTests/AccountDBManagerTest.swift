@@ -40,7 +40,7 @@ class AccountDBManagerTest: XCTestCase {
     func testGetAccount() {
 
         _ = manager?.create(message: message!)
-        let result = manager?.getOneObject(message: message!)
+        let result = manager?.getOneObject(for: message![.nameAccount] as! String)
         XCTAssertNotNil(result)
         _ = manager?.delete(message: message!)
 
@@ -50,7 +50,7 @@ class AccountDBManagerTest: XCTestCase {
     func testGetAllAccount() {
 
         _ = manager?.create(message: message!)
-        let result = manager?.getAllObject()
+        let result = manager?.get()
         XCTAssertFalse((result?.isEmpty)!)
         _ = manager?.delete(message: message!)
 

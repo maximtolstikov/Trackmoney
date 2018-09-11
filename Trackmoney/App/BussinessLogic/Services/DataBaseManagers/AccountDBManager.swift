@@ -13,9 +13,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         let account = Account(context: context)
         account.nameAccount = message[.nameAccount] as! String
         account.sumAccount = message[.sumAccount] as! Int32
-//        if mManager.isExistValue(for: .iconAccount, in: message) {
-//            account.iconAccount = message[.iconAccount] as? String
-//        }
+
         
         do {
             try context.save()
@@ -28,7 +26,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    func getAllObject() -> [NSManagedObject]? {
+    func get() -> [NSManagedObject]? {
         
         var resultRequest = [Account]()
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
@@ -45,12 +43,10 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     
     
     //Возвращает Account по имени
-    func getOneObject(message: [MessageKeyType: Any]) -> NSManagedObject? {
-        
-        guard let name = message[.nameAccount] else { return nil }
+    func getOneObject(for name: String) -> Account? {
         
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "nameAccount = %@", name as! String)
+        fetchRequest.predicate = NSPredicate(format: "nameAccount = %@", name )
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -74,12 +70,10 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     
     func change(message: [MessageKeyType: Any]) -> Bool {
         
-        guard let result = getOneObject(message: message) else {
-            //assertionFailure()
+        guard let account = getOneObject(for: message[.nameAccount] as! String) else {
+            assertionFailure()
             return false
         }
-        
-        let account = result as! Account
         
         if mManager.isExistValue(for: .newName, in: message) {
             account.nameAccount = message[.newName] as! String
@@ -102,8 +96,8 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     
     func delete(message: [MessageKeyType: Any]) -> Bool {
         
-        guard let account = getOneObject(message: message) else {
-            //assertionFailure()
+        guard let account = getOneObject(for: message[.nameAccount] as! String) else {
+            assertionFailure()
             return false
         }
         
@@ -119,6 +113,25 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             return false
         }
         
+    }
+    
+    
+    // Уменьшает сумму счета
+    func substract(for account: Account, sum: Int32) {
+        account.sumAccount -= sum
+    }
+    
+    
+    // Увеличивает сумму счета
+    func add(for account: Account, sum: Int32) {
+        account.sumAccount += sum
+    }
+    
+    
+    // Переводит сумму с одного счета на другой
+    func move(fromAccount: Account, toAccount: Account, sum: Int32) {
+        fromAccount.sumAccount -= sum
+        toAccount.sumAccount += sum
     }
   
 }

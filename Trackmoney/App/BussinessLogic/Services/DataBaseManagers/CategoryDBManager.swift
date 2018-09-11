@@ -26,7 +26,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     }
     
     // Возвращает все объекты Category
-    func getAllObject() -> [NSManagedObject]? {
+    func get() -> [NSManagedObject]? {
         
         var resultRequest = [Category]()
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
@@ -43,10 +43,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     
     //Возвращает категорию по имени
-    func getOneObject(message: [MessageKeyType: Any]) -> NSManagedObject? {
+    func getOneObject(for name: String) -> Category? {
         
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "nameCategory = %@", message[.nameCategory] as! String)
+        fetchRequest.predicate = NSPredicate(format: "nameCategory = %@", name)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -69,12 +69,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     func change(message: [MessageKeyType: Any]) -> Bool {
     
-        guard let result = getOneObject(message: message) else {
+        guard let category = getOneObject(for: message[.nameCategory] as! String) else {
             assertionFailure()
             return false
         }
-
-        let category = result as! Category
         
         if mManager.isExistValue(for: .newName, in: message) {
             category.nameCategory = message[.newName] as! String
@@ -96,12 +94,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     func delete(message: [MessageKeyType: Any]) -> Bool {
         
-        guard let result = getOneObject(message: message) else {
+        guard let category = getOneObject(for: message[.nameCategory] as! String) else {
             assertionFailure()
             return false
         }
-        
-        let category = result as! Category
         
         //TODO: сдесь нужен итератор по Транзакциям
 

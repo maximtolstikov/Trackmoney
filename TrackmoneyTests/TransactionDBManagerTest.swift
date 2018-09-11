@@ -1,6 +1,7 @@
 // Для тестирования методов класса TransactionDBManager
 
 //swiftlint:disable sorted_imports
+//swiftlint:disable force_unwrapping
 
 
 import UIKit
@@ -9,40 +10,78 @@ import XCTest
 
 class TransactionDBManagerTest: XCTestCase {
 
-    var message: [MessageKeyType: Any]?
-    var manager: TransactionDBManager?
+    var transactionMessage: [MessageKeyType: Any]?
+    var transactionManager: TransactionDBManager?
+    var accountManager: AccountDBManager?
+    
     
     override func setUp() {
         super.setUp()
         
-        let epoch = NSDate(timeIntervalSince1970: 0.0)
+        let epoch = NSDate(timeIntervalSinceNow: 0.0)
         
-        message = [
+        transactionMessage = [
             .dateTransaction: epoch,
             .sumTransaction: Int32(30),
-            .typeTransaction: MessageTransactionType.expense.rawValue,
+            .sumAccount: Int32(10),
+            .typeTransaction: TransactionType.transfer.rawValue,
             .nameAccount: "testMainName",
             .iconTransaction: "testString",
-            .corAccount: "testCoreName",
+            .corAccount: "testCorName",
             .nameCategory: "testCategoryName"
         ]
-        manager = TransactionDBManager()
+        
+        transactionManager = TransactionDBManager()
+        accountManager = AccountDBManager()
         
     }
     
+    
     override func tearDown() {
         
-        message = nil
-        manager = nil
+        transactionMessage = nil
+        transactionManager = nil
+        accountManager = nil
         
         super.tearDown()
     }
     
-    func testCreateTransaction() {
+    
+    func testCreateDeleteTransaction() {
         
-        let result = manager?.create(message: message!)
-        XCTAssertTrue(result!)
-        _ = manager?.delete(message: message!)
+        var message = transactionMessage
+        
+        for index in 0...2 {
+            
+            message![.typeTransaction] = Int16(index)
+            forTestCreateDeleteTransaction(message: message!)
+            
+        }
+        
+    }
+    
+    
+    func forTestCreateDeleteTransaction(message: [MessageKeyType: Any]) {
+        
+        let mainAccountMessage: [MessageKeyType: Any] = [
+            .nameAccount: "testMainName",
+            .sumAccount: Int32(100)
+        ]
+        let corAccountMessage: [MessageKeyType: Any] = [
+            .nameAccount: "testCorName",
+            .sumAccount: Int32(10)
+        ]
+        
+        _ = accountManager?.create(message: mainAccountMessage)
+        _ = accountManager?.create(message: corAccountMessage)
+        
+        let resultCreate = transactionManager?.create(message: message)
+        XCTAssertTrue(resultCreate!)
+        let resultDelete = transactionManager?.delete(message: message)
+        XCTAssertTrue(resultDelete!)
+        
+        _ = accountManager?.delete(message: mainAccountMessage)
+        _ = accountManager?.delete(message: corAccountMessage)
         
     }
     
