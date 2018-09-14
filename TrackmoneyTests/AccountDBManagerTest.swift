@@ -2,6 +2,7 @@
 
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_unwrapping
+//swiftlint:disable force_cast
 
 import UIKit
 import XCTest

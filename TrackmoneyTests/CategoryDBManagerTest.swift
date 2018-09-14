@@ -3,7 +3,6 @@
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_unwrapping
 
-
 import UIKit
 import XCTest
 @testable import Trackmoney
@@ -54,7 +53,7 @@ class CategoryDBManagerTest: XCTestCase {
     func testGetOneCategory() {
         
         _ = manager?.create(message: message!)
-        let result = manager?.getOneObject(for: message![.nameCategory] as! String)
+        let result = manager?.getOneObject(for: (message![.nameCategory])!)!
         XCTAssertNotNil(result)
         _ = manager?.delete(message: message!)
         

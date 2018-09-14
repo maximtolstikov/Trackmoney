@@ -1,5 +1,7 @@
 // Для описания удаления Транзакции
 
+//swiftlint:disable force_unwrapping
+
 import CoreData
 
 struct DeleteTransaction {

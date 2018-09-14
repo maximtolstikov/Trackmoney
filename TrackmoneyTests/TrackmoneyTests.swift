@@ -5,6 +5,7 @@
 //  Created by Maxim Tolstikov on 10/09/2018.
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
+//swiftlint:disable sorted_imports
 
 import XCTest
 @testable import Trackmoney
