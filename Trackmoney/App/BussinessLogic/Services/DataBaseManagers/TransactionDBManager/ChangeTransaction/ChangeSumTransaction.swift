@@ -39,6 +39,8 @@ struct ChangeSumTransaction {
             corAccount.sumAccount -= difference
         }
         
+        transaction.sumTransaction = newSum
+        
         return true
         
     }
