@@ -16,9 +16,9 @@ struct ChangeCorAccountTransaction {
         ) -> Bool {
     
         guard let oldCorAccount = accountDBManager
-            .getOneObject(for: transaction.corAccount!),
+            .getObjectByName(for: transaction.corAccount!),
             let newCorAccount = accountDBManager
-            .getOneObject(for: newCorAccount) else {
+            .getObjectByName(for: newCorAccount) else {
                 assertionFailure()
                 return false
         }

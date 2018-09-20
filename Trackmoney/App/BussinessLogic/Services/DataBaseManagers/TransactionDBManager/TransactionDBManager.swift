@@ -8,7 +8,7 @@ import UIKit
 class TransactionDBManager: DBManager, DBManagerProtocol {
     
     
-    func create(message: [MessageKeyType: Any]) -> Bool {
+    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
         guard let transaction = CreateTransaction(
             context: context,
@@ -16,7 +16,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
             message: message
             ) else {
                 assertionFailure()
-                return false
+                return (nil, ErrorMessage(error: .transactionIsNotExist))
         }
         
         return transaction.execute()
@@ -68,12 +68,12 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    func change(message: [MessageKeyType: Any]) -> Bool {
+    func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let transaction = getOneObject(
             for: message[.dateTransaction] as! NSDate) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .transactionIsNotExist)
         }
         
         let changeTransactionManager = ChangeTransactionMamager(
@@ -84,31 +84,30 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
          
             do {
                 try context.save()
-                return true
+                return nil
             } catch {
                 print(error.localizedDescription)
-                return false
+                return ErrorMessage(error: .contextDoNotBeSaved)
             }
             
         }
         
-        return false
-        
+        return ErrorMessage(error: .noName)
     }
     
     
-    func delete(message: [MessageKeyType: Any]) -> Bool {
+    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let transaction = getOneObject(
             for: message[.dateTransaction] as! NSDate),
-            let deletTransaction = DeleteTransaction(
+            let deleteTransaction = DeleteTransaction(
                 context: context,
                 transaction: transaction) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .transactionIsNotExist)
         }
         
-        return deletTransaction.execute()
+        return deleteTransaction.execute() ? nil : ErrorMessage(error: .contextDoNotBeSaved)
         
     }
 

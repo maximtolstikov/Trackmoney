@@ -12,7 +12,7 @@ struct ChangeSumTransaction {
         ) -> Bool {
         
         guard let mainAccount = accountDBManager
-                  .getOneObject(for: transaction.nameAccount),
+                  .getObjectByName(for: transaction.nameAccount),
               let type = TransactionType(rawValue: transaction.typeTransaction) else {
                 assertionFailure()
                 return false
@@ -30,7 +30,7 @@ struct ChangeSumTransaction {
             
             //swiftlint:disable force_unwrapping
             guard let corAccount = accountDBManager
-                .getOneObject(for: transaction.corAccount!) else {
+                .getObjectByName(for: transaction.corAccount!) else {
                     assertionFailure()
                     return false
             }

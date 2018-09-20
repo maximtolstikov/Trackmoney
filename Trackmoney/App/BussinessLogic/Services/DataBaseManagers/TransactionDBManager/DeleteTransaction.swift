@@ -24,7 +24,7 @@ struct DeleteTransaction {
         
         let accountDBManager = AccountDBManager()
         
-        guard let mainAccount = accountDBManager.getOneObject(
+        guard let mainAccount = accountDBManager.getObjectByName(
             for: transaction.nameAccount),
             let type = TransactionType(
                 rawValue: transaction.typeTransaction) else {
@@ -39,7 +39,8 @@ struct DeleteTransaction {
         case .income:
             accountDBManager.substract(for: mainAccount, sum: sum)
         case .transfer:
-            guard let corAccount = accountDBManager.getOneObject(for: transaction.corAccount!) else { return false }
+            guard let corAccount = accountDBManager.getObjectByName(
+                for: transaction.corAccount!) else { return false }
             accountDBManager.move(fromAccount: mainAccount, toAccount: corAccount, sum: sum)
         }
         

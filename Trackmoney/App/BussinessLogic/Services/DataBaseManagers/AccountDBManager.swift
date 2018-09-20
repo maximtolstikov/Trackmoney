@@ -1,14 +1,18 @@
 // Для описания методов по работе с BD у AccountViewController
 
 //swiftlint:disable force_cast
+//swiftlint:disable force_unwrapping
 
 import CoreData
 import UIKit
 
 class AccountDBManager: DBManager, DBManagerProtocol {
-
     
-    func create(message: [MessageKeyType: Any]) -> Bool {
+    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
+        
+        if getObjectByName(for: message[.nameAccount] as! String) != nil {
+            return (nil, ErrorMessage(error: .accountIsExistAlready))
+        }
         
         let account = Account(context: context)
         account.nameAccount = message[.nameAccount] as! String
@@ -17,10 +21,10 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         
         do {
             try context.save()
-            return true
+            return (account.objectID, nil)
         } catch {
             print(error.localizedDescription)
-            return false
+            return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
 
     }
@@ -42,11 +46,20 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    //Возвращает Account по имени
-    func getOneObject(for name: String) -> Account? {
+    //Возвращает Account по id
+    func getObjectById(for id: NSManagedObjectID) -> Account? {
+
+        return context.object(with: id) as? Account
+        
+    }
+    
+    
+    // Возвращает Account по имени
+    func getObjectByName(for name: String) -> Account? {
         
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "nameAccount = %@", name )
+        fetchRequest.predicate = NSPredicate(
+            format: "nameAccount = %@", name)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -55,8 +68,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
                 return nil
             }
             
-            let account = result.first!   //swiftlint:disable:this force_unwrapping
-            
+            let account = result.first!
             return account
             
         } catch {
@@ -68,15 +80,16 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     }
 
     
-    func change(message: [MessageKeyType: Any]) -> Bool {
+    func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let account = getOneObject(for: message[.nameAccount] as! String) else {
+        guard let account = getObjectById(
+            for: message[.idAccount] as! NSManagedObjectID) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .accountIsNotExist)
         }
         
-        if mManager.isExistValue(for: .newName, in: message) {
-            account.nameAccount = message[.newName] as! String
+        if mManager.isExistValue(for: .nameAccount, in: message) {
+            account.nameAccount = message[.nameAccount] as! String
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconAccount, in: message) {
@@ -85,20 +98,22 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         
         do {
             try context.save()
-            return true
+            return nil
         } catch {
             print(error.localizedDescription)
-            return false
+            return ErrorMessage(error: .contextDoNotBeSaved)
         }
         
     }
     
     
-    func delete(message: [MessageKeyType: Any]) -> Bool {
+    // Удаляет аккаунт по id
+    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let account = getOneObject(for: message[.nameAccount] as! String) else {
+        guard let account = getObjectById(
+            for: message[.idAccount] as! NSManagedObjectID) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .accountIsNotExist)
         }
         
         //TODO: сдесь нужен итератор по Транзакциям в бэкграунде
@@ -107,10 +122,10 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         
         do {
             try context.save()
-            return true
+            return nil
         } catch {
             print(error.localizedDescription)
-            return false
+            return ErrorMessage(error: .contextDoNotBeSaved)
         }
         
     }

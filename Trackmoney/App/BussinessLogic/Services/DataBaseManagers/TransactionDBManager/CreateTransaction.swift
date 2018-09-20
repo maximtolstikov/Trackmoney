@@ -34,7 +34,7 @@ struct CreateTransaction {
         
         guard let type = TransactionType(
             rawValue: message[.typeTransaction] as! Int16),
-            let accountMain = accountDBManager.getOneObject(
+            let accountMain = accountDBManager.getObjectByName(
                 for: message[.nameAccount] as! String) else {
                     assertionFailure()
                     return nil }
@@ -46,7 +46,7 @@ struct CreateTransaction {
             self.category = message[.nameCategory] as? String
         }
         if mManager.isExistValue(for: .corAccount, in: message) {
-            guard let accountCor = accountDBManager.getOneObject(
+            guard let accountCor = accountDBManager.getObjectByName(
                 for: message[.corAccount] as! String) else {
                     assertionFailure()
                     return nil }
@@ -56,7 +56,7 @@ struct CreateTransaction {
     }
     
     
-    func execute() -> Bool {
+    func execute() -> (NSManagedObjectID?, ErrorMessage?) {
         
         let transaction = Transaction(context: context)
         transaction.dateTransaction = date
@@ -82,10 +82,10 @@ struct CreateTransaction {
         
         do {
             try context.save()
-            return true
+            return (transaction.objectID, nil)
         } catch {
             print(error.localizedDescription)
-            return false
+            return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
         
     }

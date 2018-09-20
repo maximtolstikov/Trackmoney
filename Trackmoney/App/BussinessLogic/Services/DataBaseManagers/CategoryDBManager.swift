@@ -6,9 +6,8 @@ import CoreData
 import UIKit
 
 class CategoryDBManager: DBManager, DBManagerProtocol {
-
     
-    func create(message: [MessageKeyType: Any]) -> Bool {
+    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
         let newCategory = Category(context: context)
         
@@ -17,10 +16,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         
         do {
             try context.save()
-            return true
+            return (newCategory.objectID, nil)
         } catch {
             print(error.localizedDescription)
-            return false
+            return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
         
     }
@@ -67,11 +66,11 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    func change(message: [MessageKeyType: Any]) -> Bool {
+    func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
     
         guard let category = getOneObject(for: message[.nameCategory] as! String) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .categoryIsNotExist)
         }
         
         if mManager.isExistValue(for: .newName, in: message) {
@@ -84,19 +83,19 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
 
         do {
             try context.save()
-            return true
+            return nil
         } catch {
             print(error.localizedDescription)
-            return false
+            return ErrorMessage(error: .contextDoNotBeSaved)
         }
         
     }
     
-    func delete(message: [MessageKeyType: Any]) -> Bool {
+    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let category = getOneObject(for: message[.nameCategory] as! String) else {
             assertionFailure()
-            return false
+            return ErrorMessage(error: .categoryIsNotExist)
         }
         
         //TODO: сдесь нужен итератор по Транзакциям
@@ -105,10 +104,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
 
         do {
             try context.save()
-            return true
+            return nil
         } catch {
             print(error.localizedDescription)
-            return false
+            return ErrorMessage(error: .contextDoNotBeSaved)
         }
         
     }
