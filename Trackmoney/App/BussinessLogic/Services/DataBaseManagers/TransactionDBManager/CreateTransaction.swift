@@ -28,16 +28,18 @@ struct CreateTransaction {
         self.mManager = mManager
         self.accountDBManager = AccountDBManager()
         
-        self.date = message[.dateTransaction] as! NSDate
+        self.date = NSDate(timeIntervalSinceNow: 0.0)
         self.sum = message[.sumTransaction] as! Int32
         self.iconTransaction = message[.iconTransaction] as! String
         
         guard let type = TransactionType(
-            rawValue: message[.typeTransaction] as! Int16),
-            let accountMain = accountDBManager.getObjectByName(
-                for: message[.nameAccount] as! String) else {
-                    assertionFailure()
-                    return nil }
+            rawValue: message[.typeTransaction] as! Int16) else {
+                assertionFailure()
+                return nil }
+        guard let accountMain = accountDBManager.getObjectByName(
+            for: message[.nameAccount] as! String) else {
+                assertionFailure()
+                return nil }
         
         self.type = type
         self.mainAccount = accountMain

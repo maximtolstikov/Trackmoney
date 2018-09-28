@@ -18,14 +18,14 @@ struct ChangeSumTransaction {
                 return false
         }
         
-        let oldSum = mainAccount.sumAccount
-        let difference = oldSum - newSum
+        let oldSum = transaction.sumTransaction
+        let difference = newSum - oldSum
         
         switch type {
         case .expense:
-            mainAccount.sumAccount += difference
-        case .income:
             mainAccount.sumAccount -= difference
+        case .income:
+            mainAccount.sumAccount += difference
         case .transfer:
             
             //swiftlint:disable force_unwrapping
@@ -35,8 +35,8 @@ struct ChangeSumTransaction {
                     return false
             }
             
-            mainAccount.sumAccount += difference
-            corAccount.sumAccount -= difference
+            mainAccount.sumAccount -= difference
+            corAccount.sumAccount += difference
         }
         
         transaction.sumTransaction = newSum

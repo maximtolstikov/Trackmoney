@@ -1,6 +1,6 @@
 // Для описания класса ошибки
 
-struct ErrorMessage {
+struct ErrorMessage: Error{
     
     let error: TextErrors
     

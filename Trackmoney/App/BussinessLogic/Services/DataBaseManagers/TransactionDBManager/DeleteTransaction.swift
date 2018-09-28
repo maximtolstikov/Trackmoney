@@ -25,11 +25,13 @@ struct DeleteTransaction {
         let accountDBManager = AccountDBManager()
         
         guard let mainAccount = accountDBManager.getObjectByName(
-            for: transaction.nameAccount),
-            let type = TransactionType(
-                rawValue: transaction.typeTransaction) else {
+            for: transaction.nameAccount) else {
                     assertionFailure()
                     return false }
+        guard let type = TransactionType(
+            rawValue: transaction.typeTransaction) else {
+                assertionFailure()
+                return false }
         
         let sum = transaction.sumTransaction
         
@@ -41,7 +43,7 @@ struct DeleteTransaction {
         case .transfer:
             guard let corAccount = accountDBManager.getObjectByName(
                 for: transaction.corAccount!) else { return false }
-            accountDBManager.move(fromAccount: mainAccount, toAccount: corAccount, sum: sum)
+            accountDBManager.move(fromAccount: corAccount, toAccount: mainAccount, sum: sum)
         }
         
         context.delete(transaction)

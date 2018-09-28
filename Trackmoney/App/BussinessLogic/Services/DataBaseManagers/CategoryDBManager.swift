@@ -9,6 +9,10 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
+        if getObjectByName(for: message[.nameCategory] as! String) != nil {
+            return (nil, ErrorMessage(error: .categoryIsExistAlready))
+        }
+        
         let newCategory = Category(context: context)
         
         newCategory.nameCategory = message[.nameCategory] as! String
@@ -41,8 +45,16 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     }
     
     
+    //Возвращает Category по id
+    func getObjectById(for id: NSManagedObjectID) -> Category? {
+        
+        return context.object(with: id) as? Category
+        
+    }
+    
+    
     //Возвращает категорию по имени
-    func getOneObject(for name: String) -> Category? {
+    func getObjectByName(for name: String) -> Category? {
         
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "nameCategory = %@", name)
@@ -66,34 +78,31 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     }
     
     
+    // Изменяес имя или иконку Категории
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
     
-        guard let category = getOneObject(for: message[.nameCategory] as! String) else {
+        guard let category = getObjectById(
+            for: message[.idCategory] as! NSManagedObjectID) else {
             assertionFailure()
             return ErrorMessage(error: .categoryIsNotExist)
         }
         
-        if mManager.isExistValue(for: .newName, in: message) {
-            category.nameCategory = message[.newName] as! String
+        if mManager.isExistValue(for: .nameCategory, in: message) {
+            category.nameCategory = message[.nameCategory] as! String
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconCategory, in: message) {
             category.iconCategory = message[.iconCategory] as? String
         }
 
-        do {
-            try context.save()
-            return nil
-        } catch {
-            print(error.localizedDescription)
-            return ErrorMessage(error: .contextDoNotBeSaved)
-        }
+        return saveContext()
         
     }
     
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let category = getOneObject(for: message[.nameCategory] as! String) else {
+        guard let category = getObjectById(
+            for: message[.idCategory] as! NSManagedObjectID) else {
             assertionFailure()
             return ErrorMessage(error: .categoryIsNotExist)
         }
@@ -102,6 +111,14 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
 
         context.delete(category)
 
+        return saveContext()
+        
+    }
+    
+    
+    // Сохраняет контекст
+    private func saveContext() -> ErrorMessage? {
+        
         do {
             try context.save()
             return nil

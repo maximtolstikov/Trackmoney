@@ -3,14 +3,14 @@
 //swiftlint:disable force_cast
 
 import CoreData
-import UIKit
+
 
 class TransactionDBManager: DBManager, DBManagerProtocol {
     
     
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
-        guard let transaction = CreateTransaction(
+        guard let createTransaction = CreateTransaction(
             context: context,
             mManager: mManager,
             message: message
@@ -19,7 +19,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
                 return (nil, ErrorMessage(error: .transactionIsNotExist))
         }
         
-        return transaction.execute()
+        return createTransaction.execute()
         
     }
     
@@ -42,7 +42,15 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     
     
     // Возвращает транзакцию по времени
-    func getOneObject(for date: NSDate) -> Transaction? {
+    func getObjectById(for id: NSManagedObjectID) -> Transaction? {
+        
+        return context.object(with: id) as? Transaction
+        
+    }
+    
+    
+    // Возвращает транзакцию по времени
+    func getObjectByDate(for date: NSDate) -> Transaction? {
         
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(
@@ -70,8 +78,8 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let transaction = getOneObject(
-            for: message[.dateTransaction] as! NSDate) else {
+        guard let transaction = getObjectById(
+            for: message[.idTransaction] as! NSManagedObjectID) else {
             assertionFailure()
             return ErrorMessage(error: .transactionIsNotExist)
         }
@@ -96,10 +104,11 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     }
     
     
+    // Удаляет транзакцию
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let transaction = getOneObject(
-            for: message[.dateTransaction] as! NSDate),
+        guard let transaction = getObjectById(
+            for: message[.idTransaction] as! NSManagedObjectID),
             let deleteTransaction = DeleteTransaction(
                 context: context,
                 transaction: transaction) else {

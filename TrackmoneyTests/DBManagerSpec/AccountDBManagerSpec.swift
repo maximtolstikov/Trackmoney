@@ -12,7 +12,7 @@ import Quick
 class AccountDBManagerSpec: QuickSpec {
     override func spec() {
         
-        describe("Account") {
+        describe("Account methods") {
             var message: [MessageKeyType: Any] = [.nameAccount: "testMainName",
                                                   .iconAccount: "iconString",
                                                   .sumAccount: Int32(100)]
