@@ -4,10 +4,19 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Trackmoney.xcscheme</key>
+		<key>Trackmoney.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>0</integer>
+		</dict>
+		<key>TrackmoneyTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -23,6 +32,11 @@
 			<true/>
 		</dict>
 		<key>94858ADF2146CDFA00498DCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94F67385216142C100A51190</key>
 		<dict>
 			<key>primary</key>
 			<true/>

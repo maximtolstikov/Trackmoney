@@ -1,0 +1,29 @@
+// Russian
+
+//Buttons
+"titleCancelButton" = "Закрыть";
+"titleSaveButton" = "Сохранить";
+"titleAddAccount" = "Добавить Счет";
+"titleAddCategory" = "Добавить Категорию";
+"titleSortDelete" = "Редактировать";
+
+//Alert
+"listAccountsAlertTitle" = "Счета";
+"listCategoriesAlertTitle" = "Категории";
+
+//Settings
+"accountSettingsTitle" = "Счета";
+"categoriSettingsTitile" = "Категории";
+"settingsAccounts" = "Настройки Счетов";
+"settingsCategories" = "Настройки Категорий";
+
+//Validate error
+"errorTextFormEmpty" = "Не введено значение!";
+"errorTextFormNotToInt" = "Значение не числа!";
+"errorNegativeNumber" = "Отрицательное число!";
+"accountIs'tDifferent" = "Перевод на этот же счет!";
+"notBeenSelectedAccount" = "Не выбран счет!";
+
+//Placeholder
+"nameTextFildPlaceholder" = "название";
+"sumTextFildPlaceholder" = "сумма";

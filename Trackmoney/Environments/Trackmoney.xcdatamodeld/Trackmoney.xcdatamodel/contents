@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="iconAccount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameAccount" attributeType="String" syncable="YES"/>
         <attribute name="sumAccount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Category" representedClassName="Category" syncable="YES">
+    <entity name="CategoryTransaction" representedClassName="CategoryTransaction" syncable="YES">
         <attribute name="iconCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameCategory" attributeType="String" syncable="YES"/>
     </entity>
@@ -20,7 +20,7 @@
     </entity>
     <elements>
         <element name="Account" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Category" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="CategoryTransaction" positionX="-54" positionY="18" width="128" height="75"/>
         <element name="Transaction" positionX="-36" positionY="36" width="128" height="150"/>
     </elements>
 </model>
