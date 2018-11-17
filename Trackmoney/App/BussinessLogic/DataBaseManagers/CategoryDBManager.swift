@@ -17,6 +17,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         
         newCategory.nameCategory = message[.nameCategory] as! String
         newCategory.iconCategory = message[.iconCategory] as? String
+        newCategory.typeCategory = message[.typeCategory] as! String
         
         do {
             try context.save()

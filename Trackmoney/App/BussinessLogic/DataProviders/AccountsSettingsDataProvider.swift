@@ -27,7 +27,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         
         if result?.0 != nil, controller != nil {
             
-            AlertManager().shortNotification(
+            ShortAlert().show(
                 controller: controller!,
                 title: AlertMessage.accountCreare.rawValue,
                 body: nil, style: .alert)
@@ -36,7 +36,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
             
         } else {
             if result?.1 != nil, controller != nil {
-                AlertManager().alertNeedCancel(
+                NeedCancelAlert().show(
                     controller: controller!,
                     title: result?.1?.error.rawValue,
                     body: nil)
@@ -51,14 +51,14 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         let error = dbManager?.delete(message: message)
         
         if error == nil, controller != nil {
-            AlertManager().shortNotification(
+            ShortAlert().show(
                 controller: controller!,
                 title: AlertMessage.accountDeleted.rawValue,
                 body: nil, style: .alert)
             return true
         } else {
             if error != nil, controller != nil {
-                AlertManager().alertNeedCancel(
+                NeedCancelAlert().show(
                     controller: controller!,
                     title: error!.error.rawValue,
                     body: nil)

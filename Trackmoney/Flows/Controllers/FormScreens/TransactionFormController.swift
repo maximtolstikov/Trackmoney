@@ -226,7 +226,7 @@ class TransactionFormController: BaseFormController {
             assertionFailure("список счетов не получен из базы")
             return
         }
-        AlertManager().showSelectAccounts(accounts: arrayAccounts,
+        ChooseAccountAlert().show(accounts: arrayAccounts,
                                           controller: self) { [weak self] (name) in
             self?.topChooseButton.setTitle(name, for: .normal)
         }
@@ -244,7 +244,7 @@ class TransactionFormController: BaseFormController {
                 assertionFailure("список счетов не получен из базы")
                 return
             }
-            AlertManager().showSelectCategories(categories: arrayCategories,
+            ChooseCategoryAlert().show(categories: arrayCategories,
                                                 controller: self) { [weak self] (name) in
                 self?.bottomChooseButton.setTitle(name, for: .normal)
             }
@@ -255,7 +255,7 @@ class TransactionFormController: BaseFormController {
                 assertionFailure("список счетов не получен из базы")
                 return
             }
-            AlertManager().showSelectAccounts(accounts: arrayAccounts,
+            ChooseAccountAlert().show(accounts: arrayAccounts,
                                               controller: self) { [weak self] (name) in
                 self?.bottomChooseButton.setTitle(name, for: .normal)
             }

@@ -4,8 +4,16 @@ import UIKit
 
 class CategoryFormController: BaseFormController {
     
+    var typeCategory: TypeCategory!
+    
     //поставщик данных
     var dataProvider: DataProviderProtocol?
+    
+    let typeLable: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
     
     let nameTextField: UITextField = {
         let textField = UITextField()
@@ -18,6 +26,7 @@ class CategoryFormController: BaseFormController {
         super.viewDidLoad()
         
         createNameTextField()
+        createTypeLable()
     }
     
     // делает текстовое поле активным и вызывается клавиатура
@@ -46,6 +55,21 @@ class CategoryFormController: BaseFormController {
         
     }
     
+    // Создает lable с типом Категории
+    func createTypeLable() {
+        
+        viewOnScroll.addSubview(typeLable)
+        typeLable.text = NSLocalizedString("typeCategory", comment: "") + " " + "\(typeCategory.rawValue)"
+        typeLable.textAlignment = .center
+        
+        typeLable.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)
+            .isActive = true
+        typeLable.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
+                                             multiplier: 2 / 3).isActive = true
+        typeLable.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        typeLable.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -40).isActive = true
+    }
+    
     // MARK: - Button's methods
     
     @objc override func tapCancelButton() {
@@ -65,7 +89,7 @@ class CategoryFormController: BaseFormController {
         if checkRule.isEmpty {
             
             let message = MessageManager()
-                .craftCategoryFormMessage(nameCategory: nameText)
+                .craftCategoryFormMessage(nameCategory: nameText, type: typeCategory)
             
             dataProvider?.save(message: message)
             dismiss(animated: true, completion: nil)

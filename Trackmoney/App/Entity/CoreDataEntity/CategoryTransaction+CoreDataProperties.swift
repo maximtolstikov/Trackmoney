@@ -19,24 +19,24 @@ extension CategoryTransaction {
 
     @NSManaged public var iconCategory: String?
     @NSManaged public var nameCategory: String
-    @NSManaged public var type: Bool
-    @NSManaged public var group: NSSet?
+    @NSManaged public var typeCategory: String
+    @NSManaged public var groupCategory: NSSet?
 
 }
 
-// MARK: - Generated accessors for group
+// MARK: - Generated accessors for groupCategory
 extension CategoryTransaction {
 
-    @objc(addGroupObject:)
-    @NSManaged public func addToGroup(_ value: CategoryTransaction)
+    @objc(addGroupCategoryObject:)
+    @NSManaged public func addToGroupCategory(_ value: CategoryTransaction)
 
-    @objc(removeGroupObject:)
-    @NSManaged public func removeFromGroup(_ value: CategoryTransaction)
+    @objc(removeGroupCategoryObject:)
+    @NSManaged public func removeFromGroupCategory(_ value: CategoryTransaction)
 
-    @objc(addGroup:)
-    @NSManaged public func addToGroup(_ values: NSSet)
+    @objc(addGroupCategory:)
+    @NSManaged public func addToGroupCategory(_ values: NSSet)
 
-    @objc(removeGroup:)
-    @NSManaged public func removeFromGroup(_ values: NSSet)
+    @objc(removeGroupCategory:)
+    @NSManaged public func removeFromGroupCategory(_ values: NSSet)
 
 }

@@ -6,6 +6,7 @@ enum MessageKeyType: String {
     case sumAccount
     case iconAccount
     case idAccount
+    case typeCategory
     case nameCategory
     case iconCategory
     case idCategory

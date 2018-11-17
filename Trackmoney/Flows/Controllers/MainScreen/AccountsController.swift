@@ -125,7 +125,7 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
         
-        AlertManager().showSelectTransaction(
+        ChooseTransactionAlert().show(
             controller: self,
             nameAccount: accounts[indexPath.row].nameAccount)
         tableView.deselectRow(at: indexPath, animated: true)

@@ -1,15 +1,22 @@
 // Russian
 
 //Buttons
-"titleCancelButton" = "Закрыть";
+"titleCancelButton" = "Отменить";
 "titleSaveButton" = "Сохранить";
 "titleAddAccount" = "Добавить Счет";
 "titleAddCategory" = "Добавить Категорию";
 "titleSortDelete" = "Редактировать";
 
+//Lable
+"typeCategory" = "тип:";
+
 //Alert
 "listAccountsAlertTitle" = "Счета";
 "listCategoriesAlertTitle" = "Категории";
+"chooseTypeCategory" = "Выберите тип Категории!";
+"expenseTitle" = "Расход";
+"incomeTitle" = "Доход";
+"transferTitle" = "Перевод";
 
 //Settings
 "accountSettingsTitle" = "Счета";

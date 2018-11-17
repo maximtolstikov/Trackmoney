@@ -1,6 +1,11 @@
-// Строит контроллер формы Категории
-
+/// Строит контроллер формы Категории
 class CategoryFormControllerBilder {
+    
+    let type: TypeCategory
+    
+    init(typeCategory: TypeCategory) {
+        self.type = typeCategory
+    }
     
     func viewController() -> CategoryFormController {
         
@@ -9,6 +14,7 @@ class CategoryFormControllerBilder {
         dataProvider.dbManager = CategoryDBManager()
         dataProvider.controller = controller
         controller.dataProvider = dataProvider
+        controller.typeCategory = type
         
         return controller
     }

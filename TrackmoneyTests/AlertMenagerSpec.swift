@@ -5,15 +5,15 @@
 import XCTest
 @testable import Trackmoney
 
-class AlertManagerSpec: XCTestCase {
+class ShortAlertSpec: XCTestCase {
     
-    var alertManager: AlertManager!
+    var shortAlert: ShortAlert!
     
     override func setUp() {
-        alertManager = AlertManager()
+        shortAlert = ShortAlert()
     }
     override func tearDown() {
-        alertManager = nil
+        shortAlert = nil
     }
     
     func testShortNotification() throws {
@@ -24,11 +24,11 @@ class AlertManagerSpec: XCTestCase {
             controller = UIViewController()
         })
         try when("appear notif", closure: {
-            alertManager.shortNotification(controller: controller, title: "test", body: nil, style: .alert)
+            shortAlert.show(controller: controller, title: "test", body: nil, style: .alert)
         })
         try then("after 5 milliseconds alertController is nil", closure: {
             _ = Timer(timeInterval: 1.0, repeats: false, block: { _ in
-                XCTAssertNil(self.alertManager.alertController)
+                XCTAssertNil(self.shortAlert.alertController)
             })
         })
         

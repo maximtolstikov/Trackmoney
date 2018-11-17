@@ -62,7 +62,7 @@ class CategorySettingsController: UIViewController {
             title: NSLocalizedString("titleAddCategory", comment: ""),
             style: .done,
             target: self,
-            action: #selector(addAccount))
+            action: #selector(addCategory))
         
         let editCategoryButton = UIBarButtonItem(
             title: NSLocalizedString("titleSortDelete", comment: ""),
@@ -84,12 +84,10 @@ class CategorySettingsController: UIViewController {
     }
     
     
-    //добавляет Счет
-    @objc func addAccount() {
+    // Добавляет Категорию
+    @objc func addCategory() {
         
-        let controller = CategoryFormControllerBilder().viewController()
-        present(controller, animated: true, completion: nil)
-        
+        ChooseTypeCategoryAlert().show(controller: self)        
     }
     
     

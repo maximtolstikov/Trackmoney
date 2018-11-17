@@ -8,8 +8,8 @@
     <entity name="CategoryTransaction" representedClassName="CategoryTransaction" isAbstract="YES" syncable="YES">
         <attribute name="iconCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameCategory" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryTransaction" inverseName="group" inverseEntity="CategoryTransaction" syncable="YES"/>
+        <attribute name="typeCategory" attributeType="String" syncable="YES"/>
+        <relationship name="groupCategory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryTransaction" inverseName="groupCategory" inverseEntity="CategoryTransaction" syncable="YES"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="corAccount" optional="YES" attributeType="String" syncable="YES"/>

@@ -12,7 +12,7 @@ class CategoryFormDataProvider: DataProviderProtocol {
         let result = dbManager?.create(message: message)
         
         if let error = result?.1, let controller = controller {
-            AlertManager().alertNeedCancel(
+            NeedCancelAlert().show(
                 controller: controller,
                 title: error.error.rawValue,
                 body: nil)

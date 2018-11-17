@@ -7,9 +7,16 @@
 "titleAddCategory" = "Add Category";
 "titleSortDelete" = "Sort/Delete";
 
+//Lable
+"typeCategory" = "type:";
+
 //Alert
 "listAccountsAlertTitle" = "Accounts";
 "listCategoriesAlertTitle" = "Categories";
+"chooseTypeCategory" = "Please chose type!";
+"expenseTitle" = "Expense";
+"incomeTitle" = "Income";
+"transferTitle" = "Transfer";
 
 //Settings
 "accountSettingsTitle" = "Accounts";

@@ -36,10 +36,11 @@ struct MessageManager {
     }
     
     //создает сообщение для формы счета
-    func craftCategoryFormMessage(nameCategory: String) -> [MessageKeyType: Any] {
+    func craftCategoryFormMessage(nameCategory: String, type: TypeCategory) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.nameCategory] = nameCategory
+        dictionary[.typeCategory] = type.rawValue
         return dictionary
     }
     
