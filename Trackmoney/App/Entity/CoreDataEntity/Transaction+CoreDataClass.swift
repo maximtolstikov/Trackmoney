@@ -1,13 +1,14 @@
 //
 //  Transaction+CoreDataClass.swift
-//  
+//  Trackmoney
 //
-//  Created by Maxim Tolstikov on 10/09/2018.
+//  Created by Maxim Tolstikov on 17/11/2018.
+//  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
 //
 
-import CoreData
 import Foundation
+import CoreData
 
 @objc(Transaction)
 public class Transaction: NSManagedObject {
