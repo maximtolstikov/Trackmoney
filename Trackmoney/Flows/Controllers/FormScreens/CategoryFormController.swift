@@ -49,9 +49,7 @@ class CategoryFormController: BaseFormController {
     // MARK: - Button's methods
     
     @objc override func tapCancelButton() {
-        animateSlideUpPromt {
-            self.dismiss(animated: true, completion: nil)
-        }
+       dismiss(animated: false, completion: nil)
     }
     
     //проводит валидацию и сохраняет или вызывает подсказку
