@@ -45,7 +45,6 @@ class TransactionFormController: BaseFormController {
         createBottomChoseButton()
         createSumTextField()
         createTopChoseButton()
-        
     }
     
     // делает текстовое поле активным и вызывается клавиатура
@@ -121,9 +120,10 @@ class TransactionFormController: BaseFormController {
         sumTextField.updateFocusIfNeeded()
     }
     
-    @objc override func settingTextField(_ notification: Notification) {
+    @objc override func didChangeText(_ notification: Notification) {
         DispatchQueue.main.async {
-            self.sumTextField.borderStyle = .roundedRect
+            self.removeRedBorderTo(control: self.sumTextField)
+            self.animateSlideUpPromt(completion: nil)
         }
     }
     
@@ -165,14 +165,15 @@ class TransactionFormController: BaseFormController {
                 default:
                     bottomButtonValidateResult = CategoryButtonValidator(category: bottomChooseButtonText).validate()
                 }
-
+                
                 if bottomButtonValidateResult.isEmpty {
                     
+                    sendMessage()
                     dismiss(animated: false, completion: nil)
                     
                 } else {
                     showPromptError(result: bottomButtonValidateResult,
-                                    field: self.sumTextField)
+                                    field: self.bottomChooseButton)
                 }
                 
             } else {
@@ -182,74 +183,84 @@ class TransactionFormController: BaseFormController {
             
         } else {
             showPromptError(result: mainAccountValidateResult,
-                            field: self.sumTextField)
-        }
-    
-    
-    
-    
-    //        guard let type = transactionType,
-    //            let topButtonText = topChooseButton.currentTitle,
-    //            let sumText = sumTextField.text,
-    //            let sum = Int32(sumText),
-    //            let bottomButtonText = bottomChooseButton.currentTitle else {
-    //            assertionFailure()
-    //            return
-    //        }
-    //
-    //        let message = MessageManager()
-    //            .craftTransactionMessage(transactionType: type,
-    //                                     topButton: topButtonText,
-    //                                     sum: sum,
-    //                                     bottomButton: bottomButtonText)
-    //        dataProvider?.save(message: message)
-    //        dismiss(animated: true, completion: nil)
-}
-
-// Вызываем окно подсказки и делаем красную рамку
-private func showPromptError(result: [String: String],
-                             field: UITextField) {
-    for (_, value) in result {
-        showPromptView(with: value)
-        addRedBorderTo(textField: field)
-    }
-}
-
-@objc func tapTopChooseButton() {
-    
-    guard let arrayAccounts = accounts else {
-        assertionFailure("список счетов не получен из базы")
-        return
-    }
-    AlertManager().showSelectAccounts(accounts: arrayAccounts, controller: self) { [weak self] (name) in
-        self?.topChooseButton.setTitle(name, for: .normal)
-    }
-}
-
-@objc func tapBottomChooseButton() {
-    
-    if transactionType == TransactionType.income ||
-        transactionType == TransactionType.expense {
-        
-        guard let arrayCategories = categories else {
-            assertionFailure("список счетов не получен из базы")
-            return
-        }
-        AlertManager().showSelectCategories(categories: arrayCategories, controller: self) { [weak self] (name) in
-            self?.bottomChooseButton.setTitle(name, for: .normal)
+                            field: self.topChooseButton)
         }
         
-    } else if transactionType == TransactionType.transfer {
+    }
+    
+    // Отправляет данные формы в базу
+    func sendMessage() {
+        
+        guard let type = transactionType,
+            let topButtonText = topChooseButton.currentTitle,
+            let sumText = sumTextField.text,
+            let sum = Int32(sumText),
+            let bottomButtonText = bottomChooseButton.currentTitle else {
+                assertionFailure()
+                return
+        }
+        
+        let message = MessageManager()
+            .craftTransactionMessage(transactionType: type,
+                                     topButton: topButtonText,
+                                     sum: sum,
+                                     bottomButton: bottomButtonText)
+        dataProvider?.save(message: message)
+    }
+    
+    // Вызываем окно подсказки и делаем красную рамку
+    private func showPromptError(result: [String: String],
+                                 field: UIControl) {
+        for (_, value) in result {
+            showPromptView(with: value)
+            addRedBorderTo(control: field)
+        }
+    }
+    
+    @objc func tapTopChooseButton() {
+        
+        removeRedBorderTo(control: topChooseButton)
+        self.animateSlideUpPromt(completion: nil)
         
         guard let arrayAccounts = accounts else {
             assertionFailure("список счетов не получен из базы")
             return
         }
-        AlertManager().showSelectAccounts(accounts: arrayAccounts, controller: self) { [weak self] (name) in
-            self?.bottomChooseButton.setTitle(name, for: .normal)
+        AlertManager().showSelectAccounts(accounts: arrayAccounts,
+                                          controller: self) { [weak self] (name) in
+            self?.topChooseButton.setTitle(name, for: .normal)
         }
     }
     
-}
-
+    @objc func tapBottomChooseButton() {
+        
+        removeRedBorderTo(control: bottomChooseButton)
+        self.animateSlideUpPromt(completion: nil)
+        
+        if transactionType == TransactionType.income ||
+            transactionType == TransactionType.expense {
+            
+            guard let arrayCategories = categories else {
+                assertionFailure("список счетов не получен из базы")
+                return
+            }
+            AlertManager().showSelectCategories(categories: arrayCategories,
+                                                controller: self) { [weak self] (name) in
+                self?.bottomChooseButton.setTitle(name, for: .normal)
+            }
+            
+        } else if transactionType == TransactionType.transfer {
+            
+            guard let arrayAccounts = accounts else {
+                assertionFailure("список счетов не получен из базы")
+                return
+            }
+            AlertManager().showSelectAccounts(accounts: arrayAccounts,
+                                              controller: self) { [weak self] (name) in
+                self?.bottomChooseButton.setTitle(name, for: .normal)
+            }
+        }
+        
+    }
+    
 }

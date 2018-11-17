@@ -123,7 +123,7 @@ class AccountFormController: BaseFormController {
                                  field: UITextField) {
         for (_, value) in result {
             showPromptView(with: value)
-            addRedBorderTo(textField: field)
+            addRedBorderTo(control: field)
         }
     }
 
@@ -141,14 +141,14 @@ class AccountFormController: BaseFormController {
         nameTextField.updateFocusIfNeeded()
     }
     
-    @objc override func settingTextField(_ notification: Notification) {
+    @objc override func didChangeText(_ notification: Notification) {
         
         DispatchQueue.main.async {
             guard self.promptView != nil else {
                 return
             }
             self.animateSlideUpPromt(completion: nil)
-            self.removeRedBorderTo(textField: self.nameTextField)
+            self.removeRedBorderTo(control: self.nameTextField)
         }
     }
     

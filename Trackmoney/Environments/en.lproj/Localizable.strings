@@ -1,0 +1,29 @@
+// English
+
+//Buttons
+"titleCancelButton" = "Cancel";
+"titleSaveButton" = "Save";
+"titleAddAccount" = "Add Account";
+"titleAddCategory" = "Add Category";
+"titleSortDelete" = "Sort/Delete";
+
+//Alert
+"listAccountsAlertTitle" = "Accounts";
+"listCategoriesAlertTitle" = "Categories";
+
+//Settings
+"accountSettingsTitle" = "Accounts";
+"categoriSettingsTitile" = "Categories";
+"settingsAccounts" = "Accounts Settings";
+"settingsCategories" = "Categories Settings";
+
+//Validate error
+"errorTextFormEmpty" = "Field hasn't value!";
+"errorTextFormNotToInt" = "Value isn't numbers!";
+"errorNegativeNumber" = "Negative Number!";
+"accountIs'tDifferent" = "Transfer on that same account!";
+"notBeenSelectedAccount" = "Not been selected account!";
+
+//Placeholder
+"nameTextFildPlaceholder" = "name";
+"sumTextFildPlaceholder" = "sum";

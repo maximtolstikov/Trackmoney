@@ -10,7 +10,7 @@ class TextToNumberRule: ValidatorProtocol {
         self.textFromForm = text
     }
     
-    func validate() -> [String : String] {
+    func validate() -> [String: String] {
         
         var error = [String: String]()
         
