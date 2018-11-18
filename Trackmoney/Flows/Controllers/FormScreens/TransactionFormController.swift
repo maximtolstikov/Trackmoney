@@ -244,8 +244,11 @@ class TransactionFormController: BaseFormController {
                 assertionFailure("список счетов не получен из базы")
                 return
             }
-            ChooseCategoryAlert().show(categories: arrayCategories,
-                                                controller: self) { [weak self] (name) in
+            
+            let list = sorted(list: arrayCategories)
+            
+            ChooseCategoryAlert().show(categories: list,
+                                       controller: self) { [weak self] (name) in
                 self?.bottomChooseButton.setTitle(name, for: .normal)
             }
             
@@ -256,11 +259,20 @@ class TransactionFormController: BaseFormController {
                 return
             }
             ChooseAccountAlert().show(accounts: arrayAccounts,
-                                              controller: self) { [weak self] (name) in
+                                      controller: self) { [weak self] (name) in
                 self?.bottomChooseButton.setTitle(name, for: .normal)
             }
         }
         
+    }
+    
+    // Сортирует список категорий по типу
+    private func sorted(list: [CategoryTransaction]) -> [CategoryTransaction] {
+        
+        let type = transactionType == .expense ?
+            TypeCategory.expense.rawValue : TypeCategory.income.rawValue
+        
+        return list.filter { $0.typeCategory == type }
     }
     
 }

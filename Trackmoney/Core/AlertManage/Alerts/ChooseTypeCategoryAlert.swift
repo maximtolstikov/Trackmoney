@@ -34,8 +34,6 @@ class ChooseTypeCategoryAlert: AlertManager {
     private func presentController(controller: UIViewController, type: TypeCategory) {
         
         let formController = CategoryFormControllerBilder(typeCategory: type).viewController()
-        controller.present(formController, animated: true) {
-            self.deinitAlert()
-        }
+        controller.present(formController, animated: true, completion: nil)
     }
 }

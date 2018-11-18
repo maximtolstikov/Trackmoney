@@ -50,9 +50,7 @@ class ChooseTransactionAlert: AlertManager {
         let formController = TransactionFormControllerBilder()
             .viewController(transactionType: type)
         formController.topChooseButtonName = name
-        controller.present(formController, animated: true) {
-            self.deinitAlert()
-        }
+        controller.present(formController, animated: true, completion: nil)
     }
     
 }

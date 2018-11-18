@@ -19,9 +19,7 @@ class NeedCancelAlert: AlertManager {
         }
         
         alertController.addAction(cancel)
-        controller.present(alertController, animated: true) {
-            self.deinitAlert()
-        }
+        controller.present(alertController, animated: true, completion: nil)
         
     }
 

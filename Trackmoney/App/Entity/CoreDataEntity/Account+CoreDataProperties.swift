@@ -7,9 +7,9 @@
 //
 //
 
-import Foundation
-import CoreData
 
+import CoreData
+import Foundation
 
 extension Account {
 

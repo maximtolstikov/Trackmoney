@@ -27,9 +27,7 @@ class ChooseAccountAlert: AlertManager {
             self.alertController.addAction(action)
         }
         
-        controller.present(self.alertController, animated: true) {
-            self.deinitAlert()
-        }
+        controller.present(self.alertController, animated: true, completion: nil)
         
     }
 }
