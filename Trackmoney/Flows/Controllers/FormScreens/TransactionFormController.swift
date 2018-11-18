@@ -211,10 +211,11 @@ class TransactionFormController: BaseFormController {
     // Вызываем окно подсказки и делаем красную рамку
     private func showPromptError(result: [String: String],
                                  field: UIControl) {
-        for (_, value) in result {
+        
+        if let value = result.first?.value {
             showPromptView(with: value)
-            addRedBorderTo(control: field)
         }
+        addRedBorderTo(control: field)
     }
     
     @objc func tapTopChooseButton() {

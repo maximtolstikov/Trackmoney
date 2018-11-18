@@ -14,6 +14,8 @@ class TextToNumberRule: ValidatorProtocol {
         
         var error = [String: String]()
         
+        guard textFromForm != "" else { return [:] }
+        
         let result = Int32(textFromForm)
         
         if result == nil {
