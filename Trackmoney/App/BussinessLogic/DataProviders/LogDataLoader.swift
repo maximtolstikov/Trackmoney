@@ -1,7 +1,6 @@
-// Для описания датаПровайдера у контроллера журнала
-
 import CoreData
 
+/// Описывает датаПровайдер у контроллера журнала
 class LogDataLoader: DataProviderProtocol {
 
     var dbManager: DBManagerProtocol?
@@ -19,13 +18,12 @@ class LogDataLoader: DataProviderProtocol {
     
     func save(message: [MessageKeyType: Any]) {}
     
-    func change(message: [MessageKeyType: Any]) {}
-    
     func delete(with id: NSManagedObjectID) -> Bool {
         
         let message: [MessageKeyType: Any] = [.idTransaction: id]
         let error = dbManager?.delete(message: message)
         
+        //swiftlint:disable force_unwrapping
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,

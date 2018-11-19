@@ -40,7 +40,7 @@
 		9446624521A04FD700C9FFCF /* ChooseAccountAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624421A04FD700C9FFCF /* ChooseAccountAlert.swift */; };
 		9446624721A0551A00C9FFCF /* ChooseCategoryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */; };
 		9446624921A0569900C9FFCF /* ChooseTypeCategoryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */; };
-		9446624B21A0715900C9FFCF /* TypeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624A21A0715900C9FFCF /* TypeCategory.swift */; };
+		9446624B21A0715900C9FFCF /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624A21A0715900C9FFCF /* CategoryType.swift */; };
 		9446624E21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */; };
 		9446624F21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */; };
 		9446A5A5214F825200D44E13 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446A5A4214F825200D44E13 /* ErrorMessage.swift */; };
@@ -152,7 +152,7 @@
 		9446624421A04FD700C9FFCF /* ChooseAccountAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAccountAlert.swift; sourceTree = "<group>"; };
 		9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategoryAlert.swift; sourceTree = "<group>"; };
 		9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTypeCategoryAlert.swift; sourceTree = "<group>"; };
-		9446624A21A0715900C9FFCF /* TypeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCategory.swift; sourceTree = "<group>"; };
+		9446624A21A0715900C9FFCF /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9446A5A4214F825200D44E13 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
@@ -439,9 +439,7 @@
 		94858B072146D19800498DCF /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				94858AFE2146D15B00498DCF /* TransactionType.swift */,
 				94858B082146D1A800498DCF /* CoreDataEntity */,
-				94EC436621664492009C6BF3 /* SettingListType.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -474,7 +472,9 @@
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9417B15E2181A06B001E88AA /* PromptManager */,
-				9446624A21A0715900C9FFCF /* TypeCategory.swift */,
+				9446624A21A0715900C9FFCF /* CategoryType.swift */,
+				94858AFE2146D15B00498DCF /* TransactionType.swift */,
+				94EC436621664492009C6BF3 /* SettingListType.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -875,7 +875,7 @@
 				9446623521A03D6400C9FFCF /* Transaction+CoreDataClass.swift in Sources */,
 				9424E80D2163B54100BE756D /* AccountsControllerBilder.swift in Sources */,
 				94F613732147F0A700BED9A5 /* CreateTransaction.swift in Sources */,
-				9446624B21A0715900C9FFCF /* TypeCategory.swift in Sources */,
+				9446624B21A0715900C9FFCF /* CategoryType.swift in Sources */,
 				9446623321A03D6400C9FFCF /* Account+CoreDataClass.swift in Sources */,
 				9446623621A03D6400C9FFCF /* Transaction+CoreDataProperties.swift in Sources */,
 			);

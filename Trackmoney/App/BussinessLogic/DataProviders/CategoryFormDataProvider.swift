@@ -20,8 +20,6 @@ class CategoryFormDataProvider: DataProviderProtocol {
         
     }
     
-    func change(message: [MessageKeyType: Any]) {}
-    
     func delete(with id: NSManagedObjectID) -> Bool {
         return false
     }

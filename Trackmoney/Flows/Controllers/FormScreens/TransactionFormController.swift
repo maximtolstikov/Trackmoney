@@ -1,18 +1,22 @@
-// Для описания контроллера создания и редактирования транзакции
-
 import UIKit
+import CoreData
 
+/// Описывает контроллер создания и редактирования транзакции
 class TransactionFormController: BaseFormController {
     
     //поставщик данных
     var dataProvider: DataProviderProtocol?
     
+    // Переменные для заполнения формы
+    var topChooseButtonText: String?
+    var sumTextFieldText: String?
+    var bottomChooseButtonText: String?
+    
     var accounts: [Account]?
     var categories: [CategoryTransaction]?
-    
-    var topChooseButtonName: String?
-    var bottomChooseButtonName: String?
+
     var transactionType: TransactionType?
+    var transactionID: NSManagedObjectID?
     
     
     let bottomChooseButton: UIButton = {
@@ -66,7 +70,7 @@ class TransactionFormController: BaseFormController {
     // создаем нижнюю кнопку выбора Счета или Категории
     func createBottomChoseButton() {
         
-        if let name = bottomChooseButtonName {
+        if let name = bottomChooseButtonText {
             bottomChooseButton.setTitle(name, for: .normal)
         }
         viewOnScroll.addSubview(bottomChooseButton)
@@ -78,6 +82,9 @@ class TransactionFormController: BaseFormController {
                                                    constant: -40).isActive = true
         bottomChooseButton.addTarget(self, action: #selector(tapBottomChooseButton),
                                      for: .touchUpInside)
+        if let text = bottomChooseButtonText {
+            bottomChooseButton.titleLabel?.text = text
+        }
         
     }
     
@@ -96,14 +103,20 @@ class TransactionFormController: BaseFormController {
         sumTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         sumTextField.bottomAnchor.constraint(equalTo: bottomChooseButton.topAnchor, constant: -40).isActive = true
         
+        if let text = sumTextFieldText {
+            sumTextField.text = text
+        }
+        
     }
     
     // создает верхнюю кнопку выбора Счета
     func createTopChoseButton() {
         
-        if let name = topChooseButtonName {
+        if let name = topChooseButtonText {
             topChooseButton.setTitle(name, for: .normal)
         }
+        
+        
         viewOnScroll.addSubview(topChooseButton)
         
         topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
@@ -204,7 +217,8 @@ class TransactionFormController: BaseFormController {
             .craftTransactionMessage(transactionType: type,
                                      topButton: topButtonText,
                                      sum: sum,
-                                     bottomButton: bottomButtonText)
+                                     bottomButton: bottomButtonText,
+                                     id: transactionID)
         dataProvider?.save(message: message)
     }
     
@@ -271,7 +285,7 @@ class TransactionFormController: BaseFormController {
     private func sorted(list: [CategoryTransaction]) -> [CategoryTransaction] {
         
         let type = transactionType == .expense ?
-            TypeCategory.expense.rawValue : TypeCategory.income.rawValue
+            CategoryType.expense.rawValue : CategoryType.income.rawValue
         
         return list.filter { $0.typeCategory == type }
     }

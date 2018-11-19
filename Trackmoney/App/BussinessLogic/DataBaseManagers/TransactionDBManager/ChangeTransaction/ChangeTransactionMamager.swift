@@ -27,6 +27,11 @@ struct ChangeTransactionMamager {
         
         for key in message.keys {
             
+            // Пропускаем ключ idTransaction
+            if key == .idTransaction {
+                continue
+            }
+            
             if !chooseMethod(for: key) {
                 return false
             }

@@ -1,5 +1,5 @@
 /// Перечисление типа Категории
-enum TypeCategory: String {
+enum CategoryType: String {
     
     case income
     case expense

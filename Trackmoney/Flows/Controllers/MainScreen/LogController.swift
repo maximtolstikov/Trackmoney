@@ -89,14 +89,22 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             style: .default,
             title: NSLocalizedString("titleEditButton", comment: "")) { [weak self] (action, indexPath) in
                 
+                guard let transaction = self?.transactions[indexPath.row],
+                    let type = TransactionType(rawValue: transaction.typeTransaction)  else { return }
                 
+                let controller = TransactionFormControllerBilder()
+                    .viewController(transactionType: type)
+
+                controller.topChooseButtonText = transaction.nameAccount
+                controller.sumTextFieldText = String(transaction.sumTransaction)
+                controller.transactionID = transaction.objectID
+                if type == TransactionType.transfer {
+                    controller.bottomChooseButtonText = transaction.corAccount
+                } else {
+                    controller.bottomChooseButtonText = transaction.nameCategory
+                }
                 
-                                        //let storyboard = UIStoryboard.init(name: "Forms", bundle: nil)
-                                        //            let viewController = storyboard.instantiateViewController(withIdentifier: "transactionForm") as! TransactionFormViewController
-                                        //            guard let date = self?.transactions[indexPath.row].date else {return}
-                                        //            viewController.transactionType = .EditTransaction
-                                        //            viewController.transactionDate = date
-                                        //            self?.present(viewController, animated: true, completion: nil)
+                self?.present(controller, animated: true, completion: nil)
         }
         
         delete.backgroundColor = UIColor.red

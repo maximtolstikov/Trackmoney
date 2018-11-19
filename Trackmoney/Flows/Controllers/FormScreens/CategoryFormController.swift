@@ -4,7 +4,7 @@ import UIKit
 
 class CategoryFormController: BaseFormController {
     
-    var typeCategory: TypeCategory!
+    var typeCategory: CategoryType!
     
     //поставщик данных
     var dataProvider: DataProviderProtocol?

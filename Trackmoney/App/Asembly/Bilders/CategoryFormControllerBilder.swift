@@ -1,9 +1,9 @@
 /// Строит контроллер формы Категории
 class CategoryFormControllerBilder {
     
-    let type: TypeCategory
+    let type: CategoryType
     
-    init(typeCategory: TypeCategory) {
+    init(typeCategory: CategoryType) {
         self.type = typeCategory
     }
     

@@ -26,22 +26,38 @@ class TransactionFormDataProvider: DataProviderProtocol {
         }
     }
     
+    // смотрит если есть id, то это изменение иначе создание
     func save(message: [MessageKeyType: Any]) {
         
-        let result = dbManager?.create(message: message)
-        if let error = result?.1, let controller = controller {
-            NeedCancelAlert().show(
-                controller: controller,
-                title: error.error.rawValue,
-                body: nil)
+        if message[.idTransaction] != nil {
+            
+            if let result = dbManager?.change(message: message) {
+                showError(error: result)
+            }
+            
+        } else {
+            
+            let result = dbManager?.create(message: message)
+            if let error = result?.1 {
+                showError(error: error)
+            }
+            
         }
         
     }
     
-    func change(message: [MessageKeyType: Any]) {}
-    
     func delete(with id: NSManagedObjectID) -> Bool {
         return false
+    }
+    
+    private func showError(error: ErrorMessage) {
+        
+        guard let controller = controller else { return }
+        
+        NeedCancelAlert().show(
+            controller: controller,
+            title: error.error.rawValue,
+            body: nil)
     }
     
 }

@@ -1,5 +1,6 @@
-// Для вспомогательных функций сообщений между классами
+import CoreData
 
+/// Создает сообщения для отправки в базу
 struct MessageManager {
     
     let iconExpenseTransaction = ""
@@ -10,7 +11,8 @@ struct MessageManager {
     func craftTransactionMessage(transactionType: TransactionType,
                                  topButton: String,
                                  sum: Int32,
-                                 bottomButton: String) -> [MessageKeyType: Any] {
+                                 bottomButton: String,
+                                 id: NSManagedObjectID?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.typeTransaction] = transactionType.rawValue
@@ -21,7 +23,10 @@ struct MessageManager {
             dictionary[.corAccount] = bottomButton
         } else {
             dictionary[.nameCategory] = bottomButton
-        }        
+        }
+        if id != nil {
+            dictionary[.idTransaction] = id
+        }
         return dictionary
     }
     
@@ -36,7 +41,7 @@ struct MessageManager {
     }
     
     //создает сообщение для формы счета
-    func craftCategoryFormMessage(nameCategory: String, type: TypeCategory) -> [MessageKeyType: Any] {
+    func craftCategoryFormMessage(nameCategory: String, type: CategoryType) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.nameCategory] = nameCategory

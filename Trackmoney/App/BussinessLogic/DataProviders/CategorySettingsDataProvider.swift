@@ -68,8 +68,6 @@ class CategorySettingsDataProvider: DataProviderProtocol {
         
     }
     
-    func change(message: [MessageKeyType: Any]) {}
-    
     func delete(message: [MessageKeyType: Any]) {}
     
 }

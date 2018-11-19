@@ -31,7 +31,7 @@ class ChooseTypeCategoryAlert: AlertManager {
     }
     
     //вызывает CategoryFormController после выбора типа Категории
-    private func presentController(controller: UIViewController, type: TypeCategory) {
+    private func presentController(controller: UIViewController, type: CategoryType) {
         
         let formController = CategoryFormControllerBilder(typeCategory: type).viewController()
         controller.present(formController, animated: true, completion: nil)

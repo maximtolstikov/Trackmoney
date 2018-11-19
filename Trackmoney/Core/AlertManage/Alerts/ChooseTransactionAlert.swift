@@ -49,7 +49,7 @@ class ChooseTransactionAlert: AlertManager {
                                                   name: String) {
         let formController = TransactionFormControllerBilder()
             .viewController(transactionType: type)
-        formController.topChooseButtonName = name
+        formController.topChooseButtonText = name
         controller.present(formController, animated: true, completion: nil)
     }
     
