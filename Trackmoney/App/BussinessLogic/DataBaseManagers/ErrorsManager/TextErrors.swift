@@ -8,8 +8,7 @@ enum TextErrors: String {
     case categoryIsNotExist = "Такой категории не существует!"
     case categoryIsExistAlready = "Такая категория уже существует!"
     case transactionIsNotExist = "Такой транзакции не существует!"
-    case transactionIsExist = "Такая транзакция уже существует!"
-    
+    case transactionIsExist = "Такая транзакция уже существует!"    
     case contextDoNotBeSaved = "Контекст не может быть сохранен!"
     case noName = "No name error..."
    

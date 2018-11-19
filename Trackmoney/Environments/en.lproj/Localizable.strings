@@ -3,6 +3,8 @@
 //Buttons
 "titleCancelButton" = "Cancel";
 "titleSaveButton" = "Save";
+"titleDeleteButton" = "Delete";
+"titleEditButton" = "Edit";
 "titleAddAccount" = "Add Account";
 "titleAddCategory" = "Add Category";
 "titleSortDelete" = "Sort/Delete";

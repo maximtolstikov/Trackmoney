@@ -3,6 +3,8 @@
 //Buttons
 "titleCancelButton" = "Отменить";
 "titleSaveButton" = "Сохранить";
+"titleDeleteButton" = "Удалить";
+"titleEditButton" = "Изменить";
 "titleAddAccount" = "Добавить Счет";
 "titleAddCategory" = "Добавить Категорию";
 "titleSortDelete" = "Редактировать";

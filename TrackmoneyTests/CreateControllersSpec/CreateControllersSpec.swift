@@ -75,10 +75,10 @@ class CreateControllersSpec: XCTestCase {
                 .viewController() as? LogController
         })
         try then("dataLoader is not nil", closure: {
-            XCTAssertNotNil(logController.dataLoader)
+            XCTAssertNotNil(logController.dataProvider)
         })
         try then("LogDataLoder.dbManager is TransactionDBManager", closure: {
-            XCTAssertTrue(logController.dataLoader?.dbManager is TransactionDBManager)
+            XCTAssertTrue(logController.dataProvider?.dbManager is TransactionDBManager)
         })
         
         logController = nil

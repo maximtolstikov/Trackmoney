@@ -16,18 +16,18 @@ class LogController: UIViewController {
             }
         }
     }
-    var dataLoader: DataProviderProtocol?
-
+    var dataProvider: DataProviderProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        dataLoader?.loadData()
+        dataProvider?.loadData()
     }
     
     //настраиваем и добавляем контроллер таблицы
@@ -54,8 +54,8 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         guard transactions?.count != nil else { return 0 }
         return transactions.count
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView
@@ -65,9 +65,45 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         cell.accountNameLable.textColor = UIColor.red
         cell.sumLable.text = String(transactions[indexPath.row].sumTransaction)
         cell.categoryNameLable.text = transactions[indexPath.row].nameCategory
-
+        
         return cell
     }
     
-
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+                
+                guard let id = self?.transactions[indexPath.row].objectID else { return }
+                let result = self?.dataProvider?.delete(with: id)
+                
+                if result != nil, result == true {
+                    self?.transactions.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
+        }
+        
+        let edit = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleEditButton", comment: "")) { [weak self] (action, indexPath) in
+                
+                
+                
+                                        //let storyboard = UIStoryboard.init(name: "Forms", bundle: nil)
+                                        //            let viewController = storyboard.instantiateViewController(withIdentifier: "transactionForm") as! TransactionFormViewController
+                                        //            guard let date = self?.transactions[indexPath.row].date else {return}
+                                        //            viewController.transactionType = .EditTransaction
+                                        //            viewController.transactionDate = date
+                                        //            self?.present(viewController, animated: true, completion: nil)
+        }
+        
+        delete.backgroundColor = UIColor.red
+        edit.backgroundColor = UIColor.blue
+        
+        return [delete, edit]
+    }
+    
+    
 }

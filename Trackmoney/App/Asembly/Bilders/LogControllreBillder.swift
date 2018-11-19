@@ -10,7 +10,7 @@ class LogControllerBilder {
         let dataLoader = LogDataLoader()
         dataLoader.dbManager = TransactionDBManager()
         dataLoader.controller = logController
-        logController.dataLoader = dataLoader
+        logController.dataProvider = dataLoader
         logController.title = "Log"
         logController.tabBarItem = UITabBarItem(
             title: "Log",

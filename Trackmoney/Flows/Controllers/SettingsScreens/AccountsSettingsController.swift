@@ -1,9 +1,6 @@
-// Для описания контроллера "Насторойки счетов"
-
-//swiftlint:disable line_length
-
 import UIKit
 
+/// Описывает контроллер "Насторойки счетов"
 class AccountsSettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
@@ -107,7 +104,6 @@ class AccountsSettingsController: UIViewController {
     
 }
 
-
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -132,7 +128,9 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
     
     
     //удаляет счет из списка
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             

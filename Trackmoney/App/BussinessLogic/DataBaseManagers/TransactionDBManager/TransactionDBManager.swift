@@ -104,7 +104,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    // Удаляет транзакцию
+    /// Удаляет транзакцию
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let transaction = getObjectById(

@@ -22,7 +22,26 @@ class LogDataLoader: DataProviderProtocol {
     func change(message: [MessageKeyType: Any]) {}
     
     func delete(with id: NSManagedObjectID) -> Bool {
-        return false
+        
+        let message: [MessageKeyType: Any] = [.idTransaction: id]
+        let error = dbManager?.delete(message: message)
+        
+        if error == nil, controller != nil {
+            ShortAlert().show(
+                controller: controller!,
+                title: AlertMessage.accountDeleted.rawValue,
+                body: nil, style: .alert)
+            return true
+        } else {
+            if error != nil, controller != nil {
+                NeedCancelAlert().show(
+                    controller: controller!,
+                    title: error!.error.rawValue,
+                    body: nil)
+            }
+            return false
+        }
+        
     }
     
 }
