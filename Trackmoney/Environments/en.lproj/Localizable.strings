@@ -5,8 +5,8 @@
 "titleSaveButton" = "Save";
 "titleDeleteButton" = "Delete";
 "titleEditButton" = "Edit";
-"titleAddAccount" = "Add Account";
-"titleAddCategory" = "Add Category";
+"titleAddAccount" = "Add";
+"titleAddCategory" = "Add";
 "titleSortDelete" = "Sort/Delete";
 
 //Lable
@@ -23,7 +23,7 @@
 //Settings
 "accountSettingsTitle" = "Accounts";
 "categoriSettingsTitile" = "Categories";
-"settingsAccounts" = "Accounts Settings";
+"settingsAccounts" = "Accounts";
 "settingsCategories" = "Categories Settings";
 
 //Validate error

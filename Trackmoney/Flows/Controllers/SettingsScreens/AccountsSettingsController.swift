@@ -50,6 +50,7 @@ class AccountsSettingsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isEditing = true
         
         self.view.addSubview(tableView)
         
@@ -65,21 +66,15 @@ class AccountsSettingsController: UIViewController {
             target: self,
             action: #selector(addAccount))
         
-        let deleteAccountButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSortDelete", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteAccount))
-        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
         let buttoms = [
-            addAccountButtom,
             flexSpace,
-            deleteAccountButton]
+            addAccountButtom,
+            flexSpace]
         
         self.setToolbarItems(buttoms, animated: true)
     }
@@ -105,7 +100,6 @@ class AccountsSettingsController: UIViewController {
 }
 
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -139,17 +133,16 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                     assertionFailure()
                     return
             }
-            _ = sortManager.remove(element: accounts[indexPath.row], in: accounts)
+            sortManager.remove(element: accounts[indexPath.row], in: accounts)
             accounts.remove(at: indexPath.row)
             tableView.reloadData()
         }
         
     }
     
-    
     func tableView(_ tableView: UITableView,
                    canMoveRowAt indexPath: IndexPath) -> Bool {
-        
+
         return tableView.isEditing
     }
     

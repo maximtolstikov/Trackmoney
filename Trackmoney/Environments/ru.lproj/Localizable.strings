@@ -5,8 +5,8 @@
 "titleSaveButton" = "Сохранить";
 "titleDeleteButton" = "Удалить";
 "titleEditButton" = "Изменить";
-"titleAddAccount" = "Добавить Счет";
-"titleAddCategory" = "Добавить Категорию";
+"titleAddAccount" = "Добавить";
+"titleAddCategory" = "Добавить";
 "titleSortDelete" = "Редактировать";
 
 //Lable
@@ -23,7 +23,7 @@
 //Settings
 "accountSettingsTitle" = "Счета";
 "categoriSettingsTitile" = "Категории";
-"settingsAccounts" = "Настройки Счетов";
+"settingsAccounts" = "Счета";
 "settingsCategories" = "Настройки Категорий";
 
 //Validate error

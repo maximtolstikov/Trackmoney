@@ -69,23 +69,18 @@ struct CustomSortManager {
     }
     
     /// Добавляет элемент
-    func add<T: CustomSort>(element: T, in array: [T]) -> [T] {
+    func add<T: CustomSort>(element: T, in array: [T]) {
         
         var newArray = array
         newArray.append(element)
         _ = saveCurrentOrder(newArray)
-        
-        return newArray
     }
     
     /// Удаляет элемент
-    func remove<T: CustomSort>(element: T, in array: [T]) -> [T] {
+    func remove<T: CustomSort>(element: T, in array: [T]) {
         
         let newArray = array.filter { $0.name != element.name }
-        _ = saveCurrentOrder(newArray)
-        
-        return newArray
-        
+        _ = saveCurrentOrder(newArray)        
     }
     
     /// Перемещает элемент
