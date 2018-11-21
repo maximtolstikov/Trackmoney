@@ -1,9 +1,8 @@
-//Для описания контроллера журнала
-
 //swiftlint:disable force_cast
 
 import UIKit
 
+/// Для описания контроллера журнала
 class LogController: UIViewController {
     
     var tableView = UITableView()

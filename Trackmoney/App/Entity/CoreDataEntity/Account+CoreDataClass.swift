@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 @objc(Account)
-public class Account: NSManagedObject {
+public class Account: NSManagedObject, CustomSort {
 
 }
