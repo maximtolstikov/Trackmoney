@@ -11,11 +11,13 @@ class AccountsController: UIViewController {
     
     var tableView = UITableView()
     let cellIndentifire = "myCell"
+        var sortManager: CustomSortManager!
     
     // массив со счетами (устанавливается при вызове loadData() )
     var accounts: [Account]! {
         didSet {
             setHeightRow()
+            accounts = sortManager.sortedArray(accounts)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

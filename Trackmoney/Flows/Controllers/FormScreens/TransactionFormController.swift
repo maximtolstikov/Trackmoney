@@ -1,5 +1,5 @@
-import UIKit
 import CoreData
+import UIKit
 
 /// Описывает контроллер создания и редактирования транзакции
 class TransactionFormController: BaseFormController {

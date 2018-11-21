@@ -14,6 +14,9 @@ class AccountsSettingsControllerBilder {
         accountsSettingsController
             .navigationItem.title = NSLocalizedString("settingsAccounts",
                                                       comment: "")
+        let customSort = CustomSortManager(entity: Account.self)
+        accountsSettingsController.sortManager = customSort
+        
         return accountsSettingsController
         
     }

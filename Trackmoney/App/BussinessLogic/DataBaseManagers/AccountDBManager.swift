@@ -8,19 +8,27 @@ import UIKit
 
 class AccountDBManager: DBManager, DBManagerProtocol {
     
+    lazy var sortManager = CustomSortManager(entity: Account.self)
+    
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
         if getObjectByName(for: message[.nameAccount] as! String) != nil {
             return (nil, ErrorMessage(error: .accountIsExistAlready))
         }
+        // Получает список счетов до добавления
+        let accounts = get() as! [Account]
         
         let account = Account(context: context)
         account.name = message[.nameAccount] as! String
         account.sumAccount = message[.sumAccount] as! Int32
-
         
         do {
             try context.save()
+            // Сортирует список с пользовательской последовательностью
+            // и добавляет в конец новый элемент
+            let sortedAccounts = sortManager.sortedArray(accounts)
+            _ = sortManager.add(element: account, in: sortedAccounts)
+            
             return (account.objectID, nil)
         } catch {
             print(error.localizedDescription)
@@ -129,7 +137,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
         
     }
-    
     
     // Уменьшает сумму счета
     func substract(for account: Account, sum: Int32) {

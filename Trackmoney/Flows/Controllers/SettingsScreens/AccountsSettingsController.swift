@@ -4,10 +4,12 @@ import UIKit
 class AccountsSettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
+    var sortManager: CustomSortManager!
     var tableView = UITableView()
     let cellIndentifire = "myCell"
     var accounts: [Account]! {
         didSet {
+            accounts = sortManager.sortedArray(accounts)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -16,7 +18,7 @@ class AccountsSettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
         addTable()
         addBottomToolBar()
     }
@@ -81,25 +83,23 @@ class AccountsSettingsController: UIViewController {
         
         self.setToolbarItems(buttoms, animated: true)
     }
- 
     
     //добавляет Счет
     @objc func addAccount() {
         
         let controller = AccountFormControllerBilder().viewController()
         present(controller, animated: true, completion: nil)
-        
     }
     
-    
-    // TODO: Сделать сортировку списка счетов
     // удаляет сортирует Счета
     @objc func sortDeleteAccount() {
+        
         if self.tableView.isEditing {
             self.tableView.setEditing(false, animated: true)
         } else {
             self.tableView.setEditing(true, animated: true)
         }
+        
     }
     
 }
@@ -121,7 +121,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "myCell",
             for: indexPath)
-
+        
         cell.textLabel?.text = accounts[indexPath.row].name
         return cell
     }
@@ -139,31 +139,29 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                     assertionFailure()
                     return
             }
-
-                accounts.remove(at: indexPath.row)
-                tableView.reloadData()
-
+            _ = sortManager.remove(element: accounts[indexPath.row], in: accounts)
+            accounts.remove(at: indexPath.row)
+            tableView.reloadData()
         }
         
     }
     
     
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView,
+                   canMoveRowAt indexPath: IndexPath) -> Bool {
+        
         return tableView.isEditing
     }
     
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
         
+        let item = accounts[sourceIndexPath.row]
+        accounts.remove(at: sourceIndexPath.row)
+        accounts.insert(item, at: destinationIndexPath.row)
+        
+        sortManager.swapElement(array: accounts)
     }
-    
-
-    
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44))
-    //        view.backgroundColor = UIColor.gray
-    //
-    //        return viewHeader
-    //    }
     
 }

@@ -24,7 +24,7 @@ extension CategoryTransaction {
 
 }
 
-// MARK: Generated accessors for groupCategory
+// MARK: - Generated accessors for groupCategory
 extension CategoryTransaction {
 
     @objc(addGroupCategoryObject:)
