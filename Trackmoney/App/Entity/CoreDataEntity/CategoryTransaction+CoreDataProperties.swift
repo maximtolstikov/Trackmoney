@@ -2,7 +2,7 @@
 //  CategoryTransaction+CoreDataProperties.swift
 //  Trackmoney
 //
-//  Created by Maxim Tolstikov on 17/11/2018.
+//  Created by Maxim Tolstikov on 21/11/2018.
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
 //
@@ -18,13 +18,13 @@ extension CategoryTransaction {
     }
 
     @NSManaged public var iconCategory: String?
-    @NSManaged public var nameCategory: String
+    @NSManaged public var name: String
     @NSManaged public var typeCategory: String
     @NSManaged public var groupCategory: NSSet?
 
 }
 
-// MARK: - Generated accessors for groupCategory
+// MARK: Generated accessors for groupCategory
 extension CategoryTransaction {
 
     @objc(addGroupCategoryObject:)

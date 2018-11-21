@@ -64,10 +64,10 @@ struct CreateTransaction {
         transaction.dateTransaction = date
         transaction.sumTransaction = sum
         transaction.typeTransaction = type.rawValue
-        transaction.nameAccount = mainAccount.nameAccount
+        transaction.nameAccount = mainAccount.name
         transaction.iconTransaction = iconTransaction
         transaction.nameCategory = category
-        transaction.corAccount = corAccount?.nameAccount
+        transaction.corAccount = corAccount?.name
         
         switch type {
         case .expense:

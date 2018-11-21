@@ -73,7 +73,7 @@ class AccountDBManagerSpec: XCTestCase {
         try then("account neme equal newName", closure: {
             let account = manager.getObjectById(
                 for: message[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.nameAccount, "newName")
+            XCTAssertEqual(account?.name, "newName")
         })
         
         _ = manager.delete(message: message)

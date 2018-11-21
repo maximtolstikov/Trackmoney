@@ -18,9 +18,9 @@ class ChooseAccountAlert: AlertManager {
         self.alertController.addAction(cancel)
         
         for (account) in arrayAccounts {
-            let action = UIAlertAction(title: account.nameAccount, style: .default, handler: { [weak self] _ in
+            let action = UIAlertAction(title: account.name, style: .default, handler: { [weak self] _ in
                 
-                comletion(account.nameAccount)
+                comletion(account.name)
                 self?.alertController = nil
             })
             

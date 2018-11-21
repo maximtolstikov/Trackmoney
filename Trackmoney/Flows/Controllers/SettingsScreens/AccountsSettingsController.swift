@@ -122,7 +122,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
             withIdentifier: "myCell",
             for: indexPath)
 
-        cell.textLabel?.text = accounts[indexPath.row].nameAccount
+        cell.textLabel?.text = accounts[indexPath.row].name
         return cell
     }
     

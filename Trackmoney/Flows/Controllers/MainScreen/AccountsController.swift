@@ -114,7 +114,7 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifire,
                                                  for: indexPath) as! AccountsCell
         
-        cell.accountNameLable.text = accounts[indexPath.row].nameAccount
+        cell.accountNameLable.text = accounts[indexPath.row].name
         cell.sumLable.text = String(accounts[indexPath.row].sumAccount)
         
         return cell
@@ -127,7 +127,7 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         
         ChooseTransactionAlert().show(
             controller: self,
-            nameAccount: accounts[indexPath.row].nameAccount)
+            nameAccount: accounts[indexPath.row].name)
         tableView.deselectRow(at: indexPath, animated: true)
         
     }

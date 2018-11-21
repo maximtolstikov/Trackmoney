@@ -10,7 +10,8 @@ import XCTest
 class CategoryDBManagerSpec: XCTestCase {
     
     var message: [MessageKeyType: Any] = [.nameCategory: "testNameCategory",
-                                          .iconCategory: "iconString"]
+                                          .iconCategory: "iconString",
+                                          .typeCategory: CategoryType.expense.rawValue]
     var manager: CategoryDBManager!
     
     override func setUp() {
@@ -81,7 +82,7 @@ class CategoryDBManagerSpec: XCTestCase {
         try then("Category neme equal newName", closure: {
             let category = manager.getObjectById(
                 for: message[.idCategory] as! NSManagedObjectID)
-            XCTAssertEqual(category?.nameCategory, "newName")
+            XCTAssertEqual(category?.name, "newName")
         })
         
         _ = manager.delete(message: message)

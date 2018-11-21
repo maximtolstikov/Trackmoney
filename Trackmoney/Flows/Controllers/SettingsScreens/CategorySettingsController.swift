@@ -122,7 +122,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             withIdentifier: "myCell",
             for: indexPath)
         
-        cell.textLabel?.text = categories[indexPath.row].nameCategory
+        cell.textLabel?.text = categories[indexPath.row].name
         return cell
     }
     

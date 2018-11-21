@@ -100,7 +100,7 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
                     accountCor = managerA.getObjectById(
                         for: messageAC[.idAccount] as! NSManagedObjectID)
                     messageT[.typeTransaction] = TransactionType.transfer.rawValue
-                    messageT[.corAccount] = accountCor.nameAccount
+                    messageT[.corAccount] = accountCor.name
                     let resultCreateTransaction = managerT.create(message: messageT)
                     messageT[.idTransaction] = resultCreateTransaction.0!
                     XCTAssertEqual(accountMain?.sumAccount, 70)

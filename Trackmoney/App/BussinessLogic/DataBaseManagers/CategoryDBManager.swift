@@ -15,7 +15,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         
         let newCategory = CategoryTransaction(context: context)
         
-        newCategory.nameCategory = message[.nameCategory] as! String
+        newCategory.name = message[.nameCategory] as! String
         newCategory.iconCategory = message[.iconCategory] as? String
         newCategory.typeCategory = message[.typeCategory] as! String
         
@@ -58,7 +58,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     func getObjectByName(for name: String) -> CategoryTransaction? {
         
         let fetchRequest: NSFetchRequest<CategoryTransaction> = CategoryTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "nameCategory = %@", name)
+        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -89,7 +89,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
         
         if mManager.isExistValue(for: .nameCategory, in: message) {
-            category.nameCategory = message[.nameCategory] as! String
+            category.name = message[.nameCategory] as! String
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconCategory, in: message) {

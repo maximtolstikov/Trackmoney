@@ -15,7 +15,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
         
         let account = Account(context: context)
-        account.nameAccount = message[.nameAccount] as! String
+        account.name = message[.nameAccount] as! String
         account.sumAccount = message[.sumAccount] as! Int32
 
         
@@ -59,7 +59,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
         fetchRequest.predicate = NSPredicate(
-            format: "nameAccount = %@", name)
+            format: "name = %@", name)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -89,7 +89,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
         
         if mManager.isExistValue(for: .nameAccount, in: message) {
-            account.nameAccount = message[.nameAccount] as! String
+            account.name = message[.nameAccount] as! String
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconAccount, in: message) {
