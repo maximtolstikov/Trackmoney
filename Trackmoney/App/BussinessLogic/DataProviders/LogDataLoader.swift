@@ -8,11 +8,12 @@ class LogDataLoader: DataProviderProtocol {
     
     func loadData() {
         
-        guard let transactions = dbManager?.get() else {
+        guard let objects = dbManager?.get() else {
             assertionFailure()
             return
         }
-        controller?.transactions = transactions as? [Transaction]
+        let transactions = objects as? [Transaction]
+        controller?.transactions = transactions?.reversed()
         
     }
     
