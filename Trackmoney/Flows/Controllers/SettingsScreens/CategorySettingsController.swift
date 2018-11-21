@@ -1,7 +1,6 @@
-//Для настройки контроллера Нстроек Категорий
-
 import UIKit
 
+/// Класс контроллера Нстроек Категорий
 class CategorySettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
@@ -49,13 +48,14 @@ class CategorySettingsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isEditing = true
         
         self.view.addSubview(tableView)
         
     }
     
     
-    //настраиваем и добавляем тулБар снизу
+    // Настраивает и добавляет тулБар снизу
     private func addBottomToolBar() {
         
         let addCategoryButtom = UIBarButtonItem(
@@ -64,21 +64,12 @@ class CategorySettingsController: UIViewController {
             target: self,
             action: #selector(addCategory))
         
-        let editCategoryButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSortDelete", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteCategory))
-        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
-        let buttoms = [
-            addCategoryButtom,
-            flexSpace,
-            editCategoryButton]
+        let buttoms = [flexSpace, addCategoryButtom, flexSpace]
         
         self.setToolbarItems(buttoms, animated: true)
     }
@@ -90,22 +81,10 @@ class CategorySettingsController: UIViewController {
         ChooseTypeCategoryAlert().show(controller: self)        
     }
     
-    
-    // TODO: Сделать сортировку списка Категирий
-    // удаляет сортирует Категории
-    @objc func sortDeleteCategory() {
-        if self.tableView.isEditing {
-            self.tableView.setEditing(false, animated: true)
-        } else {
-            self.tableView.setEditing(true, animated: true)
-        }
-    }
-    
 }
 
 
 extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -113,7 +92,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         guard categories?.count != nil else { return 0 }
         return categories.count
     }
-    
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,8 +104,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    
-    //удаляет Категорию из списка
+    // Удаляет Категорию из списка
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
@@ -142,18 +119,19 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             
             categories.remove(at: indexPath.row)
             tableView.reloadData()
-            
         }
         
     }
     
-    
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView,
+                   canMoveRowAt indexPath: IndexPath) -> Bool {
+        
         return tableView.isEditing
     }
     
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
         
     }
     

@@ -1,12 +1,11 @@
-// Настраивает контроллер формы категории
-
 import UIKit
 
+/// Класс контроллера формы категории
 class CategoryFormController: BaseFormController {
     
     var typeCategory: CategoryType!
     
-    //поставщик данных
+    // Поставщик данных
     var dataProvider: DataProviderProtocol?
     
     let typeLable: UILabel = {
@@ -29,7 +28,7 @@ class CategoryFormController: BaseFormController {
         createTypeLable()
     }
     
-    // делает текстовое поле активным и вызывается клавиатура
+    // Делает текстовое поле активным и вызывается клавиатура
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         DispatchQueue.main.async {
@@ -37,7 +36,7 @@ class CategoryFormController: BaseFormController {
         }
     }
     
-    // создает текстовое поле для ввода суммы
+    // Создает текстовое поле для ввода суммы
     func createNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
@@ -51,7 +50,8 @@ class CategoryFormController: BaseFormController {
         nameTextField.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
                                              multiplier: 2 / 3).isActive = true
         nameTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        nameTextField.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -40).isActive = true
+        nameTextField.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
+                                              constant: -40).isActive = true
         
     }
     
@@ -67,7 +67,8 @@ class CategoryFormController: BaseFormController {
         typeLable.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
                                              multiplier: 2 / 3).isActive = true
         typeLable.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        typeLable.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -40).isActive = true
+        typeLable.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
+                                          constant: -40).isActive = true
     }
     
     // MARK: - Button's methods
@@ -76,7 +77,7 @@ class CategoryFormController: BaseFormController {
        dismiss(animated: false, completion: nil)
     }
     
-    //проводит валидацию и сохраняет или вызывает подсказку
+    // Проводит валидацию и сохраняет или вызывает подсказку
     @objc override func tapSaveButton() {
         
         guard let nameText = nameTextField.text else {
@@ -107,7 +108,8 @@ class CategoryFormController: BaseFormController {
         
     }
     
-    // Методы уведомления TextField
+    // MARK: - TextFields's methods
+    
     @objc override func responseTextField(_ notification: Notification) {
         nameTextField.updateFocusIfNeeded()
     }
