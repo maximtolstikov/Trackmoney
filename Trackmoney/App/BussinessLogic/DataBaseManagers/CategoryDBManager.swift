@@ -16,8 +16,13 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         let newCategory = CategoryTransaction(context: context)
         
         newCategory.name = message[.nameCategory] as! String
-        newCategory.iconCategory = message[.iconCategory] as? String
-        newCategory.typeCategory = message[.typeCategory] as! String
+        newCategory.icon = message[.iconCategory] as? String
+        newCategory.type = message[.typeCategory] as! String
+        if let parent = message[.parentCategory] {
+            let parentCategory = getObjectByName(for: parent as! String)
+            newCategory.parent = parentCategory
+            parentCategory?.addToChild(newCategory)
+        }
         
         do {
             try context.save()
@@ -93,7 +98,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconCategory, in: message) {
-            category.iconCategory = message[.iconCategory] as? String
+            category.icon = message[.iconCategory] as? String
         }
 
         return saveContext()

@@ -100,7 +100,15 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             withIdentifier: "myCell",
             for: indexPath)
         
-        cell.textLabel?.text = categories[indexPath.row].name
+        let textInCell: String
+        
+        if let parentName = categories[indexPath.row].parent?.name {
+            textInCell = "\(parentName)" + "/" + "\(categories[indexPath.row].name)"
+        } else {
+            textInCell = categories[indexPath.row].name
+        }
+        
+        cell.textLabel?.text = textInCell
         return cell
     }
     

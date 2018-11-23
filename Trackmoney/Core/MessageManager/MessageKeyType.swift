@@ -10,6 +10,7 @@ enum MessageKeyType: String {
     case nameCategory
     case iconCategory
     case idCategory
+    case parentCategory
     case dateTransaction
     case sumTransaction
     case typeTransaction

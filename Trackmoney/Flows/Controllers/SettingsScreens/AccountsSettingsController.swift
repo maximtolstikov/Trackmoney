@@ -71,10 +71,7 @@ class AccountsSettingsController: UIViewController {
             target: nil,
             action: nil)
         
-        let buttoms = [
-            flexSpace,
-            addAccountButtom,
-            flexSpace]
+        let buttoms = [flexSpace, addAccountButtom, flexSpace]
         
         self.setToolbarItems(buttoms, animated: true)
     }
@@ -85,18 +82,7 @@ class AccountsSettingsController: UIViewController {
         let controller = AccountFormControllerBilder().viewController()
         present(controller, animated: true, completion: nil)
     }
-    
-    // удаляет сортирует Счета
-    @objc func sortDeleteAccount() {
-        
-        if self.tableView.isEditing {
-            self.tableView.setEditing(false, animated: true)
-        } else {
-            self.tableView.setEditing(true, animated: true)
-        }
-        
-    }
-    
+
 }
 
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
@@ -115,6 +101,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "myCell",
             for: indexPath)
+        
         
         cell.textLabel?.text = accounts[indexPath.row].name
         return cell

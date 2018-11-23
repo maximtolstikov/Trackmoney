@@ -20,7 +20,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         
         let account = Account(context: context)
         account.name = message[.nameAccount] as! String
-        account.sumAccount = message[.sumAccount] as! Int32
+        account.sum = message[.sumAccount] as! Int32
         
         do {
             try context.save()
@@ -101,7 +101,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             //TODO: сдесь нужен итератор по Транзакциям
         }
         if mManager.isExistValue(for: .iconAccount, in: message) {
-            account.iconAccount = message[.iconAccount] as? String
+            account.icon = message[.iconAccount] as? String
         }
         
         do {
@@ -140,20 +140,20 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     
     // Уменьшает сумму счета
     func substract(for account: Account, sum: Int32) {
-        account.sumAccount -= sum
+        account.sum -= sum
     }
     
     
     // Увеличивает сумму счета
     func add(for account: Account, sum: Int32) {
-        account.sumAccount += sum
+        account.sum += sum
     }
     
     
     // Переводит сумму с одного счета на другой
     func move(fromAccount: Account, toAccount: Account, sum: Int32) {
-        fromAccount.sumAccount -= sum
-        toAccount.sumAccount += sum
+        fromAccount.sum -= sum
+        toAccount.sum += sum
     }
   
 }

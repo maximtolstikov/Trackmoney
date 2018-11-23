@@ -53,7 +53,7 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         try then("accountMainSum equal 130", closure: {
             let account = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.sumAccount, 130)
+            XCTAssertEqual(account?.sum, 130)
         })
         
         _ = managerT.delete(message: messageT)
@@ -79,7 +79,7 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         try then("accountMainSum equal 70", closure: {
             let account = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.sumAccount, 70)
+            XCTAssertEqual(account?.sum, 70)
         })
         
         _ = managerT.delete(message: messageT)
@@ -109,13 +109,13 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         try then("accountMainSum equal 70", closure: {
             let accountMain = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountMain?.sumAccount, 70)
+            XCTAssertEqual(accountMain?.sum, 70)
         })
         try then("accountCorSum equal 80", closure: {
             print(messageAC[.idAccount] as! NSManagedObjectID)
             let accountCor = managerA.getObjectById(
                 for: messageAC[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountCor?.sumAccount, 80)
+            XCTAssertEqual(accountCor?.sum, 80)
         })
         
         _ = managerT.delete(message: messageT)

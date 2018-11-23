@@ -12,21 +12,20 @@ struct ChangeSumTransaction {
         ) -> Bool {
         
         guard let mainAccount = accountDBManager
-                  .getObjectByName(for: transaction.nameAccount),
-              let type = TransactionType(rawValue: transaction
-                .typeTransaction) else {
+                  .getObjectByName(for: transaction.mainAccount),
+              let type = TransactionType(rawValue: transaction.type) else {
                 assertionFailure()
                 return false
         }
         
-        let oldSum = transaction.sumTransaction
+        let oldSum = transaction.sum
         let difference = newSum - oldSum
         
         switch type {
         case .expense:
-            mainAccount.sumAccount -= difference
+            mainAccount.sum -= difference
         case .income:
-            mainAccount.sumAccount += difference
+            mainAccount.sum += difference
         case .transfer:
             
             //swiftlint:disable force_unwrapping
@@ -36,11 +35,11 @@ struct ChangeSumTransaction {
                     return false
             }
             
-            mainAccount.sumAccount -= difference
-            corAccount.sumAccount += difference
+            mainAccount.sum -= difference
+            corAccount.sum += difference
         }
         
-        transaction.sumTransaction = newSum
+        transaction.sum = newSum
         
         return true
         

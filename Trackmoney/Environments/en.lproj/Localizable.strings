@@ -8,6 +8,7 @@
 "titleAddAccount" = "Add";
 "titleAddCategory" = "Add";
 "titleSortDelete" = "Sort/Delete";
+"chooseParentButton" = "parent category";
 
 //Lable
 "typeCategory" = "type:";

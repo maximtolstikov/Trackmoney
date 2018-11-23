@@ -2,12 +2,14 @@
 //  CategoryTransaction+CoreDataProperties.swift
 //  Trackmoney
 //
-//  Created by Maxim Tolstikov on 21/11/2018.
+//  Created by Maxim Tolstikov on 23/11/2018.
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
 //
-import CoreData
+
 import Foundation
+import CoreData
+
 
 extension CategoryTransaction {
 
@@ -15,26 +17,27 @@ extension CategoryTransaction {
         return NSFetchRequest<CategoryTransaction>(entityName: "CategoryTransaction")
     }
 
-    @NSManaged public var iconCategory: String?
+    @NSManaged public var icon: String?
     @NSManaged public var name: String
-    @NSManaged public var typeCategory: String
-    @NSManaged public var groupCategory: NSSet?
+    @NSManaged public var type: String
+    @NSManaged public var child: NSSet?
+    @NSManaged public var parent: CategoryTransaction?
 
 }
 
-// MARK: - Generated accessors for groupCategory
+// MARK: Generated accessors for child
 extension CategoryTransaction {
 
-    @objc(addGroupCategoryObject:)
-    @NSManaged public func addToGroupCategory(_ value: CategoryTransaction)
+    @objc(addChildObject:)
+    @NSManaged public func addToChild(_ value: CategoryTransaction)
 
-    @objc(removeGroupCategoryObject:)
-    @NSManaged public func removeFromGroupCategory(_ value: CategoryTransaction)
+    @objc(removeChildObject:)
+    @NSManaged public func removeFromChild(_ value: CategoryTransaction)
 
-    @objc(addGroupCategory:)
-    @NSManaged public func addToGroupCategory(_ values: NSSet)
+    @objc(addChild:)
+    @NSManaged public func addToChild(_ values: NSSet)
 
-    @objc(removeGroupCategory:)
-    @NSManaged public func removeFromGroupCategory(_ values: NSSet)
+    @objc(removeChild:)
+    @NSManaged public func removeFromChild(_ values: NSSet)
 
 }

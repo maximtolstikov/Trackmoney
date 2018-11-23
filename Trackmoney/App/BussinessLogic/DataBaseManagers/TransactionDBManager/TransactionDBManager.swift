@@ -54,7 +54,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(
-            format: "dateTransaction = %@", date)
+            format: "date = %@", date)
         
         do {
             let result = try context.fetch(fetchRequest)

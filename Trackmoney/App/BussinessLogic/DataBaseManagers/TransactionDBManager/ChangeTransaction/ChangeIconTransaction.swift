@@ -11,7 +11,7 @@ struct ChangeIconTransaction {
         for transaction: Transaction
         ) -> Bool {
         
-        transaction.iconTransaction = newIcon
+        transaction.icon = newIcon
     
         return true
         

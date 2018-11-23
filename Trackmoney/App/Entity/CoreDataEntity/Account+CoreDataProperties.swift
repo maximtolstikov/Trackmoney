@@ -2,12 +2,14 @@
 //  Account+CoreDataProperties.swift
 //  Trackmoney
 //
-//  Created by Maxim Tolstikov on 21/11/2018.
+//  Created by Maxim Tolstikov on 23/11/2018.
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
 //
-import CoreData
+
 import Foundation
+import CoreData
+
 
 extension Account {
 
@@ -15,8 +17,9 @@ extension Account {
         return NSFetchRequest<Account>(entityName: "Account")
     }
 
-    @NSManaged public var iconAccount: String?
+    @NSManaged public var icon: String?
     @NSManaged public var name: String
-    @NSManaged public var sumAccount: Int32
+    @NSManaged public var sum: Int32
+    @NSManaged public var type: String?
 
 }

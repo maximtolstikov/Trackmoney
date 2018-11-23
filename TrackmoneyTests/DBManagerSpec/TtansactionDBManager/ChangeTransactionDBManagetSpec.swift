@@ -50,7 +50,7 @@ class ChangeTransactionDBManagetSpec: XCTestCase {
         try then("sum account's should equal 120", closure: {
             let account = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.sumAccount, 120)
+            XCTAssertEqual(account?.sum, 120)
         })
         
         messageT[.sumTransaction] = Int32(30)
@@ -75,7 +75,7 @@ class ChangeTransactionDBManagetSpec: XCTestCase {
         try then("sum account's should equal 80", closure: {
             let account = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.sumAccount, 80)
+            XCTAssertEqual(account?.sum, 80)
         })
         
         messageT[.sumTransaction] = Int32(30)
@@ -103,12 +103,12 @@ class ChangeTransactionDBManagetSpec: XCTestCase {
         try then("sum main account's should equal 80", closure: {
             let accountMain = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountMain?.sumAccount, 80)
+            XCTAssertEqual(accountMain?.sum, 80)
         })
         try then("sum cor account's should equal 70", closure: {
             let accountCor = managerA.getObjectById(
                 for: messageAC[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountCor?.sumAccount, 70)
+            XCTAssertEqual(accountCor?.sum, 70)
         })
         
         messageT[.sumTransaction] = Int32(30)

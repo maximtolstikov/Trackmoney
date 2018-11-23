@@ -31,7 +31,7 @@ class GetTransactionDBManager: XCTestCase {
         let resultCreateTransaction = managerT.create(message: messageT)
         messageT[.idTransaction] = resultCreateTransaction.0!
         let transaction = managerT.getObjectById(for: resultCreateTransaction.0!)
-        messageT[.dateTransaction] = transaction?.dateTransaction
+        messageT[.dateTransaction] = transaction?.date
     }
     override func tearDown() {
         _ = managerT.delete(message: messageT)

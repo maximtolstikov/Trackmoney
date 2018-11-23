@@ -60,10 +60,10 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: cellIndentifire,
                                  for: indexPath) as! LogCell
-        cell.accountNameLable.text = transactions[indexPath.row].nameAccount
+        cell.accountNameLable.text = transactions[indexPath.row].mainAccount
         cell.accountNameLable.textColor = UIColor.red
-        cell.sumLable.text = String(transactions[indexPath.row].sumTransaction)
-        cell.categoryNameLable.text = transactions[indexPath.row].nameCategory
+        cell.sumLable.text = String(transactions[indexPath.row].sum)
+        cell.categoryNameLable.text = transactions[indexPath.row].category
         
         return cell
     }
@@ -89,18 +89,18 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             title: NSLocalizedString("titleEditButton", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let transaction = self?.transactions[indexPath.row],
-                    let type = TransactionType(rawValue: transaction.typeTransaction)  else { return }
+                    let type = TransactionType(rawValue: transaction.type)  else { return }
                 
                 let controller = TransactionFormControllerBilder()
                     .viewController(transactionType: type)
 
-                controller.topChooseButtonText = transaction.nameAccount
-                controller.sumTextFieldText = String(transaction.sumTransaction)
+                controller.topChooseButtonText = transaction.mainAccount
+                controller.sumTextFieldText = String(transaction.sum)
                 controller.transactionID = transaction.objectID
                 if type == TransactionType.transfer {
                     controller.bottomChooseButtonText = transaction.corAccount
                 } else {
-                    controller.bottomChooseButtonText = transaction.nameCategory
+                    controller.bottomChooseButtonText = transaction.category
                 }
                 
                 self?.present(controller, animated: true, completion: nil)

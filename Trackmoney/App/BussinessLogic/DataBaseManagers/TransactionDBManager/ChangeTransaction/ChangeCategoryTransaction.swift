@@ -11,7 +11,7 @@ struct ChangeCategoryTransaction {
         for transaction: Transaction
         ) -> Bool {
         
-        transaction.nameCategory = newNemeCategory
+        transaction.category = newNemeCategory
         
         return true
         

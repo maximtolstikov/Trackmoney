@@ -23,6 +23,54 @@ class CategoryDBManagerSpec: XCTestCase {
     
     // MARK: - create
     
+    func testCreateSubCategory() throws {
+        
+        var result: (NSManagedObjectID?, ErrorMessage?)!
+        var childResult: (NSManagedObjectID?, ErrorMessage?)!
+        var childMessage: [MessageKeyType: Any]!
+        
+        try given("create Category", closure: {
+            result = manager.create(message: message)
+            message[.idCategory] = result.0
+        })
+        try then("result.error equal nil", closure: {
+            XCTAssertNil(result.1)
+        })
+        try then("id is not nil", closure: {
+            XCTAssertNotNil(result.0)
+        })
+        try when("create child category", closure: {
+            childMessage = [
+                .nameCategory: "childNameCategory",
+                .iconCategory: "iconString",
+                .typeCategory: CategoryType.expense.rawValue,
+                .parentCategory: "testNameCategory"
+            ]
+            
+            childResult = manager.create(message: childMessage)
+            childMessage[.idCategory] = childResult.0
+        })
+        try then("childResult.error equal nil", closure: {
+            XCTAssertNil(childResult.1)
+        })
+        try then("parent have child whith name: childNameCategory", closure: {
+            let parent = manager.getObjectById(for: result.0!)
+            let child = parent?.child?.anyObject() as? CategoryTransaction
+            let name = child?.name
+            XCTAssertEqual(name, "childNameCategory")
+        })
+        try then("child have parent with name: testNameCategory", closure: {
+            let child = manager.getObjectById(for: childResult.0!)
+            let name = child?.parent?.name
+            XCTAssertEqual(name, "testNameCategory")
+        })
+        
+        
+        _ = manager.delete(message: message)
+        _ = manager.delete(message: childMessage)
+        
+    }
+    
     func testCreateCategory() throws {
         
         var result: (NSManagedObjectID?, ErrorMessage?)!
@@ -102,7 +150,7 @@ class CategoryDBManagerSpec: XCTestCase {
         try then("Category icon equal newPath", closure: {
             let category = manager.getObjectById(
                 for: message[.idCategory] as! NSManagedObjectID)
-            XCTAssertEqual(category?.iconCategory, "newPath")
+            XCTAssertEqual(category?.icon, "newPath")
         })
         
         _ = manager.delete(message: message)

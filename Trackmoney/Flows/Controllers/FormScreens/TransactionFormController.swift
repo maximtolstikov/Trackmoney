@@ -287,7 +287,7 @@ class TransactionFormController: BaseFormController {
         let type = transactionType == .expense ?
             CategoryType.expense.rawValue : CategoryType.income.rawValue
         
-        return list.filter { $0.typeCategory == type }
+        return list.filter { $0.type == type }
     }
     
 }

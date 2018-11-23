@@ -46,13 +46,13 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             messageT[.idTransaction] = resultCreateTransaction.0!
             accountMain = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountMain?.sumAccount, 130)
+            XCTAssertEqual(accountMain?.sum, 130)
         })
         try when("delete transaction", closure: {
             _ = managerT.delete(message: messageT)
         })
         try then("sum Account equal 100 again", closure: {
-            XCTAssertEqual(accountMain.sumAccount, 100)
+            XCTAssertEqual(accountMain.sum, 100)
         })
         
         _ = managerA.delete(message: messageAM)
@@ -71,13 +71,13 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             messageT[.idTransaction] = resultCreateTransaction.0!
             accountMain = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountMain?.sumAccount, 70)
+            XCTAssertEqual(accountMain?.sum, 70)
         })
         try when("delete transaction", closure: {
             _ = managerT.delete(message: messageT)
         })
         try then("sum Account equal 100 again", closure: {
-            XCTAssertEqual(accountMain.sumAccount, 100)
+            XCTAssertEqual(accountMain.sum, 100)
         })
         
         _ = managerA.delete(message: messageAM)
@@ -103,15 +103,15 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
                     messageT[.corAccount] = accountCor.name
                     let resultCreateTransaction = managerT.create(message: messageT)
                     messageT[.idTransaction] = resultCreateTransaction.0!
-                    XCTAssertEqual(accountMain?.sumAccount, 70)
-                    XCTAssertEqual(accountCor?.sumAccount, 80)
+                    XCTAssertEqual(accountMain?.sum, 70)
+                    XCTAssertEqual(accountCor?.sum, 80)
         })
         try when("delete transaction", closure: {
             _ = managerT.delete(message: messageT)
         })
         try then("sum AccountMain equal 100 and sum Cor 50 again", closure: {
-            XCTAssertEqual(accountMain.sumAccount, 100)
-            XCTAssertEqual(accountCor.sumAccount, 50)
+            XCTAssertEqual(accountMain.sum, 100)
+            XCTAssertEqual(accountCor.sum, 50)
         })
         
         _ = managerA.delete(message: messageAM)

@@ -30,7 +30,7 @@ struct MessageManager {
         return dictionary
     }
     
-    //создает сообщение для формы аккаунта
+    // Создает сообщение для счета
     func craftAccountFormMessage(nameAccount: String,
                                  sumAccount: Int32) -> [MessageKeyType: Any] {
         
@@ -40,12 +40,17 @@ struct MessageManager {
         return dictionary        
     }
     
-    //создает сообщение для формы счета
-    func craftCategoryFormMessage(nameCategory: String, type: CategoryType) -> [MessageKeyType: Any] {
+    // Создает сообщение для Категории
+    func craftCategoryFormMessage(nameCategory: String,
+                                  type: CategoryType,
+                                  parent: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.nameCategory] = nameCategory
         dictionary[.typeCategory] = type.rawValue
+        if parent != NSLocalizedString("chooseParentButton", comment: "") {
+            dictionary[.parentCategory] = parent
+        }
         return dictionary
     }
     

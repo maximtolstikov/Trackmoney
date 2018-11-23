@@ -24,7 +24,14 @@ class CategoryFormDataProvider: DataProviderProtocol {
         return false
     }
     
-    func loadData() {}
+    func loadData() {
+        
+        let array = dbManager?.get() as? [CategoryTransaction]
+        let type = controller?.typeCategory.rawValue
+        let categories = array?.filter { $0.type == type }
+        
+        controller?.categories = categories
+    }
     
     
 }

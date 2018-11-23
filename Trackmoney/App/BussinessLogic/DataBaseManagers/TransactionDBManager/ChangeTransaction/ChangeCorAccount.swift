@@ -23,10 +23,10 @@ struct ChangeCorAccountTransaction {
                 return false
         }
         
-        let sum = transaction.sumTransaction
+        let sum = transaction.sum
         
-        oldCorAccount.sumAccount -= sum
-        newCorAccount.sumAccount += newSum
+        oldCorAccount.sum -= sum
+        newCorAccount.sum += newSum
         
         return true
         

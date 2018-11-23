@@ -61,12 +61,12 @@ struct CreateTransaction {
     func execute() -> (NSManagedObjectID?, ErrorMessage?) {
         
         let transaction = Transaction(context: context)
-        transaction.dateTransaction = date
-        transaction.sumTransaction = sum
-        transaction.typeTransaction = type.rawValue
-        transaction.nameAccount = mainAccount.name
-        transaction.iconTransaction = iconTransaction
-        transaction.nameCategory = category
+        transaction.date = date
+        transaction.sum = sum
+        transaction.type = type.rawValue
+        transaction.mainAccount = mainAccount.name
+        transaction.icon = iconTransaction
+        transaction.category = category
         transaction.corAccount = corAccount?.name
         
         switch type {

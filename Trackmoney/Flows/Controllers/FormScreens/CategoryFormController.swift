@@ -4,9 +4,16 @@ import UIKit
 class CategoryFormController: BaseFormController {
     
     var typeCategory: CategoryType!
+    var categories: [CategoryTransaction]?
     
     // Поставщик данных
     var dataProvider: DataProviderProtocol?
+    
+    let topChooseButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let typeLable: UILabel = {
         let lable = UILabel()
@@ -24,7 +31,9 @@ class CategoryFormController: BaseFormController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataProvider?.loadData()
         createNameTextField()
+        createTopChoseButton()
         createTypeLable()
     }
     
@@ -65,16 +74,33 @@ class CategoryFormController: BaseFormController {
         typeLable.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)
             .isActive = true
         typeLable.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
-                                             multiplier: 2 / 3).isActive = true
+                                         multiplier: 2 / 3).isActive = true
         typeLable.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        typeLable.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
+        typeLable.bottomAnchor.constraint(equalTo: topChooseButton.topAnchor,
                                           constant: -40).isActive = true
+    }
+    
+    // создает верхнюю кнопку выбора родительской Категории
+    func createTopChoseButton() {
+        
+        topChooseButton.setTitle(NSLocalizedString("chooseParentButton", comment: ""),
+                                 for: .normal)
+        viewOnScroll.addSubview(topChooseButton)
+        
+        topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
+        topChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor, multiplier: 2 / 3).isActive = true
+        topChooseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        topChooseButton.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
+                                                constant: -40).isActive = true
+        topChooseButton.addTarget(self, action: #selector(tapTopChooseButton),
+                                  for: .touchUpInside)
+        
     }
     
     // MARK: - Button's methods
     
     @objc override func tapCancelButton() {
-       dismiss(animated: false, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     // Проводит валидацию и сохраняет или вызывает подсказку
@@ -90,7 +116,9 @@ class CategoryFormController: BaseFormController {
         if checkRule.isEmpty {
             
             let message = MessageManager()
-                .craftCategoryFormMessage(nameCategory: nameText, type: typeCategory)
+                .craftCategoryFormMessage(nameCategory: nameText,
+                                          type: typeCategory,
+                                          parent: topChooseButton.titleLabel?.text)
             
             dataProvider?.save(message: message)
             dismiss(animated: true, completion: nil)
@@ -106,6 +134,19 @@ class CategoryFormController: BaseFormController {
             
         }
         
+    }
+    
+    @objc func tapTopChooseButton() {
+        
+        guard let list = categories else {
+            assertionFailure("Пустой массив с категориями!")
+            return
+        }
+        
+        ChooseCategoryAlert().show(categories: list,
+                                   controller: self) { [weak self] (name) in
+                                    self?.topChooseButton.setTitle(name, for: .normal)
+        }
     }
     
     // MARK: - TextFields's methods

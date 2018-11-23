@@ -117,7 +117,7 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
                                                  for: indexPath) as! AccountsCell
         
         cell.accountNameLable.text = accounts[indexPath.row].name
-        cell.sumLable.text = String(accounts[indexPath.row].sumAccount)
+        cell.sumLable.text = String(accounts[indexPath.row].sum)
         
         return cell
         

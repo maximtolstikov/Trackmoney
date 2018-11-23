@@ -8,6 +8,7 @@
 "titleAddAccount" = "Добавить";
 "titleAddCategory" = "Добавить";
 "titleSortDelete" = "Редактировать";
+"chooseParentButton" = "родительская категория";
 
 //Lable
 "typeCategory" = "тип:";

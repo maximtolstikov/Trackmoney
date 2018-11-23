@@ -25,15 +25,15 @@ struct DeleteTransaction {
         let accountDBManager = AccountDBManager()
         
         guard let mainAccount = accountDBManager.getObjectByName(
-            for: transaction.nameAccount) else {
+            for: transaction.mainAccount) else {
                     assertionFailure()
                     return false }
         guard let type = TransactionType(
-            rawValue: transaction.typeTransaction) else {
+            rawValue: transaction.type) else {
                 assertionFailure()
                 return false }
         
-        let sum = transaction.sumTransaction
+        let sum = transaction.sum
         
         switch type {
         case .expense:
