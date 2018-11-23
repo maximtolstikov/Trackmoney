@@ -9,6 +9,7 @@
 "titleAddCategory" = "Добавить";
 "titleSortDelete" = "Редактировать";
 "chooseParentButton" = "родительская категория";
+"emptyTitle" = "-----------";
 
 //Lable
 "typeCategory" = "тип:";
@@ -20,6 +21,7 @@
 "expenseTitle" = "Расход";
 "incomeTitle" = "Доход";
 "transferTitle" = "Перевод";
+"noteTitle" = "Заметка";
 
 //Settings
 "accountSettingsTitle" = "Счета";

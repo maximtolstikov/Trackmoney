@@ -12,6 +12,7 @@ struct MessageManager {
                                  topButton: String,
                                  sum: Int32,
                                  bottomButton: String,
+                                 note: String,
                                  id: NSManagedObjectID?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
@@ -26,6 +27,9 @@ struct MessageManager {
         }
         if id != nil {
             dictionary[.idTransaction] = id
+        }
+        if note != "" {
+            dictionary[.noteTransaction] = note
         }
         return dictionary
     }

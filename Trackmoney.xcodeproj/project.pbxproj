@@ -24,6 +24,7 @@
 		942888512168C7F0002E3DCC /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888502168C7F0002E3DCC /* AlertManager.swift */; };
 		942888532168F284002E3DCC /* AlertMenagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888522168F284002E3DCC /* AlertMenagerSpec.swift */; };
 		942888562169101D002E3DCC /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888552169101D002E3DCC /* AlertMessage.swift */; };
+		9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9444221E21A8756C0005DA0B /* NoteAlert.swift */; };
 		94466220219C705000C9FFCF /* DifferentAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446621F219C705000C9FFCF /* DifferentAccountRule.swift */; };
 		94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94466221219C730400C9FFCF /* EmptyAccountRule.swift */; };
 		94466224219C767200C9FFCF /* TransferValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94466223219C767200C9FFCF /* TransferValidator.swift */; };
@@ -138,6 +139,7 @@
 		942888502168C7F0002E3DCC /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		942888522168F284002E3DCC /* AlertMenagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMenagerSpec.swift; sourceTree = "<group>"; };
 		942888552169101D002E3DCC /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		9444221E21A8756C0005DA0B /* NoteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAlert.swift; sourceTree = "<group>"; };
 		9446621F219C705000C9FFCF /* DifferentAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentAccountRule.swift; sourceTree = "<group>"; };
 		94466221219C730400C9FFCF /* EmptyAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAccountRule.swift; sourceTree = "<group>"; };
 		94466223219C767200C9FFCF /* TransferValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferValidator.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				9446624421A04FD700C9FFCF /* ChooseAccountAlert.swift */,
 				9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */,
 				9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */,
+				9444221E21A8756C0005DA0B /* NoteAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -864,6 +867,7 @@
 				9417B1622181C914001E88AA /* BaseFormController.swift in Sources */,
 				94466224219C767200C9FFCF /* TransferValidator.swift in Sources */,
 				945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */,
+				9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */,
 				9446624121A04D6900C9FFCF /* ShortAlert.swift in Sources */,
 				94A7FDF0217AF1B6009E5C4B /* AccountFormController.swift in Sources */,
 				94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */,

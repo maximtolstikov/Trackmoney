@@ -9,6 +9,7 @@
 "titleAddCategory" = "Add";
 "titleSortDelete" = "Sort/Delete";
 "chooseParentButton" = "parent category";
+"emptyTitle" = "-----------";
 
 //Lable
 "typeCategory" = "type:";
@@ -20,6 +21,7 @@
 "expenseTitle" = "Expense";
 "incomeTitle" = "Income";
 "transferTitle" = "Transfer";
+"noteTitle" = "Note";
 
 //Settings
 "accountSettingsTitle" = "Accounts";

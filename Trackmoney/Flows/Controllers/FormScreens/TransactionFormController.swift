@@ -21,8 +21,7 @@ class TransactionFormController: BaseFormController {
     
     let bottomChooseButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("-----------", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -36,8 +35,14 @@ class TransactionFormController: BaseFormController {
     
     let topChooseButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("-----------", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let noteButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -45,10 +50,11 @@ class TransactionFormController: BaseFormController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
+        dataProvider?.loadData()
         createBottomChoseButton()
         createSumTextField()
         createTopChoseButton()
+        createNoteButton()
     }
     
     // делает текстовое поле активным и вызывается клавиатура
@@ -59,17 +65,12 @@ class TransactionFormController: BaseFormController {
             self.sumTextField.becomeFirstResponder()
         }
     }
-    
-    //получаем данные для контроллера
-    func getData() {
-        
-        dataProvider?.loadData()
-    }
-    
-    
-    // создаем нижнюю кнопку выбора Счета или Категории
+   
+    // Создаем нижнюю кнопку выбора Счета или Категории
     func createBottomChoseButton() {
         
+        bottomChooseButton.setTitle(NSLocalizedString("emptyTitle", comment: ""),
+                                    for: .normal)
         if let name = bottomChooseButtonText {
             bottomChooseButton.setTitle(name, for: .normal)
         }
@@ -88,7 +89,7 @@ class TransactionFormController: BaseFormController {
         
     }
     
-    // создает текстовое поле для ввода суммы
+    // Создает текстовое поле для ввода суммы
     func createSumTextField() {
         
         viewOnScroll.addSubview(sumTextField)
@@ -109,14 +110,15 @@ class TransactionFormController: BaseFormController {
         
     }
     
-    // создает верхнюю кнопку выбора Счета
+    // Создает верхнюю кнопку выбора Счета
     func createTopChoseButton() {
         
+        topChooseButton.setTitle(NSLocalizedString("emptyTitle", comment: ""),
+                                 for: .normal)
+        topChooseButton.viewWithTag(0)?.backgroundColor = UIColor.green
         if let name = topChooseButtonText {
             topChooseButton.setTitle(name, for: .normal)
         }
-        
-        
         viewOnScroll.addSubview(topChooseButton)
         
         topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
@@ -125,6 +127,23 @@ class TransactionFormController: BaseFormController {
         topChooseButton.bottomAnchor.constraint(equalTo: sumTextField.topAnchor,
                                                 constant: -40).isActive = true
         topChooseButton.addTarget(self, action: #selector(tapTopChooseButton),
+                                  for: .touchUpInside)
+    }
+    
+    // Создает верхнюю кнопку вызова заметки
+    func createNoteButton() {
+        
+        noteButton.setTitle(NSLocalizedString("noteTitle", comment: ""),
+                                 for: .normal)
+        viewOnScroll.addSubview(noteButton)
+        
+        noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor)
+            .isActive = true
+
+        noteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        noteButton.bottomAnchor.constraint(equalTo: bottomChooseButton.topAnchor,
+                                                constant: -40).isActive = true
+        noteButton.addTarget(self, action: #selector(tapTopChooseButton),
                                   for: .touchUpInside)
         
     }
@@ -204,6 +223,7 @@ class TransactionFormController: BaseFormController {
     // Отправляет данные формы в базу
     func sendMessage() {
         
+        // TODO: - добавить note ///////
         guard let type = transactionType,
             let topButtonText = topChooseButton.currentTitle,
             let sumText = sumTextField.text,
@@ -218,6 +238,7 @@ class TransactionFormController: BaseFormController {
                                      topButton: topButtonText,
                                      sum: sum,
                                      bottomButton: bottomButtonText,
+                                     note: "", /////////
                                      id: transactionID)
         dataProvider?.save(message: message)
     }
