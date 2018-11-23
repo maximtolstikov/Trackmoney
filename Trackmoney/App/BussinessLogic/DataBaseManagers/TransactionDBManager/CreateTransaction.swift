@@ -17,6 +17,7 @@ struct CreateTransaction {
     var iconTransaction: String
     var category: String?
     var corAccount: Account?
+    var note: String?
     
     init?(
         context: NSManagedObjectContext,
@@ -54,6 +55,9 @@ struct CreateTransaction {
                     return nil }
             self.corAccount = accountCor
         }
+        if mManager.isExistValue(for: .noteTransaction, in: message) {
+            self.note = message[.noteTransaction] as? String
+        }
         
     }
     
@@ -68,6 +72,7 @@ struct CreateTransaction {
         transaction.icon = iconTransaction
         transaction.category = category
         transaction.corAccount = corAccount?.name
+        transaction.note = note
         
         switch type {
         case .expense:

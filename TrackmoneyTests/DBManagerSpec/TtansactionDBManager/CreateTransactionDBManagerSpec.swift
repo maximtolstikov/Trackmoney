@@ -36,13 +36,16 @@ class CreateTransactionDBManagerSpec: XCTestCase {
     
     func testCreateIncomeTransaction() throws {
         
+        var resultCreateTransaction: (NSManagedObjectID?, ErrorMessage?)
+        
         try given("account", closure: {
             let resultCreateMainAccount = managerA.create(message: messageAM)
             messageAM[.idAccount] = resultCreateMainAccount.0
         })
         try when("create incom transaction", closure: {
             messageT[.typeTransaction] = TransactionType.income.rawValue
-            let resultCreateTransaction = managerT.create(message: messageT)
+            messageT[.noteTransaction] = "test note"
+            resultCreateTransaction = managerT.create(message: messageT)
             messageT[.idTransaction] = resultCreateTransaction.0!
         })
         try then("resultGetTransaction is not nil", closure: {
@@ -54,6 +57,12 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             let account = managerA.getObjectById(
                 for: messageAM[.idAccount] as! NSManagedObjectID)
             XCTAssertEqual(account?.sum, 130)
+        })
+        try then("note equal 'test note'", closure: {
+            let id = resultCreateTransaction.0!
+            let transaction = managerT.getObjectById(for: id)
+            let note = transaction?.note
+            XCTAssertEqual(note, "test note")
         })
         
         _ = managerT.delete(message: messageT)

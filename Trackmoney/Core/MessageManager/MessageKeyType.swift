@@ -16,6 +16,7 @@ enum MessageKeyType: String {
     case typeTransaction
     case iconTransaction
     case idTransaction
+    case noteTransaction
     case corAccount
     
 }
