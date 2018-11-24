@@ -1,35 +1,37 @@
 import UIKit
 
 /// Alert для записи заметки в транзакции
-struct NoteAlert {
+class NoteAlert: AlertManager {
     
     func show(controller: UIViewController,
               text: String,
-              completion: @escaping (String) -> Void) {
+              completion: @escaping (String?) -> Void) {
         
-        let ac = UIAlertController(title: NSLocalizedString("noteAlertTitle",
-                                                            comment: ""),
-                                   message: "",
-                                   preferredStyle: .alert)
+        alertController = UIAlertController(title: NSLocalizedString("noteAlertTitle",
+                                                                     comment: ""),
+                                            message: "",
+                                            preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("titleCancelButton",
                                                             comment: ""),
-                                   style: .cancel,
-                                   handler: nil)
+                                   style: .cancel) { _ in
+                                    self.alertController = nil
+        }
         let save = UIAlertAction(title: NSLocalizedString("titleSaveButton",
                                                           comment: ""),
-                                 style: .cancel) { _ in
-                                    guard let textField = ac.textFields?.first else { return }
-                                    print(textField.text)
+                                 style: .default) { _ in
+                                    guard let textField = self.alertController.textFields?.first else { return }
+                                    completion(textField.text)
+                                    self.alertController = nil
         }
         
-        ac.addTextField { (textField) in
+        alertController.addTextField { (textField) in
             textField.text = text
         }
         
-        ac.addAction(cancel)
-        ac.addAction(save)
+        alertController.addAction(cancel)
+        alertController.addAction(save)
         
-       controller.present(ac, animated: true, completion: nil)
+        controller.present(alertController, animated: true, completion: nil)
         
     }
 }

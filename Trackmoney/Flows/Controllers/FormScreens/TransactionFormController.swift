@@ -11,6 +11,7 @@ class TransactionFormController: BaseFormController {
     var topChooseButtonText: String?
     var sumTextFieldText: String?
     var bottomChooseButtonText: String?
+    var note: String?
     
     var accounts: [Account]?
     var categories: [CategoryTransaction]?
@@ -115,7 +116,6 @@ class TransactionFormController: BaseFormController {
         
         topChooseButton.setTitle(NSLocalizedString("emptyTitle", comment: ""),
                                  for: .normal)
-        topChooseButton.viewWithTag(0)?.backgroundColor = UIColor.green
         if let name = topChooseButtonText {
             topChooseButton.setTitle(name, for: .normal)
         }
@@ -137,13 +137,12 @@ class TransactionFormController: BaseFormController {
                                  for: .normal)
         viewOnScroll.addSubview(noteButton)
         
-        noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor)
-            .isActive = true
-
+        noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor,
+                                         constant: 8).isActive = true
         noteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         noteButton.bottomAnchor.constraint(equalTo: bottomChooseButton.topAnchor,
                                                 constant: -40).isActive = true
-        noteButton.addTarget(self, action: #selector(tapTopChooseButton),
+        noteButton.addTarget(self, action: #selector(tapNoteButton),
                                   for: .touchUpInside)
         
     }
@@ -222,8 +221,7 @@ class TransactionFormController: BaseFormController {
     
     // Отправляет данные формы в базу
     func sendMessage() {
-        
-        // TODO: - добавить note ///////
+
         guard let type = transactionType,
             let topButtonText = topChooseButton.currentTitle,
             let sumText = sumTextField.text,
@@ -233,12 +231,14 @@ class TransactionFormController: BaseFormController {
                 return
         }
         
+        let text = note ?? ""
+        
         let message = MessageManager()
             .craftTransactionMessage(transactionType: type,
                                      topButton: topButtonText,
                                      sum: sum,
                                      bottomButton: bottomButtonText,
-                                     note: "", /////////
+                                     note: text,
                                      id: transactionID)
         dataProvider?.save(message: message)
     }
@@ -298,6 +298,17 @@ class TransactionFormController: BaseFormController {
                                       controller: self) { [weak self] (name) in
                 self?.bottomChooseButton.setTitle(name, for: .normal)
             }
+        }
+        
+    }
+    
+    @objc func tapNoteButton() {
+        
+        let text = note ?? ""
+        
+        NoteAlert().show(controller: self, text: text) { (string) in
+            
+            self.note = string
         }
         
     }
