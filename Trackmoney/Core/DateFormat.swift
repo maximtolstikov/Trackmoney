@@ -1,6 +1,6 @@
 import UIKit
-import Foundation
 
+/// Настраивает вывод даты
 class DateFormat {
     
     var dateFormatter: DateFormatter = {

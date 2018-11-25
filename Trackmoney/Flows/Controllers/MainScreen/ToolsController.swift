@@ -5,12 +5,12 @@ import UIKit
 class ToolsController: UIViewController {
     
     var dataLoader: DataProviderProtocol?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setSettingsButton()
-  
+        setGesture()
     }
     
     
@@ -34,5 +34,22 @@ class ToolsController: UIViewController {
             rootViewController: SettigsControllerBilder().viewController())
         present(settingsController, animated: true, completion: nil)
         
+    }
+    
+    // MARK: - gesture
+    
+    private func setGesture() {
+        
+        let gestre = UISwipeGestureRecognizer(
+            target: self, action: #selector(handleSwipes(_ :)))
+        gestre.direction = .right
+        self.view.addGestureRecognizer(gestre)
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        
+        //swiftlint:disable next force_cast
+        let tabBarController = self.tabBarController as! MainTabBarController
+        tabBarController.turnScreen(sender)
     }
 }

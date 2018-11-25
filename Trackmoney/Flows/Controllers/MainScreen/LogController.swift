@@ -22,6 +22,7 @@ class LogController: UIViewController {
         super.viewDidLoad()
         
         addTable()
+        setGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,8 +31,8 @@ class LogController: UIViewController {
         dataProvider?.loadData()
     }
     
-    //настраиваем и добавляем контроллер таблицы
     private func addTable() {
+        
         self.tableView = UITableView(frame: view.bounds, style: .plain)
         tableView.register(
             UITableViewCell.self,
@@ -41,11 +42,10 @@ class LogController: UIViewController {
         tableView.rowHeight = 60
         tableView.register(LogCell.self, forCellReuseIdentifier: cellIndentifire)
         
-        self.view.addSubview(tableView)
-        
+        self.view.addSubview(tableView)        
     }
+    
 }
-
 
 extension LogController: UITableViewDelegate, UITableViewDataSource {
     
@@ -132,5 +132,30 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         return [delete, edit]
     }
     
+}
+
+extension LogController {
     
+    // MARK: - gesture
+    
+    private func setGesture() {
+        
+        let gestreRight = UISwipeGestureRecognizer(
+            target: self, action: #selector(handleSwipes(_ :)))
+        gestreRight.direction = .right
+        
+        let gestreLeft = UISwipeGestureRecognizer(
+            target: self, action: #selector(handleSwipes(_ :)))
+        gestreLeft.direction = .left
+        
+        self.view.addGestureRecognizer(gestreRight)
+        self.view.addGestureRecognizer(gestreLeft)
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        
+        //swiftlint:disable next force_cast
+        let tabBarController = self.tabBarController as! MainTabBarController
+        tabBarController.turnScreen(sender)
+    }
 }

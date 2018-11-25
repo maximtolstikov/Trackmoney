@@ -14,10 +14,10 @@ class SettingsController: UIViewController {
         setBackButton()
         addTable()
         
-        let gester = UISwipeGestureRecognizer(
+        let gestre = UISwipeGestureRecognizer(
             target: self, action: #selector(handleSwipes(_ :)))
-        gester.direction = .down
-        self.view.addGestureRecognizer(gester)
+        gestre.direction = .down
+        self.view.addGestureRecognizer(gestre)
     }
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {

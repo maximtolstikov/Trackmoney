@@ -1,7 +1,4 @@
-// Для описания контроллера Счетов
-
 //swiftlint:disable comma
-
 import UIKit
 
 class AccountsController: UIViewController {
@@ -40,6 +37,7 @@ class AccountsController: UIViewController {
         super.viewDidLoad()
 
         addTable()
+        setGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +48,11 @@ class AccountsController: UIViewController {
         if accounts.count < countMaxCell {
             tableView.isScrollEnabled = false
         }
-        
     }
-    
     
     //настраиваем и добавляем контроллер таблицы
     private func addTable() {
+        
         self.tableView = UITableView(frame: view.bounds, style: .plain)
         tableView.register(
             UITableViewCell.self,
@@ -63,6 +60,7 @@ class AccountsController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AccountsCell.self, forCellReuseIdentifier: cellIndentifire)
+        
         self.view.addSubview(tableView)
         
     }
@@ -89,7 +87,6 @@ class AccountsController: UIViewController {
                   )
                 ) / CGFloat(accounts.count)
             tableView.rowHeight = CGFloat(heightRow)
-           
         }
     }
     
@@ -105,7 +102,6 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         
         guard accounts?.count != nil else { return 0 }
         return accounts.count
-        
     }
     
     func tableView(
@@ -120,7 +116,6 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         cell.sumLable.text = String(accounts[indexPath.row].sum)
         
         return cell
-        
     }
     
     func tableView(
@@ -131,7 +126,25 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
             controller: self,
             nameAccount: accounts[indexPath.row].name)
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
+}
+
+extension AccountsController {
+    
+    // MARK: - gesture
+    
+    private func setGesture() {
+        let gestre = UISwipeGestureRecognizer(
+            target: self, action: #selector(handleSwipes(_ :)))
+        gestre.direction = .left
+        self.view.addGestureRecognizer(gestre)
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        
+        //swiftlint:disable next force_cast
+        let tabBarController = self.tabBarController as! MainTabBarController
+        tabBarController.turnScreen(sender)
+    }
 }
