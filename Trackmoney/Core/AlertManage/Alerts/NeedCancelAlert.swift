@@ -14,8 +14,8 @@ class NeedCancelAlert: AlertManager {
             message: body ?? "",
             preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.deinitAlert()
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) {[weak self] _ in
+            self?.deinitAlert()
         }
         
         alertController.addAction(cancel)

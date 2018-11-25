@@ -14,8 +14,17 @@ class ChooseCategoryAlert: AlertManager {
         self.alertController = UIAlertController(
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+            self?.alertController = nil
+        }
+        
         self.alertController.addAction(cancel)
+        
+//        let add = UIAlertAction(title: "Add Category", style: .default) { _ in
+//                ChooseTypeCategoryAlert().show(controller: controller)
+//        }
+//        
+//        alertController.addAction(add)
         
         for category in arrayCategories {
             let action = UIAlertAction(title: category.name, style: .default, handler: { [weak self] _ in
