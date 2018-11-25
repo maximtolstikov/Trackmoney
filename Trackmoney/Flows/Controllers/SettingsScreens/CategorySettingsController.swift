@@ -28,19 +28,17 @@ class CategorySettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = false
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
+        
         self.navigationController?.isToolbarHidden = true
     }
-    
     
     @objc func tapBackButton() {
         dismiss(animated: true, completion: nil)
     }
     
-    
-    //настраиваем и добавляем контроллер таблицы
+    // Настраивает и добавляет контроллер таблицы
     private func addTable() {
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
@@ -48,12 +46,9 @@ class CategorySettingsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isEditing = true
         
         self.view.addSubview(tableView)
-        
     }
-    
     
     // Настраивает и добавляет тулБар снизу
     private func addBottomToolBar() {
@@ -64,21 +59,37 @@ class CategorySettingsController: UIViewController {
             target: self,
             action: #selector(addCategory))
         
+        let editCategoryButton = UIBarButtonItem(
+            title: NSLocalizedString("titleSortDelete", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(sortDeleteCategory))
+        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
-        let buttoms = [flexSpace, addCategoryButtom, flexSpace]
+        let buttoms = [
+            addCategoryButtom,
+            flexSpace,
+            editCategoryButton]
         
         self.setToolbarItems(buttoms, animated: true)
     }
     
-    
     // Добавляет Категорию
     @objc func addCategory() {
-        
         ChooseTypeCategoryAlert().show(controller: self)        
+    }
+    
+    // Включает режим редактирования списка
+    @objc func sortDeleteCategory() {
+        if self.tableView.isEditing {
+            self.tableView.setEditing(false, animated: true)
+        } else {
+            self.tableView.setEditing(true, animated: true)
+        }
     }
     
 }
@@ -124,7 +135,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                     assertionFailure()
                     return
             }
-            
             categories.remove(at: indexPath.row)
             tableView.reloadData()
         }
@@ -137,6 +147,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
+        // TODO: Сделать сортировку списка Категирий
     func tableView(_ tableView: UITableView,
                    moveRowAt sourceIndexPath: IndexPath,
                    to destinationIndexPath: IndexPath) {

@@ -30,19 +30,18 @@ class AccountsSettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = false
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
+        
         self.navigationController?.isToolbarHidden = true
     }
     
-    
     @objc func tapBackButton() {
+        
         dismiss(animated: true, completion: nil)
     }
     
-    
-    //настраиваем и добавляем контроллер таблицы
+    // Настраивает и добавляет контроллер таблицы
     private func addTable() {
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
@@ -50,14 +49,11 @@ class AccountsSettingsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isEditing = true
         
         self.view.addSubview(tableView)
-        
     }
     
-    
-    //настраиваем и добавляем тулБар снизу
+    // Настраивает и добавляет тулБар снизу
     private func addBottomToolBar() {
         
         let addAccountButtom = UIBarButtonItem(
@@ -66,21 +62,41 @@ class AccountsSettingsController: UIViewController {
             target: self,
             action: #selector(addAccount))
         
+        let deleteAccountButton = UIBarButtonItem(
+            title: NSLocalizedString("titleSortDelete", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(sortDeleteAccount))
+        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
-        let buttoms = [flexSpace, addAccountButtom, flexSpace]
+        let buttoms = [
+            addAccountButtom,
+            flexSpace,
+            deleteAccountButton]
         
         self.setToolbarItems(buttoms, animated: true)
     }
     
-    //добавляет Счет
+    // Добавляет Счет
     @objc func addAccount() {
         
         let controller = AccountFormControllerBilder().viewController()
         present(controller, animated: true, completion: nil)
+    }
+    
+    // Включает режим редактирования списка
+    @objc func sortDeleteAccount() {
+        
+        if self.tableView.isEditing {
+            self.tableView.setEditing(false, animated: true)
+        } else {
+            self.tableView.setEditing(true, animated: true)
+        }
+        
     }
 
 }
