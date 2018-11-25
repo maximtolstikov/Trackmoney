@@ -6,9 +6,8 @@
 //  Copyright © 2018 Maxim Tolstikov. All rights reserved.
 //
 //
-
-import Foundation
 import CoreData
+import Foundation
 
 
 extension Transaction {

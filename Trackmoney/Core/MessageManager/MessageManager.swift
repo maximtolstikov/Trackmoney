@@ -8,6 +8,7 @@ struct MessageManager {
     let iconTransferTransaction = ""
     
     // создает сообщение для формы транзакции
+    //swiftlint:disable next function_parameter_count
     func craftTransactionMessage(transactionType: TransactionType,
                                  topButton: String,
                                  sum: Int32,

@@ -132,4 +132,3 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
