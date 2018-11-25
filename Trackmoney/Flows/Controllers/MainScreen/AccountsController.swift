@@ -37,7 +37,6 @@ class AccountsController: UIViewController {
         super.viewDidLoad()
 
         addTable()
-        setGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,23 +127,4 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-}
-
-extension AccountsController {
-    
-    // MARK: - gesture
-    
-    private func setGesture() {
-        let gestre = UISwipeGestureRecognizer(
-            target: self, action: #selector(handleSwipes(_ :)))
-        gestre.direction = .left
-        self.view.addGestureRecognizer(gestre)
-    }
-    
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-        
-        //swiftlint:disable next force_cast
-        let tabBarController = self.tabBarController as! MainTabBarController
-        tabBarController.turnScreen(sender)
-    }
 }

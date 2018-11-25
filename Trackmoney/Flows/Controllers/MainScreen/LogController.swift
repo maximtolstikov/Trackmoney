@@ -22,7 +22,6 @@ class LogController: UIViewController {
         super.viewDidLoad()
         
         addTable()
-        setGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,28 +133,3 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension LogController {
-    
-    // MARK: - gesture
-    
-    private func setGesture() {
-        
-        let gestreRight = UISwipeGestureRecognizer(
-            target: self, action: #selector(handleSwipes(_ :)))
-        gestreRight.direction = .right
-        
-        let gestreLeft = UISwipeGestureRecognizer(
-            target: self, action: #selector(handleSwipes(_ :)))
-        gestreLeft.direction = .left
-        
-        self.view.addGestureRecognizer(gestreRight)
-        self.view.addGestureRecognizer(gestreLeft)
-    }
-    
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-        
-        //swiftlint:disable next force_cast
-        let tabBarController = self.tabBarController as! MainTabBarController
-        tabBarController.turnScreen(sender)
-    }
-}
