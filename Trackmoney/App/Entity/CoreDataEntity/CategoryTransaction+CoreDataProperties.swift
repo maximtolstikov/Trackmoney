@@ -7,9 +7,8 @@
 //
 //
 
-import Foundation
 import CoreData
-
+import Foundation
 
 extension CategoryTransaction {
 
@@ -25,7 +24,7 @@ extension CategoryTransaction {
 
 }
 
-// MARK: Generated accessors for child
+// MARK: - Generated accessors for child
 extension CategoryTransaction {
 
     @objc(addChildObject:)

@@ -7,6 +7,7 @@ class LogController: UIViewController {
     
     var tableView = UITableView()
     let cellIndentifire = "logCell"
+    let dateFormat = DateFormat()
     
     var transactions: [Transaction]! {
         didSet {
@@ -60,10 +61,29 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: cellIndentifire,
                                  for: indexPath) as! LogCell
+        
+        let date = transactions[indexPath.row].date as Date
+        let stringFromDate = dateFormat.dateFormatter.string(from: date)
         cell.accountNameLable.text = transactions[indexPath.row].mainAccount
-        cell.accountNameLable.textColor = UIColor.red
         cell.sumLable.text = String(transactions[indexPath.row].sum)
-        cell.categoryNameLable.text = transactions[indexPath.row].category
+        cell.dateLable.text = stringFromDate
+        
+        let type = transactions[indexPath.row].type
+        switch type {
+        case 0:
+            cell.sumLable.textColor = #colorLiteral(red: 0.7835699556, green: 0.2945081919, blue: 0.07579417304, alpha: 1)
+            cell.categoryNameLable.text = transactions[indexPath.row].category
+        case 1:
+            cell.sumLable.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+            cell.categoryNameLable.text = transactions[indexPath.row].category
+        case 2:
+            let transaction = transactions[indexPath.row]
+            //swiftlint:disable next force_unwrapping
+            cell.categoryNameLable.text = "\(transaction.mainAccount)"
+                + "/" + "\(String(describing: transaction.corAccount!))"
+        default:
+            break
+        }
         
         return cell
     }

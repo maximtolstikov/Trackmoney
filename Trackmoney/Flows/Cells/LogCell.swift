@@ -26,32 +26,58 @@ class LogCell: UITableViewCell {
         return lable
     }()
     
+    var dateLable: UILabel = {
+        let lable = UILabel()
+        lable.font = UIFont.systemFont(ofSize: 16)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(accountNameLable)
         contentView.addSubview(sumLable)
         contentView.addSubview(categoryNameLable)
+        contentView.addSubview(dateLable)
         
-        //create accountNameLable
-        accountNameLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        createAccountNameLable()
+        createSumLable()
+        createCategoryNameLable()
+        createDateLable()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func createAccountNameLable() {
+        
+        accountNameLable.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                              constant: 8).isActive = true
         accountNameLable.leftAnchor
             .constraint(equalTo: contentView.leftAnchor,
                         constant: 20).isActive = true
         accountNameLable.widthAnchor
             .constraint(equalTo: contentView.widthAnchor,
                         multiplier: 2 / 3).isActive = true
+    }
+    
+    private func createSumLable() {
         
-        //create sumLable
-        sumLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        sumLable.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                      constant: 8).isActive = true
         sumLable.widthAnchor.constraint(equalTo: contentView.widthAnchor,
-                                         multiplier: 1 / 4).isActive = true
+                                        multiplier: 1 / 4).isActive = true
         sumLable.rightAnchor
             .constraint(equalTo: contentView.rightAnchor,
                         constant: -20).isActive = true
+    }
+    
+    private func createCategoryNameLable() {
         
-        //create categoryNameLable
-        categoryNameLable.topAnchor.constraint(equalTo: accountNameLable.bottomAnchor, constant: 2).isActive = true
+        categoryNameLable.topAnchor.constraint(equalTo: accountNameLable.bottomAnchor,
+                                               constant: 2).isActive = true
         categoryNameLable.leftAnchor
             .constraint(equalTo: contentView.leftAnchor,
                         constant: 20).isActive = true
@@ -59,10 +85,21 @@ class LogCell: UITableViewCell {
             .constraint(equalTo: contentView.widthAnchor,
                         multiplier: 1 / 2).isActive = true
         
+        createDateLable()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func createDateLable() {
+        
+        dateLable.textAlignment = .right
+        dateLable.topAnchor.constraint(equalTo: accountNameLable.bottomAnchor,
+                                       constant: 2).isActive = true
+        dateLable.rightAnchor
+            .constraint(equalTo: contentView.rightAnchor,
+                        constant: -20).isActive = true
+        dateLable.widthAnchor
+            .constraint(equalTo: contentView.widthAnchor,
+                        multiplier: 1 / 2).isActive = true
+        
     }
 
 }

@@ -12,6 +12,7 @@
 		9417B1622181C914001E88AA /* BaseFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B1612181C914001E88AA /* BaseFormController.swift */; };
 		9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B16321820622001E88AA /* SumTextFieldValidate.swift */; };
 		9417B16621820722001E88AA /* TextToNumberRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B16521820722001E88AA /* TextToNumberRule.swift */; };
+		9424967021AABF6C00364643 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424966F21AABF6C00364643 /* DateFormat.swift */; };
 		9424E8012163651600BE756D /* CreateTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E8002163651600BE756D /* CreateTransactionDBManagerSpec.swift */; };
 		9424E8042163872000BE756D /* DeleteTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E8032163872000BE756D /* DeleteTransactionDBManagerSpec.swift */; };
 		9424E80621638F1B00BE756D /* GetTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E80521638F1B00BE756D /* GetTransactionDBManagerSpec.swift */; };
@@ -127,6 +128,7 @@
 		9417B1612181C914001E88AA /* BaseFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormController.swift; sourceTree = "<group>"; };
 		9417B16321820622001E88AA /* SumTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumTextFieldValidate.swift; sourceTree = "<group>"; };
 		9417B16521820722001E88AA /* TextToNumberRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToNumberRule.swift; sourceTree = "<group>"; };
+		9424966F21AABF6C00364643 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		9424E8002163651600BE756D /* CreateTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
 		9424E8032163872000BE756D /* DeleteTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
 		9424E80521638F1B00BE756D /* GetTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				9446624A21A0715900C9FFCF /* CategoryType.swift */,
 				94858AFE2146D15B00498DCF /* TransactionType.swift */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
+				9424966F21AABF6C00364643 /* DateFormat.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */,
 				94A7FDFF217C820A009E5C4B /* CategorySettingsController.swift in Sources */,
 				94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */,
+				9424967021AABF6C00364643 /* DateFormat.swift in Sources */,
 				9424E8122163C11F00BE756D /* AccountsDataLoader.swift in Sources */,
 				94EC435F21661E12009C6BF3 /* AccountsSettingsController.swift in Sources */,
 				94A0EE7E21A54DE7004B66E1 /* CustomSort.swift in Sources */,
