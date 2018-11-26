@@ -7,6 +7,8 @@ import UIKit
 
 class CategoryDBManager: DBManager, DBManagerProtocol {
     
+    lazy var transactionDBManager = TransactionDBManager()
+    
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
         if getObjectByName(for: message[.nameCategory] as! String) != nil {
@@ -94,8 +96,17 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
         
         if mManager.isExistValue(for: .nameCategory, in: message) {
-            category.name = message[.nameCategory] as! String
-            //TODO: сдесь нужен итератор по Транзакциям
+
+            let newName = message[.nameCategory] as! String
+            
+            let predicate = NSPredicate(format: "category = %@", category.name)
+            if let transactions = transactionDBManager
+                .getObjectBy(predicate: predicate) {
+                
+                _ = transactions.map { $0.category = newName }
+            }
+            
+            category.name = newName
         }
         if mManager.isExistValue(for: .iconCategory, in: message) {
             category.icon = message[.iconCategory] as? String
@@ -113,7 +124,12 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             return ErrorMessage(error: .categoryIsNotExist)
         }
         
-        //TODO: сдесь нужен итератор по Транзакциям
+        let predicate = NSPredicate(format: "category = %@", category.name)
+        if let transactions = transactionDBManager
+            .getObjectBy(predicate: predicate) {
+
+            _ = transactions.map { $0.category = "" }
+        }
 
         context.delete(category)
 

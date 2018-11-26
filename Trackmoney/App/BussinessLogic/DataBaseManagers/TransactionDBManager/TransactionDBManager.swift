@@ -72,7 +72,28 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
             
             return nil
         }
+    }
+    
+    // Возвращает массив транзакций по условию
+    func getObjectBy(predicate: NSPredicate) -> [Transaction]? {
         
+        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        fetchRequest.predicate = predicate
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            
+            guard !result.isEmpty else {
+                return nil
+            }
+            
+            return result
+            
+        } catch {
+            print(error.localizedDescription)
+            
+            return nil
+        }
     }
     
     

@@ -9,6 +9,7 @@ import UIKit
 class AccountDBManager: DBManager, DBManagerProtocol {
     
     lazy var sortManager = CustomSortManager(entity: Account.self)
+    lazy var transactionDBManager = TransactionDBManager()
     
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
@@ -30,13 +31,12 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             _ = sortManager.add(element: account, in: sortedAccounts)
             
             return (account.objectID, nil)
+            
         } catch {
             print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
-
     }
-    
     
     func get() -> [NSManagedObject]? {
         
@@ -50,17 +50,13 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
         
         return resultRequest
-        
     }
-    
     
     //Возвращает Account по id
     func getObjectById(for id: NSManagedObjectID) -> Account? {
 
         return context.object(with: id) as? Account
-        
     }
-    
     
     // Возвращает Account по имени
     func getObjectByName(for name: String) -> Account? {
@@ -95,8 +91,17 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
         
         if mManager.isExistValue(for: .nameAccount, in: message) {
-            account.name = message[.nameAccount] as! String
-            //TODO: сдесь нужен итератор по Транзакциям
+            
+            let newName = message[.nameAccount] as! String
+            
+            let predicate = NSPredicate(format: "mainAccount = %@", account.name)
+            if let transactions = transactionDBManager
+                .getObjectBy(predicate: predicate) {
+                
+                _ = transactions.map { $0.mainAccount = newName }
+            }
+            
+            account.name = newName
         }
         if mManager.isExistValue(for: .iconAccount, in: message) {
             account.icon = message[.iconAccount] as? String
@@ -119,8 +124,14 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             assertionFailure()
             return ErrorMessage(error: .accountIsNotExist)
         }
-        
-        //TODO: сдесь нужен итератор по Транзакциям в бэкграунде
+
+        // FIXME: Подумать стоит ли удалять счета из транзакций
+//        let predicate = NSPredicate(format: "mainAccount = %@", account.name)
+//        if let transactions = transactionDBManager
+//            .getObjectBy(predicate: predicate) {
+//
+//            _ = transactions.map { $0.mainAccount = "" }
+//        }
         
         context.delete(account)
         
@@ -131,7 +142,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
-        
     }
     
     // Уменьшает сумму счета
