@@ -5,6 +5,7 @@ class CategoryFormController: BaseFormController {
     
     var typeCategory: CategoryType!
     var categories: [CategoryTransaction]?
+    var categotyForUpdate: CategoryTransaction?
     
     // Поставщик данных
     var dataProvider: DataProviderProtocol?
@@ -49,6 +50,9 @@ class CategoryFormController: BaseFormController {
     func createNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
+        if categotyForUpdate != nil {
+            nameTextField.text = categotyForUpdate?.name
+        }
         nameTextField.keyboardType = UIKeyboardType.default
         nameTextField.textAlignment = .center
         nameTextField.placeholder = NSLocalizedString("nameTextFildPlaceholder",
@@ -116,11 +120,13 @@ class CategoryFormController: BaseFormController {
         if checkRule.isEmpty {
             
             let message = MessageManager()
-                .craftCategoryFormMessage(nameCategory: nameText,
+                .craftCategoryMessage(nameCategory: nameText,
                                           type: typeCategory,
-                                          parent: topChooseButton.titleLabel?.text)
+                                          parent: topChooseButton.titleLabel?.text,
+                                          id: categotyForUpdate?.objectID)
             
-            dataProvider?.save(message: message)
+                dataProvider?.save(message: message)
+
             dismiss(animated: true, completion: nil)
             
         } else {

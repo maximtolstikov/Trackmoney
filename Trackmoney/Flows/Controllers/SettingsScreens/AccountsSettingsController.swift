@@ -84,7 +84,7 @@ class AccountsSettingsController: UIViewController {
     // Добавляет Счет
     @objc func addAccount() {
         
-        let controller = AccountFormControllerBilder().viewController()
+        let controller = AccountFormControllerBuilder().viewController()
         present(controller, animated: true, completion: nil)
     }
     
@@ -124,7 +124,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
     }
     
     
-    //удаляет счет из списка
+    // Удаляет счет из списка
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
@@ -149,6 +149,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
+    // Сортирует список
     func tableView(_ tableView: UITableView,
                    moveRowAt sourceIndexPath: IndexPath,
                    to destinationIndexPath: IndexPath) {
@@ -158,6 +159,13 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         accounts.insert(item, at: destinationIndexPath.row)
         
         sortManager.swapElement(array: accounts)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        
+        RenameEntity().show(controller: self,
+                            entyty: accounts[indexPath.row])
     }
     
 }

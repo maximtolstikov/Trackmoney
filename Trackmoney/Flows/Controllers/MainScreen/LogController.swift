@@ -110,7 +110,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
                 guard let transaction = self?.transactions[indexPath.row],
                     let type = TransactionType(rawValue: transaction.type)  else { return }
                 
-                let controller = TransactionFormControllerBilder()
+                let controller = TransactionFormControllerBuilder()
                     .viewController(transactionType: type)
 
                 controller.topChooseButtonText = transaction.mainAccount

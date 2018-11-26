@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MainTabBarControllerBilder {
+class MainTabBarControllerBuilder {
       
     func viewController() -> UIViewController {
         
@@ -17,9 +17,9 @@ class MainTabBarControllerBilder {
     // Создаем контроллеры для TabBarController
     private func createControllers() -> [UIViewController] {
         
-        let accountsController = AccountsControllerBilder().viewController()
-        let logController = LogControllerBilder().viewController()
-        let toolsController = ToolsControllerBilder().viewController()
+        let accountsController = AccountsControllerBuilder().viewController()
+        let logController = LogControllerBuilder().viewController()
+        let toolsController = ToolsControllerBuilder().viewController()
         
         return [accountsController, logController, toolsController]
     }

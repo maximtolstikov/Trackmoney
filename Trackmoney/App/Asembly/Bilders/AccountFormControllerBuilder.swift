@@ -2,7 +2,7 @@
 
 import UIKit
 
-class AccountFormControllerBilder {
+class AccountFormControllerBuilder {
     
     func viewController() -> AccountFormController {
         

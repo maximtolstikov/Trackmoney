@@ -1,5 +1,5 @@
 /// Строит контроллер формы Категории
-class CategoryFormControllerBilder {
+class CategoryFormControllerBuilder {
     
     let type: CategoryType
     

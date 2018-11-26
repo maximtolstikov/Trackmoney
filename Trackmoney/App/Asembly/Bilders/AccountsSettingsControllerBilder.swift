@@ -2,7 +2,7 @@
 
 import UIKit
 
-class AccountsSettingsControllerBilder {
+class AccountsSettingsControllerBuilder {
     
     func viewController() -> UIViewController {
         

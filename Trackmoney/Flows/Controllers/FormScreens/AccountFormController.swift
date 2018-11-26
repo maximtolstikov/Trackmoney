@@ -6,6 +6,7 @@ class AccountFormController: BaseFormController {
     
     //поставщик данных
     var dataProvider: DataProviderProtocol?
+    var accountForUpdate: Account?
     
     let nameTextField: UITextField = {
         let textField = UITextField()
@@ -41,6 +42,10 @@ class AccountFormController: BaseFormController {
     func createSumTextField() {
         
         viewOnScroll.addSubview(sumTextField)
+        if let account = accountForUpdate {
+            sumTextField.isHidden = true
+            sumTextField.text = String(account.sum)
+        }
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = NSLocalizedString("sumTextFildPlaceholder", comment: "")
@@ -94,8 +99,12 @@ class AccountFormController: BaseFormController {
         
         if nameTextFieldValidateResult.isEmpty {
             
-            let sumTextFieldValidateResult = SumTextFieldValidate(text: sumText).validate()
+            var sumTextFieldValidateResult = [String: String]()
             
+            if !sumTextField.isHidden {
+                sumTextFieldValidateResult = SumTextFieldValidate(text: sumText)
+                    .validate()
+            }
             if sumTextFieldValidateResult.isEmpty {
                 
                 guard let sum = Int32(sumText) else {
@@ -131,7 +140,9 @@ class AccountFormController: BaseFormController {
     private func sendMessage(with name: String, and sum: Int32) {
         
         let message = MessageManager()
-            .craftAccountFormMessage(nameAccount: name, sumAccount: sum)
+            .craftAccounеMessage(nameAccount: name,
+                                  sumAccount: sum,
+                                  id: accountForUpdate?.objectID)
         dataProvider?.save(message: message)
     }
  

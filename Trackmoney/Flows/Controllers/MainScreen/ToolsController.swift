@@ -30,7 +30,7 @@ class ToolsController: UIViewController {
     @objc func tapSettingsButton() {
         
         let settingsController = UINavigationController(
-            rootViewController: SettigsControllerBilder().viewController())
+            rootViewController: SettigsControllerBuilder().viewController())
         present(settingsController, animated: true, completion: nil)
         
     }

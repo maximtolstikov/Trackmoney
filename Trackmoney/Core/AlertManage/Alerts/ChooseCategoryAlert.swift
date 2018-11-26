@@ -14,7 +14,8 @@ class ChooseCategoryAlert: AlertManager {
         self.alertController = UIAlertController(
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+                                                            comment: ""), style: .cancel) { [weak self] _ in
             self?.alertController = nil
         }
         

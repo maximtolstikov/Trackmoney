@@ -84,9 +84,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             
             return nil
         }
-        
     }
-
     
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
@@ -111,9 +109,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
-        
-    }
-    
+    }    
     
     // Удаляет аккаунт по id
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {

@@ -9,22 +9,22 @@ import XCTest
 
 class CreateControllersSpec: XCTestCase {
     
-    var accountsControllerBilder: AccountsControllerBilder!
-    var mainTabBarControllerBilder: MainTabBarControllerBilder!
-    var logControllerBilder: LogControllerBilder!
-    var toolsControllerBilder: ToolsControllerBilder!
-    var settingsControllerBilder: SettigsControllerBilder!
-    var accountsSettingsControllerBilder: AccountsSettingsControllerBilder!
+    var accountsControllerBilder: AccountsControllerBuilder!
+    var mainTabBarControllerBilder: MainTabBarControllerBuilder!
+    var logControllerBilder: LogControllerBuilder!
+    var toolsControllerBilder: ToolsControllerBuilder!
+    var settingsControllerBilder: SettigsControllerBuilder!
+    var accountsSettingsControllerBilder: AccountsSettingsControllerBuilder: Builder!
     var transactionFormControllerBilder: TransactionFormControllerBilder!
     var accountFormControllerBilder: AccountFormControllerBilder!
     
     override func setUp() {
-        accountsControllerBilder = AccountsControllerBilder()
-        mainTabBarControllerBilder = MainTabBarControllerBilder()
-        logControllerBilder = LogControllerBilder()
-        toolsControllerBilder = ToolsControllerBilder()
-        settingsControllerBilder = SettigsControllerBilder()
-        accountsSettingsControllerBilder = AccountsSettingsControllerBilder()
+        accountsControllerBilder = AccountsControllerBuilder()
+        mainTabBarControllerBilder = MainTabBarControllerBuilder()
+        logControllerBilder = LogControllerBuilder()
+        toolsControllerBilder = ToolsControllerBuilder()
+        settingsControllerBilder = SettigsControllerBuilder()
+        accountsSettingsControllerBilder = AccountsSettingsControllerBuilder: Builder()
         transactionFormControllerBilder = TransactionFormControllerBilder()
         accountFormControllerBilder = AccountFormControllerBilder()
     }

@@ -4,10 +4,12 @@ import UIKit
 class CategorySettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
+    var sortManager: CustomSortManager!
     var tableView = UITableView()
     let cellIndentifire = "myCell"
     var categories: [CategoryTransaction]! {
         didSet {
+            categories = sortManager.sortedArray(categories)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -94,7 +96,6 @@ class CategorySettingsController: UIViewController {
     
 }
 
-
 extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
@@ -147,11 +148,22 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
-        // TODO: Сделать сортировку списка Категирий
     func tableView(_ tableView: UITableView,
                    moveRowAt sourceIndexPath: IndexPath,
                    to destinationIndexPath: IndexPath) {
         
+        let item = categories[sourceIndexPath.row]
+        categories.remove(at: sourceIndexPath.row)
+        categories.insert(item, at: destinationIndexPath.row)
+        
+        sortManager.swapElement(array: categories)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        
+        RenameEntity().show(controller: self,
+                            entyty: categories[indexPath.row])
     }
     
 }

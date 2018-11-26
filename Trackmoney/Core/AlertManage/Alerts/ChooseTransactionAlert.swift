@@ -7,32 +7,40 @@ class ChooseTransactionAlert: AlertManager {
         
         guard nameAccount != "" else { return }
         
-        alertController = UIAlertController(title: "\(nameAccount)", message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController = UIAlertController(
+            title: "\(nameAccount)",
+            message: nil,
+            preferredStyle: .actionSheet)
         
-        let expense = UIAlertAction(title: "Expense",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+                                                            comment: ""),
+                                   style: .cancel) { _ in
+                                       self.alertController = nil
+        }
+        
+        let expense = UIAlertAction(title: NSLocalizedString("expenseTitle", comment: ""),
                                     style: .default,
                                     handler: { _ in
-                                        self.presentTransactionFormController(controller: controller,
-                                                                              type: TransactionType.expense,
-                                                                              name: nameAccount)
+                                        self.present(controller: controller,
+                                                     type: TransactionType.expense,
+                                                     name: nameAccount)
         })
         
-        let income = UIAlertAction(title: "Income",
+        let income = UIAlertAction(title: NSLocalizedString("incomeTitle", comment: ""),
                                    style: .default,
                                    handler: { _ in
-                                    self.presentTransactionFormController(controller: controller,
-                                                                          type: TransactionType.income,
-                                                                          name: nameAccount)
+                                    self.present(controller: controller,
+                                                 type: TransactionType.income,
+                                                 name: nameAccount)
                                     
         })
         
-        let transfer = UIAlertAction(title: "Transfer",
+        let transfer = UIAlertAction(title: NSLocalizedString("transferTitle", comment: ""),
                                      style: .default,
                                      handler: {_ in
-                                        self.presentTransactionFormController(controller: controller,
-                                                                              type: TransactionType.transfer,
-                                                                              name: nameAccount)
+                                        self.present(controller: controller,
+                                                     type: TransactionType.transfer,
+                                                     name: nameAccount)
         })
         
         alertController.addAction(expense)
@@ -43,11 +51,11 @@ class ChooseTransactionAlert: AlertManager {
         controller.present(alertController, animated: true, completion: nil)
     }
     
-    //вызывает TransactionFormController после выбора варианта транзакции
-    private func presentTransactionFormController(controller: UIViewController,
-                                                  type: TransactionType,
-                                                  name: String) {
-        let formController = TransactionFormControllerBilder()
+    //вызывает контроллер после выбора варианта транзакции
+    private func present(controller: UIViewController,
+                         type: TransactionType,
+                         name: String) {
+        let formController = TransactionFormControllerBuilder()
             .viewController(transactionType: type)
         formController.topChooseButtonText = name
         controller.present(formController, animated: true, completion: nil)

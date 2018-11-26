@@ -1,7 +1,7 @@
 // English
 
 //Buttons
-"titleCancelButton" = "Cancel";
+"cancelButton" = "Cancel";
 "titleSaveButton" = "Save";
 "titleDeleteButton" = "Delete";
 "titleEditButton" = "Edit";
@@ -10,6 +10,8 @@
 "titleSortDelete" = "Sort/Delete";
 "chooseParentButton" = "parent category";
 "emptyTitle" = "-----------";
+"decline" = "No";
+"approve" = "Yes";
 
 //Lable
 "typeCategory" = "type:";
@@ -22,6 +24,7 @@
 "incomeTitle" = "Income";
 "transferTitle" = "Transfer";
 "noteTitle" = "Note";
+"renameTitle" = "Rename?";
 
 //Settings
 "accountSettingsTitle" = "Accounts";

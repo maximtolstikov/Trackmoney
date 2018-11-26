@@ -1,6 +1,6 @@
 // Для строительства контроллера формы транзакции
 
-class TransactionFormControllerBilder {
+class TransactionFormControllerBuilder {
     
     func viewController(transactionType: TransactionType) -> TransactionFormController {
         

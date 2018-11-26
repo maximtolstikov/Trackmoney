@@ -11,7 +11,7 @@ class NoteAlert: AlertManager {
                                                                      comment: ""),
                                             message: "",
                                             preferredStyle: .alert)
-        let cancel = UIAlertAction(title: NSLocalizedString("titleCancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
                                                             comment: ""),
                                    style: .cancel) {[weak self] _ in
                                     self?.alertController = nil

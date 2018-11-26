@@ -90,10 +90,10 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
         
         switch nameCell {
         case SettingListType.getTitleFor(title: SettingListType.accountsSetting):
-            let controller = AccountsSettingsControllerBilder().viewController()
+            let controller = AccountsSettingsControllerBuilder().viewController()
             self.navigationController?.pushViewController(controller, animated: true)
         case SettingListType.getTitleFor(title: SettingListType.categoriesSettings):
-            let controller = CategorySettingsControllerBilder().viewController()
+            let controller = CategorySettingsControllerBuilder().viewController()
             self.navigationController?.pushViewController(controller, animated: true)
         default:
             break

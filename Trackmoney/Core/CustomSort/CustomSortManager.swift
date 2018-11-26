@@ -4,13 +4,13 @@ import Foundation
 struct CustomSortManager {
     
     let userDefalts = UserDefaults.standard
-    let entity: CustomSort.Type
+    let entity: DBEntity.Type
     var key: String {
         return entity == Account.self ? "sortListAccounts" : "sortListCategories"
     }
     
     /// Возвращает массив с пользовательской сортировкой
-    func sortedArray<T: CustomSort>(_ array: [T]) -> [T] {
+    func sortedArray<T: DBEntity>(_ array: [T]) -> [T] {
         
         let dict = checkDictCorrectFor(array)
         var newArray = array
@@ -27,7 +27,7 @@ struct CustomSortManager {
     }
     
     /// Защищает массив имен от не соответствия имен в словаре
-    func checkDictCorrectFor<T: CustomSort>(_ array: [T]) -> [String: Int] {
+    func checkDictCorrectFor<T: DBEntity>(_ array: [T]) -> [String: Int] {
         
         guard let dict = userDefalts.dictionary(forKey: key) as? [String: Int] else {
             return saveCurrentOrder(array)
@@ -55,7 +55,7 @@ struct CustomSortManager {
     }
     
     // Сохраняет порядок в UserDefalts
-    private func saveCurrentOrder<T: CustomSort>(_ array: [T]) -> [String: Int] {
+    private func saveCurrentOrder<T: DBEntity>(_ array: [T]) -> [String: Int] {
         
         var dict = [String: Int]()
         for (index, value) in array.enumerated() {
@@ -69,7 +69,7 @@ struct CustomSortManager {
     }
     
     /// Добавляет элемент
-    func add<T: CustomSort>(element: T, in array: [T]) {
+    func add<T: DBEntity>(element: T, in array: [T]) {
         
         var newArray = array
         newArray.append(element)
@@ -77,14 +77,14 @@ struct CustomSortManager {
     }
     
     /// Удаляет элемент
-    func remove<T: CustomSort>(element: T, in array: [T]) {
+    func remove<T: DBEntity>(element: T, in array: [T]) {
         
         let newArray = array.filter { $0.name != element.name }
         _ = saveCurrentOrder(newArray)        
     }
     
     /// Перемещает элемент
-    func swapElement<T: CustomSort>(array: [T]) {
+    func swapElement<T: DBEntity>(array: [T]) {
         
          _ = saveCurrentOrder(array)
  

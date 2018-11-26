@@ -2,7 +2,7 @@
 
 import UIKit
 
-class CategorySettingsControllerBilder {
+class CategorySettingsControllerBuilder {
     
     func viewController() -> UIViewController {
         
@@ -14,6 +14,8 @@ class CategorySettingsControllerBilder {
         categorySettingsController
             .navigationItem.title = NSLocalizedString("settingsCategories",
                                                       comment: "")
+        let customSort = CustomSortManager(entity: CategoryTransaction.self)
+        categorySettingsController.sortManager = customSort
         
         return categorySettingsController
         

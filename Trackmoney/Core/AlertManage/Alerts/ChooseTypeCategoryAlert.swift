@@ -7,19 +7,20 @@ class ChooseTypeCategoryAlert: AlertManager {
         
         alertController = UIAlertController(title: NSLocalizedString("chooseTypeCategory", comment: ""),
                                             message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: NSLocalizedString("titleCancelButton", comment: ""),
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+                                                            comment: ""),
                                    style: .cancel) {[weak self] _ in
                                     self?.alertController = nil
         }
         
         let expense = UIAlertAction(title: NSLocalizedString("expenseTitle", comment: ""),
                                     style: .default) { _ in
-                                        self.presentController(controller: controller, type: .expense)
+                                        self.present(controller: controller, type: .expense)
         }
         
         let income = UIAlertAction(title: NSLocalizedString("incomeTitle", comment: ""),
                                    style: .default) { _ in
-                                    self.presentController(controller: controller, type: .income)
+                                    self.present(controller: controller, type: .income)
         }
         
         alertController.addAction(expense)
@@ -30,9 +31,9 @@ class ChooseTypeCategoryAlert: AlertManager {
     }
     
     //вызывает CategoryFormController после выбора типа Категории
-    private func presentController(controller: UIViewController, type: CategoryType) {
+    private func present(controller: UIViewController, type: CategoryType) {
         
-        let formController = CategoryFormControllerBilder(typeCategory: type)
+        let formController = CategoryFormControllerBuilder(typeCategory: type)
             .viewController()
         controller.present(formController, animated: true, completion: nil)
     }

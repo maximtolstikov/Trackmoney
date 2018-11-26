@@ -2,7 +2,7 @@
 
 import UIKit
 
-class SettigsControllerBilder {
+class SettigsControllerBuilder {
     
     func viewController() -> UIViewController {
         

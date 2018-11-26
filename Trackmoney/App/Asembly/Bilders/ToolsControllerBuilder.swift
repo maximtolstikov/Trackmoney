@@ -2,7 +2,7 @@
 
 import UIKit
 
-class ToolsControllerBilder {
+class ToolsControllerBuilder {
     
     func viewController() -> UIViewController {
         

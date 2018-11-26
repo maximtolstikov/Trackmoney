@@ -2,7 +2,7 @@
 
 import UIKit
 
-class LogControllerBilder {
+class LogControllerBuilder {
     
     func viewController() -> UIViewController {
         

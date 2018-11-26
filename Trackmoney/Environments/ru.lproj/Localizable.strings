@@ -10,6 +10,8 @@
 "titleSortDelete" = "Редактировать";
 "chooseParentButton" = "родительская категория";
 "emptyTitle" = "-----------";
+"decline" = "Нет";
+"approve" = "Да";
 
 //Lable
 "typeCategory" = "тип:";
@@ -22,6 +24,7 @@
 "incomeTitle" = "Доход";
 "transferTitle" = "Перевод";
 "noteTitle" = "Заметка";
+"renameTitle" = "Переименовать?";
 
 //Settings
 "accountSettingsTitle" = "Счета";
