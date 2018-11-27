@@ -11,7 +11,7 @@ class SettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackButton()
+        setBarButtons()
         addTable()
         
         let gestre = UISwipeGestureRecognizer(
@@ -27,8 +27,7 @@ class SettingsController: UIViewController {
         }
     }
     
-    // создаем кнопку назад
-    private func setBackButton() {
+    private func setBarButtons() {
         
         let leftBackButton = UIBarButtonItem(
             image: UIImage(named: "Arrow_down"),
@@ -36,11 +35,24 @@ class SettingsController: UIViewController {
             target: self,
             action: #selector(dismissBack))
         
+        let rightButton = UIBarButtonItem(
+            title: NSLocalizedString("cancelButton", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(closeController))
+        
         self.navigationItem.leftBarButtonItem = leftBackButton
+        self.navigationItem.rightBarButtonItem = rightButton
     }
     
     @objc func dismissBack() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func closeController() {
+        
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
     }
     
     //настраиваем и добавляем контроллер таблицы

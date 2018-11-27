@@ -19,6 +19,7 @@ class AccountsSettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBarButton()
         addTable()
         addBottomToolBar()
     }
@@ -36,9 +37,21 @@ class AccountsSettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = true
     }
     
-    @objc func tapBackButton() {
+    private func setBarButton() {
         
-        dismiss(animated: true, completion: nil)
+        let rightButton = UIBarButtonItem(
+            title: NSLocalizedString("cancelButton", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(closeController))
+
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    @objc func closeController() {
+        
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
     }
     
     // Настраивает и добавляет контроллер таблицы
@@ -96,7 +109,6 @@ class AccountsSettingsController: UIViewController {
         } else {
             self.tableView.setEditing(true, animated: true)
         }
-        
     }
 
 }
@@ -139,8 +151,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
             sortManager.remove(element: accounts[indexPath.row], in: accounts)
             accounts.remove(at: indexPath.row)
             tableView.reloadData()
-        }
-        
+        }        
     }
     
     func tableView(_ tableView: UITableView,

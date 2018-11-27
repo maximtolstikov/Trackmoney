@@ -19,6 +19,7 @@ class CategorySettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBarButton()
         addTable()
         addBottomToolBar()
     }
@@ -36,11 +37,23 @@ class CategorySettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = true
     }
     
-    @objc func tapBackButton() {
-        dismiss(animated: true, completion: nil)
+    private func setBarButton() {
+        
+        let rightButton = UIBarButtonItem(
+            title: NSLocalizedString("cancelButton", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(closeController))
+        
+        self.navigationItem.rightBarButtonItem = rightButton
     }
     
-    // Настраивает и добавляет контроллер таблицы
+    @objc func closeController() {
+        
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
+    }
+    
     private func addTable() {
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
@@ -52,7 +65,6 @@ class CategorySettingsController: UIViewController {
         self.view.addSubview(tableView)
     }
     
-    // Настраивает и добавляет тулБар снизу
     private func addBottomToolBar() {
         
         let addCategoryButtom = UIBarButtonItem(
@@ -174,10 +186,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 expenseCategories.remove(at: indexPath.row)
                 tableView.reloadData()
             }
-            
-            
         }
-        
     }
     
     func tableView(_ tableView: UITableView,
