@@ -117,9 +117,9 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return NSLocalizedString("expenseTitle", comment: "")
-        } else {
             return NSLocalizedString("incomeTitle", comment: "")
+        } else {
+            return NSLocalizedString("expenseTitle", comment: "")
         }
     }
     
