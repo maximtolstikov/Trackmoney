@@ -20,12 +20,14 @@ class NoteAlert: AlertManager {
                                                           comment: ""),
                                  style: .default) { _ in
                                     guard let textField = self.alertController.textFields?.first else { return }
+                                    
                                     completion(textField.text)
                                     self.alertController = nil
         }
         
         alertController.addTextField { (textField) in
             textField.text = text
+            textField.delegate = self.alertController
         }
         
         alertController.addAction(cancel)
@@ -33,5 +35,22 @@ class NoteAlert: AlertManager {
         
         controller.present(alertController, animated: true, completion: nil)
         
+    }
+}
+
+extension UIAlertController: UITextFieldDelegate {
+    
+    public func textField(_ textField: UITextField,
+                          shouldChangeCharactersIn range: NSRange,
+                          replacementString string: String) -> Bool {
+        
+        let currentCharacterCount = textField.text?.count ?? 0
+        
+        if (range.length + range.location) > currentCharacterCount {
+            return false
+        }
+        
+        let newLength = currentCharacterCount + string.count - range.length
+        return newLength <= 45
     }
 }
