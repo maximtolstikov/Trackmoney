@@ -7,9 +7,9 @@ class CategorySettingsController: UIViewController {
     var sortManager: CustomSortManager!
     var tableView = UITableView()
     let cellIndentifire = "myCell"
-    var categories: [CategoryTransaction]! {
+    var incomeCategories: [CategoryTransaction]!
+    var expenseCategories: [CategoryTransaction]! {
         didSet {
-            categories = sortManager.sortedArray(categories)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -98,11 +98,29 @@ class CategorySettingsController: UIViewController {
 
 extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         
-        guard categories?.count != nil else { return 0 }
-        return categories.count
+        guard incomeCategories?.count != nil else { return 0 }
+        
+        if section == 0 {
+            return incomeCategories.count
+        } else {
+             return expenseCategories.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return NSLocalizedString("expenseTitle", comment: "")
+        } else {
+            return NSLocalizedString("incomeTitle", comment: "")
+        }
     }
     
     func tableView(_ tableView: UITableView,
@@ -114,10 +132,18 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         let textInCell: String
         
-        if let parentName = categories[indexPath.row].parent?.name {
-            textInCell = "\(parentName)" + "/" + "\(categories[indexPath.row].name)"
+        if indexPath.section == 0 {
+            if let parentName = incomeCategories[indexPath.row].parent?.name {
+                textInCell = "\(parentName)" + "/" + "\(incomeCategories[indexPath.row].name)"
+            } else {
+                textInCell = incomeCategories[indexPath.row].name
+            }
         } else {
-            textInCell = categories[indexPath.row].name
+            if let parentName = expenseCategories[indexPath.row].parent?.name {
+                textInCell = "\(parentName)" + "/" + "\(expenseCategories[indexPath.row].name)"
+            } else {
+                textInCell = expenseCategories[indexPath.row].name
+            }
         }
         
         cell.textLabel?.text = textInCell
@@ -131,13 +157,25 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         if editingStyle == .delete {
             
-            guard self.dataProvider.delete(
-                with: self.categories[indexPath.row].objectID) else {
-                    assertionFailure()
-                    return
+            if indexPath.section == 0 {
+                guard self.dataProvider.delete(
+                    with: self.incomeCategories[indexPath.row].objectID) else {
+                        assertionFailure()
+                        return
+                }
+                incomeCategories.remove(at: indexPath.row)
+                tableView.reloadData()
+            } else {
+                guard self.dataProvider.delete(
+                    with: self.expenseCategories[indexPath.row].objectID) else {
+                        assertionFailure()
+                        return
+                }
+                expenseCategories.remove(at: indexPath.row)
+                tableView.reloadData()
             }
-            categories.remove(at: indexPath.row)
-            tableView.reloadData()
+            
+            
         }
         
     }
@@ -148,22 +186,28 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
-    func tableView(_ tableView: UITableView,
-                   moveRowAt sourceIndexPath: IndexPath,
-                   to destinationIndexPath: IndexPath) {
-        
-        let item = categories[sourceIndexPath.row]
-        categories.remove(at: sourceIndexPath.row)
-        categories.insert(item, at: destinationIndexPath.row)
-        
-        sortManager.swapElement(array: categories)
-    }
-    
+//    func tableView(_ tableView: UITableView,
+//                   moveRowAt sourceIndexPath: IndexPath,
+//                   to destinationIndexPath: IndexPath) {
+//
+//        let item = categories[sourceIndexPath.row]
+//        categories.remove(at: sourceIndexPath.row)
+//        categories.insert(item, at: destinationIndexPath.row)
+//
+//        sortManager.swapElement(array: categories)
+//    }
+
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+
+        if indexPath.section == 0 {
+            RenameEntity().show(controller: self,
+                                entyty: incomeCategories[indexPath.row])
+        } else {
+            RenameEntity().show(controller: self,
+                                entyty: expenseCategories[indexPath.row])
+        }
         
-        RenameEntity().show(controller: self,
-                            entyty: categories[indexPath.row])
     }
     
 }

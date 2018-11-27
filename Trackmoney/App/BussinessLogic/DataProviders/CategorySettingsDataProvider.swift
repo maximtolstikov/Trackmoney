@@ -12,12 +12,22 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     
     func loadData() {
         
-        guard let categories = dbManager?.get() else {
+        guard let response = dbManager?.get() else {
             assertionFailure()
             return
         }
         
-        controller?.categories = categories as? [CategoryTransaction]
+        guard let categories = response as? [CategoryTransaction] else {
+            assertionFailure()
+            return
+        }
+        
+        let incomeCategories = categories.filter { $0.type == CategoryType.income.rawValue }
+        let expenseCategories = categories
+            .filter { $0.type == CategoryType.expense.rawValue }
+        
+        controller?.incomeCategories = incomeCategories
+        controller?.expenseCategories = expenseCategories
         
     }
     

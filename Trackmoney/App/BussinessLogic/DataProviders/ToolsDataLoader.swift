@@ -7,12 +7,7 @@ class ToolsDataLoader: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: ToolsController?
     
-    func loadData() {
-        
-        // let transaction = dbManager?.get()
-        // TODO: сдесь обрабатываем полученные данные и выводим их на контроллер
-        
-    }
+    func loadData() {}
     
     func save(message: [MessageKeyType: Any]) {}
     
