@@ -25,6 +25,12 @@
 "transferTitle" = "Transfer";
 "noteTitle" = "Note";
 "renameTitle" = "Rename?";
+"accountCreate" = "Account created!";
+"accountDelete" = "Account deleted!";
+"categoryCreate" = "Category created!";
+"categoryDelete" = "Category deleted!";
+"transactionCreate" = "Transaction created!";
+"transactionDelete" = "Transaction deleted!";
 
 //Settings
 "accountSettingsTitle" = "Accounts";

@@ -25,6 +25,11 @@
 "transferTitle" = "Перевод";
 "noteTitle" = "Заметка";
 "renameTitle" = "Переименовать?";
+"accountCreate" = "Счет создан!";
+"accountDelete" = "Счет удален!";
+"categoryCreate" = "Категория создана!";
+"categoryDelete" = "Категория удалена!";
+"transactionDelete" = "Транзакция удалена!";
 
 //Settings
 "accountSettingsTitle" = "Счета";

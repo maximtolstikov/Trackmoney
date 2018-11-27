@@ -28,7 +28,7 @@ class LogDataLoader: DataProviderProtocol {
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,
-                title: AlertMessage.accountDeleted.rawValue,
+                title: NSLocalizedString("transactionDelete", comment: ""),
                 body: nil, style: .alert)
             return true
         } else {

@@ -29,7 +29,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
             
             ShortAlert().show(
                 controller: controller!,
-                title: AlertMessage.accountCreare.rawValue,
+                title: NSLocalizedString("accountCreate", comment: ""),
                 body: nil, style: .alert)
             
             loadData()
@@ -53,7 +53,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,
-                title: AlertMessage.accountDeleted.rawValue,
+                title: NSLocalizedString("accountDelete", comment: ""),
                 body: nil, style: .alert)
             return true
         } else {
