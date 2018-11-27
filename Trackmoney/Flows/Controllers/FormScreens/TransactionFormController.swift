@@ -15,7 +15,7 @@ class TransactionFormController: BaseFormController {
     
     var accounts: [Account]?
     var categories: [CategoryTransaction]?
-
+    
     var transactionType: TransactionType?
     var transactionID: NSManagedObjectID?
     
@@ -66,7 +66,7 @@ class TransactionFormController: BaseFormController {
             self.sumTextField.becomeFirstResponder()
         }
     }
-   
+    
     // Создаем нижнюю кнопку выбора Счета или Категории
     func createBottomChoseButton() {
         
@@ -134,16 +134,16 @@ class TransactionFormController: BaseFormController {
     func createNoteButton() {
         
         noteButton.setTitle(NSLocalizedString("noteTitle", comment: ""),
-                                 for: .normal)
+                            for: .normal)
         viewOnScroll.addSubview(noteButton)
         
         noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor,
                                          constant: 8).isActive = true
         noteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         noteButton.bottomAnchor.constraint(equalTo: bottomChooseButton.topAnchor,
-                                                constant: -40).isActive = true
+                                           constant: -40).isActive = true
         noteButton.addTarget(self, action: #selector(tapNoteButton),
-                                  for: .touchUpInside)
+                             for: .touchUpInside)
         
     }
     
@@ -221,7 +221,7 @@ class TransactionFormController: BaseFormController {
     
     // Отправляет данные формы в базу
     func sendMessage() {
-
+        
         guard let type = transactionType,
             let topButtonText = topChooseButton.currentTitle,
             let sumText = sumTextField.text,
@@ -263,8 +263,8 @@ class TransactionFormController: BaseFormController {
             return
         }
         ChooseAccountAlert().show(accounts: arrayAccounts,
-                                          controller: self) { [weak self] (name) in
-            self?.topChooseButton.setTitle(name, for: .normal)
+                                  controller: self) { [weak self] (name) in
+                                    self?.topChooseButton.setTitle(name, for: .normal)
         }
     }
     
@@ -273,8 +273,20 @@ class TransactionFormController: BaseFormController {
         removeRedBorderTo(control: bottomChooseButton)
         self.animateSlideUpPromt(completion: nil)
         
-        if transactionType == TransactionType.income ||
-            transactionType == TransactionType.expense {
+        if transactionType == TransactionType.transfer {
+            
+            guard let arrayAccounts = accounts else {
+                assertionFailure("список счетов не получен из базы")
+                return
+            }
+            
+            let array = arrayAccounts
+                .filter { $0.name != topChooseButton.titleLabel?.text }
+            ChooseAccountAlert().show(accounts: array,
+                                      controller: self) { [weak self] (name) in
+                                        self?.bottomChooseButton.setTitle(name, for: .normal)
+            }
+        } else {
             
             guard let arrayCategories = categories else {
                 assertionFailure("список счетов не получен из базы")
@@ -285,21 +297,9 @@ class TransactionFormController: BaseFormController {
             
             ChooseCategoryAlert().show(categories: list,
                                        controller: self) { [weak self] (name) in
-                self?.bottomChooseButton.setTitle(name, for: .normal)
-            }
-            
-        } else if transactionType == TransactionType.transfer {
-            
-            guard let arrayAccounts = accounts else {
-                assertionFailure("список счетов не получен из базы")
-                return
-            }
-            ChooseAccountAlert().show(accounts: arrayAccounts,
-                                      controller: self) { [weak self] (name) in
-                self?.bottomChooseButton.setTitle(name, for: .normal)
+                                        self?.bottomChooseButton.setTitle(name, for: .normal)
             }
         }
-        
     }
     
     @objc func tapNoteButton() {
@@ -310,7 +310,6 @@ class TransactionFormController: BaseFormController {
             
             self.note = string
         }
-        
     }
     
     // Сортирует список категорий по типу
