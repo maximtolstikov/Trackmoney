@@ -87,6 +87,30 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let note = transactions[indexPath.row].note,
+            let cell = tableView.cellForRow(at: indexPath) else { return }
+        
+        let sourceCell = cell as! LogCell
+        print(note)
+        
+        let popViewController = NoteViewController()
+        popViewController.textView.text = note
+        popViewController.modalPresentationStyle = .popover
+        
+        let popOver = popViewController.popoverPresentationController
+        popOver?.delegate = self
+        popOver?.sourceView = sourceCell.sumLable
+        
+        popViewController
+            .preferredContentSize = CGSize(width: self.view.bounds.width,
+                                           height: 60)
+        
+        present(popViewController, animated: true)
+        
+    }
+    
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -131,4 +155,11 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         return [delete, edit]
     }
     
+}
+
+extension LogController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
 }

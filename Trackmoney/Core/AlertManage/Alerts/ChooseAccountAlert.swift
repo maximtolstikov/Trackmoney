@@ -17,16 +17,18 @@ class ChooseAccountAlert: AlertManager {
             message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
                                                      comment: ""),
-                                   style: .cancel, handler: nil)
+                                   style: .cancel, handler: { _ in
+                                    self.alertController = nil
+        })
         self.alertController.addAction(cancel)
         
         for (account) in arrayAccounts {
             let action = UIAlertAction(title: account.name,
                                        style: .default,
-                                       handler: { [weak self] _ in
+                                       handler: { _ in
                 
                 comletion(account.name)
-                self?.alertController = nil
+                self.alertController = nil
             })
             
             self.alertController.addAction(action)

@@ -95,6 +95,7 @@
 		94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */; };
 		94DE5460215EA4B2006CAC9D /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE545F215EA4B2006CAC9D /* AccountsController.swift */; };
 		94DE5462215EAB56006CAC9D /* ToolsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE5461215EAB56006CAC9D /* ToolsController.swift */; };
+		94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E908EB21AD3F6F00E7A31D /* NoteViewController.swift */; };
 		94EC435F21661E12009C6BF3 /* AccountsSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC435E21661E12009C6BF3 /* AccountsSettingsController.swift */; };
 		94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */; };
 		94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */; };
@@ -216,6 +217,7 @@
 		94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		94DE545F215EA4B2006CAC9D /* AccountsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
 		94DE5461215EAB56006CAC9D /* ToolsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsController.swift; sourceTree = "<group>"; };
+		94E908EB21AD3F6F00E7A31D /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		94EC435E21661E12009C6BF3 /* AccountsSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsController.swift; sourceTree = "<group>"; };
 		94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsDataProvider.swift; sourceTree = "<group>"; };
 		94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsControllerBilder.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				94A7FDFB217C8198009E5C4B /* MainScreen */,
 				94A7FDFC217C81AD009E5C4B /* SettingsScreens */,
 				94A7FDFD217C81C3009E5C4B /* FormScreens */,
+				94E908EB21AD3F6F00E7A31D /* NoteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
+				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,
 				94CC8137214FDBB30027913C /* TextErrors.swift in Sources */,
 				94DE5462215EAB56006CAC9D /* ToolsController.swift in Sources */,
 				94A7FDF4217AF3D7009E5C4B /* CategoryFormDataProvider.swift in Sources */,

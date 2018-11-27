@@ -124,14 +124,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             assertionFailure()
             return ErrorMessage(error: .accountIsNotExist)
         }
-
-        // FIXME: Подумать стоит ли удалять счета из транзакций
-//        let predicate = NSPredicate(format: "mainAccount = %@", account.name)
-//        if let transactions = transactionDBManager
-//            .getObjectBy(predicate: predicate) {
-//
-//            _ = transactions.map { $0.mainAccount = "" }
-//        }
         
         context.delete(account)
         

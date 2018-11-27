@@ -13,15 +13,15 @@ class NoteAlert: AlertManager {
                                             preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
                                                             comment: ""),
-                                   style: .cancel) {[weak self] _ in
-                                    self?.alertController = nil
+                                   style: .cancel) { _ in
+                                    self.alertController = nil
         }
         let save = UIAlertAction(title: NSLocalizedString("titleSaveButton",
                                                           comment: ""),
-                                 style: .default) {[weak self] _ in
-                                    guard let textField = self?.alertController.textFields?.first else { return }
+                                 style: .default) { _ in
+                                    guard let textField = self.alertController.textFields?.first else { return }
                                     completion(textField.text)
-                                    self?.alertController = nil
+                                    self.alertController = nil
         }
         
         alertController.addTextField { (textField) in

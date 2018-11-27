@@ -16,8 +16,8 @@ class NeedCancelAlert: AlertManager {
         
         let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
                                                             comment: ""),
-                                   style: .cancel) {[weak self] _ in
-            self?.deinitAlert()
+                                   style: .cancel) { _ in
+            self.deinitAlert()
         }
         
         alertController.addAction(cancel)
