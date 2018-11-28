@@ -74,7 +74,7 @@ class AccountsController: UIViewController {
         } else {
             let toolBarHeight = navigationController?.toolbar.frame.height
             // на iphone 10 статусБар складывается из верхнего и нижнего
-            let statusBarHeight = hasTopNotch ? CGFloat(78) : CGFloat(20)
+            let statusBarHeight = hasTopNotch ? CGFloat(83) : CGFloat(26)
             let navigationBarHeight = navigationController?.navigationBar.frame.height
             //swiftlint:disable next force_unwrapping
             let heightRow = (
