@@ -3,8 +3,8 @@ import UIKit
 /// Для отображения заметок транзакций в ячейках истории
 class NoteViewController: UIViewController {
     
-    let textView: UITextView = {
-        let view = UITextView()
+    let noteText: UILabel = {
+        let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -16,13 +16,16 @@ class NoteViewController: UIViewController {
     }
     
     private func addTextView() {
-        self.view.addSubview(textView)
+        
+        self.view.addSubview(noteText)
 
-        textView.textAlignment = .center
-        textView.font = UIFont.systemFont(ofSize: 20)
-        textView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        textView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        textView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        noteText.adjustsFontSizeToFitWidth = true
+        noteText.textAlignment = .center
+        noteText.numberOfLines = 0
+        
+        noteText.widthAnchor.constraint(equalTo: view.widthAnchor,
+                                        constant: -16).isActive = true
+        noteText.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noteText.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }

@@ -5,6 +5,8 @@ import UIKit
 /// Для описания контроллера журнала
 class LogController: UIViewController {
     
+    lazy var popViewController = NoteViewController()
+    
     var tableView = UITableView()
     let cellIndentifire = "logCell"
     let dateFormat = DateFormat()
@@ -28,6 +30,12 @@ class LogController: UIViewController {
         super.viewWillAppear(true)
         
         dataProvider?.loadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        popViewController.dismiss(animated: false)
     }
     
     private func addTable() {
@@ -95,8 +103,8 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         let sourceCell = cell as! LogCell
         print(note)
         
-        let popViewController = NoteViewController()
-        popViewController.textView.text = note
+        
+        popViewController.noteText.text = note
         popViewController.modalPresentationStyle = .popover
         
         let popOver = popViewController.popoverPresentationController

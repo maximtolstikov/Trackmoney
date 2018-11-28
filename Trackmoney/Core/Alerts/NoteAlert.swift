@@ -26,6 +26,8 @@ class NoteAlert: AlertManager {
         }
         
         alertController.addTextField { (textField) in
+            textField.font = UIFont.systemFont(ofSize: 18.0)
+            textField.textAlignment = .center
             textField.text = text
             textField.delegate = self.alertController
         }
