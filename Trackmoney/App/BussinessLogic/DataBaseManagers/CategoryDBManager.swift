@@ -20,6 +20,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         newCategory.name = message[.nameCategory] as! String
         newCategory.icon = message[.iconCategory] as? String
         newCategory.type = message[.typeCategory] as! String
+        
         if let parent = message[.parentCategory] {
             let parentCategory = getObjectByName(for: parent as! String)
             newCategory.parent = parentCategory
@@ -33,7 +34,6 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
-        
     }
     
     // Возвращает все объекты Category
@@ -49,17 +49,13 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
         
         return resultRequest
-        
     }
-    
     
     //Возвращает Category по id
     func getObjectById(for id: NSManagedObjectID) -> CategoryTransaction? {
         
         return context.object(with: id) as? CategoryTransaction
-        
     }
-    
     
     //Возвращает категорию по имени
     func getObjectByName(for name: String) -> CategoryTransaction? {
@@ -83,8 +79,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
         
         return nil
-    }
-    
+    }    
     
     // Изменяес имя или иконку Категории
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
@@ -95,11 +90,25 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             return ErrorMessage(error: .categoryIsNotExist)
         }
         
+        if let parent = message[.parentCategory] {
+            
+            if let oldParentName = category.parent?.name {
+                
+                let oldParent = getObjectByName(for: oldParentName)
+                oldParent?.removeFromChild(category)
+            }
+            
+            let newParent = getObjectByName(for: parent as! String)
+            
+            category.parent = newParent
+            newParent?.addToChild(category)
+        }
+        
         if mManager.isExistValue(for: .nameCategory, in: message) {
 
             let newName = message[.nameCategory] as! String
-            
             let predicate = NSPredicate(format: "category = %@", category.name)
+            
             if let transactions = transactionDBManager
                 .getObjectBy(predicate: predicate) {
                 
@@ -108,12 +117,12 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             
             category.name = newName
         }
+        
         if mManager.isExistValue(for: .iconCategory, in: message) {
             category.icon = message[.iconCategory] as? String
         }
 
         return saveContext()
-        
     }
     
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {

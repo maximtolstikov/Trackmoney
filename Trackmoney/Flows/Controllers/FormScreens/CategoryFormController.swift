@@ -50,9 +50,11 @@ class CategoryFormController: BaseFormController {
     func createNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
+        
         if categotyForUpdate != nil {
             nameTextField.text = categotyForUpdate?.name
         }
+        
         nameTextField.keyboardType = UIKeyboardType.default
         nameTextField.textAlignment = .center
         nameTextField.placeholder = NSLocalizedString("nameTextFildPlaceholder",
@@ -65,13 +67,13 @@ class CategoryFormController: BaseFormController {
         nameTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
                                               constant: -40).isActive = true
-        
     }
     
     // Создает lable с типом Категории
     func createTypeLable() {
         
         viewOnScroll.addSubview(typeLable)
+        
         typeLable.text = NSLocalizedString("typeCategory", comment: "") + " " + "\(typeCategory.rawValue)"
         typeLable.textAlignment = .center
         
@@ -96,9 +98,9 @@ class CategoryFormController: BaseFormController {
         topChooseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         topChooseButton.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
                                                 constant: -40).isActive = true
-        topChooseButton.addTarget(self, action: #selector(tapTopChooseButton),
-                                  for: .touchUpInside)
         
+        topChooseButton.addTarget(self, action: #selector(tapTopChooseButton),
+                                  for: .touchUpInside)        
     }
     
     // MARK: - Button's methods
