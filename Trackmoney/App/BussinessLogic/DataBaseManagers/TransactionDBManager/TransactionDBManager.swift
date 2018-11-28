@@ -1,12 +1,7 @@
-// Для описания методов доступа к BD у LogViewController
-
 //swiftlint:disable force_cast
-
 import CoreData
 
-
 class TransactionDBManager: DBManager, DBManagerProtocol {
-    
     
     func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
         
@@ -20,9 +15,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         }
         
         return createTransaction.execute()
-        
     }
-    
     
     //TODO: переделать на получение по порциям
     func get() -> [NSManagedObject]? {
@@ -37,17 +30,13 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         }
         
         return resultRequest
-        
     }
-    
     
     // Возвращает транзакцию по времени
     func getObjectById(for id: NSManagedObjectID) -> Transaction? {
         
         return context.object(with: id) as? Transaction
-        
     }
-    
     
     // Возвращает транзакцию по времени
     func getObjectByDate(for date: NSDate) -> Transaction? {
@@ -96,7 +85,6 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let transaction = getObjectById(
@@ -117,15 +105,12 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
             } catch {
                 print(error.localizedDescription)
                 return ErrorMessage(error: .contextDoNotBeSaved)
-            }
-            
+            }            
         }
         
         return ErrorMessage(error: .noName)
     }
     
-    
-    /// Удаляет транзакцию
     func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
         
         guard let transaction = getObjectById(
@@ -138,7 +123,6 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         }
         
         return deleteTransaction.execute() ? nil : ErrorMessage(error: .contextDoNotBeSaved)
-        
     }
 
 }

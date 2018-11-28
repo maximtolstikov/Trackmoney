@@ -64,6 +64,7 @@
 		94858B062146D15B00498DCF /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AFE2146D15B00498DCF /* TransactionType.swift */; };
 		94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0EE7D21A54DE7004B66E1 /* DBEntity.swift */; };
 		94A0EE8021A55214004B66E1 /* CustomSortManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0EE7F21A55214004B66E1 /* CustomSortManager.swift */; };
+		94A2243F21AE7CDE00068F47 /* ChangeNoteTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2243E21AE7CDE00068F47 /* ChangeNoteTransaction.swift */; };
 		94A24911216145D900BE71FE /* MethodsBDD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A24910216145D900BE71FE /* MethodsBDD.swift */; };
 		94A7FDEE217AF10E009E5C4B /* AccountFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FDED217AF10E009E5C4B /* AccountFormControllerBuilder.swift */; };
 		94A7FDF0217AF1B6009E5C4B /* AccountFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FDEF217AF1B6009E5C4B /* AccountFormController.swift */; };
@@ -183,6 +184,7 @@
 		94858AFE2146D15B00498DCF /* TransactionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		94A0EE7D21A54DE7004B66E1 /* DBEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBEntity.swift; sourceTree = "<group>"; };
 		94A0EE7F21A55214004B66E1 /* CustomSortManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSortManager.swift; sourceTree = "<group>"; };
+		94A2243E21AE7CDE00068F47 /* ChangeNoteTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNoteTransaction.swift; sourceTree = "<group>"; };
 		94A24910216145D900BE71FE /* MethodsBDD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsBDD.swift; sourceTree = "<group>"; };
 		94A7FDED217AF10E009E5C4B /* AccountFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormControllerBuilder.swift; sourceTree = "<group>"; };
 		94A7FDEF217AF1B6009E5C4B /* AccountFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormController.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				94D4351921495244003ED596 /* ChangeCategoryTransaction.swift */,
 				94D4351B214957B4003ED596 /* ChangeIconTransaction.swift */,
 				94DE53AD21495B8400B4CD73 /* ChangeCorAccount.swift */,
+				94A2243E21AE7CDE00068F47 /* ChangeNoteTransaction.swift */,
 			);
 			path = ChangeTransaction;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				94D435142148DA6F003ED596 /* ChangeTransactionMamager.swift in Sources */,
 				9446624F21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift in Sources */,
 				94DE5460215EA4B2006CAC9D /* AccountsController.swift in Sources */,
+				94A2243F21AE7CDE00068F47 /* ChangeNoteTransaction.swift in Sources */,
 				94DE53AE21495B8400B4CD73 /* ChangeCorAccount.swift in Sources */,
 				9446622C219DA51600C9FFCF /* CategoryButtonValidator.swift in Sources */,
 				94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */,

@@ -79,9 +79,9 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
         
         return nil
-    }    
+    }
     
-    // Изменяес имя или иконку Категории
+    // Изменяет имя или иконку Категории
     func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
     
         guard let category = getObjectById(

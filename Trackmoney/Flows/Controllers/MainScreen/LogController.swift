@@ -140,6 +140,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
                 controller.topChooseButtonText = transaction.mainAccount
                 controller.sumTextFieldText = String(transaction.sum)
                 controller.transactionID = transaction.objectID
+                controller.note = transaction.note
                 if type == TransactionType.transfer {
                     controller.bottomChooseButtonText = transaction.corAccount
                 } else {

@@ -77,6 +77,13 @@ struct ChangeTransactionMamager {
                 for: transaction
             )
             
+        } else if key == .noteTransaction {
+            
+            return ChangeNoteTransaction.changeNote(
+                on: message[key] as! String,
+                for: transaction
+            )
+            
         } else {
             
             return true
