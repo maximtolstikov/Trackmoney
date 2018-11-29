@@ -3,6 +3,12 @@
 import UIKit
 
 class LogCell: UITableViewCell {
+
+    var typeImage: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var background: UIView = {
         let view = UIView()
@@ -42,8 +48,10 @@ class LogCell: UITableViewCell {
         background.addSubview(sumLable)
         background.addSubview(categoryNameLable)
         background.addSubview(dateLable)
+        background.addSubview(typeImage)
         
         setupBackgroundView()
+        setupTypeImage()
         setupAccountNameLable()
         setupSumLable()
         setupCategoryNameLable()
@@ -81,6 +89,16 @@ class LogCell: UITableViewCell {
                         constant: -4).isActive = true
     }
     
+    private func setupTypeImage() {
+        
+        typeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        typeImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        typeImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            .isActive = true
+        typeImage.leftAnchor.constraint(equalTo: contentView.leftAnchor,
+                                        constant: 8).isActive = true
+    }
+    
     private func setupAccountNameLable() {
         
         accountNameLable.font = UIFont.systemFont(ofSize: 18)
@@ -88,8 +106,8 @@ class LogCell: UITableViewCell {
         accountNameLable.topAnchor.constraint(equalTo: contentView.topAnchor,
                                               constant: 10).isActive = true
         accountNameLable.leftAnchor
-            .constraint(equalTo: contentView.leftAnchor,
-                        constant: 20).isActive = true
+            .constraint(equalTo: typeImage.rightAnchor,
+                        constant: 8).isActive = true
         accountNameLable.widthAnchor
             .constraint(equalTo: contentView.widthAnchor,
                         multiplier: 2 / 3).isActive = true
@@ -117,8 +135,8 @@ class LogCell: UITableViewCell {
         categoryNameLable.topAnchor.constraint(equalTo: accountNameLable.bottomAnchor,
                                                constant: 2).isActive = true
         categoryNameLable.leftAnchor
-            .constraint(equalTo: contentView.leftAnchor,
-                        constant: 20).isActive = true
+            .constraint(equalTo: typeImage.rightAnchor,
+                        constant: 8).isActive = true
         categoryNameLable.widthAnchor
             .constraint(equalTo: contentView.widthAnchor,
                         multiplier: 1 / 2).isActive = true

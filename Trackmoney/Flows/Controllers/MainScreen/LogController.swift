@@ -69,6 +69,13 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             .dequeueReusableCell(withIdentifier: cellIndentifire,
                                  for: indexPath) as! LogCell
         
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let cell = cell as! LogCell
+        
         let date = transactions[indexPath.row].date as Date
         let stringFromDate = dateFormat.dateFormatter.string(from: date)
         cell.accountNameLable.text = transactions[indexPath.row].mainAccount
@@ -78,12 +85,16 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         let type = transactions[indexPath.row].type
         switch type {
         case 0:
+            cell.typeImage.image = UIImage(named: "Minus")
             cell.sumLable.textColor = #colorLiteral(red: 0.7835699556, green: 0.2945081919, blue: 0.07579417304, alpha: 1)
             cell.categoryNameLable.text = transactions[indexPath.row].category
         case 1:
+            cell.typeImage.image = UIImage(named: "Plus")
             cell.sumLable.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
             cell.categoryNameLable.text = transactions[indexPath.row].category
         case 2:
+            cell.typeImage.image = UIImage(named: "Transfer")
+            cell.sumLable.textColor = UIColor.darkGray
             let transaction = transactions[indexPath.row]
             //swiftlint:disable next force_unwrapping
             cell.categoryNameLable.text = "\(transaction.mainAccount)"
@@ -92,7 +103,6 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             break
         }
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -101,9 +111,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let sourceCell = cell as! LogCell
-        print(note)
-        
-        
+  
         popViewController.noteText.text = note
         popViewController.modalPresentationStyle = .popover
         
