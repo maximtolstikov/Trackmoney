@@ -48,6 +48,7 @@ class LogController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 60
         tableView.register(LogCell.self, forCellReuseIdentifier: cellIndentifire)
+        tableView.showsVerticalScrollIndicator = false
         
         self.view.addSubview(tableView)        
     }
