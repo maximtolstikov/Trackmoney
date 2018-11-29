@@ -33,9 +33,9 @@ class CategoryFormController: BaseFormController {
         super.viewDidLoad()
         
         dataProvider?.loadData()
-        createNameTextField()
-        createTopChoseButton()
-        createTypeLable()
+        setupNameTextField()
+        setupTopChoseButton()
+        setupTypeLable()
     }
     
     // Делает текстовое поле активным и вызывается клавиатура
@@ -47,7 +47,7 @@ class CategoryFormController: BaseFormController {
     }
     
     // Создает текстовое поле для ввода суммы
-    func createNameTextField() {
+    func setupNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
         
@@ -70,7 +70,7 @@ class CategoryFormController: BaseFormController {
     }
     
     // Создает lable с типом Категории
-    func createTypeLable() {
+    func setupTypeLable() {
         
         viewOnScroll.addSubview(typeLable)
         
@@ -87,7 +87,7 @@ class CategoryFormController: BaseFormController {
     }
     
     // создает верхнюю кнопку выбора родительской Категории
-    func createTopChoseButton() {
+    func setupTopChoseButton() {
         
         topChooseButton.setTitle(NSLocalizedString("chooseParentButton", comment: ""),
                                  for: .normal)

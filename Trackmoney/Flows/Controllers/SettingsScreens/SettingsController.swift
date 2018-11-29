@@ -13,7 +13,11 @@ class SettingsController: UIViewController {
         
         setBarButtons()
         addTable()
-        
+        setupSwipeDown()
+    }
+    
+    func setupSwipeDown() {
+    
         let gestre = UISwipeGestureRecognizer(
             target: self, action: #selector(handleSwipes(_ :)))
         gestre.direction = .down

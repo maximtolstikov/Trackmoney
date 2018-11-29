@@ -1,4 +1,3 @@
-//swiftlint:disable comma
 import UIKit
 
 class AccountsController: UIViewController {
@@ -20,17 +19,7 @@ class AccountsController: UIViewController {
             }
         }
     }
-    
-    // проверяет новый ли тип статус бара
-    var hasTopNotch: Bool {
-        if #available (iOS 11.0,  *) {
-            return UIApplication.shared.delegate?
-                .window??.safeAreaInsets.top ?? 0 > 20
-        }
-        return false
-    }
-    
-    // поставщик данных
+
     var dataLoader: DataProviderProtocol?
 
     override func viewDidLoad() {
@@ -74,7 +63,7 @@ class AccountsController: UIViewController {
         } else {
             let toolBarHeight = navigationController?.toolbar.frame.height
             // на iphone 10 статусБар складывается из верхнего и нижнего
-            let statusBarHeight = hasTopNotch ? CGFloat(83) : CGFloat(26)
+            let statusBarHeight = StatusBarType.check() ? CGFloat(83) : CGFloat(26)
             let navigationBarHeight = navigationController?.navigationBar.frame.height
             //swiftlint:disable next force_unwrapping
             let heightRow = (

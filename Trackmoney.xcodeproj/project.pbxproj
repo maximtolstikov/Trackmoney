@@ -46,6 +46,7 @@
 		9446624E21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */; };
 		9446624F21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */; };
 		9446A5A5214F825200D44E13 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446A5A4214F825200D44E13 /* ErrorMessage.swift */; };
+		945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B921121AFF7F200A1A791 /* StatusBarType.swift */; };
 		945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */; };
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
 		945C7A962179EE5800AF0B86 /* TransactionFormSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A952179EE5800AF0B86 /* TransactionFormSpec.swift */; };
@@ -164,6 +165,7 @@
 		9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9446A5A4214F825200D44E13 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		945B921121AFF7F200A1A791 /* StatusBarType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarType.swift; sourceTree = "<group>"; };
 		945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormControllerBuilder.swift; sourceTree = "<group>"; };
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
 		945C7A952179EE5800AF0B86 /* TransactionFormSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormSpec.swift; sourceTree = "<group>"; };
@@ -272,14 +274,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9417B15E2181A06B001E88AA /* PromptManager */ = {
-			isa = PBXGroup;
-			children = (
-				9417B15F2181A092001E88AA /* PromptView.swift */,
-			);
-			path = PromptManager;
-			sourceTree = "<group>";
-		};
 		9424E8022163656E00BE756D /* TtansactionDBManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +342,15 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		945B921021AFF70700A1A791 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				945C7A992179FF1300AF0B86 /* LogCell.swift */,
+				94A7FDF5217B4E8A009E5C4B /* AccountsCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		945C7A972179FEDD00AF0B86 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,13 +362,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		945C7A982179FEED00AF0B86 /* Cells */ = {
+		945C7A982179FEED00AF0B86 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				945C7A992179FF1300AF0B86 /* LogCell.swift */,
-				94A7FDF5217B4E8A009E5C4B /* AccountsCell.swift */,
+				945B921021AFF70700A1A791 /* Cells */,
+				9417B15F2181A092001E88AA /* PromptView.swift */,
 			);
-			path = Cells;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		94858AB52146CDF900498DCF = {
@@ -477,12 +480,12 @@
 				9446623F21A04D4600C9FFCF /* Alerts */,
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
-				9417B15E2181A06B001E88AA /* PromptManager */,
 				94A0EE8121A5528F004B66E1 /* CustomSort */,
 				9446624A21A0715900C9FFCF /* CategoryType.swift */,
 				94858AFE2146D15B00498DCF /* TransactionType.swift */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
 				9424966F21AABF6C00364643 /* DateFormat.swift */,
+				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -509,7 +512,7 @@
 		94858B0D2146D22400498DCF /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				945C7A982179FEED00AF0B86 /* Cells */,
+				945C7A982179FEED00AF0B86 /* Views */,
 				945C7A972179FEDD00AF0B86 /* Controllers */,
 			);
 			path = Flows;
@@ -887,6 +890,7 @@
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
+				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
 				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,
 				94CC8137214FDBB30027913C /* TextErrors.swift in Sources */,

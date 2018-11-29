@@ -43,16 +43,16 @@ class AccountsCell: UITableViewCell {
         background.backgroundColor = UIColor(red: CGFloat(11) / 225.0,
                                              green: CGFloat(154) / 225.0,
                                              blue: CGFloat(117) / 225.0,
-                                             alpha: CGFloat(0.5))
+                                             alpha: CGFloat(0.4))
         background.layer.cornerRadius = 20.0
         background.layer.borderColor = UIColor(red: CGFloat(102) / 225.0,
                                                green: CGFloat(218) / 225.0,
                                                blue: CGFloat(181) / 225.0,
                                                alpha: CGFloat(1.0)).cgColor
         background.layer.borderWidth = 2
-        background.layer.shadowOffset = CGSize(width: 0, height: 3)
+        background.layer.shadowOffset = CGSize(width: 0, height: 2)
         background.layer.shadowOpacity = 0.5
-        background.layer.shadowRadius = 5
+        background.layer.shadowRadius = 4
         
         background.centerYAnchor
             .constraint(equalTo: contentView.centerYAnchor).isActive = true

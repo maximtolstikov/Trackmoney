@@ -48,3 +48,8 @@
 //Placeholder
 "nameTextFildPlaceholder" = "name";
 "sumTextFildPlaceholder" = "sum";
+
+//SegmentedController
+"monthSegment" = "Month";
+"yearSegment" = "Year";
+"periodSegment" = "Period";

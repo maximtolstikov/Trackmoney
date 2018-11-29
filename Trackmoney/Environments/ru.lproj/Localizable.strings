@@ -1,7 +1,7 @@
 // Russian
 
 //Buttons
-"titleCancelButton" = "Отменить";
+"cancelButton" = "Отменить";
 "titleSaveButton" = "Сохранить";
 "titleDeleteButton" = "Удалить";
 "titleEditButton" = "Изменить";
@@ -47,3 +47,8 @@
 //Placeholder
 "nameTextFildPlaceholder" = "название";
 "sumTextFildPlaceholder" = "сумма";
+
+//SegmentedController
+"monthSegment" = "Месяц";
+"yearSegment" = "Год";
+"periodSegment" = "Период";
