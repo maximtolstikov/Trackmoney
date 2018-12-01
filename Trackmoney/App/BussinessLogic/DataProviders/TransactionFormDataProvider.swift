@@ -1,5 +1,3 @@
-// Доставки данных в контроллер формы транзакции
-
 import CoreData
 
 class TransactionFormDataProvider: DataProviderProtocol {
@@ -11,42 +9,60 @@ class TransactionFormDataProvider: DataProviderProtocol {
     
     func loadData() {
         
-        guard let accounts = accountDbManager?.get() as? [Account] else {
+        let all = NSPredicate(value: true)
+        
+        let result = accountDbManager?.get(all)
+        
+        guard let accounts = result?.0 else {
             assertionFailure()
             return
         }
-        controller?.accounts = accounts
         
-        if let manager = categoryDbManager {
-            guard let categories = manager.get() as? [CategoryTransaction] else {
-                    assertionFailure()
-                    return
+        controller?.accounts = accounts as? [Account]
+        
+        let categoryType: CategoryType?
+        
+        if controller?.transactionType == .expense {
+            categoryType = .expense
+        } else if controller?.transactionType == .income {
+            categoryType = .income
+        } else {
+            categoryType = nil
+        }
+        
+        if let type = categoryType?.rawValue {
+            
+            let predicat = NSPredicate(format: "type = %@", type)
+            let result = categoryDbManager?.get(predicat)
+            
+            guard let objects = result?.0 else {
+                assertionFailure()
+                return
             }
-            controller?.categories = categories
+            
+            controller?.categories = objects as? [CategoryTransaction]
         }
     }
     
     // смотрит если есть id, то это изменение иначе создание
     func save(message: [MessageKeyType: Any]) {
         
-        if message[.idTransaction] != nil {
+        if message[.id] != nil {
             
-            if let result = dbManager?.change(message: message) {
+            if let result = dbManager?.update(message) {
                 showError(error: result)
             }
             
         } else {
             
-            let result = dbManager?.create(message: message)
+            let result = dbManager?.create(message)
             if let error = result?.1 {
                 showError(error: error)
             }
-            
-        }
-        
+        }        
     }
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         return false
     }
     

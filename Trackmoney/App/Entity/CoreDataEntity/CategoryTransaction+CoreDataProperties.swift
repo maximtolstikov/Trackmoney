@@ -1,12 +1,3 @@
-//
-//  CategoryTransaction+CoreDataProperties.swift
-//  Trackmoney
-//
-//  Created by Maxim Tolstikov on 23/11/2018.
-//  Copyright © 2018 Maxim Tolstikov. All rights reserved.
-//
-//
-
 import CoreData
 import Foundation
 
@@ -16,9 +7,10 @@ extension CategoryTransaction {
         return NSFetchRequest<CategoryTransaction>(entityName: "CategoryTransaction")
     }
 
-    @NSManaged public var icon: String?
+    @NSManaged public var icon: String
     @NSManaged public var name: String
     @NSManaged public var type: String
+    @NSManaged public var id: String
     @NSManaged public var child: NSSet?
     @NSManaged public var parent: CategoryTransaction?
 

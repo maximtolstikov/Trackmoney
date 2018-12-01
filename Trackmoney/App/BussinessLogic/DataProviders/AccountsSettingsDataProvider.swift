@@ -1,6 +1,5 @@
 // Для описания класса работы с данными для контроллера "Настройки счетов"
 
-//swiftlint:disable force_unwrapping
 
 import CoreData
 import UIKit
@@ -12,28 +11,37 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
     
     func loadData() {
         
-        guard let accounts = dbManager?.get() else {
+        let all = NSPredicate(value: true)
+        let result = dbManager?.get(all)
+        
+        guard let objects = result?.0 else {
+            if controller != nil {
+                // swiftlint:disable next force_unwrapping
+                ShortAlert().show(controller: controller!,
+                                  title: result?.1?.error.rawValue,
+                                  body: nil,
+                                  style: .alert)
+            }
             assertionFailure()
             return
         }
 
-        controller?.accounts = accounts as? [Account]
-        
+        controller?.accounts = objects as? [Account]
     }
     
     func save(message: [MessageKeyType: Any]) {
         
-        let result = dbManager?.create(message: message)
-        
+        let result = dbManager?.create(message)
+
         if result?.0 != nil, controller != nil {
-            
+
             ShortAlert().show(
                 controller: controller!,
                 title: NSLocalizedString("accountCreate", comment: ""),
                 body: nil, style: .alert)
-            
+
             loadData()
-            
+
         } else {
             if result?.1 != nil, controller != nil {
                 NeedCancelAlert().show(
@@ -45,11 +53,10 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         
     }
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         
-        let message: [MessageKeyType: Any] = [.idAccount: id]
-        let error = dbManager?.delete(message: message)
-        
+        let error = dbManager?.delete(id)
+
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,
@@ -65,9 +72,6 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
             }
             return false
         }
-        
     }
-    
-    func delete(message: [MessageKeyType: Any]) {}
     
 }

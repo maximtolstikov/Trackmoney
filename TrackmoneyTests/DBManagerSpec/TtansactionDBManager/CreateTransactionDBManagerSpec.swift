@@ -1,8 +1,6 @@
-// Для описания спецификации создания Транзакции
-
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_cast
-
+//swiftlint:disable force_unwrapping
 import CoreData
 import XCTest
 @testable import Trackmoney
@@ -10,17 +8,17 @@ import XCTest
 class CreateTransactionDBManagerSpec: XCTestCase {
     
     var messageAM: [MessageKeyType: Any] = [
-        .nameAccount: "testMainName",
-        .iconAccount: "iconString",
-        .sumAccount: Int32(100)]
+        .name: "testMainName",
+        .icon: "icon",
+        .sum: Int32(100)]
     var messageAC: [MessageKeyType: Any] = [
-        .nameAccount: "testCorName",
-        .iconAccount: "iconString",
-        .sumAccount: Int32(50)]
+        .name: "testCorName",
+        .icon: "iconString",
+        .sum: Int32(50)]
     var messageT: [MessageKeyType: Any] = [
-        .sumTransaction: Int32(30),
-        .nameAccount: "testMainName",
-        .iconTransaction: "iconString"]
+        .sum: Int32(30),
+        .mainAccount: "testMainName",
+        .icon: "iconString"]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!
@@ -33,103 +31,110 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         managerA = nil
         managerT = nil
     }
-    
+
     func testCreateIncomeTransaction() throws {
         
-        var resultCreateTransaction: (NSManagedObjectID?, ErrorMessage?)
+        var resultCreateTransaction: (Transaction?, ErrorMessage?)
         
         try given("account", closure: {
-            let resultCreateMainAccount = managerA.create(message: messageAM)
-            messageAM[.idAccount] = resultCreateMainAccount.0
+            let result = managerA.create(messageAM)
+            messageAM[.id] = result.0?.id
         })
         try when("create incom transaction", closure: {
-            messageT[.typeTransaction] = TransactionType.income.rawValue
-            messageT[.noteTransaction] = "test note"
-            resultCreateTransaction = managerT.create(message: messageT)
-            messageT[.idTransaction] = resultCreateTransaction.0!
+            messageT[.type] = TransactionType.income.rawValue
+            messageT[.note] = "test note"
+            resultCreateTransaction = managerT.create(messageT) as! (Transaction?, ErrorMessage?)
+            messageT[.id] = resultCreateTransaction.0?.id
         })
-        try then("resultGetTransaction is not nil", closure: {
-            let resultGetTransaction = managerT.getObjectById(
-                for: messageT[.idTransaction] as! NSManagedObjectID)
-            XCTAssertNotNil(resultGetTransaction)
+        try then("result error is not nil", closure: {
+            let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
+            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
+            let object = result.0
+            XCTAssertNotNil(object)
         })
         try then("accountMainSum equal 130", closure: {
-            let account = managerA.getObjectById(
-                for: messageAM[.idAccount] as! NSManagedObjectID)
+            let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            let account = result.0?.first
             XCTAssertEqual(account?.sum, 130)
         })
         try then("note equal 'test note'", closure: {
-            let id = resultCreateTransaction.0!
-            let transaction = managerT.getObjectById(for: id)
+            let id = resultCreateTransaction.0?.id
+            let predicate = NSPredicate(format: "id = %@", id!)
+            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
+            let transaction = result.0?.first
             let note = transaction?.note
             XCTAssertEqual(note, "test note")
         })
         
-        _ = managerT.delete(message: messageT)
-        _ = managerA.delete(message: messageAM)
+        _ = managerT.delete(messageT[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String)
     }
     
     func testCreateExpenseTransaction() throws {
         
         try given("account", closure: {
-            let resultCreateMainAccount = managerA.create(message: messageAM)
-            messageAM[.idAccount] = resultCreateMainAccount.0
+            let result = managerA.create(messageAM)
+            messageAM[.id] = result.0?.id
         })
         try when("create incom transaction", closure: {
-            messageT[.typeTransaction] = TransactionType.expense.rawValue
-            let resultCreateTransaction = managerT.create(message: messageT)
-            messageT[.idTransaction] = resultCreateTransaction.0!
+            messageT[.type] = TransactionType.expense.rawValue
+            let resultCreateTransaction = managerT.create(messageT)
+            messageT[.id] = resultCreateTransaction.0?.id
         })
         try then("resultGetTransaction is not nil", closure: {
-            let resultGetTransaction = managerT.getObjectById(
-                for: messageT[.idTransaction] as! NSManagedObjectID)
-            XCTAssertNotNil(resultGetTransaction)
+            let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
+            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
+            XCTAssertFalse((result.0?.isEmpty)!)
         })
         try then("accountMainSum equal 70", closure: {
-            let account = managerA.getObjectById(
-                for: messageAM[.idAccount] as! NSManagedObjectID)
+            let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            let account = result.0?.first
             XCTAssertEqual(account?.sum, 70)
         })
         
-        _ = managerT.delete(message: messageT)
-        _ = managerA.delete(message: messageAM)
+        _ = managerT.delete(messageT[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String)
     }
     
     func testCreateTransferTransaction() throws {
         
         try given("two accounts", closure: {
-            let resultCreateMainAccount = managerA.create(message: messageAM)
-            messageAM[.idAccount] = resultCreateMainAccount.0
-            let resultCreateCorAccount = managerA.create(message: messageAC)
-            messageAC[.idAccount] = resultCreateCorAccount.0
+            let resultCreateMainAccount = managerA.create(messageAM)
+            messageAM[.id] = resultCreateMainAccount.0?.id
+            let resultCreateCorAccount = managerA.create(messageAC)
+            messageAC[.id] = resultCreateCorAccount.0?.id
             XCTAssertNotNil(resultCreateCorAccount)
         })
         try when("create incom transaction", closure: {
-            messageT[.typeTransaction] = TransactionType.transfer.rawValue
+            messageT[.type] = TransactionType.transfer.rawValue
             messageT[.corAccount] = "testCorName"
-            let resultCreateTransaction = managerT.create(message: messageT)
-            messageT[.idTransaction] = resultCreateTransaction.0!
+            let result = managerT.create(messageT)
+            messageT[.id] = result.0?.id
         })
-        try then("resultGetTransaction is not nil", closure: {
-            let resultGetTransaction = managerT.getObjectById(
-                for: messageT[.idTransaction] as! NSManagedObjectID)
-            XCTAssertNotNil(resultGetTransaction)
+        try then("object is not nil", closure: {
+            let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
+            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
+            let transaction = result.0?.first
+            XCTAssertNotNil(transaction)
         })
         try then("accountMainSum equal 70", closure: {
-            let accountMain = managerA.getObjectById(
-                for: messageAM[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountMain?.sum, 70)
+            let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            let account = result.0?.first
+            XCTAssertEqual(account?.sum, 70)
         })
         try then("accountCorSum equal 80", closure: {
-            print(messageAC[.idAccount] as! NSManagedObjectID)
-            let accountCor = managerA.getObjectById(
-                for: messageAC[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(accountCor?.sum, 80)
+            let predicate = NSPredicate(format: "id = %@", messageAC[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            let account = result.0?.first
+            XCTAssertEqual(account?.sum, 80)
         })
         
-        _ = managerT.delete(message: messageT)
-        _ = managerA.delete(message: messageAM)
-        _ = managerA.delete(message: messageAC)
+        _ = managerT.delete(messageT[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerA.delete(messageAC[.id] as! String)
     }
     
 }

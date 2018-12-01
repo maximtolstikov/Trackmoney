@@ -144,7 +144,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         if editingStyle == .delete {
             
             guard self.dataProvider.delete(
-                with: self.accounts[indexPath.row].objectID) else {
+                with: self.accounts[indexPath.row].id) else {
                     assertionFailure()
                     return
             }

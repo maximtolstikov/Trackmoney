@@ -10,10 +10,10 @@ class AccountFormDataProvider: DataProviderProtocol {
         
         let result: ErrorMessage?
         
-        if message[.idAccount] != nil {
-            result = dbManager?.change(message: message)
+        if message[.id] != nil {
+            result = dbManager?.update(message)
         } else {
-            result = dbManager?.create(message: message).1
+            result = dbManager?.create(message).1
         }
 
         if let error = result, let controller = controller {
@@ -24,7 +24,7 @@ class AccountFormDataProvider: DataProviderProtocol {
         }
     }
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         return false
     }
     

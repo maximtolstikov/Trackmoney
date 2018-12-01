@@ -17,7 +17,7 @@ class TransactionFormController: BaseFormController {
     var categories: [CategoryTransaction]?
     
     var transactionType: TransactionType?
-    var transactionID: NSManagedObjectID?
+    var transactionID: String?
     
     
     let bottomChooseButton: UIButton = {
@@ -293,9 +293,7 @@ class TransactionFormController: BaseFormController {
                 return
             }
             
-            let list = sorted(list: arrayCategories)
-            
-            ChooseCategoryAlert().show(categories: list,
+            ChooseCategoryAlert().show(categories: arrayCategories,
                                        controller: self) { [weak self] (name) in
                                         self?.bottomChooseButton.setTitle(name, for: .normal)
             }
@@ -307,18 +305,8 @@ class TransactionFormController: BaseFormController {
         let text = note ?? ""
         
         NoteAlert().show(controller: self, text: text) { (string) in
-            
             self.note = string
         }
-    }
-    
-    // Сортирует список категорий по типу
-    private func sorted(list: [CategoryTransaction]) -> [CategoryTransaction] {
-        
-        let type = transactionType == .expense ?
-            CategoryType.expense.rawValue : CategoryType.income.rawValue
-        
-        return list.filter { $0.type == type }
     }
     
 }

@@ -2,12 +2,14 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G3025" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="sum" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" maxValueString="10" syncable="YES"/>
     </entity>
     <entity name="CategoryTransaction" representedClassName="CategoryTransaction" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="type" attributeType="String" syncable="YES"/>
         <relationship name="child" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryTransaction" inverseName="parent" inverseEntity="CategoryTransaction" syncable="YES"/>
@@ -18,14 +20,15 @@
         <attribute name="corAccount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" attributeType="Date" minDateTimeInterval="558291180" maxDateTimeInterval="873910500" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mainAccount" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
         <attribute name="sum" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-37.94140625" positionY="-185.27734375" width="128" height="105"/>
-        <element name="CategoryTransaction" positionX="-25.06640625" positionY="-58.64453125" width="128" height="120"/>
-        <element name="Transaction" positionX="125.47265625" positionY="-183.15234375" width="128" height="165"/>
+        <element name="Account" positionX="-37.94140625" positionY="-185.27734375" width="128" height="120"/>
+        <element name="CategoryTransaction" positionX="-25.06640625" positionY="-58.64453125" width="128" height="135"/>
+        <element name="Transaction" positionX="125.47265625" positionY="-183.15234375" width="128" height="180"/>
     </elements>
 </model>

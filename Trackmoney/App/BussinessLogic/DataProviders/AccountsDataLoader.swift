@@ -10,7 +10,11 @@ class AccountsDataLoader: DataProviderProtocol {
     
     func loadData() {
         
-        guard let accounts = dbManager?.get() else {
+        let all = NSPredicate(value: true)
+        
+        let result = dbManager?.get(all)
+        
+        guard let accounts = result?.0 else {
             assertionFailure()
             return
         }
@@ -21,7 +25,7 @@ class AccountsDataLoader: DataProviderProtocol {
     
     func save(message: [MessageKeyType: Any]) {}
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         return false
     }
     

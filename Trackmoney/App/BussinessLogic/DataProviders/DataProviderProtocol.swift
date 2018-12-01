@@ -1,5 +1,3 @@
-// Для определения интерфейса загрузчика данных
-
 import CoreData
 import UIKit
 
@@ -9,6 +7,5 @@ protocol DataProviderProtocol: AnyObject {
     
     func loadData()
     func save(message: [MessageKeyType: Any])
-    func delete(with id: NSManagedObjectID) -> Bool
-    
+    func delete(with id: String) -> Bool
 }

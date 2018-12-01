@@ -1,17 +1,15 @@
-// Для спецификации класса работы Счетов с базой данных
-
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_cast
-
+//swiftlint:disable force_unwrapping
 import CoreData
 import XCTest
 @testable import Trackmoney
 
 class AccountDBManagerSpec: XCTestCase {
     
-    var message: [MessageKeyType: Any] = [.nameAccount: "testMainName",
-                                          .iconAccount: "iconString",
-                                          .sumAccount: Int32(100)]
+    var message: [MessageKeyType: Any] = [.name: "testMainName",
+                                          .icon: "icon",
+                                          .sum: Int32(100)]
     var manager: AccountDBManager!
     
     override func setUp() {
@@ -25,117 +23,97 @@ class AccountDBManagerSpec: XCTestCase {
     
     func testCreateAccount() throws {
         
-        var result: (NSManagedObjectID?, ErrorMessage?)!
+        var result: (Account?, ErrorMessage?)!
         
-        try given("create Account", closure: {
-            result = manager.create(message: message)
-            message[.idAccount] = result.0
+        try when("create Account", closure: {
+            result = manager.create(message) as? (Account?, ErrorMessage?)
+            message[.id] = result.0?.id
         })
         try then("result.error equal nil", closure: {
             XCTAssertNil(result.1)
         })
+        try then("created account name equal message.name", closure: {
+            XCTAssertEqual(result.0?.name, message[.name] as? String)
+        })
         
-        _ = manager.delete(message: message)
+        _ = manager.delete(message[.id] as! String)
         
     }
-    
+
     // MARK: - delete
     
     func testDeleteAccount() throws {
         
-        var resultDelete: ErrorMessage!
+        var resultDelete: ErrorMessage?
         
         try given("create Account", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idAccount] = resultCreate.0
+            let resultCreate = manager.create(message)
+            message[.id] = resultCreate.0?.id
         })
         try when("delete Account", closure: {
-            resultDelete = manager.delete(message: message)
+            resultDelete = manager.delete(message[.id] as! String)
         })
         try then("result should correspond nil", closure: {
             XCTAssertNil(resultDelete)
         })
+        try then("object ib base isn't exist, should empty result", closure: {
+            let predicate = NSPredicate(format: "name = %@", message[.name] as! String)
+            let result = manager.get(predicate)
+            
+            XCTAssertTrue((result.0?.isEmpty)!)
+        })
         
     }
     
-    // MARK: - change
+        // MARK: - get
     
-    func testChangeNameAccount() throws {
+        func testGetAcconts() throws {
+    
+            var result: ([DBEntity]?, ErrorMessage?)
+    
+            try given("Account", closure: {
+                let resultCreate = manager.create(message)
+                message[.id] = resultCreate.0?.id
+            })
+            try when("get Account by name") {
+            let predicate = NSPredicate(format: "name = %@", message[.name] as! String)
+                result = manager.get(predicate)
+            }
+            try then("account.name equal messege.name", closure: {
+                let account = result.0?.first as! Account
+                XCTAssertEqual(account.name, message[.name] as! String)
+            })
+            try then("shold be one result", closure: {
+                let count = result.0?.count
+                XCTAssertEqual(count, 1)
+            })
+    
+            _ = manager.delete(message[.id] as! String)
+        }
+
+    // MARK: - update
+    
+    func testUpdateAccount() throws {
         
         try given("Account", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idAccount] = resultCreate.0
+            let resultCreate = manager.create(message)
+            message[.id] = resultCreate.0?.id
         })
         try when("change Name", closure: {
-            message[.nameAccount] = "newName"
-            _ = manager.change(message: message)
+            message[.name] = "newName"
+            message[.icon] = "newIcon"
+            _ = manager.update(message)
         })
         try then("account neme equal newName", closure: {
-            let account = manager.getObjectById(
-                for: message[.idAccount] as! NSManagedObjectID)
-            XCTAssertEqual(account?.name, "newName")
+            let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
+            let result = manager.get(predicate)
+            let account = result.0?.first as! Account
+            XCTAssertEqual(account.name, "newName")
+            XCTAssertEqual(account.icon, "newIcon")
         })
         
-        _ = manager.delete(message: message)
+        _ = manager.delete(message[.id] as! String)
         
-    }
-    
-    // MARK: - get
-    
-    func testGetAllAcconts() throws {
-        
-        var resultGetAll: [NSManagedObject]?
-        
-        try given("Account", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idAccount] = resultCreate.0
-        })
-        try when("get all Account") {
-            resultGetAll = manager.get()
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetAll)
-        })
-        
-        _ = manager.delete(message: message)
-    }
-    
-    func testGetOneAccountById() throws {
-        
-        var resultGetOne: Account?
-        
-        try given("Account", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idAccount] = resultCreate.0
-        })
-        try when("get Account by Id") {
-            resultGetOne = manager.getObjectById(
-                for: message[.idAccount] as! NSManagedObjectID)
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetOne)
-        })
-        
-        _ = manager.delete(message: message)
-    }
-    
-    func testGetOneAccountByName() throws {
-        
-        var resultGetOne: Account?
-        
-        try given("Account", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idAccount] = resultCreate.0
-        })
-        try when("get Account by Id") {
-            resultGetOne = manager.getObjectByName(
-                for: message[.nameAccount] as! String)
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetOne)
-        })
-        
-        _ = manager.delete(message: message)
     }
     
 }

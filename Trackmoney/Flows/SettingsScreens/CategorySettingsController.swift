@@ -171,7 +171,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             
             if indexPath.section == 0 {
                 guard self.dataProvider.delete(
-                    with: self.incomeCategories[indexPath.row].objectID) else {
+                    with: self.incomeCategories[indexPath.row].id) else {
                         assertionFailure()
                         return
                 }
@@ -179,7 +179,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 tableView.reloadData()
             } else {
                 guard self.dataProvider.delete(
-                    with: self.expenseCategories[indexPath.row].objectID) else {
+                    with: self.expenseCategories[indexPath.row].id) else {
                         assertionFailure()
                         return
                 }

@@ -1,22 +1,15 @@
-// Для перечисления ключей сообщений
-
+/// Перечисление ключей сообщений
 enum MessageKeyType: String {
     
-    case nameAccount
-    case sumAccount
-    case iconAccount
-    case idAccount
-    case typeCategory
-    case nameCategory
-    case iconCategory
-    case idCategory
-    case parentCategory
-    case dateTransaction
-    case sumTransaction
-    case typeTransaction
-    case iconTransaction
-    case idTransaction
-    case noteTransaction
+    case category
     case corAccount
-    
+    case date
+    case icon
+    case id
+    case mainAccount
+    case name
+    case note
+    case parent
+    case sum
+    case type
 }

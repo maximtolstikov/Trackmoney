@@ -4,9 +4,9 @@ import CoreData
 
 protocol DBManagerProtocol {
         
-    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?)
-    func get() -> [NSManagedObject]?
-    func change(message: [MessageKeyType: Any]) -> ErrorMessage?
-    func delete(message: [MessageKeyType: Any]) -> ErrorMessage?
+    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, ErrorMessage?)
+    func get(_ predicate: NSPredicate) -> ([DBEntity]?, ErrorMessage?)
+    func update(_ message: [MessageKeyType: Any]) -> ErrorMessage?
+    func delete(_ id: String) -> ErrorMessage?
     
 }

@@ -1,7 +1,3 @@
-// Для описания класса работы с данными для контроллера "Настройки Категорий"
-
-//swiftlint:disable force_unwrapping
-
 import CoreData
 import UIKit
 
@@ -12,12 +8,22 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     
     func loadData() {
         
-        guard let response = dbManager?.get() else {
+        let all = NSPredicate(value: true)
+        let result = dbManager?.get(all)
+        
+        guard let objects = result?.0 else {
+            if controller != nil {
+                // swiftlint:disable next force_unwrapping
+                ShortAlert().show(controller: controller!,
+                                  title: result?.1?.error.rawValue,
+                                  body: nil,
+                                  style: .alert)
+            }
             assertionFailure()
             return
         }
         
-        guard let categories = response as? [CategoryTransaction] else {
+        guard let categories = objects as? [CategoryTransaction] else {
             assertionFailure()
             return
         }
@@ -33,17 +39,17 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     
     func save(message: [MessageKeyType: Any]) {
         
-        let result = dbManager?.create(message: message)
-        
+        let result = dbManager?.create(message)
+
         if result?.0 != nil, controller != nil {
-            
+
             ShortAlert().show(
                 controller: controller!,
                 title: NSLocalizedString("categoryCreate", comment: ""),
                 body: nil, style: .alert)
-            
+
             loadData()
-            
+
         } else {
             if result?.1 != nil, controller != nil {
                 NeedCancelAlert().show(
@@ -52,20 +58,21 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                     body: nil)
             }
         }
-        
+
     }
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         
-        let message: [MessageKeyType: Any] = [.idCategory: id]
-        let error = dbManager?.delete(message: message)
-        
+        let error = dbManager?.delete(id)
+
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,
                 title: NSLocalizedString("categoryDelete", comment: ""),
                 body: nil, style: .alert)
+
             return true
+            
         } else {
             if error != nil, controller != nil {
                 NeedCancelAlert().show(
@@ -73,11 +80,8 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                     title: error!.error.rawValue,
                     body: nil)
             }
-            return false
+           return false
         }
-        
     }
-    
-    func delete(message: [MessageKeyType: Any]) {}
     
 }

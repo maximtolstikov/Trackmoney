@@ -1,17 +1,14 @@
-// Для описания спецификации работы Категорий с БД
-
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_cast
-
 import CoreData
 import XCTest
 @testable import Trackmoney
 
 class CategoryDBManagerSpec: XCTestCase {
     
-    var message: [MessageKeyType: Any] = [.nameCategory: "testNameCategory",
-                                          .iconCategory: "iconString",
-                                          .typeCategory: CategoryType.expense.rawValue]
+    var message: [MessageKeyType: Any] = [.name: "testNameCategory",
+                                          .icon: "iconString",
+                                          .type: CategoryType.expense.rawValue]
     var manager: CategoryDBManager!
     
     override func setUp() {
@@ -24,76 +21,79 @@ class CategoryDBManagerSpec: XCTestCase {
     // MARK: - create
     
     func testCreateSubCategory() throws {
-        
-        var result: (NSManagedObjectID?, ErrorMessage?)!
-        var childResult: (NSManagedObjectID?, ErrorMessage?)!
+
+        var result: (CategoryTransaction?, ErrorMessage?)!
+        var childResult: (CategoryTransaction?, ErrorMessage?)!
         var childMessage: [MessageKeyType: Any]!
-        
-        try given("create Category", closure: {
-            result = manager.create(message: message)
-            message[.idCategory] = result.0
+
+        try when("create Category", closure: {
+            result = (manager.create(message) as! (CategoryTransaction?, ErrorMessage?))
+            message[.id] = result.0?.id
         })
         try then("result.error equal nil", closure: {
             XCTAssertNil(result.1)
         })
-        try then("id is not nil", closure: {
-            XCTAssertNotNil(result.0)
-        })
+        
         try when("create child category", closure: {
             childMessage = [
-                .nameCategory: "childNameCategory",
-                .iconCategory: "iconString",
-                .typeCategory: CategoryType.expense.rawValue,
-                .parentCategory: "testNameCategory"
+                .name: "childNameCategory",
+                .icon: "iconString",
+                .type: CategoryType.expense.rawValue,
+                .parent: "testNameCategory"
             ]
-            
-            childResult = manager.create(message: childMessage)
-            childMessage[.idCategory] = childResult.0
+
+            childResult = (manager.create(childMessage) as! (CategoryTransaction?, ErrorMessage?))
+            childMessage[.id] = childResult.0?.id
         })
         try then("childResult.error equal nil", closure: {
             XCTAssertNil(childResult.1)
         })
         try then("parent have child whith name: childNameCategory", closure: {
-            let parent = manager.getObjectById(for: result.0!)
-            let child = parent?.child?.anyObject() as? CategoryTransaction
+            let predicate = NSPredicate(format: "name = %@",
+                                       childMessage[.parent] as! String)
+            let parentResult = manager.get(predicate)
+            let parent = parentResult.0?.first as! CategoryTransaction
+            let child = parent.child?.anyObject() as? CategoryTransaction
             let name = child?.name
             XCTAssertEqual(name, "childNameCategory")
         })
         try then("child have parent with name: testNameCategory", closure: {
-            let child = manager.getObjectById(for: childResult.0!)
-            let name = child?.parent?.name
+            let predicate = NSPredicate(format: "id = %@",
+                                        childMessage[.id] as! String)
+            let newChildResult = manager.get(predicate)
+            let child = newChildResult.0?.first as! CategoryTransaction
+            let name = child.parent?.name
             XCTAssertEqual(name, "testNameCategory")
         })
-        
-        
-        _ = manager.delete(message: message)
-        _ = manager.delete(message: childMessage)
-        
+
+
+        _ = manager.delete(message[.id] as! String)
+        _ = manager.delete(message[.id] as! String)
+
     }
     
     func testCreateCategory() throws {
         
-        var result: (NSManagedObjectID?, ErrorMessage?)!
+        var result: (CategoryTransaction?, ErrorMessage?)!
         
-        try given("create Category", closure: {
-            result = manager.create(message: message)
-            message[.idCategory] = result.0
+        try when("create Category", closure: {
+            result = (manager.create(message) as! (CategoryTransaction?, ErrorMessage?))
+            message[.id] = result.0?.id
         })
         try then("result.error equal nil", closure: {
             XCTAssertNil(result.1)
         })
         try when("create again", closure: {
-            result = manager.create(message: message)
+            result = (manager.create(message) as! (CategoryTransaction?, ErrorMessage?))
         })
         try then("result contein error", closure: {
-            let error = ErrorMessage(error: .categoryIsExistAlready)
+            let error = ErrorMessage(error: .objectIsExistAlready)
             if let resultError = result.1 {
                 XCTAssertEqual(resultError, error)
             }
         })
         
-        _ = manager.delete(message: message)
-        
+        _ = manager.delete(message[.id] as! String)        
     }
     
     // MARK: - delete
@@ -103,116 +103,37 @@ class CategoryDBManagerSpec: XCTestCase {
         var resultDelete: ErrorMessage!
         
         try given("create Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
+            let resultCreate = manager.create(message)
+            message[.id] = resultCreate.0?.id
         })
         try when("delete Category", closure: {
-            resultDelete = manager.delete(message: message)
+            resultDelete = manager.delete(message[.id] as! String)
         })
         try then("result should correspond nil", closure: {
             XCTAssertNil(resultDelete)
         })
-        
     }
+
+    // MARK: - update
     
-    // MARK: - change
-    
-    func testChangeNameCategory() throws {
+    func testUpdateCategory() throws {
         
-        try given("Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
+        try when("create Category", closure: {
+            let result = (manager.create(message) as! (CategoryTransaction?, ErrorMessage?))
+            message[.id] = result.0?.id
         })
         try when("change Name", closure: {
-            message[.nameCategory] = "newName"
-            _ = manager.change(message: message)
+            message[.name] = "newName"
+            _ = manager.update(message)
         })
         try then("Category neme equal newName", closure: {
-            let category = manager.getObjectById(
-                for: message[.idCategory] as! NSManagedObjectID)
-            XCTAssertEqual(category?.name, "newName")
+            let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
+            let result = manager.get(predicate)
+            let category = result.0?.first as! CategoryTransaction
+            XCTAssertEqual(category.name, "newName")
         })
         
-        _ = manager.delete(message: message)
-        
-    }
-    
-    func testChangeIconCategory() throws {
-        
-        try given("Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
-        })
-        try when("change icon", closure: {
-            message[.iconCategory] = "newPath"
-            _ = manager.change(message: message)
-        })
-        try then("Category icon equal newPath", closure: {
-            let category = manager.getObjectById(
-                for: message[.idCategory] as! NSManagedObjectID)
-            XCTAssertEqual(category?.icon, "newPath")
-        })
-        
-        _ = manager.delete(message: message)
-        
-    }
-    
-    // MARK: - get
-    
-    func testGetAllCategory() throws {
-    
-        var resultGetAll: [NSManagedObject]?
-        
-        try given("Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
-        })
-        try when("get all Category") {
-            resultGetAll = manager.get()
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetAll)
-        })
-            
-            _ = manager.delete(message: message)
-    }
-    
-    func testGetOneCategoryById() throws {
-        
-        var resultGetOne: CategoryTransaction?
-        
-        try given("Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
-        })
-        try when("get Category by Id") {
-            resultGetOne = manager.getObjectById(
-                for: message[.idCategory] as! NSManagedObjectID)
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetOne)
-        })
-        
-        _ = manager.delete(message: message)
-    }
-    
-    func testGetOneCategoryByName() throws {
-        
-        var resultGetOne: CategoryTransaction?
-        
-        try given("Category", closure: {
-            let resultCreate = manager.create(message: message)
-            message[.idCategory] = resultCreate.0
-        })
-        try when("get Category by Id") {
-            resultGetOne = manager.getObjectByName(
-                for: message[.nameCategory] as! String)
-        }
-        try then("result is not nil", closure: {
-            XCTAssertNotNil(resultGetOne)
-        })
-        
-        _ = manager.delete(message: message)
+        _ = manager.delete(message[.id] as! String)        
     }
     
 }

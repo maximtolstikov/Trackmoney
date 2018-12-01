@@ -1,7 +1,5 @@
-// Для описания процесса создания Транзакции
-
 //swiftlint:disable force_cast
-
+//swiftlint:disable force_unwrapping
 import CoreData
 
 struct CreateTransaction {
@@ -30,41 +28,52 @@ struct CreateTransaction {
         self.accountDBManager = AccountDBManager()
         
         self.date = NSDate(timeIntervalSinceNow: 0.0)
-        self.sum = message[.sumTransaction] as! Int32
-        self.iconTransaction = message[.iconTransaction] as! String
+        self.sum = message[.sum] as! Int32
+        self.iconTransaction = message[.icon] as! String
         
         guard let type = TransactionType(
-            rawValue: message[.typeTransaction] as! Int16) else {
+            rawValue: message[.type] as! Int16) else {
                 assertionFailure()
                 return nil }
-        guard let accountMain = accountDBManager.getObjectByName(
-            for: message[.nameAccount] as! String) else {
-                assertionFailure()
-                return nil }
+        
+        let predicate = NSPredicate(format: "name = %@",
+                                    message[.mainAccount] as! String)
+        let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+        
+        guard let accountMain = result.0?.first else {
+            assertionFailure(TextErrors.objectIsNotExist.rawValue)
+            return nil }
         
         self.type = type
         self.mainAccount = accountMain
         
-        if mManager.isExistValue(for: .nameCategory, in: message) {
-            self.category = message[.nameCategory] as? String
-        }
-        if mManager.isExistValue(for: .corAccount, in: message) {
-            guard let accountCor = accountDBManager.getObjectByName(
-                for: message[.corAccount] as! String) else {
-                    assertionFailure()
-                    return nil }
-            self.corAccount = accountCor
-        }
-        if mManager.isExistValue(for: .noteTransaction, in: message) {
-            self.note = message[.noteTransaction] as? String
+        if mManager.isExistValue(for: .category, in: message) {
+            self.category = message[.category] as? String
         }
         
+        if mManager.isExistValue(for: .corAccount, in: message) {
+            let predicate = NSPredicate(format: "name = %@",
+                                        message[.corAccount] as! String)
+            let result = accountDBManager
+                .get(predicate) as! ([Account]?, ErrorMessage?)
+            
+            guard let accountCor = result.0?.first else {
+                assertionFailure(TextErrors.objectIsNotExist.rawValue)
+                return nil }
+            
+            self.corAccount = accountCor
+        }
+        
+        if mManager.isExistValue(for: .note, in: message) {
+            self.note = message[.note] as? String
+        }
     }
     
     
-    func execute() -> (NSManagedObjectID?, ErrorMessage?) {
+    func execute() -> (DBEntity?, ErrorMessage?) {
         
         let transaction = Transaction(context: context)
+        transaction.id = UUID().uuidString
         transaction.date = date
         transaction.sum = sum
         transaction.type = type.rawValue
@@ -82,19 +91,18 @@ struct CreateTransaction {
         case .transfer:
             accountDBManager.move(
                 fromAccount: mainAccount,
-                toAccount: corAccount!,  //swiftlint:disable:this force_unwrapping
+                toAccount: corAccount!, 
                 sum: sum
             )
         }
         
         do {
             try context.save()
-            return (transaction.objectID, nil)
+            return (transaction, nil)
         } catch {
             print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
-        
     }
     
 }

@@ -1,4 +1,3 @@
-/// Для поствки данных в кортроллер форма Категорий
 import CoreData
 
 class CategoryFormDataProvider: DataProviderProtocol {
@@ -9,13 +8,13 @@ class CategoryFormDataProvider: DataProviderProtocol {
     func save(message: [MessageKeyType: Any]) {
         
         let result: ErrorMessage?
-        
-        if message[.idCategory] != nil {
-            result = dbManager?.change(message: message)
+
+        if message[.id] != nil {
+            result = dbManager?.update(message)
         } else {
-            result = dbManager?.create(message: message).1
+            result = dbManager?.create(message).1
         }
-        
+
         if let error = result, let controller = controller {
             NeedCancelAlert().show(
                 controller: controller,
@@ -24,13 +23,28 @@ class CategoryFormDataProvider: DataProviderProtocol {
         }
     }
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         return false
     }
     
     func loadData() {
         
-        let array = dbManager?.get() as? [CategoryTransaction]
+        let all = NSPredicate(value: true)
+        let result = dbManager?.get(all)
+        
+        guard let objects = result?.0 else {
+            if controller != nil {
+                // swiftlint:disable next force_unwrapping
+                ShortAlert().show(controller: controller!,
+                                  title: result?.1?.error.rawValue,
+                                  body: nil,
+                                  style: .alert)
+            }
+            assertionFailure()
+            return
+        }
+        
+        let array = objects as? [CategoryTransaction]
         let type = controller?.typeCategory.rawValue
         let categories = array?.filter { $0.type == type }
         

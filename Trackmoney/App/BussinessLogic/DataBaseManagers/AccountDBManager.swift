@@ -1,8 +1,4 @@
-// Для описания методов по работе с BD у AccountViewController
-
 //swiftlint:disable force_cast
-//swiftlint:disable force_unwrapping
-
 import CoreData
 import UIKit
 
@@ -11,26 +7,50 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     lazy var sortManager = CustomSortManager(entity: Account.self)
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
+    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, ErrorMessage?) {
         
-        if getObjectByName(for: message[.nameAccount] as! String) != nil {
-            return (nil, ErrorMessage(error: .accountIsExistAlready))
+        // Проверка что объекта с таким именем нет в базе
+        guard let name = message[.name] else {
+            return (nil, ErrorMessage(error: .messageHaventRequireValue))
         }
-        // Получает список счетов до добавления
-        let accounts = get() as! [Account]
         
+        let predicateName = NSPredicate(format: "name = %@", name as! String)
+        let resultForName = get(predicateName)
+        
+        guard resultForName.1 == nil else {
+            return (nil, resultForName.1)
+        }
+        //swiftlint:disable next force_unwrapping
+        guard (resultForName.0?.isEmpty)! else {
+            return (nil, ErrorMessage(error: .objectIsExistAlready))
+        }
+        
+        // Получение списока счетов до добавления для сортировки
+        let predicatAll = NSPredicate(value: true)
+        
+        guard let resultForAll = get(predicatAll).0 else {
+            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
+        }
+        
+        let accounts = resultForAll as! [Account]
+        
+        // Создание нового объекта
         let account = Account(context: context)
-        account.name = message[.nameAccount] as! String
-        account.sum = message[.sumAccount] as! Int32
+        
+        account.id = UUID().uuidString
+        account.name = message[.name] as! String
+        account.sum = message[.sum] as! Int32
+        account.icon = message[.icon] as! String
         
         do {
             try context.save()
+            
             // Сортирует список с пользовательской последовательностью
             // и добавляет в конец новый элемент
             let sortedAccounts = sortManager.sortedArray(accounts)
             _ = sortManager.add(element: account, in: sortedAccounts)
             
-            return (account.objectID, nil)
+            return (account, nil)
             
         } catch {
             print(error.localizedDescription)
@@ -38,73 +58,51 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func get() -> [NSManagedObject]? {
-        
-        var resultRequest = [Account]()
-        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        
-        do {
-            resultRequest = try context.fetch(fetchRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return resultRequest
-    }
-    
-    //Возвращает Account по id
-    func getObjectById(for id: NSManagedObjectID) -> Account? {
-
-        return context.object(with: id) as? Account
-    }
-    
-    // Возвращает Account по имени
-    func getObjectByName(for name: String) -> Account? {
+    func get(_ predicate: NSPredicate) -> ([DBEntity]?, ErrorMessage?) {
         
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        fetchRequest.predicate = NSPredicate(
-            format: "name = %@", name)
+        fetchRequest.predicate = predicate
         
         do {
             let result = try context.fetch(fetchRequest)
-            
-            guard !result.isEmpty else {
-                return nil
-            }
-            
-            let account = result.first!
-            return account
+            return (result, nil)
             
         } catch {
-            print(error.localizedDescription)
-            
-            return nil
+            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
         }
     }
     
-    func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
+    func update(_ message: [MessageKeyType: Any]) -> ErrorMessage? {
         
-        guard let account = getObjectById(
-            for: message[.idAccount] as! NSManagedObjectID) else {
-            assertionFailure()
-            return ErrorMessage(error: .accountIsNotExist)
+        let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
+        let result = get(predicate) as! ([Account]?, ErrorMessage?)
+        
+        if let error = result.1 {
+            return error
         }
         
-        if mManager.isExistValue(for: .nameAccount, in: message) {
+        guard let account = result.0?.first else {
+            return ErrorMessage(error: .objectIsNotExist)
+        }
+        
+        if mManager.isExistValue(for: .name, in: message) {
             
-            let newName = message[.nameAccount] as! String
+            let newName = message[.name] as! String
             
             let predicate = NSPredicate(format: "mainAccount = %@", account.name)
-            if let transactions = transactionDBManager
-                .getObjectBy(predicate: predicate) {
-                
-                _ = transactions.map { $0.mainAccount = newName }
+            let result = transactionDBManager.get(predicate)
+            
+            guard let objects = result.0 else {
+                    return ErrorMessage(error: .objectCanntGetFromBase)
             }
+            
+            let transactions = objects as! [Transaction]
+            _ = transactions.map { $0.mainAccount = newName }
             
             account.name = newName
         }
-        if mManager.isExistValue(for: .iconAccount, in: message) {
-            account.icon = message[.iconAccount] as? String
+        if mManager.isExistValue(for: .icon, in: message) {
+            account.icon = message[.icon] as! String
         }
         
         do {
@@ -114,15 +112,19 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
-    }    
+    }
     
-    // Удаляет аккаунт по id
-    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
+    func delete(_ id: String) -> ErrorMessage? {
         
-        guard let account = getObjectById(
-            for: message[.idAccount] as! NSManagedObjectID) else {
-            assertionFailure()
-            return ErrorMessage(error: .accountIsNotExist)
+        let predicate = NSPredicate(format: "id = %@", id)
+        let result = get(predicate) as! ([Account]?, ErrorMessage?)
+        
+        if let error = result.1 {
+            return error
+        }
+        
+        guard let account = result.0?.first else {
+            return ErrorMessage(error: .objectIsNotExist)
         }
         
         context.delete(account)
@@ -139,19 +141,17 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     // Уменьшает сумму счета
     func substract(for account: Account, sum: Int32) {
         account.sum -= sum
-    }
-    
+    }    
     
     // Увеличивает сумму счета
     func add(for account: Account, sum: Int32) {
         account.sum += sum
     }
     
-    
     // Переводит сумму с одного счета на другой
     func move(fromAccount: Account, toAccount: Account, sum: Int32) {
         fromAccount.sum -= sum
         toAccount.sum += sum
     }
-  
+    
 }

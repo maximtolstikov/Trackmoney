@@ -8,23 +8,31 @@ class LogDataLoader: DataProviderProtocol {
     
     func loadData() {
         
-        guard let objects = dbManager?.get() else {
+        let all = NSPredicate(value: true)
+        let result = dbManager?.get(all)
+        
+        guard let objects = result?.0 else {
+            if controller != nil {
+                // swiftlint:disable next force_unwrapping
+                ShortAlert().show(controller: controller!,
+                                  title: result?.1?.error.rawValue,
+                                  body: nil,
+                                  style: .alert)
+            }
             assertionFailure()
             return
         }
+        
         let transactions = objects as? [Transaction]
         controller?.transactions = transactions?.reversed()
-        
     }
     
     func save(message: [MessageKeyType: Any]) {}
     
-    func delete(with id: NSManagedObjectID) -> Bool {
+    func delete(with id: String) -> Bool {
         
-        let message: [MessageKeyType: Any] = [.idTransaction: id]
-        let error = dbManager?.delete(message: message)
-        
-        //swiftlint:disable force_unwrapping
+        let error = dbManager?.delete(id)
+
         if error == nil, controller != nil {
             ShortAlert().show(
                 controller: controller!,
@@ -32,7 +40,7 @@ class LogDataLoader: DataProviderProtocol {
                 body: nil, style: .alert)
             return true
         } else {
-            if error != nil, controller != nil {
+            if controller != nil {
                 NeedCancelAlert().show(
                     controller: controller!,
                     title: error!.error.rawValue,
@@ -40,7 +48,6 @@ class LogDataLoader: DataProviderProtocol {
             }
             return false
         }
-        
     }
     
 }

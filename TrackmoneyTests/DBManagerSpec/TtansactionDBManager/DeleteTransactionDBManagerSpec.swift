@@ -1,8 +1,5 @@
-// Для описания спецификации удаления Транзакции
-
 //swiftlint:disable sorted_imports
 //swiftlint:disable force_cast
-
 import CoreData
 import XCTest
 @testable import Trackmoney
@@ -10,17 +7,17 @@ import XCTest
 class DeleteTransactionDBManagetSpec: XCTestCase {
     
     var messageAM: [MessageKeyType: Any] = [
-        .nameAccount: "testMainName",
-        .iconAccount: "iconString",
-        .sumAccount: Int32(100)]
+        .name: "testMainName",
+        .icon: "iconString",
+        .sum: Int32(100)]
     var messageAC: [MessageKeyType: Any] = [
-        .nameAccount: "testCorName",
-        .iconAccount: "iconString",
-        .sumAccount: Int32(50)]
+        .name: "testCorName",
+        .icon: "iconString",
+        .sum: Int32(50)]
     var messageT: [MessageKeyType: Any] = [
-        .sumTransaction: Int32(30),
-        .nameAccount: "testMainName",
-        .iconTransaction: "iconString"]
+        .sum: Int32(30),
+        .mainAccount: "testMainName",
+        .icon: "iconString"]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!
@@ -39,23 +36,24 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
         var accountMain: Account!
         
         try given("account and after transaction income sum equal 130", closure: {
-            let resultCreateMainAccount = managerA.create(message: messageAM)
-            messageAM[.idAccount] = resultCreateMainAccount.0
-            messageT[.typeTransaction] = TransactionType.income.rawValue
-            let resultCreateTransaction = managerT.create(message: messageT)
-            messageT[.idTransaction] = resultCreateTransaction.0!
-            accountMain = managerA.getObjectById(
-                for: messageAM[.idAccount] as! NSManagedObjectID)
+            let resultCreateMainAccount = managerA.create(messageAM)
+            messageAM[.id] = resultCreateMainAccount.0?.id
+            messageT[.type] = TransactionType.income.rawValue
+            let resultCreateTransaction = managerT.create(messageT)
+            messageT[.id] = resultCreateTransaction.0?.id
+            let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            accountMain = result.0?.first
             XCTAssertEqual(accountMain?.sum, 130)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(message: messageT)
+            _ = managerT.delete(messageT[.id] as! String)
         })
         try then("sum Account equal 100 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
         })
         
-        _ = managerA.delete(message: messageAM)
+        _ = managerA.delete(messageAM[.id] as! String)
         
     }
     
@@ -64,23 +62,24 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
         var accountMain: Account!
         
         try given("account and after transaction income sum equal 70", closure: {
-            let resultCreateMainAccount = managerA.create(message: messageAM)
-            messageAM[.idAccount] = resultCreateMainAccount.0
-            messageT[.typeTransaction] = TransactionType.expense.rawValue
-            let resultCreateTransaction = managerT.create(message: messageT)
-            messageT[.idTransaction] = resultCreateTransaction.0!
-            accountMain = managerA.getObjectById(
-                for: messageAM[.idAccount] as! NSManagedObjectID)
+            let resultCreateMainAccount = managerA.create(messageAM)
+            messageAM[.id] = resultCreateMainAccount.0?.id
+            messageT[.type] = TransactionType.expense.rawValue
+            let resultCreateTransaction = managerT.create(messageT)
+            messageT[.id] = resultCreateTransaction.0?.id
+            let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
+            accountMain = result.0?.first
             XCTAssertEqual(accountMain?.sum, 70)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(message: messageT)
+            _ = managerT.delete(messageT[.id] as! String)
         })
         try then("sum Account equal 100 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
         })
         
-        _ = managerA.delete(message: messageAM)
+        _ = managerA.delete(messageAM[.id] as! String)
         
     }
     
@@ -89,33 +88,38 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
         var accountMain: Account!
         var accountCor: Account!
         
-        try given("two accounts and after transaction transfer sumM equal 70, sumC 80 ",
-                  closure: {
-                    let resultCreateMainAccount = managerA.create(message: messageAM)
-                    messageAM[.idAccount] = resultCreateMainAccount.0
-                    let resultCreateCorAccount = managerA.create(message: messageAC)
-                    messageAC[.idAccount] = resultCreateCorAccount.0
-                    accountMain = managerA.getObjectById(
-                        for: messageAM[.idAccount] as! NSManagedObjectID)
-                    accountCor = managerA.getObjectById(
-                        for: messageAC[.idAccount] as! NSManagedObjectID)
-                    messageT[.typeTransaction] = TransactionType.transfer.rawValue
-                    messageT[.corAccount] = accountCor.name
-                    let resultCreateTransaction = managerT.create(message: messageT)
-                    messageT[.idTransaction] = resultCreateTransaction.0!
-                    XCTAssertEqual(accountMain?.sum, 70)
-                    XCTAssertEqual(accountCor?.sum, 80)
+        try given("two accounts, aftertransfer sumM equal 70, sumC 80 ", closure: {
+            let resultCreateMainAccount = managerA.create(messageAM)
+            messageAM[.id] = resultCreateMainAccount.0?.id
+            let resultCreateCorAccount = managerA.create(messageAC)
+            messageAC[.id] = resultCreateCorAccount.0?.id
+            
+            let predicateM = NSPredicate(format: "id = %@", messageAM[.id] as! String)
+            let resultM = managerA.get(predicateM) as! ([Account]?, ErrorMessage?)
+            accountMain = resultM.0?.first
+            
+            let predicateC = NSPredicate(format: "id = %@", messageAC[.id] as! String)
+            let resultC = managerA.get(predicateC) as! ([Account]?, ErrorMessage?)
+            accountCor = resultC.0?.first
+            
+            messageT[.type] = TransactionType.transfer.rawValue
+            messageT[.corAccount] = accountCor.name
+            let resultCreateTransaction = managerT.create(messageT)
+            messageT[.id] = resultCreateTransaction.0?.id
+            
+            XCTAssertEqual(accountMain?.sum, 70)
+            XCTAssertEqual(accountCor?.sum, 80)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(message: messageT)
+            _ = managerT.delete(messageT[.id] as! String)
         })
         try then("sum AccountMain equal 100 and sum Cor 50 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
             XCTAssertEqual(accountCor.sum, 50)
         })
         
-        _ = managerA.delete(message: messageAM)
-        _ = managerA.delete(message: messageAC)
+        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerA.delete(messageAC[.id] as! String)
         
     }
     

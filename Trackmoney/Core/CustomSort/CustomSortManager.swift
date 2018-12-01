@@ -15,13 +15,15 @@ struct CustomSortManager {
         let dict = checkDictCorrectFor(array)
         var newArray = array
         
-        for element in array {
-            guard let index = dict[element.name] else {
-                assertionFailure()
-                return newArray
-            }            
-            newArray[index] = element
-        }
+        // FIXME: - разобраться
+        
+//        for element in array {
+//            guard let index = dict[element.name] else {
+//                assertionFailure()
+//                return newArray
+//            }
+//            newArray[index] = element
+//        }
         
         return newArray
     }
@@ -41,9 +43,9 @@ struct CustomSortManager {
         // Сохраняет словарь с текущим порядком если есть не совпадение имен
         // в массиве и в словаре
         for entity in array {
-            guard mySet.contains(entity.name) else {
-                return saveCurrentOrder(array)
-            }
+//            guard mySet.contains(entity.name) else {
+//                return saveCurrentOrder(array)
+//            }
         }
         // Сохраняет словарь с текущим порядком если количество имен в массиве
         // не совпадает с словарем
@@ -58,9 +60,9 @@ struct CustomSortManager {
     private func saveCurrentOrder<T: DBEntity>(_ array: [T]) -> [String: Int] {
         
         var dict = [String: Int]()
-        for (index, value) in array.enumerated() {
-            dict[value.name] = index
-        }
+//        for (index, value) in array.enumerated() {
+//            dict[value.name] = index
+//        }
         
         userDefalts.set(dict, forKey: key)
         
@@ -79,8 +81,8 @@ struct CustomSortManager {
     /// Удаляет элемент
     func remove<T: DBEntity>(element: T, in array: [T]) {
         
-        let newArray = array.filter { $0.name != element.name }
-        _ = saveCurrentOrder(newArray)        
+//        let newArray = array.filter { $0.name != element.name }
+//        _ = saveCurrentOrder(newArray)        
     }
     
     /// Перемещает элемент

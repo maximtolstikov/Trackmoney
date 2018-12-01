@@ -1,7 +1,4 @@
-// Для описания методов BD у Категорий
-
 //swiftlint:disable force_cast
-
 import CoreData
 import UIKit
 
@@ -9,143 +6,147 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
+    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, ErrorMessage?) {
         
-        if getObjectByName(for: message[.nameCategory] as! String) != nil {
-            return (nil, ErrorMessage(error: .categoryIsExistAlready))
+        // Проверка что объекта с таким именем нет в базе
+        guard let name = message[.name] else {
+            return (nil, ErrorMessage(error: .messageHaventRequireValue))
         }
         
-        let newCategory = CategoryTransaction(context: context)
+        let predicateName = NSPredicate(format: "name = %@", name as! String)
+        let resultForName = get(predicateName)
         
-        newCategory.name = message[.nameCategory] as! String
-        newCategory.icon = message[.iconCategory] as? String
-        newCategory.type = message[.typeCategory] as! String
+        guard resultForName.1 == nil else {
+            return (nil, resultForName.1)
+        }
+        //swiftlint:disable next force_unwrapping
+        guard (resultForName.0?.isEmpty)! else {
+            return (nil, ErrorMessage(error: .objectIsExistAlready))
+        }
         
-        if let parent = message[.parentCategory] {
-            let parentCategory = getObjectByName(for: parent as! String)
-            newCategory.parent = parentCategory
-            parentCategory?.addToChild(newCategory)
+        // Создание нового объекта
+        let category = CategoryTransaction(context: context)
+        
+        category.id = UUID().uuidString
+        category.name = message[.name] as! String
+        category.icon = message[.icon] as! String
+        category.type = message[.type] as! String
+        
+        if let parentName = message[.parent] {
+            let predicate = NSPredicate(format: "name = %@", parentName as! String)
+            let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+            
+            guard let parent = result.0?.first else {
+                return (nil, ErrorMessage(error: .objectIsNotExist))
+            }
+            
+            category.parent = parent
+            parent.addToChild(category)
         }
         
         do {
             try context.save()
-            return (newCategory.objectID, nil)
+            return (category, nil)
+            
         } catch {
             print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
     }
     
-    // Возвращает все объекты Category
-    func get() -> [NSManagedObject]? {
-        
-        var resultRequest = [CategoryTransaction]()
-        let fetchRequest: NSFetchRequest<CategoryTransaction> = CategoryTransaction.fetchRequest()
-        
-        do {
-            resultRequest = try context.fetch(fetchRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return resultRequest
-    }
-    
-    //Возвращает Category по id
-    func getObjectById(for id: NSManagedObjectID) -> CategoryTransaction? {
-        
-        return context.object(with: id) as? CategoryTransaction
-    }
-    
-    //Возвращает категорию по имени
-    func getObjectByName(for name: String) -> CategoryTransaction? {
+    func get(_ predicate: NSPredicate) -> ([DBEntity]?, ErrorMessage?) {
         
         let fetchRequest: NSFetchRequest<CategoryTransaction> = CategoryTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+        fetchRequest.predicate = predicate
         
         do {
             let result = try context.fetch(fetchRequest)
-            
-            guard !result.isEmpty else {
-                return nil
-            }
-            
-            let category = result.first!   //swiftlint:disable:this force_unwrapping
-            
-            return category
+            return (result, nil)
             
         } catch {
-            print(error.localizedDescription)
+            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
         }
-        
-        return nil
     }
     
-    // Изменяет имя или иконку Категории
-    func change(message: [MessageKeyType: Any]) -> ErrorMessage? {
-    
-        guard let category = getObjectById(
-            for: message[.idCategory] as! NSManagedObjectID) else {
-            assertionFailure()
-            return ErrorMessage(error: .categoryIsNotExist)
+    func update(_ message: [MessageKeyType: Any]) -> ErrorMessage? {
+        
+        let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
+        let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+        
+        if let error = result.1 {
+            return error
         }
         
-        if let parent = message[.parentCategory] {
+        guard let category = result.0?.first else {
+            return ErrorMessage(error: .objectIsNotExist)
+        }
+        
+        if let parent = message[.parent] {
             
             if let oldParentName = category.parent?.name {
                 
-                let oldParent = getObjectByName(for: oldParentName)
-                oldParent?.removeFromChild(category)
+                let predicate = NSPredicate(format: "name = %@", oldParentName)
+                let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+                
+                guard let oldParent = result.0?.first else {
+                    return ErrorMessage(error: .objectIsNotExist)
+                }
+                
+                oldParent.removeFromChild(category)
             }
             
-            let newParent = getObjectByName(for: parent as! String)
+            let predicate = NSPredicate(format: "name = %@", parent as! String)
+            let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+            
+            guard let newParent = result.0?.first else {
+                return ErrorMessage(error: .objectIsNotExist)
+            }
             
             category.parent = newParent
-            newParent?.addToChild(category)
+            newParent.addToChild(category)
         }
         
-        if mManager.isExistValue(for: .nameCategory, in: message) {
-
-            let newName = message[.nameCategory] as! String
-            let predicate = NSPredicate(format: "category = %@", category.name)
+        if mManager.isExistValue(for: .name, in: message) {
             
-            if let transactions = transactionDBManager
-                .getObjectBy(predicate: predicate) {
-                
-                _ = transactions.map { $0.category = newName }
+            let newName = message[.name] as! String
+            
+            let predicate = NSPredicate(format: "category = %@", category.name)
+            let result = transactionDBManager.get(predicate)
+            
+            guard let objects = result.0 else {
+                return ErrorMessage(error: .objectCanntGetFromBase)
             }
+
+            let transactions = objects as! [Transaction]
+            _ = transactions.map { $0.category = newName }
             
             category.name = newName
         }
         
-        if mManager.isExistValue(for: .iconCategory, in: message) {
-            category.icon = message[.iconCategory] as? String
+        if mManager.isExistValue(for: .icon, in: message) {
+            category.icon = message[.icon] as! String
         }
-
+        
         return saveContext()
     }
     
-    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
+    func delete(_ id: String) -> ErrorMessage? {
         
-        guard let category = getObjectById(
-            for: message[.idCategory] as! NSManagedObjectID) else {
-            assertionFailure()
-            return ErrorMessage(error: .categoryIsNotExist)
+        let predicate = NSPredicate(format: "id = %@", id)
+        let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+        
+        if let error = result.1 {
+            return error
         }
         
-        let predicate = NSPredicate(format: "category = %@", category.name)
-        if let transactions = transactionDBManager
-            .getObjectBy(predicate: predicate) {
-
-            _ = transactions.map { $0.category = "" }
+        guard let object = result.0?.first else {
+            return ErrorMessage(error: .objectIsNotExist)
         }
-
-        context.delete(category)
-
+        
+        context.delete(object)
+        
         return saveContext()
-        
     }
-    
     
     // Сохраняет контекст
     private func saveContext() -> ErrorMessage? {
@@ -157,7 +158,6 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
-        
     }
     
 }

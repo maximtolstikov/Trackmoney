@@ -83,6 +83,8 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         cell.sumLable.text = String(transactions[indexPath.row].sum)
         cell.dateLable.text = stringFromDate
         
+        // FIXME: - переделать на получение иконок из транзакции
+        
         let type = transactions[indexPath.row].type
         switch type {
         case 0:
@@ -135,7 +137,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             style: .default,
             title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
                 
-                guard let id = self?.transactions[indexPath.row].objectID else { return }
+                guard let id = self?.transactions[indexPath.row].id else { return }
                 let result = self?.dataProvider?.delete(with: id)
                 
                 if result != nil, result == true {
@@ -156,7 +158,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
 
                 controller.topChooseButtonText = transaction.mainAccount
                 controller.sumTextFieldText = String(transaction.sum)
-                controller.transactionID = transaction.objectID
+                controller.transactionID = transaction.id
                 controller.note = transaction.note
                 if type == TransactionType.transfer {
                     controller.bottomChooseButtonText = transaction.corAccount
