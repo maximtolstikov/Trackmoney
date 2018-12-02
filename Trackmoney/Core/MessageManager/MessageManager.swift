@@ -26,7 +26,7 @@ struct MessageManager {
         if transactionType == TransactionType.transfer {
             dictionary[.corAccount] = bottomButton
         } else {
-            dictionary[.name] = bottomButton
+            dictionary[.category] = bottomButton
         }
         if id != nil {
             dictionary[.id] = id

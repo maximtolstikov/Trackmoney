@@ -43,14 +43,21 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         try when("create incom transaction", closure: {
             messageT[.type] = TransactionType.income.rawValue
             messageT[.note] = "test note"
+            messageT[.category] = "myCategory"
             resultCreateTransaction = managerT.create(messageT) as! (Transaction?, ErrorMessage?)
             messageT[.id] = resultCreateTransaction.0?.id
         })
         try then("result error is not nil", closure: {
             let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
             let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            let object = result.0
+            let object = result.0?.first
             XCTAssertNotNil(object)
+        })
+        try then("transaction.category equal myCategory", closure: {
+            let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
+            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
+            let transaction = result.0?.first
+            XCTAssertEqual(transaction?.category, "myCategory")
         })
         try then("accountMainSum equal 130", closure: {
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
