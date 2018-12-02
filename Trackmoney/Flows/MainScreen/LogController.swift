@@ -76,36 +76,31 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let cell = cell as! LogCell
+        let transaction = transactions[indexPath.row]
         
-        let date = transactions[indexPath.row].date as Date
+        let date = transaction.date as Date
         let stringFromDate = dateFormat.dateFormatter.string(from: date)
-        cell.accountNameLable.text = transactions[indexPath.row].mainAccount
-        cell.sumLable.text = String(transactions[indexPath.row].sum)
+        cell.accountNameLable.text = transaction.mainAccount
+        cell.sumLable.text = String(transaction.sum)
         cell.dateLable.text = stringFromDate
+        cell.typeImage.image = UIImage(named: transaction.icon)
         
-        // FIXME: - переделать на получение иконок из транзакции
-        
-        let type = transactions[indexPath.row].type
+        let type = transaction.type
         switch type {
         case 0:
-            cell.typeImage.image = UIImage(named: "Minus")
             cell.sumLable.textColor = #colorLiteral(red: 0.7835699556, green: 0.2945081919, blue: 0.07579417304, alpha: 1)
-            cell.categoryNameLable.text = transactions[indexPath.row].category
+            cell.categoryNameLable.text = transaction.category
         case 1:
-            cell.typeImage.image = UIImage(named: "Plus")
             cell.sumLable.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
-            cell.categoryNameLable.text = transactions[indexPath.row].category
+            cell.categoryNameLable.text = transaction.category
         case 2:
-            cell.typeImage.image = UIImage(named: "Transfer")
             cell.sumLable.textColor = UIColor.darkGray
-            let transaction = transactions[indexPath.row]
             //swiftlint:disable next force_unwrapping
             cell.categoryNameLable.text = "\(transaction.mainAccount)"
                 + "/" + "\(String(describing: transaction.corAccount!))"
         default:
             break
-        }
-        
+        }        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -180,6 +175,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
 extension LogController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        
         return .none
     }
 }

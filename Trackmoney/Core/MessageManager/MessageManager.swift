@@ -3,9 +3,10 @@ import CoreData
 /// Создает сообщения для отправки в базу
 struct MessageManager {
     
-    let iconExpenseTransaction = ""
-    let iconIncomeTransaction = ""
-    let iconTransferTransaction = ""
+    // FIXME: - переделать на получение реальных иконок
+    let iconExpenseTransaction = "Minus"
+    let iconIncomeTransaction = "Plus"
+    let iconTransferTransaction = "Transfer"
     let iconAccount = ""
     let iconCategory = ""
     
@@ -22,18 +23,26 @@ struct MessageManager {
         dictionary[.type] = transactionType.rawValue
         dictionary[.mainAccount] = topButton
         dictionary[.sum] = sum
-        dictionary[.icon] = iconExpenseTransaction
-        if transactionType == TransactionType.transfer {
-            dictionary[.corAccount] = bottomButton
-        } else {
-            dictionary[.category] = bottomButton
-        }
+ 
         if id != nil {
             dictionary[.id] = id
         }
         if note != "" {
             dictionary[.note] = note
         }
+        
+        switch transactionType {
+        case .expense:
+            dictionary[.icon] = iconExpenseTransaction
+            dictionary[.category] = bottomButton
+        case .income:
+            dictionary[.icon] = iconIncomeTransaction
+            dictionary[.category] = bottomButton
+        case .transfer:
+            dictionary[.corAccount] = bottomButton
+            dictionary[.icon] = iconTransferTransaction            
+        }
+        
         return dictionary
     }
     
@@ -77,7 +86,6 @@ struct MessageManager {
         ) -> Bool {
         
         return (dictionary.index(forKey: key) != nil)
-        
     }
     
 }
