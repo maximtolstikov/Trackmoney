@@ -4,6 +4,8 @@ protocol ToolsDataProviderProtocol {
     var dataManager: DBManagerProtocol? { get }
     var dateManager: SupplierDates? { get }
     
-    func loadData(_ what: WhatPeriod, _ period: Period)
-    func loadDateFor(month: Int, year: Int)
+    func load(_ period: Period)
+    func next(_ period: Period)
+    func previous(_ period: Period)
+    func loadFor(month: Int, year: Int)
 }

@@ -41,7 +41,9 @@ class ToolsController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        dataProvider?.loadData(.current, period)
+        DispatchQueue.global().async {
+            self.dataProvider?.load(self.period)
+        }
     }
     
     func setupBackgroundView() {
@@ -109,10 +111,10 @@ class ToolsController: UIViewController {
             switch index {
             case 0:
                 period = .month
-                dataProvider?.loadData(.current, period)
+                dataProvider?.load(period)
             case 1:
                 period = .year
-                dataProvider?.loadData(.current, period)
+                dataProvider?.load(period)
             case 2:
                 break
             default:
@@ -161,9 +163,9 @@ class ToolsController: UIViewController {
         
         switch sender.direction {
         case .left:
-            dataProvider?.loadData(.next, period)
+            dataProvider?.next(period)
         case .right:
-            dataProvider?.loadData(.previous, period)
+            dataProvider?.previous(period)
             
         default:
             break

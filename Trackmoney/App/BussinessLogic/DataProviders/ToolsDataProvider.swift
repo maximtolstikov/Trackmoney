@@ -5,15 +5,18 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
     var dataManager: DBManagerProtocol?
     var dateManager: SupplierDates?
     weak var controller: ToolsController?
+    var currentDate: Date?
     
-    func loadData(_ what: WhatPeriod, _ period: Period) {
+    func load(_ period: Period) {
         
-        dateManager?.datesFor(period, what, completion: { (startDate, finishDate) in
+        dateManager?.current(period, completion: { (startDate, finishDate) in
             
             guard let start = startDate, let finish = finishDate else {
                 assertionFailure()
                 return
             }
+            
+            self.currentDate = start
             
             let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
                                         start as NSDate,
@@ -24,34 +27,60 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             let objects = result?.0
             
             print(objects?.count)
-            //print("period: \(period), what: \(what)")
         })
     }
     
-    func loadDateFor(month: Int, year: Int) {
+    func next(_ period: Period) {
         
+        guard let date = currentDate else { return }
+        
+        dateManager?.next(period, date, completion: { (startDate, finishDate) in
+            
+            guard let start = startDate, let finish = finishDate else {
+                assertionFailure()
+                return
+            }
+            
+            self.currentDate = start
+            
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
+                                        start as NSDate,
+                                        finish as NSDate)
+            
+            let result = self.dataManager?.get(predicate)
+            
+            let objects = result?.0
+            
+            print(objects?.count)
+        })
     }
     
-    
-    
-    
-    func loadData() {
+    func previous(_ period: Period) {
         
-        //        dateManager?.monthDates(.current, completion: { (startDate, finishDate) in
-        //
-        //            guard let start = startDate, let finish = finishDate else {
-        //                assertionFailure()
-        //                return
-        //            }
-        //
-        //            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", start as! NSDate, finish as! NSDate)
-        //
-        //            let result = self.dbManager?.get(predicate)
-        //
-        //            let objects = result?.0
-        //
-        //            print(objects?.count)
-        //        })
+        guard let date = currentDate else { return }
+        
+        dateManager?.previous(period, date, completion: { (startDate, finishDate) in
+            
+            guard let start = startDate, let finish = finishDate else {
+                assertionFailure()
+                return
+            }
+            
+            self.currentDate = start
+            
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
+                                        start as NSDate,
+                                        finish as NSDate)
+            
+            let result = self.dataManager?.get(predicate)
+            
+            let objects = result?.0
+            
+            print(objects?.count)
+        })
+    }
+    
+    func loadFor(month: Int, year: Int) {
         
     }
     

@@ -97,7 +97,7 @@
 		94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */; };
 		94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */; };
 		94EC436721664492009C6BF3 /* SettingListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436621664492009C6BF3 /* SettingListType.swift */; };
-		94EC74F721B5584A002476AC /* ParametersDateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F621B5584A002476AC /* ParametersDateRequest.swift */; };
+		94EC74F721B5584A002476AC /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F621B5584A002476AC /* Period.swift */; };
 		94EC74F921B5593C002476AC /* SupplierDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F821B5593C002476AC /* SupplierDates.swift */; };
 		94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */; };
 		94F613732147F0A700BED9A5 /* CreateTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613722147F0A700BED9A5 /* CreateTransaction.swift */; };
@@ -217,7 +217,7 @@
 		94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsDataProvider.swift; sourceTree = "<group>"; };
 		94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsControllerBilder.swift; sourceTree = "<group>"; };
 		94EC436621664492009C6BF3 /* SettingListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListType.swift; sourceTree = "<group>"; };
-		94EC74F621B5584A002476AC /* ParametersDateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersDateRequest.swift; sourceTree = "<group>"; };
+		94EC74F621B5584A002476AC /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		94EC74F821B5593C002476AC /* SupplierDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDates.swift; sourceTree = "<group>"; };
 		94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextFieldValidate.swift; sourceTree = "<group>"; };
 		94F613722147F0A700BED9A5 /* CreateTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransaction.swift; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 			children = (
 				9424966F21AABF6C00364643 /* DateFormat.swift */,
 				9470D44621B44DF100FF07B1 /* DateManager.swift */,
-				94EC74F621B5584A002476AC /* ParametersDateRequest.swift */,
+				94EC74F621B5584A002476AC /* Period.swift */,
 				94EC74F821B5593C002476AC /* SupplierDates.swift */,
 			);
 			path = Date;
@@ -829,7 +829,7 @@
 				94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */,
 				94858B032146D15B00498DCF /* TransactionDBManager.swift in Sources */,
 				9424967221AAFE7400364643 /* RenameEntity.swift in Sources */,
-				94EC74F721B5584A002476AC /* ParametersDateRequest.swift in Sources */,
+				94EC74F721B5584A002476AC /* Period.swift in Sources */,
 				94A7FE01217C8CF1009E5C4B /* CategorySettingsDataProvider.swift in Sources */,
 				94858B002146D15B00498DCF /* CategoryDBManager.swift in Sources */,
 				94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */,
