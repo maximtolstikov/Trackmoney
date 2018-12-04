@@ -2,6 +2,8 @@ import UIKit
 
 class ToolsController: UIViewController {
     
+    var period: Period = .month
+    
     let segmentedControll: UISegmentedControl = {
         let array = [NSLocalizedString("monthSegment", comment: ""),
                      NSLocalizedString("yearSegment", comment: ""),
@@ -23,7 +25,7 @@ class ToolsController: UIViewController {
         return view
     }()
     
-    var dataLoader: DataProviderProtocol?
+    var dataProvider: ToolsDataProviderProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,12 @@ class ToolsController: UIViewController {
         setupSegmentedControll()
         setupSwipeRight()
         setupSwipeLeft()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        dataProvider?.loadData(.current, period)
     }
     
     func setupBackgroundView() {
@@ -72,11 +80,14 @@ class ToolsController: UIViewController {
     func setupSegmentedControll() {
         
         segmentedControll.frame = CGRect.zero
+        segmentedControll.addTarget(self,
+                                    action: #selector(changeSegment),
+                                    for: .valueChanged)
         self.view.addSubview(segmentedControll)
         
         segmentedControll.layer.shadowOffset = CGSize(width: 0, height: 1)
         segmentedControll.layer.shadowOpacity = 1
-        segmentedControll.layer.shadowRadius = 2
+        segmentedControll.layer.shadowRadius = 3
         
         var topHeight: CGFloat {
             return StatusBarType.check() ? 96.0 : 72.0
@@ -88,7 +99,26 @@ class ToolsController: UIViewController {
             .isActive = true
         segmentedControll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topHeight).isActive = true
         segmentedControll.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -16.0).isActive = true
-        segmentedControll.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        segmentedControll.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+    }
+    
+    @objc func changeSegment(controll: UISegmentedControl) {
+        if controll == self.segmentedControll {
+            let index = controll.selectedSegmentIndex
+            
+            switch index {
+            case 0:
+                period = .month
+                dataProvider?.loadData(.current, period)
+            case 1:
+                period = .year
+                dataProvider?.loadData(.current, period)
+            case 2:
+                break
+            default:
+                break
+            }
+        }
     }
     
     // Устанавливает кнопку настроеек сверху справа
@@ -129,17 +159,12 @@ class ToolsController: UIViewController {
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
         
-        let countSegments = segmentedControll.numberOfSegments
-        
         switch sender.direction {
         case .left:
-            if segmentedControll.selectedSegmentIndex < countSegments - 1 {
-                segmentedControll.selectedSegmentIndex += 1
-            }
+            dataProvider?.loadData(.next, period)
         case .right:
-            if segmentedControll.selectedSegmentIndex > 0 {
-                segmentedControll.selectedSegmentIndex -= 1
-            }
+            dataProvider?.loadData(.previous, period)
+            
         default:
             break
         }

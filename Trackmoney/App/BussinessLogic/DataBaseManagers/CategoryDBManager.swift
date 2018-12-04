@@ -49,7 +49,6 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             return (category, nil)
             
         } catch {
-            print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
     }
@@ -155,7 +154,6 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             try context.save()
             return nil
         } catch {
-            print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
     }

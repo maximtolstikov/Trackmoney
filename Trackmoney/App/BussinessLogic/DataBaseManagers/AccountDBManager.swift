@@ -53,7 +53,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             return (account, nil)
             
         } catch {
-            print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
     }
@@ -109,7 +108,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             try context.save()
             return nil
         } catch {
-            print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
     }
@@ -133,7 +131,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             try context.save()
             return nil
         } catch {
-            print(error.localizedDescription)
             return ErrorMessage(error: .contextDoNotBeSaved)
         }
     }

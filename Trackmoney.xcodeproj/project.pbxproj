@@ -25,6 +25,7 @@
 		9424E8152163D92200BE756D /* CreateControllersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E8142163D92200BE756D /* CreateControllersSpec.swift */; };
 		942888512168C7F0002E3DCC /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888502168C7F0002E3DCC /* AlertManager.swift */; };
 		942888532168F284002E3DCC /* AlertMenagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888522168F284002E3DCC /* AlertMenagerSpec.swift */; };
+		9441172821B66A380015B38C /* ToolsDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */; };
 		9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9444221E21A8756C0005DA0B /* NoteAlert.swift */; };
 		94466220219C705000C9FFCF /* DifferentAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446621F219C705000C9FFCF /* DifferentAccountRule.swift */; };
 		94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94466221219C730400C9FFCF /* EmptyAccountRule.swift */; };
@@ -50,6 +51,7 @@
 		945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */; };
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
 		945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A992179FF1300AF0B86 /* LogCell.swift */; };
+		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
 		94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC12146CDF900498DCF /* AppDelegate.swift */; };
 		94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */; };
 		94858ACC2146CDFA00498DCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94858ACB2146CDFA00498DCF /* Assets.xcassets */; };
@@ -78,7 +80,7 @@
 		94C553C12164FAFA00C0F628 /* LogControllreBillder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */; };
 		94C553C32165004A00C0F628 /* LogDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C22165004A00C0F628 /* LogDataLoader.swift */; };
 		94C553C5216514A900C0F628 /* ToolsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */; };
-		94C553C72165158A00C0F628 /* ToolsDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C62165158A00C0F628 /* ToolsDataLoader.swift */; };
+		94C553C72165158A00C0F628 /* ToolsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C62165158A00C0F628 /* ToolsDataProvider.swift */; };
 		94C553C92165323C00C0F628 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C82165323C00C0F628 /* SettingsController.swift */; };
 		94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */; };
 		94CC8137214FDBB30027913C /* TextErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC8136214FDBB30027913C /* TextErrors.swift */; };
@@ -95,6 +97,8 @@
 		94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */; };
 		94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */; };
 		94EC436721664492009C6BF3 /* SettingListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436621664492009C6BF3 /* SettingListType.swift */; };
+		94EC74F721B5584A002476AC /* ParametersDateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F621B5584A002476AC /* ParametersDateRequest.swift */; };
+		94EC74F921B5593C002476AC /* SupplierDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F821B5593C002476AC /* SupplierDates.swift */; };
 		94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */; };
 		94F613732147F0A700BED9A5 /* CreateTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613722147F0A700BED9A5 /* CreateTransaction.swift */; };
 		94F613752148136E00BED9A5 /* DeleteTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613742148136E00BED9A5 /* DeleteTransaction.swift */; };
@@ -137,6 +141,7 @@
 		9424E8142163D92200BE756D /* CreateControllersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateControllersSpec.swift; sourceTree = "<group>"; };
 		942888502168C7F0002E3DCC /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		942888522168F284002E3DCC /* AlertMenagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMenagerSpec.swift; sourceTree = "<group>"; };
+		9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataProviderProtocol.swift; sourceTree = "<group>"; };
 		9444221E21A8756C0005DA0B /* NoteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAlert.swift; sourceTree = "<group>"; };
 		9446621F219C705000C9FFCF /* DifferentAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentAccountRule.swift; sourceTree = "<group>"; };
 		94466221219C730400C9FFCF /* EmptyAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAccountRule.swift; sourceTree = "<group>"; };
@@ -162,6 +167,7 @@
 		945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormControllerBuilder.swift; sourceTree = "<group>"; };
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
 		945C7A992179FF1300AF0B86 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		94858ABE2146CDF900498DCF /* Trackmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackmoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94858AC12146CDF900498DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94858AC92146CDF900498DCF /* Trackmoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trackmoney.xcdatamodel; sourceTree = "<group>"; };
@@ -192,7 +198,7 @@
 		94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogControllreBillder.swift; sourceTree = "<group>"; };
 		94C553C22165004A00C0F628 /* LogDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDataLoader.swift; sourceTree = "<group>"; };
 		94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsControllerBuilder.swift; sourceTree = "<group>"; };
-		94C553C62165158A00C0F628 /* ToolsDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataLoader.swift; sourceTree = "<group>"; };
+		94C553C62165158A00C0F628 /* ToolsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataProvider.swift; sourceTree = "<group>"; };
 		94C553C82165323C00C0F628 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerBilder.swift; sourceTree = "<group>"; };
 		94CC8136214FDBB30027913C /* TextErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextErrors.swift; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 		94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsDataProvider.swift; sourceTree = "<group>"; };
 		94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsControllerBilder.swift; sourceTree = "<group>"; };
 		94EC436621664492009C6BF3 /* SettingListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListType.swift; sourceTree = "<group>"; };
+		94EC74F621B5584A002476AC /* ParametersDateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersDateRequest.swift; sourceTree = "<group>"; };
+		94EC74F821B5593C002476AC /* SupplierDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDates.swift; sourceTree = "<group>"; };
 		94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextFieldValidate.swift; sourceTree = "<group>"; };
 		94F613722147F0A700BED9A5 /* CreateTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransaction.swift; sourceTree = "<group>"; };
 		94F613742148136E00BED9A5 /* DeleteTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTransaction.swift; sourceTree = "<group>"; };
@@ -271,30 +279,14 @@
 			path = TtansactionDBManager;
 			sourceTree = "<group>";
 		};
-		9424E8092163B3C100BE756D /* Bilders */ = {
-			isa = PBXGroup;
-			children = (
-				9424E80A2163B4A400BE756D /* MainTabBarControllerBuilder.swift */,
-				9424E80C2163B54100BE756D /* AccountsControllerBuilder.swift */,
-				94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */,
-				94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */,
-				94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */,
-				94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */,
-				94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */,
-				945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */,
-				94A7FDED217AF10E009E5C4B /* AccountFormControllerBuilder.swift */,
-				94A7FDF7217B519A009E5C4B /* CategoryFormControllerBuilder.swift */,
-			);
-			path = Bilders;
-			sourceTree = "<group>";
-		};
 		9424E80E2163BA0F00BE756D /* DataProviders */ = {
 			isa = PBXGroup;
 			children = (
 				9424E80F2163BA4C00BE756D /* DataProviderProtocol.swift */,
+				9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */,
 				9424E8112163C11F00BE756D /* AccountsDataLoader.swift */,
 				94C553C22165004A00C0F628 /* LogDataLoader.swift */,
-				94C553C62165158A00C0F628 /* ToolsDataLoader.swift */,
+				94C553C62165158A00C0F628 /* ToolsDataProvider.swift */,
 				94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */,
 				94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */,
 				945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */,
@@ -344,6 +336,17 @@
 				9417B15F2181A092001E88AA /* PromptView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9470D44521B44DBC00FF07B1 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				9424966F21AABF6C00364643 /* DateFormat.swift */,
+				9470D44621B44DF100FF07B1 /* DateManager.swift */,
+				94EC74F621B5584A002476AC /* ParametersDateRequest.swift */,
+				94EC74F821B5593C002476AC /* SupplierDates.swift */,
+			);
+			path = Date;
 			sourceTree = "<group>";
 		};
 		94858AB52146CDF900498DCF = {
@@ -443,7 +446,16 @@
 		94858B092146D1BC00498DCF /* Asembly */ = {
 			isa = PBXGroup;
 			children = (
-				9424E8092163B3C100BE756D /* Bilders */,
+				9424E80A2163B4A400BE756D /* MainTabBarControllerBuilder.swift */,
+				9424E80C2163B54100BE756D /* AccountsControllerBuilder.swift */,
+				94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */,
+				94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */,
+				94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */,
+				94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */,
+				94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */,
+				945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */,
+				94A7FDED217AF10E009E5C4B /* AccountFormControllerBuilder.swift */,
+				94A7FDF7217B519A009E5C4B /* CategoryFormControllerBuilder.swift */,
 			);
 			path = Asembly;
 			sourceTree = "<group>";
@@ -452,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				9446623F21A04D4600C9FFCF /* Alerts */,
+				9470D44521B44DBC00FF07B1 /* Date */,
 				94CC8135214FDB7C0027913C /* ErrorsManager */,
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
@@ -459,7 +472,6 @@
 				9446624A21A0715900C9FFCF /* CategoryType.swift */,
 				94858AFE2146D15B00498DCF /* TransactionType.swift */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
-				9424966F21AABF6C00364643 /* DateFormat.swift */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
 			path = Core;
@@ -784,6 +796,7 @@
 			files = (
 				94A7FDEE217AF10E009E5C4B /* AccountFormControllerBuilder.swift in Sources */,
 				94858B042146D15B00498DCF /* MessageKeyType.swift in Sources */,
+				94EC74F921B5593C002476AC /* SupplierDates.swift in Sources */,
 				9446624321A04EA300C9FFCF /* NeedCancelAlert.swift in Sources */,
 				94FA33F6215FB88200689061 /* LogController.swift in Sources */,
 				9446624521A04FD700C9FFCF /* ChooseAccountAlert.swift in Sources */,
@@ -804,7 +817,7 @@
 				94466228219D89F300C9FFCF /* MainAccountButtonValidator.swift in Sources */,
 				94C553C32165004A00C0F628 /* LogDataLoader.swift in Sources */,
 				94466220219C705000C9FFCF /* DifferentAccountRule.swift in Sources */,
-				94C553C72165158A00C0F628 /* ToolsDataLoader.swift in Sources */,
+				94C553C72165158A00C0F628 /* ToolsDataProvider.swift in Sources */,
 				94EC436721664492009C6BF3 /* SettingListType.swift in Sources */,
 				94A0EE8021A55214004B66E1 /* CustomSortManager.swift in Sources */,
 				94858B012146D15B00498DCF /* DBManager.swift in Sources */,
@@ -816,6 +829,7 @@
 				94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */,
 				94858B032146D15B00498DCF /* TransactionDBManager.swift in Sources */,
 				9424967221AAFE7400364643 /* RenameEntity.swift in Sources */,
+				94EC74F721B5584A002476AC /* ParametersDateRequest.swift in Sources */,
 				94A7FE01217C8CF1009E5C4B /* CategorySettingsDataProvider.swift in Sources */,
 				94858B002146D15B00498DCF /* CategoryDBManager.swift in Sources */,
 				94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */,
@@ -827,8 +841,10 @@
 				94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */,
 				94A7FDF6217B4E8A009E5C4B /* AccountsCell.swift in Sources */,
 				9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */,
+				9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */,
 				9417B1622181C914001E88AA /* BaseFormController.swift in Sources */,
 				94466224219C767200C9FFCF /* TransferValidator.swift in Sources */,
+				9441172821B66A380015B38C /* ToolsDataProviderProtocol.swift in Sources */,
 				945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */,
 				9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */,
 				9446624121A04D6900C9FFCF /* ShortAlert.swift in Sources */,

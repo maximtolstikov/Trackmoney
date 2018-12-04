@@ -7,10 +7,12 @@ class ToolsControllerBuilder {
     func viewController() -> UIViewController {
         
         let toolsController = ToolsController()
-        let dataLoader = ToolsDataLoader()
-        dataLoader.dbManager = TransactionDBManager()
-        dataLoader.controller = toolsController
-        toolsController.dataLoader = dataLoader
+        let dataProvider = ToolsDataProvider()
+        let dateManager = DateManager()
+        dataProvider.dataManager = TransactionDBManager()
+        dataProvider.controller = toolsController
+        dataProvider.dateManager = dateManager
+        toolsController.dataProvider = dataProvider
         toolsController.title = "Tools"
         toolsController.tabBarItem = UITabBarItem(
             title: "Tools",

@@ -58,7 +58,6 @@ struct DeleteTransaction {
             try context.save()
             return true
         } catch {
-            print(error.localizedDescription)
             return false
         }
     }

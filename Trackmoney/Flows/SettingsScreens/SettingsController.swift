@@ -102,7 +102,6 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let nameCell = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        print(arrayPoint[indexPath.row])
         
         switch nameCell {
         case SettingListType.getTitleFor(title: SettingListType.accountsSetting):

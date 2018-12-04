@@ -24,7 +24,6 @@ class LogDataLoader: DataProviderProtocol {
         }
         
         let transactions = objects as? [Transaction]
-
         controller?.transactions = transactions?.reversed()
     }
     

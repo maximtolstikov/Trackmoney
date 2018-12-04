@@ -1,3 +1,4 @@
+//swiftlint:disable sorted_imports
 import XCTest
 @testable import Trackmoney
 

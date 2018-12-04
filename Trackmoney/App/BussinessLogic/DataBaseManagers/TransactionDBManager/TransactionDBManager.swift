@@ -26,7 +26,6 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
             return try (context.fetch(fetchRequest), nil)
             
         } catch {
-            print(error.localizedDescription)
             return (nil, ErrorMessage(error: .objectCanntGetFromBase))
         }
     }
@@ -56,7 +55,6 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
                 try context.save()
                 return nil
             } catch {
-                print(error.localizedDescription)
                 return ErrorMessage(error: .contextDoNotBeSaved)
             }
         }
@@ -82,105 +80,5 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         
         return deleteTransaction.execute() ? nil : ErrorMessage(error: .contextDoNotBeSaved)
     }
-    
-   
-//    func create(message: [MessageKeyType: Any]) -> (NSManagedObjectID?, ErrorMessage?) {
-//
-//        guard let createTransaction = CreateTransaction(
-//            context: context,
-//            mManager: mManager,
-//            message: message
-//            ) else {
-//                assertionFailure()
-//                return (nil, ErrorMessage(error: .transactionIsExist))
-//        }
-//
-//        return createTransaction.execute()
-//    }
-//
-//    func get(predicate: NSPredicate) -> ([NSManagedObject]?, ErrorMessage?) {
-//
-//        let fetchRequest: NSFetchRequest = Transaction.fetchRequest()
-//        fetchRequest.predicate = predicate
-//
-//        do {
-//            return try (context.fetch(fetchRequest), nil)
-//
-//        } catch {
-//            print(error.localizedDescription)
-//            return (nil, ErrorMessage(error: .transactionsCannotGet))
-//        }
-//    }
-//
-////    // Возвращает транзакцию по Id
-////    func getObjectById(for id: NSManagedObjectID) -> Transaction? {
-////
-////        return context.object(with: id) as? Transaction
-////    }
-//
-////    // Возвращает транзакцию по времени
-////    func getObjectByDate(for date: NSDate) -> Transaction? {
-////
-////        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-////        fetchRequest.predicate = NSPredicate(
-////            format: "date = %@", date)
-////
-////        do {
-////            let result = try context.fetch(fetchRequest)
-////
-////            guard !result.isEmpty else {
-////                return nil
-////            }
-////
-////            let transaction = result.first!   //swiftlint:disable:this force_unwrapping
-////
-////            return transaction
-////
-////        } catch {
-////            print(error.localizedDescription)
-////
-////            return nil
-////        }
-////    }
-//
-//    func update(message: [MessageKeyType: Any]) -> ErrorMessage? {
-//
-//        guard let transaction = getObjectById(
-//            for: message[.idTransaction] as! NSManagedObjectID) else {
-//            assertionFailure()
-//            return ErrorMessage(error: .transactionIsNotExist)
-//        }
-//
-//        let changeTransactionManager = ChangeTransactionMamager(
-//            transaction: transaction,
-//            message: message)
-//
-//        if changeTransactionManager.execute() {
-//
-//            do {
-//                try context.save()
-//                return nil
-//            } catch {
-//                print(error.localizedDescription)
-//                return ErrorMessage(error: .contextDoNotBeSaved)
-//            }
-//        }
-//
-//        return ErrorMessage(error: .noName)
-//    }
-//
-//    func delete(message: [MessageKeyType: Any]) -> ErrorMessage? {
-//
-//        guard let transaction = getObjectById(
-//            for: message[.idTransaction] as! NSManagedObjectID),
-//            let deleteTransaction = DeleteTransaction(
-//                context: context,
-//                transaction: transaction) else {
-//            assertionFailure()
-//            return ErrorMessage(error: .transactionIsNotExist)
-//        }
-//
-//        return deleteTransaction.execute() ? nil : ErrorMessage(error: .contextDoNotBeSaved)
-//    }
 
 }

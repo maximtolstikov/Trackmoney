@@ -134,7 +134,6 @@ class CategoryFormController: BaseFormController {
         } else {
             
             for (_, value) in checkRule {
-                print(value)
                 showPromptView(with: value)
                 addRedBorderTo(control: self.nameTextField)
                 break

@@ -100,7 +100,6 @@ struct CreateTransaction {
             try context.save()
             return (transaction, nil)
         } catch {
-            print(error.localizedDescription)
             return (nil, ErrorMessage(error: .contextDoNotBeSaved))
         }
     }
