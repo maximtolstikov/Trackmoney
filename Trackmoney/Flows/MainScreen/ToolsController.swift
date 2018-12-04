@@ -42,7 +42,7 @@ class ToolsController: UIViewController {
         super.viewWillAppear(animated)
 
         DispatchQueue.global().async {
-            self.dataProvider?.load(self.period)
+            self.dataProvider?.load(self.period, .current)
         }
     }
     
@@ -111,10 +111,10 @@ class ToolsController: UIViewController {
             switch index {
             case 0:
                 period = .month
-                dataProvider?.load(period)
+                dataProvider?.load(period, .current)
             case 1:
                 period = .year
-                dataProvider?.load(period)
+                dataProvider?.load(period, .current)
             case 2:
                 break
             default:
@@ -163,9 +163,9 @@ class ToolsController: UIViewController {
         
         switch sender.direction {
         case .left:
-            dataProvider?.next(period)
+            dataProvider?.load(period, .next)
         case .right:
-            dataProvider?.previous(period)
+            dataProvider?.load(period, .previous)
             
         default:
             break
