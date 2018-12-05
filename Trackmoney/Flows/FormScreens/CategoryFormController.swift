@@ -123,9 +123,9 @@ class CategoryFormController: BaseFormController {
             
             let message = MessageManager()
                 .craftCategoryMessage(nameCategory: nameText,
-                                          type: typeCategory,
-                                          parent: topChooseButton.titleLabel?.text,
-                                          id: categotyForUpdate?.objectID)
+                                      type: typeCategory,
+                                      parent: topChooseButton.titleLabel?.text,
+                                      id: categotyForUpdate?.id)
             
                 dataProvider?.save(message: message)
 

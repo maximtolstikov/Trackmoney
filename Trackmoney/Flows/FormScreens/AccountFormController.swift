@@ -142,7 +142,7 @@ class AccountFormController: BaseFormController {
         let message = MessageManager()
             .craftAccounеMessage(nameAccount: name,
                                   sumAccount: sum,
-                                  id: accountForUpdate?.objectID)
+                                  id: accountForUpdate?.id)
         dataProvider?.save(message: message)
     }
  
