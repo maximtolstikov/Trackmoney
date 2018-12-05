@@ -185,7 +185,7 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
             .dequeueReusableCell(withIdentifier: cellIndentifire,
                                  for: indexPath)
         
-        cell.backgroundColor = #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         
         return cell
     }

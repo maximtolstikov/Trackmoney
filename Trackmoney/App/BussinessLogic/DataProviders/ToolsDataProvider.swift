@@ -7,9 +7,7 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
     var dateManager: SupplierDates?
     weak var controller: ToolsController?
     var currentDate: Date?
-    
-    // TODO: - сделать проверку если данные не найдены то сurrentDate не обновлять
-    
+
     func load(_ period: Period, _ what: WhatPeriod) {
         
         if what == .current {
@@ -25,9 +23,6 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
                 return
             }
             
-            self.setTitle(start, period)
-            self.currentDate = start
-            
             let byDates = NSPredicate(format: "(date >= %@) AND (date <= %@)",
                                         start as NSDate,
                                         finish as NSDate)
@@ -40,8 +35,12 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             let resultAll = manager.get(all) as! ([CategoryTransaction]?, ErrorMessage?)
             
             guard let transactions = resultByDates.0,
+                !transactions.isEmpty,
                 let categories = resultAll.0  else { return }
 
+            self.currentDate = start
+            self.setTitle(start, period)
+            
             DispatchQueue.global().async {
                 
                 var calculator = AverageValues(transactions: transactions,
