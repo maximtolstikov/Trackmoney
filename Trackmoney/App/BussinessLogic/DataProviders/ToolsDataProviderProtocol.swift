@@ -1,3 +1,5 @@
+import Foundation
+
 /// Описывает интерфейс поставщика данных для контроллера Tools
 protocol ToolsDataProviderProtocol {
     
@@ -5,5 +7,5 @@ protocol ToolsDataProviderProtocol {
     var dateManager: SupplierDates? { get }
     
     func load(_ period: Period, _ what: WhatPeriod)
-    func loadFor(month: Int, year: Int)
+    func loadFor(startDate: Date, finishDate: Date)
 }

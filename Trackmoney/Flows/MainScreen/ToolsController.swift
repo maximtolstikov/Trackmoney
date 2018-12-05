@@ -2,7 +2,16 @@ import UIKit
 
 class ToolsController: UIViewController {
     
+    var tableView = UITableView()
+    let cellIndentifire = "cell"
     var period: Period = .month
+    var categories: [AverageCategory]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     let segmentedControll: UISegmentedControl = {
         let array = [NSLocalizedString("monthSegment", comment: ""),
@@ -31,9 +40,8 @@ class ToolsController: UIViewController {
         super.viewDidLoad()
         
         setSettingsButton()
-        setupBackgroundView()
-        setupScrollView()
         setupSegmentedControll()
+        addTable()
         setupSwipeRight()
         setupSwipeLeft()
     }
@@ -44,39 +52,6 @@ class ToolsController: UIViewController {
         DispatchQueue.global().async {
             self.dataProvider?.load(self.period, .current)
         }
-    }
-    
-    func setupBackgroundView() {
-        
-        self.view.addSubview(background)
-        
-        background.backgroundColor = UIColor(red: CGFloat(129) / 225.0,
-                                                 green: CGFloat(121) / 225.0,
-                                                 blue: CGFloat(198) / 225.0,
-                                                 alpha: CGFloat(0.2))
-        
-        background.leftAnchor.constraint(equalTo: self.view.leftAnchor)
-            .isActive = true
-        background.topAnchor.constraint(equalTo: self.view.topAnchor)
-            .isActive = true
-        background.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-            .isActive = true
-        background.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-            .isActive = true
-    }
-    
-    func setupScrollView() {
-        
-        background.addSubview(scrollView)
-        
-        scrollView.leftAnchor.constraint(equalTo: background.leftAnchor)
-            .isActive = true
-        scrollView.topAnchor.constraint(equalTo: background.topAnchor)
-            .isActive = true
-        scrollView.rightAnchor.constraint(equalTo: background.rightAnchor)
-            .isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: background.bottomAnchor)
-            .isActive = true
     }
     
     func setupSegmentedControll() {
@@ -104,6 +79,27 @@ class ToolsController: UIViewController {
         segmentedControll.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
     }
     
+    private func addTable() {
+        
+        let frame = CGRect.zero
+        tableView = UITableView(frame: frame, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ToolsCell.self, forCellReuseIdentifier: cellIndentifire)
+        tableView.showsVerticalScrollIndicator = false
+        
+        self.view.addSubview(tableView)
+        
+        tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControll.bottomAnchor,
+                                       constant: 8.0).isActive = true
+        tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        tableView.bottomAnchor
+            .constraint(equalTo: self.view.bottomAnchor).isActive = true
+    }
+    
+    // Обрабатывает нажатие на сегменты
     @objc func changeSegment(controll: UISegmentedControl) {
         if controll == self.segmentedControll {
             let index = controll.selectedSegmentIndex
@@ -117,6 +113,11 @@ class ToolsController: UIViewController {
                 dataProvider?.load(period, .current)
             case 2:
                 break
+                // FIXMY: - реализовать DatePicker
+//                let picker = UIDatePicker()
+//                self.view.addSubview(picker)
+//                picker.center = self.view.center
+//                picker.datePickerMode = .countDownTimer
             default:
                 break
             }
@@ -171,5 +172,37 @@ class ToolsController: UIViewController {
             break
         }
     }
+
+}
+
+extension ToolsController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return categories?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView
+            .dequeueReusableCell(withIdentifier: cellIndentifire,
+                                 for: indexPath)
+        
+        cell.backgroundColor = #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
+
+        let cell = cell as! ToolsCell
+
+        guard let category = categories?[indexPath.row] else { return }
+
+        cell.categoryNameLable.text = category.name
+        cell.sumLable.text = String(category.sum)
+    }
+    
 
 }

@@ -1,5 +1,3 @@
-// Для настройки ячейки Списка Счетов
-
 import UIKit
 
 class AccountsCell: UITableViewCell {

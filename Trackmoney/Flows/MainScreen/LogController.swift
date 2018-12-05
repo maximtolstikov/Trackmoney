@@ -1,5 +1,4 @@
 //swiftlint:disable force_cast
-
 import UIKit
 
 /// Для описания контроллера журнала
@@ -40,10 +39,7 @@ class LogController: UIViewController {
     
     private func addTable() {
         
-        self.tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: cellIndentifire)
+        tableView = UITableView(frame: view.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60
@@ -68,12 +64,13 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: cellIndentifire,
-                                 for: indexPath) as! LogCell
-        
+                                 for: indexPath)        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
         
         let cell = cell as! LogCell
         let transaction = transactions[indexPath.row]

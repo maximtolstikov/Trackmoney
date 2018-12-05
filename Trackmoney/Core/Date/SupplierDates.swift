@@ -8,6 +8,4 @@ protocol SupplierDates {
                _ what: WhatPeriod,
                _ date: Date,
                completion: @escaping (Date?, Date?) -> Void)
-
-    
 }

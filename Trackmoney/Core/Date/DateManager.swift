@@ -4,6 +4,7 @@ class DateManager: SupplierDates {
     
     let calendar = Calendar.current
     var components = DateComponents()
+    
     var startDate: Date?
     var finishDate: Date?
     
@@ -96,7 +97,6 @@ class DateManager: SupplierDates {
     }
     
     private func currentDateComponents(_ date: Date) -> DateComponents {
-        
         return calendar.dateComponents([.month, .year], from: date)
     }
     

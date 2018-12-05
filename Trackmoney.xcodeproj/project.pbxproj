@@ -26,6 +26,8 @@
 		942888512168C7F0002E3DCC /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888502168C7F0002E3DCC /* AlertManager.swift */; };
 		942888532168F284002E3DCC /* AlertMenagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942888522168F284002E3DCC /* AlertMenagerSpec.swift */; };
 		9441172821B66A380015B38C /* ToolsDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */; };
+		9441172A21B7047C0015B38C /* AverageValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9441172921B7047C0015B38C /* AverageValues.swift */; };
+		9441172C21B707DE0015B38C /* AverageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9441172B21B707DE0015B38C /* AverageCategory.swift */; };
 		9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9444221E21A8756C0005DA0B /* NoteAlert.swift */; };
 		94466220219C705000C9FFCF /* DifferentAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446621F219C705000C9FFCF /* DifferentAccountRule.swift */; };
 		94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94466221219C730400C9FFCF /* EmptyAccountRule.swift */; };
@@ -64,6 +66,7 @@
 		94858B042146D15B00498DCF /* MessageKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AFC2146D15B00498DCF /* MessageKeyType.swift */; };
 		94858B052146D15B00498DCF /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AFD2146D15B00498DCF /* MessageManager.swift */; };
 		94858B062146D15B00498DCF /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AFE2146D15B00498DCF /* TransactionType.swift */; };
+		949A081321B8053C008E40EE /* ToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949A081221B8053C008E40EE /* ToolsCell.swift */; };
 		94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0EE7D21A54DE7004B66E1 /* DBEntity.swift */; };
 		94A0EE8021A55214004B66E1 /* CustomSortManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0EE7F21A55214004B66E1 /* CustomSortManager.swift */; };
 		94A24911216145D900BE71FE /* MethodsBDD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A24910216145D900BE71FE /* MethodsBDD.swift */; };
@@ -142,6 +145,8 @@
 		942888502168C7F0002E3DCC /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		942888522168F284002E3DCC /* AlertMenagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMenagerSpec.swift; sourceTree = "<group>"; };
 		9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataProviderProtocol.swift; sourceTree = "<group>"; };
+		9441172921B7047C0015B38C /* AverageValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValues.swift; sourceTree = "<group>"; };
+		9441172B21B707DE0015B38C /* AverageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCategory.swift; sourceTree = "<group>"; };
 		9444221E21A8756C0005DA0B /* NoteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAlert.swift; sourceTree = "<group>"; };
 		9446621F219C705000C9FFCF /* DifferentAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentAccountRule.swift; sourceTree = "<group>"; };
 		94466221219C730400C9FFCF /* EmptyAccountRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAccountRule.swift; sourceTree = "<group>"; };
@@ -182,6 +187,7 @@
 		94858AFC2146D15B00498DCF /* MessageKeyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageKeyType.swift; sourceTree = "<group>"; };
 		94858AFD2146D15B00498DCF /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		94858AFE2146D15B00498DCF /* TransactionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
+		949A081221B8053C008E40EE /* ToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCell.swift; sourceTree = "<group>"; };
 		94A0EE7D21A54DE7004B66E1 /* DBEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBEntity.swift; sourceTree = "<group>"; };
 		94A0EE7F21A55214004B66E1 /* CustomSortManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSortManager.swift; sourceTree = "<group>"; };
 		94A24910216145D900BE71FE /* MethodsBDD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsBDD.swift; sourceTree = "<group>"; };
@@ -323,8 +329,9 @@
 		945B921021AFF70700A1A791 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				945C7A992179FF1300AF0B86 /* LogCell.swift */,
 				94A7FDF5217B4E8A009E5C4B /* AccountsCell.swift */,
+				945C7A992179FF1300AF0B86 /* LogCell.swift */,
+				949A081221B8053C008E40EE /* ToolsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -395,8 +402,12 @@
 		94858AF32146D15B00498DCF /* BussinessLogic */ = {
 			isa = PBXGroup;
 			children = (
-				9424E80E2163BA0F00BE756D /* DataProviders */,
+				94A0EE8121A5528F004B66E1 /* CustomSort */,
 				94858AF52146D15B00498DCF /* DataBaseManagers */,
+				9424E80E2163BA0F00BE756D /* DataProviders */,
+				94858AFB2146D15B00498DCF /* MessageManager */,
+				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
+				9441172921B7047C0015B38C /* AverageValues.swift */,
 			);
 			path = BussinessLogic;
 			sourceTree = "<group>";
@@ -426,6 +437,9 @@
 			isa = PBXGroup;
 			children = (
 				94858B082146D1A800498DCF /* CoreDataEntity */,
+				9446624A21A0715900C9FFCF /* CategoryType.swift */,
+				94858AFE2146D15B00498DCF /* TransactionType.swift */,
+				9441172B21B707DE0015B38C /* AverageCategory.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -466,11 +480,6 @@
 				9446623F21A04D4600C9FFCF /* Alerts */,
 				9470D44521B44DBC00FF07B1 /* Date */,
 				94CC8135214FDB7C0027913C /* ErrorsManager */,
-				94858AFB2146D15B00498DCF /* MessageManager */,
-				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
-				94A0EE8121A5528F004B66E1 /* CustomSort */,
-				9446624A21A0715900C9FFCF /* CategoryType.swift */,
-				94858AFE2146D15B00498DCF /* TransactionType.swift */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
@@ -801,7 +810,9 @@
 				94FA33F6215FB88200689061 /* LogController.swift in Sources */,
 				9446624521A04FD700C9FFCF /* ChooseAccountAlert.swift in Sources */,
 				94858B022146D15B00498DCF /* DBManagerProtocol.swift in Sources */,
+				9441172A21B7047C0015B38C /* AverageValues.swift in Sources */,
 				9446623E21A044B700C9FFCF /* ChooseTransactionAlert.swift in Sources */,
+				9441172C21B707DE0015B38C /* AverageCategory.swift in Sources */,
 				9417B16621820722001E88AA /* TextToNumberRule.swift in Sources */,
 				94F613752148136E00BED9A5 /* DeleteTransaction.swift in Sources */,
 				94A7FDFA217B51EB009E5C4B /* CategoryFormController.swift in Sources */,
@@ -825,6 +836,7 @@
 				9446624E21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift in Sources */,
 				9446624721A0551A00C9FFCF /* ChooseCategoryAlert.swift in Sources */,
 				945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */,
+				949A081321B8053C008E40EE /* ToolsCell.swift in Sources */,
 				942888512168C7F0002E3DCC /* AlertManager.swift in Sources */,
 				94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */,
 				94858B032146D15B00498DCF /* TransactionDBManager.swift in Sources */,

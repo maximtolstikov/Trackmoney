@@ -1,3 +1,4 @@
+//swiftlint:disable force_cast
 import CoreData
 
 class ToolsDataProvider: ToolsDataProviderProtocol {
@@ -26,20 +27,31 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             
             self.currentDate = start
             
-            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
+            let byDates = NSPredicate(format: "(date >= %@) AND (date <= %@)",
                                         start as NSDate,
                                         finish as NSDate)
             
-            let result = self.dataManager?.get(predicate)
+            let resultByDates = self.dataManager?
+                .get(byDates) as! ([Transaction]?, ErrorMessage?)
             
-            let objects = result?.0
+            let manager = CategoryDBManager()
+            let all = NSPredicate(value: true)
+            let resultAll = manager.get(all) as! ([CategoryTransaction]?, ErrorMessage?)
             
-            print(objects?.count)
+            guard let transactions = resultByDates.0,
+                let categories = resultAll.0  else { return }
+
+            var calculator = AverageValues(transactions: transactions,
+                                           categories: categories)
+            let averageCategories = calculator.collectCategories()
+            
+            self.controller?.categories = averageCategories
         })
     }
     
-    func loadFor(month: Int, year: Int) {
-        
+    // TODO: - сделать получение данных на основе DatePicker
+    func loadFor(startDate: Date, finishDate: Date) {
+
     }
     
 }
