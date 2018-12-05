@@ -84,6 +84,8 @@ class ToolsController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 44
+        tableView.separatorStyle = .none
         tableView.register(ToolsCell.self, forCellReuseIdentifier: cellIndentifire)
         tableView.showsVerticalScrollIndicator = false
         
@@ -184,9 +186,6 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: cellIndentifire,
                                  for: indexPath)
-        
-        cell.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        
         return cell
     }
     
@@ -194,12 +193,14 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
 
+        // swiftlint:disable next force_cast
         let cell = cell as! ToolsCell
 
         guard let category = categories?[indexPath.row] else { return }
 
         cell.categoryNameLable.text = category.name
         cell.sumLable.text = String(category.sum)
+        cell.shapeLayer.strokeEnd = CGFloat(category.part)
     }
     
 
