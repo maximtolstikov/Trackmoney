@@ -13,7 +13,6 @@ class ToolsControllerBuilder {
         dataProvider.controller = toolsController
         dataProvider.dateManager = dateManager
         toolsController.dataProvider = dataProvider
-        toolsController.title = "Tools"
         toolsController.tabBarItem = UITabBarItem(
             title: "Tools",
             image: UIImage(named: "Tools"),

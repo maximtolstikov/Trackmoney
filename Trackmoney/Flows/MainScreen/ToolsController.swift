@@ -49,9 +49,7 @@ class ToolsController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        DispatchQueue.global().async {
             self.dataProvider?.load(self.period, .current)
-        }
     }
     
     func setupSegmentedControll() {

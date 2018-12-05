@@ -25,6 +25,7 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
                 return
             }
             
+            self.setTitle(start, period)
             self.currentDate = start
             
             let byDates = NSPredicate(format: "(date >= %@) AND (date <= %@)",
@@ -41,17 +42,35 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             guard let transactions = resultByDates.0,
                 let categories = resultAll.0  else { return }
 
-            var calculator = AverageValues(transactions: transactions,
-                                           categories: categories)
-            let averageCategories = calculator.collectCategories()
-            
-            self.controller?.categories = averageCategories
+            DispatchQueue.global().async {
+                
+                var calculator = AverageValues(transactions: transactions,
+                                               categories: categories)
+                let averageCategories = calculator.collectCategories()
+                
+                self.controller?.categories = averageCategories
+            }
         })
     }
     
     // TODO: - сделать получение данных на основе DatePicker
     func loadFor(startDate: Date, finishDate: Date) {
 
+    }
+    
+    private func setTitle(_ from: Date, _ period: Period) {
+        
+        let dateFormatter = DateFormatter()
+        
+        switch period {
+        case .month:
+            dateFormatter.dateFormat = "MMMM"
+        case .year:
+            dateFormatter.dateFormat = "y"
+        }
+        
+        let title = dateFormatter.string(from: from)
+        self.controller?.navigationItem.title = title
     }
     
 }

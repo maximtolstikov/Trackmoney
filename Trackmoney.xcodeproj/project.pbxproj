@@ -289,15 +289,15 @@
 			isa = PBXGroup;
 			children = (
 				9424E80F2163BA4C00BE756D /* DataProviderProtocol.swift */,
-				9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */,
 				9424E8112163C11F00BE756D /* AccountsDataLoader.swift */,
-				94C553C22165004A00C0F628 /* LogDataLoader.swift */,
-				94C553C62165158A00C0F628 /* ToolsDataProvider.swift */,
-				94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */,
-				94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */,
-				945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */,
 				94A7FDF1217AF234009E5C4B /* AccountFormDataProvider.swift */,
+				94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */,
 				94A7FDF3217AF3D7009E5C4B /* CategoryFormDataProvider.swift */,
+				94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */,
+				94C553C22165004A00C0F628 /* LogDataLoader.swift */,
+				9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */,
+				94C553C62165158A00C0F628 /* ToolsDataProvider.swift */,
+				945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -462,14 +462,14 @@
 			children = (
 				9424E80A2163B4A400BE756D /* MainTabBarControllerBuilder.swift */,
 				9424E80C2163B54100BE756D /* AccountsControllerBuilder.swift */,
-				94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */,
-				94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */,
-				94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */,
-				94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */,
-				94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */,
-				945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */,
 				94A7FDED217AF10E009E5C4B /* AccountFormControllerBuilder.swift */,
+				94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */,
 				94A7FDF7217B519A009E5C4B /* CategoryFormControllerBuilder.swift */,
+				94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */,
+				94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */,
+				94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */,
+				94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */,
+				945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */,
 			);
 			path = Asembly;
 			sourceTree = "<group>";
