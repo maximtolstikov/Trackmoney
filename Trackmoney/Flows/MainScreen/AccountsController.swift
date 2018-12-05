@@ -47,6 +47,7 @@ class AccountsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(AccountsCell.self, forCellReuseIdentifier: cellIndentifire)
         
         self.view.addSubview(tableView)

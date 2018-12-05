@@ -43,6 +43,7 @@ class LogController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60
+        tableView.separatorStyle = .none
         tableView.register(LogCell.self, forCellReuseIdentifier: cellIndentifire)
         tableView.showsVerticalScrollIndicator = false
         
