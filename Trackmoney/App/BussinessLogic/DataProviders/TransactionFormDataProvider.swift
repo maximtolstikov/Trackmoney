@@ -21,11 +21,14 @@ class TransactionFormDataProvider: DataProviderProtocol {
         controller?.accounts = accounts as? [Account]
         
         let categoryType: CategoryType?
+        var sortKey: SortKeys?
         
         if controller?.transactionType == .expense {
             categoryType = .expense
+            sortKey = .expense
         } else if controller?.transactionType == .income {
             categoryType = .income
+            sortKey = .expense
         } else {
             categoryType = nil
         }
@@ -33,14 +36,20 @@ class TransactionFormDataProvider: DataProviderProtocol {
         if let type = categoryType?.rawValue {
             
             let predicat = NSPredicate(format: "type = %@", type)
-            let result = categoryDbManager?.get(predicat)
+            let result = categoryDbManager?
+                .get(predicat) as? ([CategoryTransaction]?, ErrorMessage?)
             
             guard let objects = result?.0 else {
                 assertionFailure()
                 return
             }
             
-            controller?.categories = objects as? [CategoryTransaction]
+            if let key = sortKey {
+                
+                let sortManager = CustomSortManager(key)
+                let array = sortManager.sortedArray(objects)
+                controller?.categories = array
+            }
         }
     }
     

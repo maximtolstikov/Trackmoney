@@ -406,6 +406,7 @@
 		94858AF32146D15B00498DCF /* BussinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				9446623F21A04D4600C9FFCF /* Alerts */,
 				94A0EE8121A5528F004B66E1 /* CustomSort */,
 				94858AF52146D15B00498DCF /* DataBaseManagers */,
 				9424E80E2163BA0F00BE756D /* DataProviders */,
@@ -482,7 +483,6 @@
 		94858B0A2146D1E200498DCF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9446623F21A04D4600C9FFCF /* Alerts */,
 				9470D44521B44DBC00FF07B1 /* Date */,
 				94CC8135214FDB7C0027913C /* ErrorsManager */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
