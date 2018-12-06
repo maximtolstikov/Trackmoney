@@ -128,8 +128,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "myCell",
-            for: indexPath)
-        
+            for: indexPath)        
         
         cell.textLabel?.text = accounts[indexPath.row].name
         return cell

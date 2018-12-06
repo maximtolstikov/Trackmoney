@@ -7,8 +7,8 @@
 "titleEditButton" = "Изменить";
 "titleAddAccount" = "Добавить";
 "titleAddCategory" = "Добавить";
-"titleSortDelete" = "Редактировать";
-"chooseParentButton" = "родительская категория";
+"titleSortDelete" = "Сортировать";
+"chooseParentButton" = "родитель";
 "emptyTitle" = "-----------";
 "decline" = "Нет";
 "approve" = "Да";

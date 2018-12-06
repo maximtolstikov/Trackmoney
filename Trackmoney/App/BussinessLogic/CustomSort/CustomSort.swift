@@ -1,7 +1,6 @@
 /// Определяет обязательное поле для сортировки объектов в списке
-protocol DBEntity {
+protocol CustomSort {
     
-    var id: String { get }
-    
+    var name: String { get }
     
 }

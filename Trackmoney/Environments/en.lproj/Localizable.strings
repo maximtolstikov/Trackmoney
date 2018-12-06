@@ -7,8 +7,8 @@
 "titleEditButton" = "Edit";
 "titleAddAccount" = "Add";
 "titleAddCategory" = "Add";
-"titleSortDelete" = "Sort/Delete";
-"chooseParentButton" = "parent category";
+"titleSortDelete" = "Sort";
+"chooseParentButton" = "parent";
 "emptyTitle" = "-----------";
 "decline" = "No";
 "approve" = "Yes";
