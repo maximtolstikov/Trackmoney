@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-        let controller = self.window?.rootViewController as? MainTabBarController
-        controller?.selectedIndex = 0
+    func applicationDidEnterBackground(_ application: UIApplication) {
+            
+        let tabBarController = MainTabBarControllerBuilder().viewController()
+        self.window?.rootViewController = tabBarController
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
