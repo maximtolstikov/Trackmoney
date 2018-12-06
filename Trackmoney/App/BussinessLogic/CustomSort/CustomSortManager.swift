@@ -4,9 +4,11 @@ import Foundation
 struct CustomSortManager {
     
     let userDefalts = UserDefaults.standard
-    let entity: DBEntity.Type
-    var key: String {
-        return entity == Account.self ? "sortListAccounts" : "sortListCategories"
+    var key: SortKeys
+    
+    init(_ key: SortKeys) {
+        
+        self.key = key
     }
     
     /// Возвращает массив с пользовательской сортировкой
@@ -15,8 +17,6 @@ struct CustomSortManager {
         let dict = checkDictCorrectFor(array)
         var newArray = array
         
-        // FIXME: - разобраться
-        
         for element in array {
             guard let index = dict[element.name] else {
                 assertionFailure()
@@ -24,14 +24,13 @@ struct CustomSortManager {
             }
             newArray[index] = element
         }
-        
         return newArray
     }
     
     /// Защищает массив имен от не соответствия имен в словаре
     func checkDictCorrectFor<T: CustomSort>(_ array: [T]) -> [String: Int] {
         
-        guard let dict = userDefalts.dictionary(forKey: key) as? [String: Int] else {
+        guard let dict = userDefalts.dictionary(forKey: key.rawValue) as? [String: Int] else {
             return saveCurrentOrder(array)
         }
         
@@ -64,10 +63,10 @@ struct CustomSortManager {
             dict[value.name] = index
         }
         
-        userDefalts.set(dict, forKey: key)
+        userDefalts.set(dict, forKey: key.rawValue)
         
         //swiftlint:disable next force_cast
-        return userDefalts.dictionary(forKey: key) as! [String: Int]
+        return userDefalts.dictionary(forKey: key.rawValue) as! [String: Int]
     }
     
     /// Добавляет элемент
@@ -82,14 +81,13 @@ struct CustomSortManager {
     func remove<T: CustomSort>(element: T, in array: [T]) {
         
         let newArray = array.filter { $0.name != element.name }
-        _ = saveCurrentOrder(newArray)        
+        _ = saveCurrentOrder(newArray)
     }
     
     /// Перемещает элемент
     func swapElement<T: CustomSort>(array: [T]) {
         
          _ = saveCurrentOrder(array)
- 
     }
     
 }

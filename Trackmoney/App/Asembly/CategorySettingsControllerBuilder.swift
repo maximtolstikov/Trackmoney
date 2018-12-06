@@ -1,5 +1,3 @@
-// Для строительства контроллера "Настроек Категорий"
-
 import UIKit
 
 class CategorySettingsControllerBuilder {
@@ -14,8 +12,10 @@ class CategorySettingsControllerBuilder {
         categorySettingsController
             .navigationItem.title = NSLocalizedString("settingsCategories",
                                                       comment: "")
-        let customSort = CustomSortManager(entity: CategoryTransaction.self)
-        categorySettingsController.sortManager = customSort
+        let expenseSort = CustomSortManager(.expense)
+        let incomeSort = CustomSortManager(.income)
+        categorySettingsController.incomeSortManager = incomeSort
+        categorySettingsController.expenseSortManager = expenseSort
         
         return categorySettingsController
         

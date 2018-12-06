@@ -122,7 +122,6 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         return accounts.count
     }
     
-    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -133,7 +132,6 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.text = accounts[indexPath.row].name
         return cell
     }
-    
     
     // Удаляет счет из списка
     func tableView(_ tableView: UITableView,

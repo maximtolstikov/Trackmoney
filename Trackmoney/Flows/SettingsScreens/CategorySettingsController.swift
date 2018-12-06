@@ -4,12 +4,22 @@ import UIKit
 class CategorySettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
-    var sortManager: CustomSortManager!
     var tableView = UITableView()
     let cellIndentifire = "myCell"
-    var incomeCategories: [CategoryTransaction]!
+    var incomeSortManager: CustomSortManager!
+    var expenseSortManager: CustomSortManager!
+    
+    var incomeCategories: [CategoryTransaction]! {
+        didSet {
+            incomeCategories = expenseSortManager.sortedArray(incomeCategories)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     var expenseCategories: [CategoryTransaction]! {
         didSet {
+            expenseCategories = expenseSortManager.sortedArray(expenseCategories)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -195,16 +205,28 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
-//    func tableView(_ tableView: UITableView,
-//                   moveRowAt sourceIndexPath: IndexPath,
-//                   to destinationIndexPath: IndexPath) {
-//
-//        let item = categories[sourceIndexPath.row]
-//        categories.remove(at: sourceIndexPath.row)
-//        categories.insert(item, at: destinationIndexPath.row)
-//
-//        sortManager.swapElement(array: categories)
-//    }
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
+        
+        if sourceIndexPath.section == 0 {
+            
+            let item = incomeCategories[sourceIndexPath.row]
+            incomeCategories.remove(at: sourceIndexPath.row)
+            incomeCategories.insert(item, at: destinationIndexPath.row)
+            tableView.reloadData()
+            
+            incomeSortManager.swapElement(array: incomeCategories)
+        } else {
+            
+            let item = expenseCategories[sourceIndexPath.row]
+            expenseCategories.remove(at: sourceIndexPath.row)
+            expenseCategories.insert(item, at: destinationIndexPath.row)
+            tableView.reloadData()
+            
+            expenseSortManager.swapElement(array: expenseCategories)
+        }
+    }
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {

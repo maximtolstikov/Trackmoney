@@ -15,7 +15,7 @@ class AccountsControllerBuilder {
             title: "Accounts",
             image: UIImage(named: "Accounts"),
             tag: 0)
-        let customSort = CustomSortManager(entity: Account.self)
+        let customSort = CustomSortManager(.accounts)
         accountsController.sortManager = customSort        
         
         return accountsController

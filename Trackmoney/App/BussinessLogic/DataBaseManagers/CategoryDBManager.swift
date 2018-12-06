@@ -24,13 +24,30 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             return (nil, ErrorMessage(error: .objectIsExistAlready))
         }
         
+        // Получение списока категорий создоваемого типа до добавления для сортировки
+        let all = NSPredicate(value: true)
+        
+        guard let resultForAll = get(all).0 else {
+            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
+        }
+        
+        let categories = resultForAll as! [CategoryTransaction]
+        let sortManager: CustomSortManager
+        let type = message[.type] as! String
+        if type == CategoryType.expense.rawValue {
+            sortManager = CustomSortManager(.expense)
+        } else {
+            sortManager = CustomSortManager(.income)
+        }
+        let sortedByType = categories.filter { $0.type == type }
+        
         // Создание нового объекта
         let category = CategoryTransaction(context: context)
         
         category.id = UUID().uuidString
         category.name = message[.name] as! String
         category.icon = message[.icon] as! String
-        category.type = message[.type] as! String
+        category.type = type
         
         if let parentName = message[.parent] {
             let predicate = NSPredicate(format: "name = %@", parentName as! String)
@@ -46,6 +63,11 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         
         do {
             try context.save()
+            // Сортирует список с пользовательской последовательностью
+            // и добавляет в конец новый элемент
+            let sortedList = sortManager.sortedArray(sortedByType)
+            _ = sortManager.add(element: category, in: sortedList)            
+            
             return (category, nil)
             
         } catch {

@@ -4,7 +4,7 @@ import UIKit
 
 class AccountDBManager: DBManager, DBManagerProtocol {
     
-    lazy var sortManager = CustomSortManager(entity: Account.self)
+    lazy var sortManager = CustomSortManager(.accounts)
     lazy var transactionDBManager = TransactionDBManager()
     
     func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, ErrorMessage?) {
