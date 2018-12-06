@@ -3,4 +3,5 @@ enum CategoryType: String {
     
     case income
     case expense
+    
 }

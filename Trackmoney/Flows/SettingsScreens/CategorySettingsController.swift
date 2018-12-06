@@ -172,6 +172,11 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView,
+                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
     // Удаляет Категорию из списка
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
@@ -197,6 +202,67 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 tableView.reloadData()
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+                
+                if indexPath.section == 0 {
+                    
+                    guard let id = self?.incomeCategories[indexPath.row].id else { return }
+                    let result = self?.dataProvider?.delete(with: id)
+                    
+                    if result != nil, result == true {
+                        
+                        let item = self?.incomeCategories[indexPath.row]
+                        self?.incomeSortManager.remove(element: item!, in: self!.incomeCategories)
+                        self?.incomeCategories.remove(at: indexPath.row)
+                        
+                        tableView.reloadData()
+                    }
+                } else {
+                    
+                    guard let id = self?.expenseCategories[indexPath.row].id else { return }
+                    let result = self?.dataProvider?.delete(with: id)
+                    
+                    if result != nil, result == true {
+                        
+                        let item = self?.expenseCategories[indexPath.row]
+                        self?.expenseSortManager.remove(element: item!, in: self!.expenseCategories)
+                        self?.expenseCategories.remove(at: indexPath.row)
+                        
+                        tableView.reloadData()
+                    }
+                }
+        }
+        
+        let rename = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
+
+                let item: CategoryTransaction
+                
+                if indexPath.section == 0 {
+                    item = self!.incomeCategories[indexPath.row]
+                } else {
+                    item = self!.expenseCategories[indexPath.row]
+                }
+                
+                let type = CategoryType(rawValue: item.type)!
+                let formController = CategoryFormControllerBuilder(typeCategory: type)
+                    .viewController()
+                formController.categotyForUpdate = item
+                self?.present(formController, animated: true, completion: nil)
+        }
+        
+        delete.backgroundColor = UIColor.red
+        rename.backgroundColor = UIColor.blue
+        
+        return [delete, rename]
     }
     
     func tableView(_ tableView: UITableView,
@@ -226,19 +292,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             
             expenseSortManager.swapElement(array: expenseCategories)
         }
-    }
-
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-
-        if indexPath.section == 0 {
-            RenameEntity().show(controller: self,
-                                entyty: incomeCategories[indexPath.row])
-        } else {
-            RenameEntity().show(controller: self,
-                                entyty: expenseCategories[indexPath.row])
-        }
-        
     }
     
 }

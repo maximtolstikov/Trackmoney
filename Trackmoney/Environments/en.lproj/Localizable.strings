@@ -3,6 +3,7 @@
 //Buttons
 "cancelButton" = "Cancel";
 "titleSaveButton" = "Save";
+"titleRename" = "Rename";
 "titleDeleteButton" = "Delete";
 "titleEditButton" = "Edit";
 "titleAddAccount" = "Add";

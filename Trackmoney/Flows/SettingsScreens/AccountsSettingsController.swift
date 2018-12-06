@@ -172,8 +172,8 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
-        RenameEntity().show(controller: self,
-                            entyty: accounts[indexPath.row])
+//        RenameEntity().show(controller: self,
+//                            entyty: accounts[indexPath.row])
     }
     
 }

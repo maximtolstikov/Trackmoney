@@ -13,7 +13,6 @@
 		9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B16321820622001E88AA /* SumTextFieldValidate.swift */; };
 		9417B16621820722001E88AA /* TextToNumberRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B16521820722001E88AA /* TextToNumberRule.swift */; };
 		9424967021AABF6C00364643 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424966F21AABF6C00364643 /* DateFormat.swift */; };
-		9424967221AAFE7400364643 /* RenameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424967121AAFE7400364643 /* RenameEntity.swift */; };
 		9424E8012163651600BE756D /* CreateTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E8002163651600BE756D /* CreateTransactionDBManagerSpec.swift */; };
 		9424E8042163872000BE756D /* DeleteTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E8032163872000BE756D /* DeleteTransactionDBManagerSpec.swift */; };
 		9424E80621638F1B00BE756D /* GetTransactionDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424E80521638F1B00BE756D /* GetTransactionDBManagerSpec.swift */; };
@@ -134,7 +133,6 @@
 		9417B16321820622001E88AA /* SumTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumTextFieldValidate.swift; sourceTree = "<group>"; };
 		9417B16521820722001E88AA /* TextToNumberRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToNumberRule.swift; sourceTree = "<group>"; };
 		9424966F21AABF6C00364643 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
-		9424967121AAFE7400364643 /* RenameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameEntity.swift; sourceTree = "<group>"; };
 		9424E8002163651600BE756D /* CreateTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
 		9424E8032163872000BE756D /* DeleteTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
 		9424E80521638F1B00BE756D /* GetTransactionDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTransactionDBManagerSpec.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 				9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */,
 				9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */,
 				9444221E21A8756C0005DA0B /* NoteAlert.swift */,
-				9424967121AAFE7400364643 /* RenameEntity.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -847,7 +844,6 @@
 				942888512168C7F0002E3DCC /* AlertManager.swift in Sources */,
 				94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */,
 				94858B032146D15B00498DCF /* TransactionDBManager.swift in Sources */,
-				9424967221AAFE7400364643 /* RenameEntity.swift in Sources */,
 				94EC74F721B5584A002476AC /* Period.swift in Sources */,
 				94A7FE01217C8CF1009E5C4B /* CategorySettingsDataProvider.swift in Sources */,
 				94858B002146D15B00498DCF /* CategoryDBManager.swift in Sources */,
