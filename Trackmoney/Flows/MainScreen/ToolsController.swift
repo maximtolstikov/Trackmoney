@@ -72,7 +72,7 @@ class ToolsController: UIViewController {
     private func addTable() {
         
         let frame = CGRect.zero
-        tableView = UITableView(frame: frame, style: .plain)
+        tableView = UITableView(frame: frame, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -181,15 +181,6 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
             return expenseCategories?.count ?? 0
         } else {
             return incomeCategories?.count ?? 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return NSLocalizedString("incomeTitle", comment: "")
-        } else {
-            return NSLocalizedString("expenseTitle", comment: "")
         }
     }
     
