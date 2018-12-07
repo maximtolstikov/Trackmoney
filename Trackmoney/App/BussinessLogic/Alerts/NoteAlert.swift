@@ -16,7 +16,7 @@ class NoteAlert: AlertManager {
                                    style: .cancel) { _ in
                                     self.alertController = nil
         }
-        let save = UIAlertAction(title: NSLocalizedString("titleSaveButton",
+        let save = UIAlertAction(title: NSLocalizedString("titleOkButton",
                                                           comment: ""),
                                  style: .default) { _ in
                                     guard let textField = self.alertController.textFields?.first else { return }

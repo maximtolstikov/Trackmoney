@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        var start = StartDataFill()
+        start.checkData()
+        
         self.window = UIWindow()
         let tabBarController = MainTabBarControllerBuilder().viewController()
         self.window?.rootViewController = tabBarController

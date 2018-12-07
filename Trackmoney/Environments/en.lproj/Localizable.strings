@@ -3,6 +3,7 @@
 //Buttons
 "cancelButton" = "Cancel";
 "titleSaveButton" = "Save";
+"titleOkButton" = "Ok";
 "titleRename" = "Rename";
 "titleDeleteButton" = "Delete";
 "titleEditButton" = "Edit";
@@ -24,7 +25,7 @@
 "expenseTitle" = "Expense";
 "incomeTitle" = "Income";
 "transferTitle" = "Transfer";
-"noteTitle" = "Note";
+"noteTitle" = "✏️";
 "renameTitle" = "Rename?";
 "accountCreate" = "Account created!";
 "accountDelete" = "Account deleted!";

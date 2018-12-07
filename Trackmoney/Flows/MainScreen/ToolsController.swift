@@ -35,6 +35,7 @@ class ToolsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.9254901961, blue: 0.9490196078, alpha: 1)
         setSettingsButton()
         setupSegmentedControll()
         addTable()
@@ -85,7 +86,7 @@ class ToolsController: UIViewController {
         
         tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: segmentedControll.bottomAnchor,
-                                       constant: 8.0).isActive = true
+                                       constant: 1.0).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         tableView.bottomAnchor
             .constraint(equalTo: self.view.bottomAnchor).isActive = true

@@ -3,6 +3,7 @@
 //Buttons
 "cancelButton" = "Отменить";
 "titleSaveButton" = "Сохранить";
+"titleOkButton" = "Готово";
 "titleRename" = "Переименовать";
 "titleDeleteButton" = "Удалить";
 "titleEditButton" = "Изменить";
@@ -24,7 +25,7 @@
 "expenseTitle" = "Расход";
 "incomeTitle" = "Доход";
 "transferTitle" = "Перевод";
-"noteTitle" = "Заметка";
+"noteTitle" = "✏️";
 "renameTitle" = "Переименовать?";
 "accountCreate" = "Счет создан!";
 "accountDelete" = "Счет удален!";

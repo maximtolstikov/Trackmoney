@@ -24,7 +24,6 @@ struct DeleteTransaction {
         let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
         
         guard let mainAccount = result.0?.first else {
-            assertionFailure()
             return false }
         
         guard let type = TransactionType(

@@ -91,6 +91,7 @@
 		94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */; };
 		94D89E4E216260780090D192 /* AccountDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D89E4D216260780090D192 /* AccountDBManagerSpec.swift */; };
 		94D89E5021626F640090D192 /* CategoryDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D89E4F21626F640090D192 /* CategoryDBManagerSpec.swift */; };
+		94DC094F21BACF970043DC53 /* StartDataFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC094E21BACF970043DC53 /* StartDataFill.swift */; };
 		94DD1B6E2178FCB100FF2853 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94DD1B702178FCB100FF2853 /* Localizable.strings */; };
 		94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */; };
 		94DE5460215EA4B2006CAC9D /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE545F215EA4B2006CAC9D /* AccountsController.swift */; };
@@ -212,6 +213,7 @@
 		94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTransactionManager.swift; sourceTree = "<group>"; };
 		94D89E4D216260780090D192 /* AccountDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDBManagerSpec.swift; sourceTree = "<group>"; };
 		94D89E4F21626F640090D192 /* CategoryDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDBManagerSpec.swift; sourceTree = "<group>"; };
+		94DC094E21BACF970043DC53 /* StartDataFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDataFill.swift; sourceTree = "<group>"; };
 		94DD1B62217895F300FF2853 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		94DD1B6F2178FCB100FF2853 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		94DD1B712178FCB300FF2853 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9441172921B7047C0015B38C /* AverageValues.swift */,
+				94DC094E21BACF970043DC53 /* StartDataFill.swift */,
 			);
 			path = BussinessLogic;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */,
 				9446624F21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift in Sources */,
 				94DE5460215EA4B2006CAC9D /* AccountsController.swift in Sources */,
+				94DC094F21BACF970043DC53 /* StartDataFill.swift in Sources */,
 				9446622C219DA51600C9FFCF /* CategoryButtonValidator.swift in Sources */,
 				94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */,
 				94C553C5216514A900C0F628 /* ToolsControllerBuilder.swift in Sources */,
