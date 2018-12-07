@@ -43,11 +43,19 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             
             DispatchQueue.global().async {
                 
-                var calculator = AverageValues(transactions: transactions,
-                                               categories: categories)
-                let averageCategories = calculator.collectCategories()
+                let expenseTransaction = transactions
+                    .filter { $0.type == TransactionType.expense.rawValue }
+                let incomeTransaction = transactions
+                    .filter { $0.type == TransactionType.income.rawValue }
                 
-                self.controller?.categories = averageCategories
+                var calculator = AverageValues(categories)
+                let expenseAverageCategories = calculator
+                    .collectCategories(expenseTransaction)
+                let incomeAverageCategories = calculator
+                    .collectCategories(incomeTransaction)
+                
+                self.controller?.expenseCategories = expenseAverageCategories
+                self.controller?.incomeCategories = incomeAverageCategories
             }
         })
     }

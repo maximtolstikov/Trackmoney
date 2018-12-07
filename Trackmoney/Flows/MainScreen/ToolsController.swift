@@ -5,7 +5,15 @@ class ToolsController: UIViewController {
     var tableView = UITableView()
     let cellIndentifire = "cell"
     var period: Period = .month
-    var categories: [AverageCategory]? {
+    
+    var expenseCategories: [AverageCategory]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    var incomeCategories: [AverageCategory]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -15,23 +23,11 @@ class ToolsController: UIViewController {
     
     let segmentedControll: UISegmentedControl = {
         let array = [NSLocalizedString("monthSegment", comment: ""),
-                     NSLocalizedString("yearSegment", comment: ""),
-                     NSLocalizedString("periodSegment", comment: "")]
+                     NSLocalizedString("yearSegment", comment: "")]
+                     //NSLocalizedString("periodSegment", comment: "")]
         let controll = UISegmentedControl(items: array)
         controll.translatesAutoresizingMaskIntoConstraints = false
         return controll
-    }()
-    
-    let background: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let scrollView: UIScrollView = {
-        let view = UIScrollView(frame: CGRect.zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
     }()
     
     var dataProvider: ToolsDataProviderProtocol?
@@ -60,10 +56,6 @@ class ToolsController: UIViewController {
                                     for: .valueChanged)
         self.view.addSubview(segmentedControll)
         
-        segmentedControll.layer.shadowOffset = CGSize(width: 0, height: 1)
-        segmentedControll.layer.shadowOpacity = 1
-        segmentedControll.layer.shadowRadius = 3
-        
         var topHeight: CGFloat {
             return StatusBarType.check() ? 96.0 : 72.0
         }
@@ -74,7 +66,7 @@ class ToolsController: UIViewController {
             .isActive = true
         segmentedControll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topHeight).isActive = true
         segmentedControll.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -16.0).isActive = true
-        segmentedControll.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        segmentedControll.heightAnchor.constraint(equalToConstant: 24.0).isActive = true
     }
     
     private func addTable() {
@@ -175,17 +167,37 @@ class ToolsController: UIViewController {
 
 }
 
+
 extension ToolsController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        return categories?.count ?? 0
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         
-        let cell = tableView
-            .dequeueReusableCell(withIdentifier: cellIndentifire,
-                                 for: indexPath)
+        if section == 0 {
+            return expenseCategories?.count ?? 0
+        } else {
+            return incomeCategories?.count ?? 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return NSLocalizedString("incomeTitle", comment: "")
+        } else {
+            return NSLocalizedString("expenseTitle", comment: "")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifire,
+                                                 for: indexPath)
         return cell
     }
     
@@ -195,13 +207,25 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
 
         // swiftlint:disable next force_cast
         let cell = cell as! ToolsCell
-
-        guard let category = categories?[indexPath.row] else { return }
-
-        cell.categoryNameLable.text = category.name
-        cell.sumLable.text = String(category.sum)
-        cell.shapeLayer.strokeEnd = CGFloat(category.part)
+        
+        if indexPath.section == 0 {
+            
+            guard let category = expenseCategories?[indexPath.row] else { return }
+            
+            cell.categoryNameLable.text = category.name
+            cell.sumLable.text = String(category.sum)
+            cell.shapeLayer.strokeEnd = CGFloat(category.part)
+            cell.shapeLayer.strokeColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+            
+        } else {
+            
+            guard let category = incomeCategories?[indexPath.row] else { return }
+            
+            cell.categoryNameLable.text = category.name
+            cell.sumLable.text = String(category.sum)
+            cell.shapeLayer.strokeEnd = CGFloat(category.part)
+            cell.shapeLayer.strokeColor = #colorLiteral(red: 0.4500938654, green: 0.9813225865, blue: 0.4743030667, alpha: 1)
+        }
     }
     
-
 }

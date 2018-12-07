@@ -34,6 +34,7 @@ class ToolsCell: UITableViewCell {
     private func setupNameLable() {
         
         contentView.addSubview(categoryNameLable)
+        categoryNameLable.font = UIFont.italicSystemFont(ofSize: 16)
         categoryNameLable.adjustsFontSizeToFitWidth = true
         
         categoryNameLable.topAnchor
@@ -64,13 +65,13 @@ class ToolsCell: UITableViewCell {
     private func setIndicator() {
         
         contentView.layer.addSublayer(shapeLayer)
-        shapeLayer.lineWidth = 20
+        
+        shapeLayer.lineWidth = 16
         shapeLayer.lineCap = .round
         shapeLayer.fillColor = nil
         shapeLayer.strokeEnd = 1
-        shapeLayer.strokeColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
-        
         shapeLayer.frame = contentView.bounds
+        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: contentView.bounds.minX + 16.0,
                               y: contentView.bounds.maxY - 10.0))
