@@ -89,8 +89,14 @@ class CategoryFormController: BaseFormController {
     // создает верхнюю кнопку выбора родительской Категории
     func setupTopChoseButton() {
         
-        topChooseButton.setTitle(NSLocalizedString("chooseParentButton", comment: ""),
-                                 for: .normal)
+        if categotyForUpdate == nil {
+            topChooseButton
+                .setTitle(NSLocalizedString("chooseParentButton", comment: ""),
+                          for: .normal)
+        } else {
+            topChooseButton.setTitle(categotyForUpdate?.parent?.name, for: .normal)
+        }
+        
         viewOnScroll.addSubview(topChooseButton)
         
         topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
