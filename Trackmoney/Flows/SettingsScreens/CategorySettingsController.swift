@@ -11,7 +11,7 @@ class CategorySettingsController: UIViewController {
     
     var incomeCategories: [CategoryTransaction]! {
         didSet {
-            incomeCategories = expenseSortManager.sortedArray(incomeCategories)
+            incomeCategories = incomeSortManager.sortedArray(incomeCategories)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -177,33 +177,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return .none
     }
     
-    // Удаляет Категорию из списка
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-            if indexPath.section == 0 {
-                guard self.dataProvider.delete(
-                    with: self.incomeCategories[indexPath.row].id) else {
-                        assertionFailure()
-                        return
-                }
-                incomeCategories.remove(at: indexPath.row)
-                tableView.reloadData()
-            } else {
-                guard self.dataProvider.delete(
-                    with: self.expenseCategories[indexPath.row].id) else {
-                        assertionFailure()
-                        return
-                }
-                expenseCategories.remove(at: indexPath.row)
-                tableView.reloadData()
-            }
-        }
-    }
-    
+    // Свайп по ячейке
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -214,11 +188,12 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 if indexPath.section == 0 {
                     
                     guard let id = self?.incomeCategories[indexPath.row].id else { return }
+                    
+                    let item = self?.incomeCategories[indexPath.row]
                     let result = self?.dataProvider?.delete(with: id)
                     
                     if result != nil, result == true {
                         
-                        let item = self?.incomeCategories[indexPath.row]
                         self?.incomeSortManager.remove(element: item!, in: self!.incomeCategories)
                         self?.incomeCategories.remove(at: indexPath.row)
                         
@@ -227,11 +202,12 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 } else {
                     
                     guard let id = self?.expenseCategories[indexPath.row].id else { return }
+                    
+                    let item = self?.expenseCategories[indexPath.row]
                     let result = self?.dataProvider?.delete(with: id)
                     
                     if result != nil, result == true {
                         
-                        let item = self?.expenseCategories[indexPath.row]
                         self?.expenseSortManager.remove(element: item!, in: self!.expenseCategories)
                         self?.expenseCategories.remove(at: indexPath.row)
                         
@@ -271,6 +247,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         return tableView.isEditing
     }
     
+    // Сортирует список
     func tableView(_ tableView: UITableView,
                    moveRowAt sourceIndexPath: IndexPath,
                    to destinationIndexPath: IndexPath) {
@@ -280,17 +257,15 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
             let item = incomeCategories[sourceIndexPath.row]
             incomeCategories.remove(at: sourceIndexPath.row)
             incomeCategories.insert(item, at: destinationIndexPath.row)
-            tableView.reloadData()
-            
             incomeSortManager.swapElement(array: incomeCategories)
+            tableView.reloadData()
         } else {
             
             let item = expenseCategories[sourceIndexPath.row]
             expenseCategories.remove(at: sourceIndexPath.row)
             expenseCategories.insert(item, at: destinationIndexPath.row)
-            tableView.reloadData()
-            
             expenseSortManager.swapElement(array: expenseCategories)
+            tableView.reloadData()
         }
     }
     

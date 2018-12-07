@@ -12,13 +12,13 @@ struct CustomSortManager {
     }
     
     /// Возвращает массив с пользовательской сортировкой
-    func sortedArray<T: CustomSort>(_ array: [T]) -> [T] {
+    func sortedArray<T: DBEntity>(_ array: [T]) -> [T] {
         
         let dict = checkDictCorrectFor(array)
         var newArray = array
         
         for element in array {
-            guard let index = dict[element.name] else {
+            guard let index = dict[element.id] else {
                 assertionFailure()
                 return newArray
             }
@@ -28,7 +28,7 @@ struct CustomSortManager {
     }
     
     /// Защищает массив имен от не соответствия имен в словаре
-    func checkDictCorrectFor<T: CustomSort>(_ array: [T]) -> [String: Int] {
+    func checkDictCorrectFor<T: DBEntity>(_ array: [T]) -> [String: Int] {
         
         guard let dict = userDefalts.dictionary(forKey: key.rawValue) as? [String: Int] else {
             return saveCurrentOrder(array)
@@ -36,13 +36,13 @@ struct CustomSortManager {
         
         var mySet = Set<String>()
         // Создает множество из значений словаря
-        for name in dict.keys {
-            mySet.insert(name)
+        for id in dict.keys {
+            mySet.insert(id)
         }
         // Сохраняет словарь с текущим порядком если есть не совпадение имен
         // в массиве и в словаре
         for entity in array {
-            guard mySet.contains(entity.name) else {
+            guard mySet.contains(entity.id) else {
                 return saveCurrentOrder(array)
             }
         }
@@ -56,11 +56,11 @@ struct CustomSortManager {
     }
     
     // Сохраняет порядок в UserDefalts
-    private func saveCurrentOrder<T: CustomSort>(_ array: [T]) -> [String: Int] {
+    private func saveCurrentOrder<T: DBEntity>(_ array: [T]) -> [String: Int] {
         
         var dict = [String: Int]()
         for (index, value) in array.enumerated() {
-            dict[value.name] = index
+            dict[value.id] = index
         }
         
         userDefalts.set(dict, forKey: key.rawValue)
@@ -70,7 +70,7 @@ struct CustomSortManager {
     }
     
     /// Добавляет элемент
-    func add<T: CustomSort>(element: T, in array: [T]) {
+    func add<T: DBEntity>(element: T, in array: [T]) {
         
         var newArray = array
         newArray.append(element)
@@ -78,14 +78,14 @@ struct CustomSortManager {
     }
     
     /// Удаляет элемент
-    func remove<T: CustomSort>(element: T, in array: [T]) {
+    func remove<T: DBEntity>(element: T, in array: [T]) {
         
-        let newArray = array.filter { $0.name != element.name }
+        let newArray = array.filter { $0.id != element.id }
         _ = saveCurrentOrder(newArray)
     }
     
     /// Перемещает элемент
-    func swapElement<T: CustomSort>(array: [T]) {
+    func swapElement<T: DBEntity>(array: [T]) {
         
          _ = saveCurrentOrder(array)
     }

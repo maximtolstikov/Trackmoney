@@ -11,6 +11,6 @@ import CoreData
 import Foundation
 
 @objc(CategoryTransaction)
-public class CategoryTransaction: NSManagedObject, DBEntity, CustomSort {
+public class CategoryTransaction: NSManagedObject, DBEntity {
 
 }

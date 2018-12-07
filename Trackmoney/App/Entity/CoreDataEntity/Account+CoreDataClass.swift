@@ -10,6 +10,6 @@ import CoreData
 import Foundation
 
 @objc(Account)
-public class Account: NSManagedObject, DBEntity, CustomSort {
+public class Account: NSManagedObject, DBEntity{
 
 }

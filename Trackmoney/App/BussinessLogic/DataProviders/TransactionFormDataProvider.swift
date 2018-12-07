@@ -28,7 +28,7 @@ class TransactionFormDataProvider: DataProviderProtocol {
             sortKey = .expense
         } else if controller?.transactionType == .income {
             categoryType = .income
-            sortKey = .expense
+            sortKey = .income
         } else {
             categoryType = nil
         }
@@ -49,6 +49,7 @@ class TransactionFormDataProvider: DataProviderProtocol {
                 let sortManager = CustomSortManager(key)
                 let array = sortManager.sortedArray(objects)
                 controller?.categories = array
+                print(key)
             }
         }
     }

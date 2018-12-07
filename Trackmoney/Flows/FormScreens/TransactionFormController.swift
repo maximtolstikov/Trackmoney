@@ -288,12 +288,12 @@ class TransactionFormController: BaseFormController {
             }
         } else {
             
-            guard let arrayCategories = categories else {
+            guard let array = categories else {
                 assertionFailure("список счетов не получен из базы")
                 return
             }
             
-            ChooseCategoryAlert().show(categories: arrayCategories,
+            ChooseCategoryAlert().show(categories: array,
                                        controller: self) { [weak self] (name) in
                                         self?.bottomChooseButton.setTitle(name, for: .normal)
             }

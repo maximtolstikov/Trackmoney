@@ -86,7 +86,6 @@
 		94C553C92165323C00C0F628 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C82165323C00C0F628 /* SettingsController.swift */; };
 		94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */; };
 		94CC8137214FDBB30027913C /* TextErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC8136214FDBB30027913C /* TextErrors.swift */; };
-		94CFA79621B8FFB50082FC17 /* CustomSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFA79521B8FFB50082FC17 /* CustomSort.swift */; };
 		94CFA79821B935030082FC17 /* SortKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFA79721B935030082FC17 /* SortKeys.swift */; };
 		94D166892199A88500C5D091 /* NegativeSumRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D166882199A88500C5D091 /* NegativeSumRule.swift */; };
 		94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */; };
@@ -208,7 +207,6 @@
 		94C553C82165323C00C0F628 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerBilder.swift; sourceTree = "<group>"; };
 		94CC8136214FDBB30027913C /* TextErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextErrors.swift; sourceTree = "<group>"; };
-		94CFA79521B8FFB50082FC17 /* CustomSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSort.swift; sourceTree = "<group>"; };
 		94CFA79721B935030082FC17 /* SortKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortKeys.swift; sourceTree = "<group>"; };
 		94D166882199A88500C5D091 /* NegativeSumRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeSumRule.swift; sourceTree = "<group>"; };
 		94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTransactionManager.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 			isa = PBXGroup;
 			children = (
 				94A0EE7F21A55214004B66E1 /* CustomSortManager.swift */,
-				94CFA79521B8FFB50082FC17 /* CustomSort.swift */,
 				94CFA79721B935030082FC17 /* SortKeys.swift */,
 			);
 			path = CustomSort;
@@ -540,9 +537,9 @@
 		94A7FDFB217C8198009E5C4B /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */,
 				94DE545F215EA4B2006CAC9D /* AccountsController.swift */,
 				94FA33F5215FB88200689061 /* LogController.swift */,
+				94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */,
 				94DE5461215EAB56006CAC9D /* ToolsController.swift */,
 			);
 			path = MainScreen;
@@ -551,9 +548,9 @@
 		94A7FDFC217C81AD009E5C4B /* SettingsScreens */ = {
 			isa = PBXGroup;
 			children = (
-				94C553C82165323C00C0F628 /* SettingsController.swift */,
 				94EC435E21661E12009C6BF3 /* AccountsSettingsController.swift */,
 				94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */,
+				94C553C82165323C00C0F628 /* SettingsController.swift */,
 			);
 			path = SettingsScreens;
 			sourceTree = "<group>";
@@ -561,10 +558,10 @@
 		94A7FDFD217C81C3009E5C4B /* FormScreens */ = {
 			isa = PBXGroup;
 			children = (
-				9417B1612181C914001E88AA /* BaseFormController.swift */,
-				94F82413216B3CE5003DEE00 /* TransactionFormController.swift */,
 				94A7FDEF217AF1B6009E5C4B /* AccountFormController.swift */,
+				9417B1612181C914001E88AA /* BaseFormController.swift */,
 				94A7FDF9217B51EB009E5C4B /* CategoryFormController.swift */,
+				94F82413216B3CE5003DEE00 /* TransactionFormController.swift */,
 			);
 			path = FormScreens;
 			sourceTree = "<group>";
@@ -868,7 +865,6 @@
 				94F82414216B3CE5003DEE00 /* TransactionFormController.swift in Sources */,
 				9446623421A03D6400C9FFCF /* Account+CoreDataProperties.swift in Sources */,
 				94858B052146D15B00498DCF /* MessageManager.swift in Sources */,
-				94CFA79621B8FFB50082FC17 /* CustomSort.swift in Sources */,
 				94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */,
 				94A7FDFF217C820A009E5C4B /* CategorySettingsController.swift in Sources */,
 				94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */,
