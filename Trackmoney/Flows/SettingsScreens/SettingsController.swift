@@ -77,14 +77,12 @@ class SettingsController: UIViewController {
 }
 
 
-extension SettingsController: UITableViewDelegate, UITableViewDataSource {
-    
+extension SettingsController: UITableViewDelegate, UITableViewDataSource {    
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return arrayPoint.count
     }
-    
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,7 +95,6 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -113,14 +110,6 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-        
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44))
-//        view.backgroundColor = UIColor.gray
-//        
-//        return viewHeader
-//    }
     
 }

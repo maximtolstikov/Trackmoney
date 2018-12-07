@@ -44,7 +44,7 @@ class AccountsSettingsController: UIViewController {
             style: .done,
             target: self,
             action: #selector(closeController))
-
+        
         self.navigationItem.rightBarButtonItem = rightButton
     }
     
@@ -110,7 +110,7 @@ class AccountsSettingsController: UIViewController {
             self.tableView.setEditing(true, animated: true)
         }
     }
-
+    
 }
 
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
@@ -133,27 +133,67 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    // Удаляет счет из списка
+    //    // Удаляет счет из списка
+    //    func tableView(_ tableView: UITableView,
+    //                   commit editingStyle: UITableViewCell.EditingStyle,
+    //                   forRowAt indexPath: IndexPath) {
+    //
+    //        if editingStyle == .delete {
+    //
+    //            guard self.dataProvider.delete(
+    //                with: self.accounts[indexPath.row].id) else {
+    //                    assertionFailure()
+    //                    return
+    //            }
+    //            sortManager.remove(element: accounts[indexPath.row], in: accounts)
+    //            accounts.remove(at: indexPath.row)
+    //            tableView.reloadData()
+    //        }
+    //    }
+    
+    // Свайп по ячейке
     func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        if editingStyle == .delete {
-            
-            guard self.dataProvider.delete(
-                with: self.accounts[indexPath.row].id) else {
-                    assertionFailure()
-                    return
-            }
-            sortManager.remove(element: accounts[indexPath.row], in: accounts)
-            accounts.remove(at: indexPath.row)
-            tableView.reloadData()
-        }        
+        let delete = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+                
+                guard let id = self?.accounts[indexPath.row].id else { return }
+                
+                let item = self?.accounts[indexPath.row]
+                let result = self?.dataProvider?.delete(with: id)
+                
+                if result != nil, result == true {
+                    
+                    self?.sortManager.remove(element: item!, in: (self?.accounts)!)
+                    self?.accounts.remove(at: indexPath.row)
+                    
+                    tableView.reloadData()
+                }
+        }
+        
+        let rename = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
+                
+                let item = self!.accounts[indexPath.row]
+                let controller = AccountFormControllerBuilder()
+                    .viewController() as! AccountFormController
+                controller.accountForUpdate = item
+                
+                self?.present(controller, animated: true, completion: nil)
+        }
+        
+        delete.backgroundColor = UIColor.red
+        rename.backgroundColor = UIColor.blue
+        
+        return [delete, rename]
     }
     
     func tableView(_ tableView: UITableView,
                    canMoveRowAt indexPath: IndexPath) -> Bool {
-
+        
         return tableView.isEditing
     }
     
@@ -167,13 +207,6 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         accounts.insert(item, at: destinationIndexPath.row)
         
         sortManager.swapElement(array: accounts)
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        
-//        RenameEntity().show(controller: self,
-//                            entyty: accounts[indexPath.row])
     }
     
 }

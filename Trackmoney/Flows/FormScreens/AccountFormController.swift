@@ -6,7 +6,12 @@ class AccountFormController: BaseFormController {
     
     //поставщик данных
     var dataProvider: DataProviderProtocol?
-    var accountForUpdate: Account?
+    var accountForUpdate: Account? {
+        didSet {
+            nameTextField.text = accountForUpdate?.name
+            sumTextField.isHidden = true
+        }
+    }
     
     let nameTextField: UITextField = {
         let textField = UITextField()
