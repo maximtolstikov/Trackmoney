@@ -2,6 +2,12 @@ import UIKit
 
 class ToolsCell: UITableViewCell {
     
+    var background: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var shapeLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         return layer
@@ -22,6 +28,7 @@ class ToolsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
    
+        setupBackgroundView()
         setupNameLable()
         setupSumLable()
         setIndicator()
@@ -31,9 +38,32 @@ class ToolsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupBackgroundView() {
+        
+        contentView.addSubview(background)
+        
+        background.backgroundColor = UIColor(red: CGFloat(11) / 225.0,
+                                             green: CGFloat(154) / 225.0,
+                                             blue: CGFloat(117) / 225.0,
+                                             alpha: CGFloat(0.1))
+        
+        background.layer.shadowOffset = CGSize(width: 0, height: 2)
+        background.layer.shadowOpacity = 0.5
+        background.layer.shadowRadius = 3
+        
+        background.centerYAnchor
+            .constraint(equalTo: contentView.centerYAnchor).isActive = true
+        background.leftAnchor
+            .constraint(equalTo: contentView.leftAnchor).isActive = true
+        background.rightAnchor
+            .constraint(equalTo: contentView.rightAnchor).isActive = true
+        background.heightAnchor
+            .constraint(equalTo: contentView.heightAnchor).isActive = true
+    }
+    
     private func setupNameLable() {
         
-        contentView.addSubview(categoryNameLable)
+        background.addSubview(categoryNameLable)
         categoryNameLable.font = UIFont.italicSystemFont(ofSize: 16)
         categoryNameLable.adjustsFontSizeToFitWidth = true
         
@@ -49,7 +79,7 @@ class ToolsCell: UITableViewCell {
     
     private func setupSumLable() {
         
-        contentView.addSubview(sumLable)
+        background.addSubview(sumLable)
         sumLable.textAlignment = .right
         sumLable.adjustsFontSizeToFitWidth = true
         
@@ -64,9 +94,9 @@ class ToolsCell: UITableViewCell {
     
     private func setIndicator() {
         
-        contentView.layer.addSublayer(shapeLayer)
+        background.layer.addSublayer(shapeLayer)
         
-        shapeLayer.lineWidth = 16
+        shapeLayer.lineWidth = 10
         shapeLayer.lineCap = .round
         shapeLayer.fillColor = nil
         shapeLayer.strokeEnd = 1

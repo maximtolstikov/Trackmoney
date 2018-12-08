@@ -139,6 +139,7 @@ class TransactionFormController: BaseFormController {
         
         noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor,
                                          constant: 8).isActive = true
+        noteButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         noteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         noteButton.bottomAnchor.constraint(equalTo: bottomChooseButton.topAnchor,
                                            constant: -40).isActive = true

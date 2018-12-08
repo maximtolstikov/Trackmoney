@@ -216,7 +216,7 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
             cell.categoryNameLable.text = category.name
             cell.sumLable.text = String(category.sum)
             cell.shapeLayer.strokeEnd = CGFloat(category.part)
-            cell.shapeLayer.strokeColor = #colorLiteral(red: 0.4500938654, green: 0.9813225865, blue: 0.4743030667, alpha: 1)
+            cell.shapeLayer.strokeColor = #colorLiteral(red: 0.1855610516, green: 0.495716603, blue: 0.9686274529, alpha: 1)
         }
     }
     
