@@ -77,11 +77,15 @@ class SettingsController: UIViewController {
 }
 
 
-extension SettingsController: UITableViewDelegate, UITableViewDataSource {    
+extension SettingsController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return arrayPoint.count
+    }
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return arrayPoint.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView,
@@ -91,24 +95,22 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "myCell",
             for: indexPath)
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = arrayPoint[indexPath.row]
+        cell.textLabel?.text = arrayPoint[indexPath.section]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let nameCell = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        
-        switch nameCell {
-        case SettingListType.getTitleFor(title: SettingListType.accountsSetting):
+        if indexPath.section == 0 {
+            
             let controller = AccountsSettingsControllerBuilder().viewController()
             self.navigationController?.pushViewController(controller, animated: true)
-        case SettingListType.getTitleFor(title: SettingListType.categoriesSettings):
+            
+        } else {
+            
             let controller = CategorySettingsControllerBuilder().viewController()
             self.navigationController?.pushViewController(controller, animated: true)
-        default:
-            break
         }
     }
     

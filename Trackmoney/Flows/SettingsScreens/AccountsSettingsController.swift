@@ -76,7 +76,7 @@ class AccountsSettingsController: UIViewController {
             action: #selector(addAccount))
         
         let deleteAccountButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSortDelete", comment: ""),
+            title: NSLocalizedString("titleSort", comment: ""),
             style: .done,
             target: self,
             action: #selector(sortDeleteAccount))
@@ -105,8 +105,10 @@ class AccountsSettingsController: UIViewController {
     @objc func sortDeleteAccount() {
         
         if self.tableView.isEditing {
+            
             self.tableView.setEditing(false, animated: true)
         } else {
+            
             self.tableView.setEditing(true, animated: true)
         }
     }
@@ -133,23 +135,10 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    //    // Удаляет счет из списка
-    //    func tableView(_ tableView: UITableView,
-    //                   commit editingStyle: UITableViewCell.EditingStyle,
-    //                   forRowAt indexPath: IndexPath) {
-    //
-    //        if editingStyle == .delete {
-    //
-    //            guard self.dataProvider.delete(
-    //                with: self.accounts[indexPath.row].id) else {
-    //                    assertionFailure()
-    //                    return
-    //            }
-    //            sortManager.remove(element: accounts[indexPath.row], in: accounts)
-    //            accounts.remove(at: indexPath.row)
-    //            tableView.reloadData()
-    //        }
-    //    }
+    func tableView(_ tableView: UITableView,
+                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     
     // Свайп по ячейке
     func tableView(_ tableView: UITableView,

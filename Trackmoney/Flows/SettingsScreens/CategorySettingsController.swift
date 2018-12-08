@@ -65,6 +65,7 @@ class CategorySettingsController: UIViewController {
     }
     
     private func addTable() {
+        
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
             UITableViewCell.self,

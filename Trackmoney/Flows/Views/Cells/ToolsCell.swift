@@ -47,7 +47,7 @@ class ToolsCell: UITableViewCell {
                                              blue: CGFloat(117) / 225.0,
                                              alpha: CGFloat(0.1))
         
-        background.layer.shadowOffset = CGSize(width: 0, height: 2)
+        background.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         background.layer.shadowOpacity = 0.5
         background.layer.shadowRadius = 3
         
@@ -58,7 +58,8 @@ class ToolsCell: UITableViewCell {
         background.rightAnchor
             .constraint(equalTo: contentView.rightAnchor).isActive = true
         background.heightAnchor
-            .constraint(equalTo: contentView.heightAnchor).isActive = true
+            .constraint(equalTo: contentView.heightAnchor,
+                        constant: -1.0).isActive = true
     }
     
     private func setupNameLable() {

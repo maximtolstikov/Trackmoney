@@ -9,7 +9,7 @@
 "titleEditButton" = "Edit";
 "titleAddAccount" = "Add";
 "titleAddCategory" = "Add";
-"titleSortDelete" = "Sort";
+"titleSort" = "Sort";
 "chooseParentButton" = "parent";
 "emptyTitle" = "-----------";
 "decline" = "No";
