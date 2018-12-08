@@ -125,7 +125,8 @@ class BaseFormController: UIViewController {
         }
         
         //swiftlint:disable next force_cast
-        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue)
+            .cgRectValue
         scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize.height)
     }
     
@@ -156,7 +157,8 @@ class BaseFormController: UIViewController {
     //создаем жест тап по экрану
     private func tapOnScreen() {
         
-        tapOnViewGesture = UITapGestureRecognizer(target: self, action: #selector (animateSlideUpPromt))
+        tapOnViewGesture = UITapGestureRecognizer(target: self,
+                                                  action: #selector (animateSlideUpPromt))
         tapOnViewGesture.numberOfTapsRequired = 1
         self.view.addGestureRecognizer(tapOnViewGesture)
         

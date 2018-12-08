@@ -1,4 +1,3 @@
-/// Для описания поставщика данных для контроллера форма Счета
 import CoreData
 
 class AccountFormDataProvider: DataProviderProtocol {

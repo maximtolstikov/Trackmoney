@@ -1,5 +1,3 @@
-// Для строительства контроллера формы сушьности
-
 import UIKit
 
 class AccountFormControllerBuilder {

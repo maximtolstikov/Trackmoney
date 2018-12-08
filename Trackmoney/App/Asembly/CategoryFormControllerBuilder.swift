@@ -1,4 +1,3 @@
-/// Строит контроллер формы Категории
 class CategoryFormControllerBuilder {
     
     let type: CategoryType

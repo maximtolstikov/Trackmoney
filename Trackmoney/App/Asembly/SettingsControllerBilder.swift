@@ -1,5 +1,3 @@
-// Для строительства контроллера выбора настроек
-
 import UIKit
 
 class SettigsControllerBuilder {

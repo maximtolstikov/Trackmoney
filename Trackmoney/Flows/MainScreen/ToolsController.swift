@@ -24,7 +24,6 @@ class ToolsController: UIViewController {
     let segmentedControll: UISegmentedControl = {
         let array = [NSLocalizedString("monthSegment", comment: ""),
                      NSLocalizedString("yearSegment", comment: "")]
-                     //NSLocalizedString("periodSegment", comment: "")]
         let controll = UISegmentedControl(items: array)
         controll.translatesAutoresizingMaskIntoConstraints = false
         return controll
@@ -45,8 +44,8 @@ class ToolsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-            self.dataProvider?.load(self.period, .current)
+        
+        self.dataProvider?.load(self.period, .current)
     }
     
     func setupSegmentedControll() {
@@ -65,8 +64,10 @@ class ToolsController: UIViewController {
         
         segmentedControll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
             .isActive = true
-        segmentedControll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topHeight).isActive = true
-        segmentedControll.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -16.0).isActive = true
+        segmentedControll.topAnchor.constraint(equalTo: self.view.topAnchor,
+                                               constant: topHeight).isActive = true
+        segmentedControll.widthAnchor.constraint(equalTo: self.view.widthAnchor,
+                                                 constant: -16.0).isActive = true
         segmentedControll.heightAnchor.constraint(equalToConstant: 24.0).isActive = true
     }
     
@@ -104,13 +105,6 @@ class ToolsController: UIViewController {
             case 1:
                 period = .year
                 dataProvider?.load(period, .current)
-            case 2:
-                break
-                // FIXMY: - реализовать DatePicker
-//                let picker = UIDatePicker()
-//                self.view.addSubview(picker)
-//                picker.center = self.view.center
-//                picker.datePickerMode = .countDownTimer
             default:
                 break
             }
@@ -165,7 +159,7 @@ class ToolsController: UIViewController {
             break
         }
     }
-
+    
 }
 
 
@@ -196,7 +190,7 @@ extension ToolsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
-
+        
         // swiftlint:disable next force_cast
         let cell = cell as! ToolsCell
         

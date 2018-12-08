@@ -7,5 +7,4 @@ protocol ToolsDataProviderProtocol {
     var dateManager: SupplierDates? { get }
     
     func load(_ period: Period, _ what: WhatPeriod)
-    func loadFor(startDate: Date, finishDate: Date)
 }

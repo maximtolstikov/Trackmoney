@@ -1,5 +1,3 @@
-// Для строительства контроллера "Настроек Счетов"
-
 import UIKit
 
 class AccountsSettingsControllerBuilder {

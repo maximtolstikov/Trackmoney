@@ -2,7 +2,7 @@
 import CoreData
 
 class ToolsDataProvider: ToolsDataProviderProtocol {
-    
+   
     var dataManager: DBManagerProtocol?
     var dateManager: SupplierDates?
     weak var controller: ToolsController?
@@ -58,11 +58,6 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
                 self.controller?.incomeCategories = incomeAverageCategories
             }
         })
-    }
-    
-    // TODO: - сделать получение данных на основе DatePicker
-    func loadFor(startDate: Date, finishDate: Date) {
-
     }
     
     private func setTitle(_ from: Date, _ period: Period) {

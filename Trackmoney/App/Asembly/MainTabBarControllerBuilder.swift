@@ -1,5 +1,3 @@
-// Для конструирования Главного Таб бар контроллера
-
 import UIKit
 
 class MainTabBarControllerBuilder {

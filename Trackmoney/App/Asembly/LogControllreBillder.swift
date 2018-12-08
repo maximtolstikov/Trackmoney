@@ -1,5 +1,3 @@
-// Для строительства контроллера журнала
-
 import UIKit
 
 class LogControllerBuilder {

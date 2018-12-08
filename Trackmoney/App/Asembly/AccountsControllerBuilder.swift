@@ -1,5 +1,3 @@
-// Для конструирования контроллера счетов
-
 import UIKit
 
 class AccountsControllerBuilder {

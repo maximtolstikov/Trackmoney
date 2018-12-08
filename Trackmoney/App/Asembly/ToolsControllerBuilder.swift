@@ -1,5 +1,3 @@
-// Для описания строителя контроллера Интструменты
-
 import UIKit
 
 class ToolsControllerBuilder {

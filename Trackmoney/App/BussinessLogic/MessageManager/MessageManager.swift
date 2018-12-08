@@ -3,7 +3,6 @@ import CoreData
 /// Создает сообщения для отправки в базу
 struct MessageManager {
     
-    // FIXME: - переделать на получение реальных иконок
     let iconExpenseTransaction = "Minus"
     let iconIncomeTransaction = "Plus"
     let iconTransferTransaction = "Transfer"
@@ -47,7 +46,9 @@ struct MessageManager {
     }
     
     // Создает сообщение для счета
-    func craftAccounеMessage(nameAccount: String, sumAccount: Int32, id: String?) -> [MessageKeyType: Any] {
+    func craftAccounеMessage(nameAccount: String,
+                              sumAccount: Int32,
+                              id: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameAccount

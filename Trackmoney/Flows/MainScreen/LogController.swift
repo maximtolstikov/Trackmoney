@@ -107,7 +107,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let sourceCell = cell as! LogCell
-  
+        
         popViewController.noteText.text = note
         popViewController.modalPresentationStyle = .popover
         
@@ -148,7 +148,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
                 
                 let controller = TransactionFormControllerBuilder()
                     .viewController(transactionType: type)
-
+                
                 controller.topChooseButtonText = transaction.mainAccount
                 controller.sumTextFieldText = String(transaction.sum)
                 controller.transactionID = transaction.id

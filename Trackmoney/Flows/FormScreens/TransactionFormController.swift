@@ -121,8 +121,10 @@ class TransactionFormController: BaseFormController {
         }
         viewOnScroll.addSubview(topChooseButton)
         
-        topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
-        topChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor, multiplier: 2 / 3).isActive = true
+        topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)
+            .isActive = true
+        topChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
+                                               multiplier: 2 / 3).isActive = true
         topChooseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         topChooseButton.bottomAnchor.constraint(equalTo: sumTextField.topAnchor,
                                                 constant: -40).isActive = true
@@ -181,7 +183,8 @@ class TransactionFormController: BaseFormController {
                 return
         }
         
-        let mainAccountValidateResult = MainAccountButtonValidator(account: topChooseButtonText).validate()
+        let mainAccountValidateResult = MainAccountButtonValidator(account: topChooseButtonText)
+            .validate()
         if mainAccountValidateResult.isEmpty {
             
             let sumTextFieldValidateResult = SumTextFieldValidate(text: sumText).validate()
@@ -195,7 +198,8 @@ class TransactionFormController: BaseFormController {
                         mainAccount: topChooseButtonText,
                         corAccount: bottomChooseButtonText).validate()
                 default:
-                    bottomButtonValidateResult = CategoryButtonValidator(category: bottomChooseButtonText).validate()
+                    bottomButtonValidateResult = CategoryButtonValidator(category: bottomChooseButtonText)
+                        .validate()
                 }
                 
                 if bottomButtonValidateResult.isEmpty {

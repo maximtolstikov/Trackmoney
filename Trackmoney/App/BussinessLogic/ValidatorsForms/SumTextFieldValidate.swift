@@ -1,5 +1,3 @@
-// Для описания правил валидации поля суммы
-
 class SumTextFieldValidate: ValidatorProtocol {
     
     var textForValidate: String

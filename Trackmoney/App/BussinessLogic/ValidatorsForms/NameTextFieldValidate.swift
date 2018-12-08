@@ -1,5 +1,3 @@
-// Для валидации текстового поля формы Категории
-
 class NameTextFieldValidate: ValidatorProtocol {
     
     var textForValidate: String

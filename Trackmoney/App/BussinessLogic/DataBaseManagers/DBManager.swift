@@ -1,5 +1,3 @@
-// Для определения базового класса DataBaseManager
-
 import CoreData
 import UIKit
 

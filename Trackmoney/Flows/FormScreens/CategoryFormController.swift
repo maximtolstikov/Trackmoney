@@ -99,8 +99,10 @@ class CategoryFormController: BaseFormController {
         
         viewOnScroll.addSubview(topChooseButton)
         
-        topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
-        topChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor, multiplier: 2 / 3).isActive = true
+        topChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)
+            .isActive = true
+        topChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
+                                               multiplier: 2 / 3).isActive = true
         topChooseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         topChooseButton.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
                                                 constant: -40).isActive = true

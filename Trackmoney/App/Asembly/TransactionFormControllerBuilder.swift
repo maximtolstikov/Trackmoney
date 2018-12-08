@@ -1,5 +1,3 @@
-// Для строительства контроллера формы транзакции
-
 class TransactionFormControllerBuilder {
     
     func viewController(transactionType: TransactionType) -> TransactionFormController {
