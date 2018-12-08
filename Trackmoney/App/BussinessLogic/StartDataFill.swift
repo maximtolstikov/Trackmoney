@@ -76,19 +76,19 @@ struct StartDataFill {
         
         let income: [MessageKeyType: Any] = [.sum: Int32(30),
                                              .mainAccount: "Cash",
-                                             .icon: "icon",
+                                             .icon: "Plus",
                                              .type: TransactionType.income.rawValue,
                                              .category: "💰 Income",
                                              .note: ""]
         let firstEexpense: [MessageKeyType: Any] = [.sum: Int32(15),
                                             .mainAccount: "Debit card",
-                                            .icon: "icon",
+                                            .icon: "Minus",
                                             .type: TransactionType.expense.rawValue,
                                             .category: "🚙 Car",
                                             .note: ""]
         let secondEexpense: [MessageKeyType: Any] = [.sum: Int32(15),
                                                 .mainAccount: "Cash",
-                                                .icon: "icon",
+                                                .icon: "Minus",
                                                 .type: TransactionType.expense.rawValue,
                                                 .category: "🍉 Food",
                                                 .note: ""]
