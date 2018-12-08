@@ -10,6 +10,6 @@ import CoreData
 import Foundation
 
 @objc(Account)
-public class Account: NSManagedObject, DBEntity{
+public class Account: NSManagedObject, DBEntity {
 
 }

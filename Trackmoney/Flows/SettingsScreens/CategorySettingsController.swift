@@ -182,64 +182,84 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        let delete = configureDelete()
+        let rename = configureRename()
+        
+        delete.backgroundColor = UIColor.red
+        rename.backgroundColor = UIColor.blue
+        
+        return [delete, rename]
+    }
+    
+    private func configureDelete() -> UITableViewRowAction {
+        
         let delete = UITableViewRowAction(
             style: .default,
             title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
                 
                 if indexPath.section == 0 {
                     
-                    guard let id = self?.incomeCategories[indexPath.row].id else { return }
+                    guard let item = self?.incomeCategories[indexPath.row] else {
+                        assertionFailure()
+                        return
+                    }
                     
-                    let item = self?.incomeCategories[indexPath.row]
-                    let result = self?.dataProvider?.delete(with: id)
+                    let result = self?.dataProvider?.delete(with: item.id)
                     
                     if result != nil, result == true {
                         
-                        self?.incomeSortManager.remove(element: item!, in: self!.incomeCategories)
+                        self?.incomeSortManager.remove(element: item,
+                                                       in: self!.incomeCategories)
                         self?.incomeCategories.remove(at: indexPath.row)
-                        
-                        tableView.reloadData()
+                        self?.tableView.reloadData()
                     }
                 } else {
                     
-                    guard let id = self?.expenseCategories[indexPath.row].id else { return }
+                    guard let item = self?.expenseCategories[indexPath.row] else {
+                        assertionFailure()
+                        return
+                    }
                     
-                    let item = self?.expenseCategories[indexPath.row]
-                    let result = self?.dataProvider?.delete(with: id)
+                    let result = self?.dataProvider?.delete(with: item.id)
                     
                     if result != nil, result == true {
                         
-                        self?.expenseSortManager.remove(element: item!, in: self!.expenseCategories)
+                        self?.expenseSortManager.remove(element: item,
+                                                        in: self!.expenseCategories)
                         self?.expenseCategories.remove(at: indexPath.row)
-                        
-                        tableView.reloadData()
+                        self?.tableView.reloadData()
                     }
                 }
         }
+        return delete
+    }
+    
+    private func configureRename() -> UITableViewRowAction {
         
         let rename = UITableViewRowAction(
             style: .default,
             title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
-
-                let item: CategoryTransaction
+                
+                let category: CategoryTransaction?
                 
                 if indexPath.section == 0 {
-                    item = self!.incomeCategories[indexPath.row]
+                    category = self!.incomeCategories[indexPath.row]
                 } else {
-                    item = self!.expenseCategories[indexPath.row]
+                    category = self!.expenseCategories[indexPath.row]
                 }
                 
-                let type = CategoryType(rawValue: item.type)!
+                guard let item = category,
+                    let type = CategoryType(rawValue: item.type) else {
+                        assertionFailure()
+                        return
+                }
+                
                 let formController = CategoryFormControllerBuilder(typeCategory: type)
                     .viewController()
                 formController.categotyForUpdate = item
                 self?.present(formController, animated: true, completion: nil)
         }
-        
-        delete.backgroundColor = UIColor.red
-        rename.backgroundColor = UIColor.blue
-        
-        return [delete, rename]
+        return rename
     }
     
     func tableView(_ tableView: UITableView,

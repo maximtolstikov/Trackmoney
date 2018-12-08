@@ -115,6 +115,7 @@ class AccountsSettingsController: UIViewController {
     
 }
 
+
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
@@ -148,14 +149,14 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
             style: .default,
             title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
                 
-                guard let id = self?.accounts[indexPath.row].id else { return }
+                guard let item = self?.accounts[indexPath.row],
+                    let array = self?.accounts else { return }
                 
-                let item = self?.accounts[indexPath.row]
-                let result = self?.dataProvider?.delete(with: id)
+                let result = self?.dataProvider?.delete(with: item.id)
                 
                 if result != nil, result == true {
                     
-                    self?.sortManager.remove(element: item!, in: (self?.accounts)!)
+                    self?.sortManager.remove(element: item, in: array)
                     self?.accounts.remove(at: indexPath.row)
                     
                     tableView.reloadData()
@@ -168,7 +169,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                 
                 let item = self!.accounts[indexPath.row]
                 let controller = AccountFormControllerBuilder()
-                    .viewController() as! AccountFormController
+                    .viewController()
                 controller.accountForUpdate = item
                 
                 self?.present(controller, animated: true, completion: nil)
