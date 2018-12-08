@@ -58,8 +58,7 @@ class ToolsCell: UITableViewCell {
         background.rightAnchor
             .constraint(equalTo: contentView.rightAnchor).isActive = true
         background.heightAnchor
-            .constraint(equalTo: contentView.heightAnchor,
-                        constant: -1.0).isActive = true
+            .constraint(equalTo: contentView.heightAnchor).isActive = true
     }
     
     private func setupNameLable() {

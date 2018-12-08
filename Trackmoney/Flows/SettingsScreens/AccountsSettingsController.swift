@@ -70,7 +70,7 @@ class AccountsSettingsController: UIViewController {
     private func addBottomToolBar() {
         
         let addAccountButtom = UIBarButtonItem(
-            title: NSLocalizedString("titleAddAccount", comment: ""),
+            title: NSLocalizedString("titleAdd", comment: ""),
             style: .done,
             target: self,
             action: #selector(addAccount))

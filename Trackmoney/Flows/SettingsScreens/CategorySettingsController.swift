@@ -79,13 +79,13 @@ class CategorySettingsController: UIViewController {
     private func addBottomToolBar() {
         
         let addCategoryButtom = UIBarButtonItem(
-            title: NSLocalizedString("titleAddCategory", comment: ""),
+            title: NSLocalizedString("titleAdd", comment: ""),
             style: .done,
             target: self,
             action: #selector(addCategory))
         
         let editCategoryButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSortDelete", comment: ""),
+            title: NSLocalizedString("titleSort", comment: ""),
             style: .done,
             target: self,
             action: #selector(sortDeleteCategory))

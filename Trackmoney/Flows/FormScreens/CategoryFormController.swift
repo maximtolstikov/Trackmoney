@@ -74,7 +74,7 @@ class CategoryFormController: BaseFormController {
         
         viewOnScroll.addSubview(typeLable)
         
-        typeLable.text = NSLocalizedString("typeCategory", comment: "") + " " + "\(typeCategory.rawValue)"
+        typeLable.text = typeCategory.rawValue
         typeLable.textAlignment = .center
         
         typeLable.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)

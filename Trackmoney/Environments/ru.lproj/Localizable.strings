@@ -7,16 +7,12 @@
 "titleRename" = "Переименовать";
 "titleDeleteButton" = "Удалить";
 "titleEditButton" = "Изменить";
-"titleAddAccount" = "Добавить";
-"titleAddCategory" = "Добавить";
+"titleAdd" = "Добавить";
 "titleSort" = "Сортировать";
 "chooseParentButton" = "родитель";
 "emptyTitle" = "-----------";
 "decline" = "Нет";
 "approve" = "Да";
-
-//Lable
-"typeCategory" = "тип:";
 
 //Alert
 "listAccountsAlertTitle" = "Счета";

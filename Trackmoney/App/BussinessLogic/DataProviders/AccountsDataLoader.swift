@@ -12,15 +12,16 @@ class AccountsDataLoader: DataProviderProtocol {
         
         let all = NSPredicate(value: true)
         
-        let result = dbManager?.get(all)
+        let result = dbManager?.get(all) as? ([Account]?, ErrorMessage?)
         
         guard let accounts = result?.0 else {
             assertionFailure()
             return
         }
-        
-        controller?.accounts = accounts as? [Account]
-        controller?.navigationItem.title = "Total:"
+       
+        let totalSum = accounts.map { $0.sum }.reduce (0, +)
+        controller?.navigationItem.title = "Total: " + " " + "\(totalSum)"
+        controller?.accounts = accounts
     }
     
     func save(message: [MessageKeyType: Any]) {}

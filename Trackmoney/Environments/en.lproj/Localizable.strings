@@ -7,16 +7,12 @@
 "titleRename" = "Rename";
 "titleDeleteButton" = "Delete";
 "titleEditButton" = "Edit";
-"titleAddAccount" = "Add";
-"titleAddCategory" = "Add";
+"titleAdd" = "Add";
 "titleSort" = "Sort";
 "chooseParentButton" = "parent";
 "emptyTitle" = "-----------";
 "decline" = "No";
 "approve" = "Yes";
-
-//Lable
-"typeCategory" = "type:";
 
 //Alert
 "listAccountsAlertTitle" = "Accounts";

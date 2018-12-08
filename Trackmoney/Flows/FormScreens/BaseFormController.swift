@@ -52,7 +52,6 @@ class BaseFormController: UIViewController {
         viewOnScroll = UIView(frame: self.view.bounds)
         viewOnScroll.backgroundColor = UIColor.white
         self.scrollView.addSubview(viewOnScroll)
-        
     }
     
     //создаем кнопки Сохранит данные формы и Отменить
@@ -61,27 +60,27 @@ class BaseFormController: UIViewController {
         viewOnScroll.addSubview(cancelButton)
         viewOnScroll.addSubview(saveButton)
         
-        cancelButton.leftAnchor.constraint(equalTo: viewOnScroll.leftAnchor,
-                                           constant: 42).isActive = true
+        cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        cancelButton.leftAnchor.constraint(equalTo: viewOnScroll.leftAnchor)
+            .isActive = true
         cancelButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
-                                            multiplier: 1 / 4).isActive = true
+                                            multiplier: 1 / 2).isActive = true
         cancelButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         cancelButton.bottomAnchor.constraint(equalTo: viewOnScroll.bottomAnchor,
                                              constant: -40).isActive = true
         cancelButton.addTarget(self, action: #selector(tapCancelButton),
                                for: .touchUpInside)
         
-        
-        saveButton.rightAnchor.constraint(equalTo: viewOnScroll.rightAnchor,
-                                          constant: -42).isActive = true
+        saveButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        saveButton.rightAnchor.constraint(equalTo: viewOnScroll.rightAnchor)
+            .isActive = true
         saveButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
-                                          multiplier: 1 / 4).isActive = true
+                                          multiplier: 1 / 2).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: viewOnScroll.bottomAnchor,
                                            constant: -40).isActive = true
         saveButton.addTarget(self, action: #selector(tapSaveButton),
                              for: .touchUpInside)
-        
     }
     
     // Методы кнопок "сохранить" и "отменить"
