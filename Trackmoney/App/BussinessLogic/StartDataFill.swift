@@ -11,17 +11,17 @@ struct StartDataFill {
         
         let predicate = NSPredicate(value: true)
         let accountResult = accountDBManager.get(predicate)
-        guard let accountArray = accountResult.0 else { return }
+        guard let accountArray = accountResult else { return }
         
         if accountArray.isEmpty {
             
             let categoryResult = categoryDBManager.get(predicate)
-            guard let categoryArray = categoryResult.0 else { return }
+            guard let categoryArray = categoryResult else { return }
             
             if categoryArray.isEmpty {
                 
                 let transactionResult = transactionDBManager.get(predicate)
-                guard let transactionArray = transactionResult.0 else { return }
+                guard let transactionArray = transactionResult else { return }
                 
                 if transactionArray.isEmpty {
                     

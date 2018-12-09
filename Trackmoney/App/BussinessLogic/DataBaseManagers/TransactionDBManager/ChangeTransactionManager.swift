@@ -38,9 +38,9 @@ struct ChangeTransactionManager {
     private func clearData(type: TransactionType) -> Bool {
         
         let mainPredicate = NSPredicate(format: "name = %@", transaction.mainAccount)
-        let mainResult = accountDBManager.get(mainPredicate) as! ([Account]?, ErrorMessage?)
+        let mainResult = accountDBManager.get(mainPredicate) as! [Account]?
         
-        guard let mainAccount = mainResult.0?.first else {
+        guard let mainAccount = mainResult?.first else {
             assertionFailure()
             return false }
         
@@ -54,9 +54,9 @@ struct ChangeTransactionManager {
         case .transfer:
             
             let predicate = NSPredicate(format: "name = %@", transaction.corAccount!)
-            let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+            let result = accountDBManager.get(predicate) as! [Account]?
             
-            guard let corAccount = result.0?.first else {
+            guard let corAccount = result?.first else {
                 assertionFailure()
                 return false }
             
@@ -71,9 +71,9 @@ struct ChangeTransactionManager {
         
         let mainAccountName = message[.mainAccount] as! String
         let mainPredicate = NSPredicate(format: "name = %@", mainAccountName)
-        let mainResult = accountDBManager.get(mainPredicate) as! ([Account]?, ErrorMessage?)
+        let mainResult = accountDBManager.get(mainPredicate) as! [Account]?
         
-        guard let mainAccount = mainResult.0?.first else {
+        guard let mainAccount = mainResult?.first else {
             assertionFailure()
             return false }
         
@@ -94,9 +94,9 @@ struct ChangeTransactionManager {
         case .transfer:
             
             let predicate = NSPredicate(format: "name = %@", transaction.corAccount!)
-            let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+            let result = accountDBManager.get(predicate) as! [Account]?
             
-            guard let corAccount = result.0?.first else {
+            guard let corAccount = result?.first else {
                 assertionFailure()
                 return false }
             

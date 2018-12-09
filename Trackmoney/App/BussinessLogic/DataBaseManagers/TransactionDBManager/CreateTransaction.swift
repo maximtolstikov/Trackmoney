@@ -38,12 +38,13 @@ struct CreateTransaction {
         
         let predicate = NSPredicate(format: "name = %@",
                                     message[.mainAccount] as! String)
-        let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+        let result = accountDBManager.get(predicate)
         
-        guard let accountMain = result.0?.first else {
-            assertionFailure(TextErrors.objectIsNotExist.rawValue)
+        guard let object = result?.first else {
+            assertionFailure()
             return nil }
         
+        let accountMain = object as! Account
         self.type = type
         self.mainAccount = accountMain
         
@@ -54,13 +55,13 @@ struct CreateTransaction {
         if mManager.isExistValue(for: .corAccount, in: message) {
             let predicate = NSPredicate(format: "name = %@",
                                         message[.corAccount] as! String)
-            let result = accountDBManager
-                .get(predicate) as! ([Account]?, ErrorMessage?)
+            let result = accountDBManager.get(predicate)
             
-            guard let accountCor = result.0?.first else {
-                assertionFailure(TextErrors.objectIsNotExist.rawValue)
+            guard let object = result?.first else {
+                assertionFailure()
                 return nil }
             
+            let accountCor = object as! Account
             self.corAccount = accountCor
         }
         
@@ -70,7 +71,7 @@ struct CreateTransaction {
     }
     
     
-    func execute() -> (DBEntity?, ErrorMessage?) {
+    func execute() -> (DBEntity?, DBError?) {
         
         let transaction = Transaction(context: context)
         transaction.id = UUID().uuidString
@@ -98,9 +99,9 @@ struct CreateTransaction {
         
         do {
             try context.save()
-            return (transaction, nil)
+            return (transaction as DBEntity, nil)
         } catch {
-            return (nil, ErrorMessage(error: .contextDoNotBeSaved))
+            return (nil, DBError.contextDoNotBeSaved)
         }
     }
     

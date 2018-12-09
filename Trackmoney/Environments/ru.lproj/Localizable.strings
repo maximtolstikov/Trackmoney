@@ -50,3 +50,12 @@
 "monthSegment" = "Месяц";
 "yearSegment" = "Год";
 "periodSegment" = "Период";
+
+//DBError
+"accountHaveTransaction" = "Сначала требуется удалить транзакции для этого счета:";
+"contextDoNotBeSaved" = "Не удалось сохранить в базу данных!";
+"messageHaventRequireValue" = "Ошибка BD 1!";
+"noName" = "Ошибка BD 0!";
+"objectCanntGetFromBase" = "Ошибка BD 2!";
+"objectIsExistAlready" = "Объект уже существует!";
+"objectIsNotExist" = "Объект не сущестувует!";

@@ -1,5 +1,3 @@
-// Для определения вызва подсказки
-
 import UIKit
 
 class BaseFormController: UIViewController {

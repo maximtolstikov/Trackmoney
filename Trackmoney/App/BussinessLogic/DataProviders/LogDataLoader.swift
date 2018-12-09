@@ -11,11 +11,11 @@ class LogDataLoader: DataProviderProtocol {
         let all = NSPredicate(value: true)
         let result = dbManager?.get(all)
         
-        guard let objects = result?.0 else {
+        guard let objects = result else {
             if controller != nil {
                 // swiftlint:disable next force_unwrapping
                 ShortAlert().show(controller: controller!,
-                                  title: result?.1?.error.rawValue,
+                                  title: DBError.objectCanntGetFromBase.description,
                                   body: nil,
                                   style: .alert)
             }
@@ -43,7 +43,7 @@ class LogDataLoader: DataProviderProtocol {
             if controller != nil {
                 NeedCancelAlert().show(
                     controller: controller!,
-                    title: error!.error.rawValue,
+                    title: error?.description,
                     body: nil)
             }
             return false

@@ -47,7 +47,6 @@
 		9446624B21A0715900C9FFCF /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624A21A0715900C9FFCF /* CategoryType.swift */; };
 		9446624E21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */; };
 		9446624F21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */; };
-		9446A5A5214F825200D44E13 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446A5A4214F825200D44E13 /* ErrorMessage.swift */; };
 		945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B921121AFF7F200A1A791 /* StatusBarType.swift */; };
 		945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */; };
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
@@ -85,7 +84,7 @@
 		94C553C72165158A00C0F628 /* ToolsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C62165158A00C0F628 /* ToolsDataProvider.swift */; };
 		94C553C92165323C00C0F628 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C82165323C00C0F628 /* SettingsController.swift */; };
 		94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */; };
-		94CC8137214FDBB30027913C /* TextErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC8136214FDBB30027913C /* TextErrors.swift */; };
+		94CC8137214FDBB30027913C /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC8136214FDBB30027913C /* DBError.swift */; };
 		94CFA79821B935030082FC17 /* SortKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFA79721B935030082FC17 /* SortKeys.swift */; };
 		94D166892199A88500C5D091 /* NegativeSumRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D166882199A88500C5D091 /* NegativeSumRule.swift */; };
 		94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */; };
@@ -167,7 +166,6 @@
 		9446624A21A0715900C9FFCF /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		9446624C21A0720300C9FFCF /* CategoryTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9446624D21A0720300C9FFCF /* CategoryTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9446A5A4214F825200D44E13 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		945B921121AFF7F200A1A791 /* StatusBarType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarType.swift; sourceTree = "<group>"; };
 		945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormControllerBuilder.swift; sourceTree = "<group>"; };
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
@@ -207,7 +205,7 @@
 		94C553C62165158A00C0F628 /* ToolsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataProvider.swift; sourceTree = "<group>"; };
 		94C553C82165323C00C0F628 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerBilder.swift; sourceTree = "<group>"; };
-		94CC8136214FDBB30027913C /* TextErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextErrors.swift; sourceTree = "<group>"; };
+		94CC8136214FDBB30027913C /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		94CFA79721B935030082FC17 /* SortKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortKeys.swift; sourceTree = "<group>"; };
 		94D166882199A88500C5D091 /* NegativeSumRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeSumRule.swift; sourceTree = "<group>"; };
 		94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTransactionManager.swift; sourceTree = "<group>"; };
@@ -410,6 +408,7 @@
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9441172921B7047C0015B38C /* AverageValues.swift */,
+				94CC8136214FDBB30027913C /* DBError.swift */,
 				94DC094E21BACF970043DC53 /* StartDataFill.swift */,
 			);
 			path = BussinessLogic;
@@ -482,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				9470D44521B44DBC00FF07B1 /* Date */,
-				94CC8135214FDB7C0027913C /* ErrorsManager */,
 				94EC436621664492009C6BF3 /* SettingListType.swift */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
@@ -567,15 +565,6 @@
 				94F82413216B3CE5003DEE00 /* TransactionFormController.swift */,
 			);
 			path = FormScreens;
-			sourceTree = "<group>";
-		};
-		94CC8135214FDB7C0027913C /* ErrorsManager */ = {
-			isa = PBXGroup;
-			children = (
-				9446A5A4214F825200D44E13 /* ErrorMessage.swift */,
-				94CC8136214FDBB30027913C /* TextErrors.swift */,
-			);
-			path = ErrorsManager;
 			sourceTree = "<group>";
 		};
 		94D1668A2199AC4800C5D091 /* Rules */ = {
@@ -825,7 +814,6 @@
 				9424E8102163BA4C00BE756D /* DataProviderProtocol.swift in Sources */,
 				94D166892199A88500C5D091 /* NegativeSumRule.swift in Sources */,
 				9417B1602181A092001E88AA /* PromptView.swift in Sources */,
-				9446A5A5214F825200D44E13 /* ErrorMessage.swift in Sources */,
 				94858B062146D15B00498DCF /* TransactionType.swift in Sources */,
 				94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */,
 				94C553C12164FAFA00C0F628 /* LogControllreBillder.swift in Sources */,
@@ -883,7 +871,7 @@
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
 				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,
-				94CC8137214FDBB30027913C /* TextErrors.swift in Sources */,
+				94CC8137214FDBB30027913C /* DBError.swift in Sources */,
 				94DE5462215EAB56006CAC9D /* ToolsController.swift in Sources */,
 				94A7FDF4217AF3D7009E5C4B /* CategoryFormDataProvider.swift in Sources */,
 				9446624921A0569900C9FFCF /* ChooseTypeCategoryAlert.swift in Sources */,
@@ -1000,7 +988,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1056,7 +1044,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1070,6 +1058,7 @@
 			baseConfigurationReference = 4B771A0E68CD1C303BE92499 /* Pods-Trackmoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;
 				ENABLE_BITCODE = YES;
@@ -1081,6 +1070,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.trackmoney.Trackmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1091,6 +1081,7 @@
 			baseConfigurationReference = DB7C7CAE116CDCC9EE5640C9 /* Pods-Trackmoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;
 				ENABLE_BITCODE = YES;
@@ -1102,6 +1093,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.trackmoney.Trackmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

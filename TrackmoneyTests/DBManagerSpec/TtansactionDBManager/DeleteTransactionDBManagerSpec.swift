@@ -42,8 +42,8 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             let resultCreateTransaction = managerT.create(messageT)
             messageT[.id] = resultCreateTransaction.0?.id
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            accountMain = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            accountMain = result?.first
             XCTAssertEqual(accountMain?.sum, 130)
         })
         try when("delete transaction", closure: {
@@ -68,8 +68,8 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             let resultCreateTransaction = managerT.create(messageT)
             messageT[.id] = resultCreateTransaction.0?.id
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            accountMain = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            accountMain = result?.first
             XCTAssertEqual(accountMain?.sum, 70)
         })
         try when("delete transaction", closure: {
@@ -95,12 +95,12 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             messageAC[.id] = resultCreateCorAccount.0?.id
             
             let predicateM = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let resultM = managerA.get(predicateM) as! ([Account]?, ErrorMessage?)
-            accountMain = resultM.0?.first
+            let resultM = managerA.get(predicateM) as! [Account]?
+            accountMain = resultM?.first
             
             let predicateC = NSPredicate(format: "id = %@", messageAC[.id] as! String)
-            let resultC = managerA.get(predicateC) as! ([Account]?, ErrorMessage?)
-            accountCor = resultC.0?.first
+            let resultC = managerA.get(predicateC) as! [Account]?
+            accountCor = resultC?.first
             
             messageT[.type] = TransactionType.transfer.rawValue
             messageT[.corAccount] = accountCor.name

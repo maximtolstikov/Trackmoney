@@ -27,16 +27,20 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
                                         start as NSDate,
                                         finish as NSDate)
             
-            let resultByDates = self.dataManager?
-                .get(byDates) as! ([Transaction]?, ErrorMessage?)
+            let resultByDates = self.dataManager?.get(byDates)
             
             let manager = CategoryDBManager()
             let all = NSPredicate(value: true)
-            let resultAll = manager.get(all) as! ([CategoryTransaction]?, ErrorMessage?)
+            let resultAll = manager.get(all)
             
-            guard let transactions = resultByDates.0,
-                !transactions.isEmpty,
-                let categories = resultAll.0  else { return }
+            guard let objectsTransaction = resultByDates,
+                let objectsCategory = resultAll else {
+                assertionFailure()
+                return
+            }
+            
+            let transactions = objectsTransaction as! [Transaction]
+            let categories = objectsCategory as! [CategoryTransaction]
 
             self.currentDate = start
             self.setTitle(start, period)

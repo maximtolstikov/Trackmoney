@@ -21,9 +21,9 @@ struct DeleteTransaction {
         
         let accountDBManager = AccountDBManager()
         let predicate = NSPredicate(format: "name = %@", transaction.mainAccount)
-        let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+        let result = accountDBManager.get(predicate) as! [Account]?
         
-        guard let mainAccount = result.0?.first else {
+        guard let mainAccount = result?.first else {
             return false }
         
         guard let type = TransactionType(
@@ -40,9 +40,9 @@ struct DeleteTransaction {
             accountDBManager.substract(for: mainAccount, sum: sum)
         case .transfer:
             let predicate = NSPredicate(format: "name = %@", transaction.corAccount!)
-            let result = accountDBManager.get(predicate) as! ([Account]?, ErrorMessage?)
+            let result = accountDBManager.get(predicate) as! [Account]?
             
-            guard let corAccount = result.0?.first else {
+            guard let corAccount = result?.first else {
                 assertionFailure()
                 return false }
 

@@ -11,11 +11,11 @@ class CategorySettingsDataProvider: DataProviderProtocol {
         let all = NSPredicate(value: true)
         let result = dbManager?.get(all)
         
-        guard let objects = result?.0 else {
+        guard let objects = result else {
             if controller != nil {
                 // swiftlint:disable next force_unwrapping
                 ShortAlert().show(controller: controller!,
-                                  title: result?.1?.error.rawValue,
+                                  title: result?.description,
                                   body: nil,
                                   style: .alert)
             }
@@ -41,7 +41,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
         
         let result = dbManager?.create(message)
 
-        if result?.0 != nil, controller != nil {
+        if result != nil, controller != nil {
 
             ShortAlert().show(
                 controller: controller!,
@@ -54,7 +54,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
             if result?.1 != nil, controller != nil {
                 NeedCancelAlert().show(
                     controller: controller!,
-                    title: result?.1?.error.rawValue,
+                    title: result?.1?.description,
                     body: nil)
             }
         }
@@ -77,7 +77,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
             if error != nil, controller != nil {
                 NeedCancelAlert().show(
                     controller: controller!,
-                    title: error!.error.rawValue,
+                    title: error!.description,
                     body: nil)
             }
            return false

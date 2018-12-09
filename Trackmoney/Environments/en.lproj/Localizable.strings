@@ -51,3 +51,12 @@
 "monthSegment" = "Month";
 "yearSegment" = "Year";
 "periodSegment" = "Period";
+
+//DBError
+"accountHaveTransaction" = "At first need delete transactions:";
+"contextDoNotBeSaved" = "Can not save to base!";
+"messageHaventRequireValue" = "Error BD 1!";
+"noName" = "Error BD 0!";
+"objectCanntGetFromBase" = "Error BD 2!";
+"objectIsExistAlready" = "The object is exist already Объект уже существует!";
+"objectIsNotExist" = "The object is not exist Объект не сущестувует!";

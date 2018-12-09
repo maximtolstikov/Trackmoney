@@ -7,7 +7,7 @@ class CategoryFormDataProvider: DataProviderProtocol {
 
     func save(message: [MessageKeyType: Any]) {
         
-        let result: ErrorMessage?
+        let result: DBError?
 
         if message[.id] != nil {
             result = dbManager?.update(message)
@@ -18,7 +18,7 @@ class CategoryFormDataProvider: DataProviderProtocol {
         if let error = result, let controller = controller {
             NeedCancelAlert().show(
                 controller: controller,
-                title: error.error.rawValue,
+                title: error.description,
                 body: nil)
         }
     }
@@ -32,11 +32,11 @@ class CategoryFormDataProvider: DataProviderProtocol {
         let all = NSPredicate(value: true)
         let result = dbManager?.get(all)
         
-        guard let objects = result?.0 else {
+        guard let objects = result else {
             if controller != nil {
                 // swiftlint:disable next force_unwrapping
                 ShortAlert().show(controller: controller!,
-                                  title: result?.1?.error.rawValue,
+                                  title: DBError.objectCanntGetFromBase.description,
                                   body: nil,
                                   style: .alert)
             }

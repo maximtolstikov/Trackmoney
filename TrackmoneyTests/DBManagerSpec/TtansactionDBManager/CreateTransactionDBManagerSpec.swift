@@ -34,7 +34,7 @@ class CreateTransactionDBManagerSpec: XCTestCase {
 
     func testCreateIncomeTransaction() throws {
         
-        var resultCreateTransaction: (Transaction?, ErrorMessage?)
+        var resultCreateTransaction: (Transaction?, DBError?)
         
         try given("account", closure: {
             let result = managerA.create(messageAM)
@@ -44,32 +44,32 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             messageT[.type] = TransactionType.income.rawValue
             messageT[.note] = "test note"
             messageT[.category] = "myCategory"
-            resultCreateTransaction = managerT.create(messageT) as! (Transaction?, ErrorMessage?)
+            resultCreateTransaction = managerT.create(messageT) as! (Transaction?, DBError?)
             messageT[.id] = resultCreateTransaction.0?.id
         })
         try then("result error is not nil", closure: {
             let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
-            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            let object = result.0?.first
+            let result = managerT.get(predicate) as! [Transaction]?
+            let object = result?.first
             XCTAssertNotNil(object)
         })
         try then("transaction.category equal myCategory", closure: {
             let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
-            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            let transaction = result.0?.first
+            let result = managerT.get(predicate) as! [Transaction]?
+            let transaction = result?.first
             XCTAssertEqual(transaction?.category, "myCategory")
         })
         try then("accountMainSum equal 130", closure: {
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            let account = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            let account = result?.first
             XCTAssertEqual(account?.sum, 130)
         })
         try then("note equal 'test note'", closure: {
             let id = resultCreateTransaction.0?.id
             let predicate = NSPredicate(format: "id = %@", id!)
-            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            let transaction = result.0?.first
+            let result = managerT.get(predicate) as! [Transaction]?
+            let transaction = result?.first
             let note = transaction?.note
             XCTAssertEqual(note, "test note")
         })
@@ -91,13 +91,13 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         })
         try then("resultGetTransaction is not nil", closure: {
             let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
-            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            XCTAssertFalse((result.0?.isEmpty)!)
+            let result = managerT.get(predicate) as! [Transaction]?
+            XCTAssertFalse((result?.isEmpty)!)
         })
         try then("accountMainSum equal 70", closure: {
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            let account = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            let account = result?.first
             XCTAssertEqual(account?.sum, 70)
         })
         
@@ -122,20 +122,20 @@ class CreateTransactionDBManagerSpec: XCTestCase {
         })
         try then("object is not nil", closure: {
             let predicate = NSPredicate(format: "id = %@", messageT[.id] as! String)
-            let result = managerT.get(predicate) as! ([Transaction]?, ErrorMessage?)
-            let transaction = result.0?.first
+            let result = managerT.get(predicate) as! [Transaction]?
+            let transaction = result?.first
             XCTAssertNotNil(transaction)
         })
         try then("accountMainSum equal 70", closure: {
             let predicate = NSPredicate(format: "id = %@", messageAM[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            let account = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            let account = result?.first
             XCTAssertEqual(account?.sum, 70)
         })
         try then("accountCorSum equal 80", closure: {
             let predicate = NSPredicate(format: "id = %@", messageAC[.id] as! String)
-            let result = managerA.get(predicate) as! ([Account]?, ErrorMessage?)
-            let account = result.0?.first
+            let result = managerA.get(predicate) as! [Account]?
+            let account = result?.first
             XCTAssertEqual(account?.sum, 80)
         })
         

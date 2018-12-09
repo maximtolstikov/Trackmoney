@@ -1,3 +1,4 @@
+//swiftlint:disable force_cast
 import CoreData
 
 class TransactionFormDataProvider: DataProviderProtocol {
@@ -13,12 +14,13 @@ class TransactionFormDataProvider: DataProviderProtocol {
         
         let result = accountDbManager?.get(all)
         
-        guard let accounts = result?.0 else {
+        guard let objects = result else {
             assertionFailure()
             return
         }
         
-        controller?.accounts = accounts as? [Account]
+        let accounts = objects as! [Account]
+        controller?.accounts = accounts
         
         let categoryType: CategoryType?
         var sortKey: SortKeys?
@@ -36,18 +38,19 @@ class TransactionFormDataProvider: DataProviderProtocol {
         if let type = categoryType?.rawValue {
             
             let predicat = NSPredicate(format: "type = %@", type)
-            let result = categoryDbManager?
-                .get(predicat) as? ([CategoryTransaction]?, ErrorMessage?)
+            let result = categoryDbManager?.get(predicat)
             
-            guard let objects = result?.0 else {
+            guard let objects = result else {
                 assertionFailure()
                 return
             }
             
+            let categories = objects as! [CategoryTransaction]
+            
             if let key = sortKey {
                 
                 let sortManager = CustomSortManager(key)
-                let array = sortManager.sortedArray(objects)
+                let array = sortManager.sortedArray(categories)
                 controller?.categories = array
                 print(key)
             }
@@ -76,13 +79,13 @@ class TransactionFormDataProvider: DataProviderProtocol {
         return false
     }
     
-    private func showError(error: ErrorMessage) {
+    private func showError(error: DBError) {
         
         guard let controller = controller else { return }
         
         NeedCancelAlert().show(
             controller: controller,
-            title: error.error.rawValue,
+            title: error.description,
             body: nil)
     }
     

@@ -23,10 +23,10 @@ class AccountDBManagerSpec: XCTestCase {
     
     func testCreateAccount() throws {
         
-        var result: (Account?, ErrorMessage?)!
+        var result: (Account?, DBError?)!
         
         try when("create Account", closure: {
-            result = manager.create(message) as? (Account?, ErrorMessage?)
+            result = manager.create(message) as? (Account?, DBError?)
             message[.id] = result.0?.id
         })
         try then("result.error equal nil", closure: {
@@ -44,7 +44,7 @@ class AccountDBManagerSpec: XCTestCase {
     
     func testDeleteAccount() throws {
         
-        var resultDelete: ErrorMessage?
+        var resultDelete: DBError?
         
         try given("create Account", closure: {
             let resultCreate = manager.create(message)
@@ -58,9 +58,8 @@ class AccountDBManagerSpec: XCTestCase {
         })
         try then("object ib base isn't exist, should empty result", closure: {
             let predicate = NSPredicate(format: "name = %@", message[.name] as! String)
-            let result = manager.get(predicate)
-            
-            XCTAssertTrue((result.0?.isEmpty)!)
+            let result = manager.get(predicate)            
+            XCTAssertTrue((result?.isEmpty)!)
         })
         
     }
@@ -69,7 +68,7 @@ class AccountDBManagerSpec: XCTestCase {
     
         func testGetAcconts() throws {
     
-            var result: ([DBEntity]?, ErrorMessage?)
+            var result: [DBEntity]?
     
             try given("Account", closure: {
                 let resultCreate = manager.create(message)
@@ -80,11 +79,11 @@ class AccountDBManagerSpec: XCTestCase {
                 result = manager.get(predicate)
             }
             try then("account.name equal messege.name", closure: {
-                let account = result.0?.first as! Account
+                let account = result?.first as! Account
                 XCTAssertEqual(account.name, message[.name] as! String)
             })
             try then("shold be one result", closure: {
-                let count = result.0?.count
+                let count = result?.count
                 XCTAssertEqual(count, 1)
             })
     
@@ -107,7 +106,7 @@ class AccountDBManagerSpec: XCTestCase {
         try then("account neme equal newName", closure: {
             let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
             let result = manager.get(predicate)
-            let account = result.0?.first as! Account
+            let account = result?.first as! Account
             XCTAssertEqual(account.name, "newName")
             XCTAssertEqual(account.icon, "newIcon")
         })

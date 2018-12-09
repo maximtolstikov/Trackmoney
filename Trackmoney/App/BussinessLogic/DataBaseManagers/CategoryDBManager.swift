@@ -6,29 +6,25 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, ErrorMessage?) {
+    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
         
         // Проверка что объекта с таким именем нет в базе
         guard let name = message[.name] else {
-            return (nil, ErrorMessage(error: .messageHaventRequireValue))
+            return (nil, DBError.messageHaventRequireValue)
         }
         
         let predicateName = NSPredicate(format: "name = %@", name as! String)
         let resultForName = get(predicateName)
         
-        guard resultForName.1 == nil else {
-            return (nil, resultForName.1)
-        }
-        //swiftlint:disable next force_unwrapping
-        guard (resultForName.0?.isEmpty)! else {
-            return (nil, ErrorMessage(error: .objectIsExistAlready))
+        guard let response = resultForName, response.isEmpty else {
+            return (nil, DBError.objectIsExistAlready)
         }
         
         // Получение списока категорий создоваемого типа до добавления для сортировки
         let all = NSPredicate(value: true)
         
-        guard let resultForAll = get(all).0 else {
-            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
+        guard let resultForAll = get(all) else {
+            return (nil, DBError.objectCanntGetFromBase)
         }
         
         let categories = resultForAll as! [CategoryTransaction]
@@ -51,12 +47,13 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         
         if let parentName = message[.parent] {
             let predicate = NSPredicate(format: "name = %@", parentName as! String)
-            let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+            let result = get(predicate)
             
-            guard let parent = result.0?.first else {
-                return (nil, ErrorMessage(error: .objectIsNotExist))
+            guard let object = result?.first else {
+                return (nil, DBError.objectCanntGetFromBase)
             }
             
+            let parent = object as! CategoryTransaction
             category.parent = parent
             parent.addToChild(category)
         }
@@ -71,35 +68,31 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             return (category, nil)
             
         } catch {
-            return (nil, ErrorMessage(error: .contextDoNotBeSaved))
+            return (nil, DBError.contextDoNotBeSaved)
         }
     }
     
-    func get(_ predicate: NSPredicate) -> ([DBEntity]?, ErrorMessage?) {
+    func get(_ predicate: NSPredicate) -> [DBEntity]? {
         
         let fetchRequest: NSFetchRequest<CategoryTransaction> = CategoryTransaction.fetchRequest()
         fetchRequest.predicate = predicate
         
         do {
             let result = try context.fetch(fetchRequest)
-            return (result, nil)
+            return result
             
         } catch {
-            return (nil, ErrorMessage(error: .objectCanntGetFromBase))
+            return nil
         }
     }
     
-    func update(_ message: [MessageKeyType: Any]) -> ErrorMessage? {
+    func update(_ message: [MessageKeyType: Any]) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
-        let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+        let result = get(predicate) as! [CategoryTransaction]?
         
-        if let error = result.1 {
-            return error
-        }
-        
-        guard let category = result.0?.first else {
-            return ErrorMessage(error: .objectIsNotExist)
+        guard let category = result?.first else {
+            return DBError.objectIsNotExist
         }
         
         if let parent = message[.parent] {
@@ -107,20 +100,20 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             if let oldParentName = category.parent?.name {
                 
                 let predicate = NSPredicate(format: "name = %@", oldParentName)
-                let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+                let result = get(predicate) as! [CategoryTransaction]?
                 
-                guard let oldParent = result.0?.first else {
-                    return ErrorMessage(error: .objectIsNotExist)
+                guard let oldParent = result?.first else {
+                    return DBError.objectIsNotExist
                 }
                 
                 oldParent.removeFromChild(category)
             }
             
             let predicate = NSPredicate(format: "name = %@", parent as! String)
-            let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+            let result = get(predicate) as! [CategoryTransaction]
             
-            guard let newParent = result.0?.first else {
-                return ErrorMessage(error: .objectIsNotExist)
+            guard let newParent = result.first else {
+                return DBError.objectIsNotExist
             }
             
             category.parent = newParent
@@ -134,8 +127,8 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             let predicate = NSPredicate(format: "category = %@", category.name)
             let result = transactionDBManager.get(predicate)
             
-            guard let objects = result.0 else {
-                return ErrorMessage(error: .objectCanntGetFromBase)
+            guard let objects = result else {
+                return DBError.objectCanntGetFromBase
             }
 
             let transactions = objects as! [Transaction]
@@ -151,32 +144,27 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         return saveContext()
     }
     
-    func delete(_ id: String) -> ErrorMessage? {
+    func delete(_ id: String) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
-        let result = get(predicate) as! ([CategoryTransaction]?, ErrorMessage?)
+        let result = get(predicate) as! [CategoryTransaction]?
         
-        if let error = result.1 {
-            return error
-        }
-        
-        guard let object = result.0?.first else {
-            return ErrorMessage(error: .objectIsNotExist)
+        guard let object = result?.first else {
+            return DBError.objectIsNotExist
         }
         
         context.delete(object)
-        
         return saveContext()
     }
     
     // Сохраняет контекст
-    private func saveContext() -> ErrorMessage? {
+    private func saveContext() -> DBError? {
         
         do {
             try context.save()
             return nil
         } catch {
-            return ErrorMessage(error: .contextDoNotBeSaved)
+            return DBError.contextDoNotBeSaved
         }
     }
     

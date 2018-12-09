@@ -1,3 +1,4 @@
+//swiftlint:disable force_cast
 import CoreData
 import UIKit
 
@@ -9,13 +10,14 @@ class AccountsDataLoader: DataProviderProtocol {
     func loadData() {
         
         let all = NSPredicate(value: true)
+        let result = dbManager?.get(all)
         
-        let result = dbManager?.get(all) as? ([Account]?, ErrorMessage?)
-        
-        guard let accounts = result?.0 else {
+        guard let objects = result else {
             assertionFailure()
             return
         }
+        
+        let accounts = objects as! [Account]
        
         let totalSum = accounts.map { $0.sum }.reduce (0, +)
         controller?.navigationItem.title = "Total: " + " " + "\(totalSum)"

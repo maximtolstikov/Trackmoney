@@ -9,7 +9,6 @@ class SettigsControllerBuilder {
         settingsController.arrayPoint = createSettingsList()
         
         return settingsController
-        
     }
     
     private func createSettingsList() -> [String] {
@@ -21,7 +20,6 @@ class SettigsControllerBuilder {
         }
         
         return array
-        
     }
     
 }

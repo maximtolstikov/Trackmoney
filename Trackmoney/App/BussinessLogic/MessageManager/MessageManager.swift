@@ -47,8 +47,8 @@ struct MessageManager {
     
     // Создает сообщение для счета
     func craftAccounеMessage(nameAccount: String,
-                              sumAccount: Int32,
-                              id: String?) -> [MessageKeyType: Any] {
+                             sumAccount: Int32,
+                             id: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameAccount

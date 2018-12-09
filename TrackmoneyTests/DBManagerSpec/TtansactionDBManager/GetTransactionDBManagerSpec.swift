@@ -28,7 +28,7 @@ class GetTransactionDBManager: XCTestCase {
         messageAM[.id] = resultCreateMainAccount.0?.id
         
         messageT[.type] = TransactionType.income.rawValue
-        let result = managerT.create(messageT) as! (Transaction?, ErrorMessage?)
+        let result = managerT.create(messageT) as! (Transaction?, DBError?)
         messageT[.id] = result.0?.id
         messageT[.date] = result.0?.date
     }
@@ -46,8 +46,8 @@ class GetTransactionDBManager: XCTestCase {
         
         try when("get transaction", closure: {
             let predicate = NSPredicate(format: "date = %@", messageT[.date] as! NSDate)
-            let result = managerT.get(predicate)  as! ([Transaction]?, ErrorMessage?)
-            transaction = result.0?.first
+            let result = managerT.get(predicate)
+            transaction = result?.first as? Transaction
         })
         try then("result is not nil", closure: {
             XCTAssertNotNil(transaction)

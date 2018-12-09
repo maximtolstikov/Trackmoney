@@ -7,7 +7,7 @@ class AccountFormDataProvider: DataProviderProtocol {
   
     func save(message: [MessageKeyType: Any]) {
         
-        let result: ErrorMessage?
+        let result: DBError?
         
         if message[.id] != nil {
             result = dbManager?.update(message)
@@ -18,7 +18,7 @@ class AccountFormDataProvider: DataProviderProtocol {
         if let error = result, let controller = controller {
             NeedCancelAlert().show(
                 controller: controller,
-                title: error.error.rawValue,
+                title: error.description,
                 body: nil)
         }
     }
