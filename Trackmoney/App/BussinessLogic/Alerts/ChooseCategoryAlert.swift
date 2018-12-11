@@ -4,6 +4,7 @@ import UIKit
 class ChooseCategoryAlert: AlertManager {
     
     func show(categories: [CategoryTransaction],
+              type: CategoryType,
               controller: UIViewController,
               comletion: @escaping (String) -> Void) {
         
@@ -11,7 +12,7 @@ class ChooseCategoryAlert: AlertManager {
         
         let titleAllert = NSLocalizedString("listCategoriesAlertTitle", comment: "")
         
-        self.alertController = UIAlertController(
+        alertController = UIAlertController(
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
@@ -19,7 +20,14 @@ class ChooseCategoryAlert: AlertManager {
             self?.alertController = nil
         }
         
-        self.alertController.addAction(cancel)
+        let add = UIAlertAction(title: NSLocalizedString("addCategory", comment: ""),
+                                style: .default, handler: { _ in
+            let viewController = CategoryFormControllerBuilder(typeCategory: type).viewController()
+            controller.present(viewController, animated: true, completion: nil)
+        })
+        
+        alertController.addAction(add)
+        alertController.addAction(cancel)
         
         for category in arrayCategories {
             let action = UIAlertAction(title: category.name, style: .default, handler: { [weak self] _ in
@@ -31,7 +39,7 @@ class ChooseCategoryAlert: AlertManager {
             self.alertController.addAction(action)
         }
         
-        controller.present(self.alertController, animated: true, completion: nil)
+        controller.present(alertController, animated: true, completion: nil)
         
     }
     

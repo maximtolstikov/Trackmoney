@@ -29,6 +29,7 @@
 "categoryDelete" = "Category deleted!";
 "transactionCreate" = "Transaction created!";
 "transactionDelete" = "Transaction deleted!";
+"addCategory" = "Add";
 
 //Settings
 "accountSettingsTitle" = "Accounts";

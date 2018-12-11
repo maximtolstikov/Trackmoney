@@ -28,6 +28,7 @@
 "categoryCreate" = "Категория создана!";
 "categoryDelete" = "Категория удалена!";
 "transactionDelete" = "Транзакция удалена!";
+"addCategory" = "Добавить";
 
 //Settings
 "accountSettingsTitle" = "Счета";

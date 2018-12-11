@@ -51,7 +51,6 @@ class TransactionFormController: BaseFormController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataProvider?.loadData()
         createBottomChoseButton()
         createSumTextField()
         createTopChoseButton()
@@ -62,6 +61,7 @@ class TransactionFormController: BaseFormController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        dataProvider?.loadData()
         DispatchQueue.main.async {
             self.sumTextField.becomeFirstResponder()
         }
@@ -298,7 +298,16 @@ class TransactionFormController: BaseFormController {
                 return
             }
             
+            let categoryType: CategoryType
+            
+            if transactionType == .expense {
+                categoryType = .expense
+            } else {
+                categoryType = .income
+            }
+            
             ChooseCategoryAlert().show(categories: array,
+                                       type: categoryType,
                                        controller: self) { [weak self] (name) in
                                         self?.bottomChooseButton.setTitle(name, for: .normal)
             }

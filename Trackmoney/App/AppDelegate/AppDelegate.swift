@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         
+        // swiftlint:disable next force_cast
         let controller = self.window?.rootViewController as! MainTabBarController
         controller.selectedIndex = 0
     }

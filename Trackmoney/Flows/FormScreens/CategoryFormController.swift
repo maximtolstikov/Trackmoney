@@ -159,6 +159,7 @@ class CategoryFormController: BaseFormController {
         }
         
         ChooseCategoryAlert().show(categories: list,
+                                   type: typeCategory,
                                    controller: self) { [weak self] (name) in
                                     self?.topChooseButton.setTitle(name, for: .normal)
         }
