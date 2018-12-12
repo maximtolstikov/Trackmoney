@@ -1,14 +1,14 @@
 // English
 
 //Buttons
-"cancelButton" = "Cancel";
+"cancelButton" = "Close";
 "titleSaveButton" = "Save";
 "titleOkButton" = "Ok";
 "titleRename" = "Rename";
 "titleDeleteButton" = "Delete";
-"titleEditButton" = "Edit";
+"editTitle" = "Edit";
 "titleAdd" = "Add";
-"titleSort" = "Sort";
+"sortTitle" = "Sort";
 "chooseParentButton" = "parent";
 "emptyTitle" = "-----------";
 "decline" = "No";

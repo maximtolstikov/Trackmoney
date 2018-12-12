@@ -26,6 +26,11 @@ class CategorySettingsController: UIViewController {
         }
     }
     
+    var sortEditButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,11 +89,11 @@ class CategorySettingsController: UIViewController {
             target: self,
             action: #selector(addCategory))
         
-        let editCategoryButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSort", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteCategory))
+        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
+                                                                  comment: ""),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(sortDeleteCategory))
         
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
@@ -98,7 +103,7 @@ class CategorySettingsController: UIViewController {
         let buttoms = [
             addCategoryButtom,
             flexSpace,
-            editCategoryButton]
+            sortEditButton]
         
         self.setToolbarItems(buttoms, animated: true)
     }
@@ -110,9 +115,14 @@ class CategorySettingsController: UIViewController {
     
     // Включает режим редактирования списка
     @objc func sortDeleteCategory() {
+        
         if self.tableView.isEditing {
+            
+            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
         } else {
+            
+            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
             self.tableView.setEditing(true, animated: true)
         }
     }

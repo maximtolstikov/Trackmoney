@@ -14,7 +14,12 @@ class AccountsSettingsController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-    }    
+    }
+    
+    var sortEditButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,23 +80,23 @@ class AccountsSettingsController: UIViewController {
             target: self,
             action: #selector(addAccount))
         
-        let deleteAccountButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSort", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteAccount))
+        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
+                                                                  comment: ""),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(sortDeleteAccount))
         
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
-        let buttoms = [
+        let buttons = [
             addAccountButtom,
             flexSpace,
-            deleteAccountButton]
+            sortEditButton]
         
-        self.setToolbarItems(buttoms, animated: true)
+        self.setToolbarItems(buttons, animated: true)
     }
     
     // Добавляет Счет
@@ -106,9 +111,11 @@ class AccountsSettingsController: UIViewController {
         
         if self.tableView.isEditing {
             
+            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
-        } else {
             
+        } else {
+            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
             self.tableView.setEditing(true, animated: true)
         }
     }

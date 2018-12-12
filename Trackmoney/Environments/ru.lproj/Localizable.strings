@@ -1,14 +1,14 @@
 // Russian
 
 //Buttons
-"cancelButton" = "Отменить";
+"cancelButton" = "Закрыть";
 "titleSaveButton" = "Сохранить";
 "titleOkButton" = "Готово";
 "titleRename" = "Переименовать";
 "titleDeleteButton" = "Удалить";
-"titleEditButton" = "Изменить";
+"editTitle" = "Изменить";
 "titleAdd" = "Добавить";
-"titleSort" = "Сортировать";
+"sortTitle" = "Сортировать";
 "chooseParentButton" = "родитель";
 "emptyTitle" = "-----------";
 "decline" = "Нет";
