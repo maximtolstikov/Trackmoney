@@ -16,7 +16,8 @@ class ChooseCategoryAlert: AlertManager {
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
-                                                            comment: ""), style: .cancel) { [weak self] _ in
+                                                            comment: ""),
+                                   style: .cancel) { [weak self] _ in
             self?.alertController = nil
         }
         
@@ -25,9 +26,6 @@ class ChooseCategoryAlert: AlertManager {
             let viewController = CategoryFormControllerBuilder(typeCategory: type).viewController()
             controller.present(viewController, animated: true, completion: nil)
         })
-        
-        alertController.addAction(add)
-        alertController.addAction(cancel)
         
         for category in arrayCategories {
             let action = UIAlertAction(title: category.name, style: .default, handler: { [weak self] _ in
@@ -38,6 +36,16 @@ class ChooseCategoryAlert: AlertManager {
             
             self.alertController.addAction(action)
         }
+        
+        let empty = UIAlertAction(title: NSLocalizedString("emptyTitle", comment: ""),
+                                  style: .default) { _ in
+                                    comletion(NSLocalizedString("emptyTitle",
+                                                                comment: ""))
+        }
+        
+        alertController.addAction(empty)
+        alertController.addAction(add)
+        alertController.addAction(cancel)
         
         controller.present(alertController, animated: true, completion: nil)
         
