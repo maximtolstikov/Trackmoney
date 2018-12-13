@@ -7,7 +7,7 @@ class ChooseTypeCategoryAlert: AlertManager {
         
         alertController = UIAlertController(title: NSLocalizedString("chooseTypeCategory", comment: ""),
                                             message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""),
                                    style: .cancel) {[weak self] _ in
                                     self?.alertController = nil

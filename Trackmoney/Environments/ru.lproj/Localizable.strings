@@ -1,20 +1,21 @@
 // Russian
 
-//Buttons
-"cancelButton" = "Закрыть";
-"titleSaveButton" = "Сохранить";
-"titleOkButton" = "Готово";
-"titleRename" = "Переименовать";
-"titleDeleteButton" = "Удалить";
+//Titles
+"cancelTitle" = "Закрыть";
+"saveTitle" = "Сохранить";
+"okTitle" = "Ok";
+"renameTitle" = "Переименовать";
+"deleteTitle" = "Удалить";
 "editTitle" = "Изменить";
-"titleAdd" = "Добавить";
+"addTitle" = "Добавить";
 "sortTitle" = "Сортировать";
-"chooseParentButton" = "родитель";
+"chooseParentTitle" = "родитель";
 "emptyTitle" = "-----------";
-"decline" = "Нет";
-"approve" = "Да";
+"declineTitle" = "Нет";
+"approveTitle" = "Да";
 
 //Alert
+"acceptDeleteTitle" = "Хотите удалить?";
 "listAccountsAlertTitle" = "Счета";
 "listCategoriesAlertTitle" = "Категории";
 "chooseTypeCategory" = "Выберите тип Категории!";

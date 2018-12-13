@@ -45,7 +45,7 @@ class AccountsSettingsController: UIViewController {
     private func setBarButton() {
         
         let rightButton = UIBarButtonItem(
-            title: NSLocalizedString("cancelButton", comment: ""),
+            title: NSLocalizedString("saveTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(closeController))
@@ -75,7 +75,7 @@ class AccountsSettingsController: UIViewController {
     private func addBottomToolBar() {
         
         let addAccountButtom = UIBarButtonItem(
-            title: NSLocalizedString("titleAdd", comment: ""),
+            title: NSLocalizedString("addTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(addAccount))
@@ -154,7 +154,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         
         let delete = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let item = self?.accounts[indexPath.row],
                     let array = self?.accounts else { return }
@@ -172,7 +172,7 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         
         let rename = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("renameTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 let item = self!.accounts[indexPath.row]
                 let controller = AccountFormControllerBuilder()

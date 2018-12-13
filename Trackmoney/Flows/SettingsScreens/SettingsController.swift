@@ -40,7 +40,7 @@ class SettingsController: UIViewController {
             action: #selector(dismissBack))
         
         let rightButton = UIBarButtonItem(
-            title: NSLocalizedString("cancelButton", comment: ""),
+            title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(closeController))

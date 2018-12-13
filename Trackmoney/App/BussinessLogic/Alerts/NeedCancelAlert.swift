@@ -14,7 +14,7 @@ class NeedCancelAlert: AlertManager {
             message: body ?? "",
             preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""),
                                    style: .cancel) { _ in
             self.deinitAlert()
@@ -24,5 +24,4 @@ class NeedCancelAlert: AlertManager {
         controller.present(alertController, animated: true, completion: nil)
         
     }
-
 }

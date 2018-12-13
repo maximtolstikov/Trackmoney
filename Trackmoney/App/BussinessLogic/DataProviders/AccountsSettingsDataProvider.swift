@@ -6,6 +6,8 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: AccountsSettingsController?
     
+    var deleted = false
+    
     func loadData() {
         
         let all = NSPredicate(value: true)
@@ -22,23 +24,23 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
             assertionFailure()
             return
         }
-
+        
         controller?.accounts = objects as? [Account]
     }
     
     func save(message: [MessageKeyType: Any]) {
         
         let result = dbManager?.create(message)
-
+        
         if result?.0 != nil, controller != nil {
-
+            
             ShortAlert().show(
                 controller: controller!,
                 title: NSLocalizedString("accountCreate", comment: ""),
                 body: nil, style: .alert)
-
+            
             loadData()
-
+            
         } else {
             if result?.1 != nil, controller != nil {
                 NeedCancelAlert().show(
@@ -52,23 +54,35 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
     
     func delete(with id: String) -> Bool {
         
-        let error = dbManager?.delete(id)
-
-        if error == nil, controller != nil {
-            ShortAlert().show(
-                controller: controller!,
-                title: NSLocalizedString("accountDelete", comment: ""),
-                body: nil, style: .alert)
-            return true
-        } else {
-            if error != nil, controller != nil {
-                NeedCancelAlert().show(
-                    controller: controller!,
-                    title: error!.description,
-                    body: nil)
-            }
-            return false
+        guard let controller = controller else { return false }
+        
+        AcceptAlert().show(controller: controller,
+                           title: NSLocalizedString("acceptDeleteTitle",
+                                                    comment: ""),
+                           body: nil) { [unowned self] (flag) in
+                            if flag {
+                                let error = self.dbManager?.delete(id)
+                                
+                                if error == nil {
+                                    
+                                    self.deleted = true
+                                    ShortAlert().show(
+                                        controller: controller,
+                                        title: NSLocalizedString("accountDelete", comment: ""),
+                                        body: nil,
+                                        style: .alert)
+                                    
+                                } else {
+                                    if error != nil {
+                                        NeedCancelAlert().show(
+                                            controller: controller,
+                                            title: error!.description,
+                                            body: nil)
+                                    }
+                                }
+                            }
         }
+        return deleted
     }
     
 }

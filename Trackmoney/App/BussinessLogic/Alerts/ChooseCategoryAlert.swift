@@ -15,12 +15,12 @@ class ChooseCategoryAlert: AlertManager {
         alertController = UIAlertController(
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""), style: .cancel) { [weak self] _ in
             self?.alertController = nil
         }
         
-        let add = UIAlertAction(title: NSLocalizedString("addCategory", comment: ""),
+        let add = UIAlertAction(title: NSLocalizedString("addTitle", comment: ""),
                                 style: .default, handler: { _ in
             let viewController = CategoryFormControllerBuilder(typeCategory: type).viewController()
             controller.present(viewController, animated: true, completion: nil)

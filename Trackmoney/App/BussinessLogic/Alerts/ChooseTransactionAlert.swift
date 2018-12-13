@@ -12,7 +12,7 @@ class ChooseTransactionAlert: AlertManager {
             message: nil,
             preferredStyle: .actionSheet)
         
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""),
                                    style: .cancel) { _ in
                                        self.alertController = nil

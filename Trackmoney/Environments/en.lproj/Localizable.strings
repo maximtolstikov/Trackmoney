@@ -1,20 +1,21 @@
 // English
 
-//Buttons
-"cancelButton" = "Close";
-"titleSaveButton" = "Save";
-"titleOkButton" = "Ok";
-"titleRename" = "Rename";
-"titleDeleteButton" = "Delete";
+//Titles
+"cancelTitle" = "Close";
+"saveTitle" = "Save";
+"okTitle" = "Ok";
+"renameTitle" = "Rename";
+"deleteTitle" = "Delete";
 "editTitle" = "Edit";
-"titleAdd" = "Add";
+"addTitle" = "Add";
 "sortTitle" = "Sort";
-"chooseParentButton" = "parent";
+"chooseParentTitle" = "parent";
 "emptyTitle" = "-----------";
-"decline" = "No";
-"approve" = "Yes";
+"declineTitle" = "No";
+"approveTitle" = "Yes";
 
 //Alert
+"acceptDeleteTitle" = "Do you want to delete?";
 "listAccountsAlertTitle" = "Accounts";
 "listCategoriesAlertTitle" = "Categories";
 "chooseTypeCategory" = "Please chose type!";

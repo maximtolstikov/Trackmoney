@@ -7,16 +7,16 @@ class NoteAlert: AlertManager {
               text: String,
               completion: @escaping (String?) -> Void) {
         
-        alertController = UIAlertController(title: NSLocalizedString("noteAlertTitle",
+        alertController = UIAlertController(title: NSLocalizedString("noteTitle",
                                                                      comment: ""),
                                             message: "",
                                             preferredStyle: .alert)
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""),
                                    style: .cancel) { _ in
                                     self.alertController = nil
         }
-        let save = UIAlertAction(title: NSLocalizedString("titleOkButton",
+        let save = UIAlertAction(title: NSLocalizedString("okTitle",
                                                           comment: ""),
                                  style: .default) { _ in
                                     guard let textField = self.alertController.textFields?.first else { return }

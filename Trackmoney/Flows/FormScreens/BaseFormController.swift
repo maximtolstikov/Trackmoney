@@ -10,7 +10,7 @@ class BaseFormController: UIViewController {
     
     var cancelButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle(NSLocalizedString("cancelButton", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("cancelTitle", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -18,7 +18,7 @@ class BaseFormController: UIViewController {
     
     let saveButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle(NSLocalizedString("titleSaveButton", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("saveTitle", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

@@ -84,6 +84,7 @@
 		94C553C72165158A00C0F628 /* ToolsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C62165158A00C0F628 /* ToolsDataProvider.swift */; };
 		94C553C92165323C00C0F628 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C82165323C00C0F628 /* SettingsController.swift */; };
 		94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */; };
+		94C9060021C283E8000531D4 /* AcceptAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C905FF21C283E8000531D4 /* AcceptAlert.swift */; };
 		94CC8137214FDBB30027913C /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC8136214FDBB30027913C /* DBError.swift */; };
 		94CFA79821B935030082FC17 /* SortKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFA79721B935030082FC17 /* SortKeys.swift */; };
 		94D166892199A88500C5D091 /* NegativeSumRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D166882199A88500C5D091 /* NegativeSumRule.swift */; };
@@ -205,6 +206,7 @@
 		94C553C62165158A00C0F628 /* ToolsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDataProvider.swift; sourceTree = "<group>"; };
 		94C553C82165323C00C0F628 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerBilder.swift; sourceTree = "<group>"; };
+		94C905FF21C283E8000531D4 /* AcceptAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptAlert.swift; sourceTree = "<group>"; };
 		94CC8136214FDBB30027913C /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		94CFA79721B935030082FC17 /* SortKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortKeys.swift; sourceTree = "<group>"; };
 		94D166882199A88500C5D091 /* NegativeSumRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeSumRule.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				942888502168C7F0002E3DCC /* AlertManager.swift */,
+				94C905FF21C283E8000531D4 /* AcceptAlert.swift */,
 				9446623D21A044B700C9FFCF /* ChooseTransactionAlert.swift */,
 				9446624021A04D6900C9FFCF /* ShortAlert.swift */,
 				9446624221A04EA300C9FFCF /* NeedCancelAlert.swift */,
@@ -859,6 +862,7 @@
 				94858B052146D15B00498DCF /* MessageManager.swift in Sources */,
 				94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */,
 				94A7FDFF217C820A009E5C4B /* CategorySettingsController.swift in Sources */,
+				94C9060021C283E8000531D4 /* AcceptAlert.swift in Sources */,
 				94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */,
 				9424967021AABF6C00364643 /* DateFormat.swift in Sources */,
 				9424E8122163C11F00BE756D /* AccountsDataLoader.swift in Sources */,

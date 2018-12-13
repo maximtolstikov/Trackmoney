@@ -128,7 +128,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         
         let delete = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let id = self?.transactions[indexPath.row].id else { return }
                 let result = self?.dataProvider?.delete(with: id)
@@ -141,7 +141,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         
         let edit = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleEditButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("editTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let transaction = self?.transactions[indexPath.row],
                     let type = TransactionType(rawValue: transaction.type)  else { return }

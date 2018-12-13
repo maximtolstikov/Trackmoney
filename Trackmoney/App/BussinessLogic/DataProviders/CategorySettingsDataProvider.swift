@@ -6,6 +6,8 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: CategorySettingsController?
     
+    var deleted = false
+    
     func loadData() {
         
         let all = NSPredicate(value: true)
@@ -63,25 +65,35 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     
     func delete(with id: String) -> Bool {
         
-        let error = dbManager?.delete(id)
-
-        if error == nil, controller != nil {
-            ShortAlert().show(
-                controller: controller!,
-                title: NSLocalizedString("categoryDelete", comment: ""),
-                body: nil, style: .alert)
-
-            return true
-            
-        } else {
-            if error != nil, controller != nil {
-                NeedCancelAlert().show(
-                    controller: controller!,
-                    title: error!.description,
-                    body: nil)
-            }
-           return false
+        guard let controller = controller else { return false }
+        
+        AcceptAlert().show(controller: controller,
+                           title: NSLocalizedString("acceptDeleteTitle",
+                                                    comment: ""),
+                           body: nil) { [unowned self] (flag) in
+                            if flag {
+                                let error = self.dbManager?.delete(id)
+                                
+                                if error == nil {
+                                    
+                                    self.deleted = true
+                                    ShortAlert().show(
+                                        controller: controller,
+                                        title: NSLocalizedString("categoryDelete", comment: ""),
+                                        body: nil,
+                                        style: .alert)
+                                    
+                                } else {
+                                    if error != nil {
+                                        NeedCancelAlert().show(
+                                            controller: controller,
+                                            title: error!.description,
+                                            body: nil)
+                                    }
+                                }
+                            }
         }
+        return deleted
     }
     
 }
