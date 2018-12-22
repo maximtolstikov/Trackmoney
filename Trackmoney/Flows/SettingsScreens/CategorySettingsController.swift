@@ -285,12 +285,17 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         if sourceIndexPath.section == 0 {
             
+            guard destinationIndexPath.section == sourceIndexPath.section else { return }
+            
             let item = incomeCategories[sourceIndexPath.row]
             incomeCategories.remove(at: sourceIndexPath.row)
             incomeCategories.insert(item, at: destinationIndexPath.row)
             incomeSortManager.swapElement(array: incomeCategories)
             tableView.reloadData()
+            
         } else {
+            
+            guard destinationIndexPath.section == sourceIndexPath.section else { return }
             
             let item = expenseCategories[sourceIndexPath.row]
             expenseCategories.remove(at: sourceIndexPath.row)

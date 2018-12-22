@@ -63,7 +63,7 @@ class TransactionFormController: BaseFormController {
         
         dataProvider?.loadData()
         DispatchQueue.main.async {
-            self.sumTextField.becomeFirstResponder()
+            //self.sumTextField.becomeFirstResponder()
         }
     }
     
@@ -94,6 +94,9 @@ class TransactionFormController: BaseFormController {
     func createSumTextField() {
         
         viewOnScroll.addSubview(sumTextField)
+        
+        sumTextField.becomeFirstResponder()
+        
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = "sum"

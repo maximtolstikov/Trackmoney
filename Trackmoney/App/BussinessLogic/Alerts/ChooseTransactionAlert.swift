@@ -37,7 +37,7 @@ class ChooseTransactionAlert: AlertManager {
         
         let transfer = UIAlertAction(title: NSLocalizedString("transferTitle", comment: ""),
                                      style: .default,
-                                     handler: {_ in
+                                     handler: { _ in
                                         self.present(controller: controller,
                                                      type: TransactionType.transfer,
                                                      name: nameAccount)

@@ -5,6 +5,8 @@ class AccountsSettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
     var sortManager: CustomSortManager!
+    var formController: AccountFormController!
+    
     var tableView = UITableView()
     let cellIndentifire = "myCell"
     var accounts: [Account]! {
@@ -16,10 +18,8 @@ class AccountsSettingsController: UIViewController {
         }
     }
     
-    var sortEditButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        return button
-    }()
+    
+    var sortEditButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class AccountsSettingsController: UIViewController {
     private func setBarButton() {
         
         let rightButton = UIBarButtonItem(
-            title: NSLocalizedString("saveTitle", comment: ""),
+            title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(closeController))
@@ -102,8 +102,7 @@ class AccountsSettingsController: UIViewController {
     // Добавляет Счет
     @objc func addAccount() {
         
-        let controller = AccountFormControllerBuilder().viewController()
-        present(controller, animated: true, completion: nil)
+        present(formController, animated: true, completion: nil)
     }
     
     // Включает режим редактирования списка

@@ -91,7 +91,7 @@ class CategoryFormController: BaseFormController {
         
         if categotyForUpdate == nil {
             topChooseButton
-                .setTitle(NSLocalizedString("chooseParentButton", comment: ""),
+                .setTitle(NSLocalizedString("chooseParentTitle", comment: ""),
                           for: .normal)
         } else {
             topChooseButton.setTitle(categotyForUpdate?.parent?.name, for: .normal)

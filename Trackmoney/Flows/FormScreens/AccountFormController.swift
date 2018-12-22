@@ -1,5 +1,3 @@
-// Для описания контроллера формы сущьности
-
 import UIKit
 
 class AccountFormController: BaseFormController {
@@ -13,19 +11,8 @@ class AccountFormController: BaseFormController {
         }
     }
     
-    let nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .line
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    let sumTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .line
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    let nameTextField = UITextField()
+    let sumTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +38,8 @@ class AccountFormController: BaseFormController {
             sumTextField.isHidden = true
             sumTextField.text = String(account.sum)
         }
+        sumTextField.borderStyle = .line
+        sumTextField.translatesAutoresizingMaskIntoConstraints = false
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = NSLocalizedString("sumTextFildPlaceholder", comment: "")
@@ -69,6 +58,8 @@ class AccountFormController: BaseFormController {
     func createNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
+        nameTextField.borderStyle = .line
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.textAlignment = .center
         nameTextField.placeholder = NSLocalizedString("nameTextFildPlaceholder", comment: "")
         

@@ -40,8 +40,7 @@ class BaseFormController: UIViewController {
         
         scrollView = UIScrollView(frame: self.view.bounds)
         self.scrollView.contentSize = self.view.bounds.size
-        self.view.addSubview(self.scrollView)
-        
+        self.view.addSubview(self.scrollView)        
     }
     
     //создаем вью на скролл куда добавим все видимые элементы экрана
@@ -171,8 +170,8 @@ class BaseFormController: UIViewController {
                        animations: {
                         self.promptView.frame.origin.y = 0
         },
-                       completion: { (finish) in
-                        self.tapOnScreen()
+                       completion: { [weak self] (finish) in
+                        self!.tapOnScreen()
         })
         
     }
@@ -186,11 +185,11 @@ class BaseFormController: UIViewController {
                            animations: {
                             self.promptView.frame.origin.y = -100
             },
-                           completion: { (finish) in
-                            self.view.removeGestureRecognizer(self.tapOnViewGesture)
-                            if let gestures = self.view.gestureRecognizers,
+                           completion: { [weak self] (finish) in
+                            self?.view.removeGestureRecognizer(self!.tapOnViewGesture)
+                            if let gestures = self?.view.gestureRecognizers,
                                 gestures.isEmpty {
-                                self.destroyPromptView()
+                                self?.destroyPromptView()
                             }
             })
         }
