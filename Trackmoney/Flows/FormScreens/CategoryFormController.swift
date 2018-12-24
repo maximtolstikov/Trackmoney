@@ -135,8 +135,7 @@ class CategoryFormController: BaseFormController {
                                       parent: topChooseButton.titleLabel?.text,
                                       id: categotyForUpdate?.id)
             
-                dataProvider?.save(message: message)
-
+            dataProvider?.save(message: message)            
             dismiss(animated: true, completion: nil)
             
         } else {
@@ -146,9 +145,7 @@ class CategoryFormController: BaseFormController {
                 addRedBorderTo(control: self.nameTextField)
                 break
             }
-            
         }
-        
     }
     
     @objc func tapTopChooseButton() {
@@ -172,13 +169,13 @@ class CategoryFormController: BaseFormController {
     }
     
     @objc override func didChangeText(_ notification: Notification) {
+        
+        // swiftlint:disable next force_cast
+        let textField = notification.object as! UITextField
+        
         DispatchQueue.main.async {
-            
-            guard self.promptView != nil else {
-                return
-            }
             self.animateSlideUpPromt(completion: nil)
-            self.removeRedBorderTo(control: self.nameTextField)
+            self.removeRedBorderTo(control: textField)
         }
     }
     

@@ -5,7 +5,6 @@ class AccountsSettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
     var sortManager: CustomSortManager!
-    var formController: AccountFormController!
     
     var tableView = UITableView()
     let cellIndentifire = "myCell"
@@ -99,10 +98,11 @@ class AccountsSettingsController: UIViewController {
         self.setToolbarItems(buttons, animated: true)
     }
     
-    // Добавляет Счет
+    // Вызывает контроллер формы счета
     @objc func addAccount() {
         
-        present(formController, animated: true, completion: nil)
+        let controller = AccountFormControllerBuilder().viewController()
+        present(controller, animated: true, completion: nil)
     }
     
     // Включает режим редактирования списка

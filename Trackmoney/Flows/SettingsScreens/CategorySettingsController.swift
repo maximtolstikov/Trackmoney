@@ -108,7 +108,7 @@ class CategorySettingsController: UIViewController {
         self.setToolbarItems(buttoms, animated: true)
     }
     
-    // Добавляет Категорию
+    // Вызывает контроллер формы категории
     @objc func addCategory() {
         ChooseTypeCategoryAlert().show(controller: self)        
     }

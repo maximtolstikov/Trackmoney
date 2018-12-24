@@ -1,21 +1,23 @@
 import CoreData
 
 class CategoryFormDataProvider: DataProviderProtocol {
-
+    
     var dbManager: DBManagerProtocol?
     weak var controller: CategoryFormController?
-
+    
     func save(message: [MessageKeyType: Any]) {
         
         let result: DBError?
-
+        
         if message[.id] != nil {
             result = dbManager?.update(message)
         } else {
             result = dbManager?.create(message).1
         }
-
-        if let error = result, let controller = controller {
+        
+        guard let controller = controller else { return }
+        
+        if let error = result {
             NeedCancelAlert().show(
                 controller: controller,
                 title: error.description,

@@ -16,11 +16,6 @@ class LogDataLoader: DataProviderProtocol {
             return
         }
         
-        ShortAlert().show(controller: controller,
-                          title: DBError.objectCanntGetFromBase.description,
-                          body: nil,
-                          style: .alert)
-        
         let transactions = objects as? [Transaction]
         controller.transactions = transactions?.reversed()
     }

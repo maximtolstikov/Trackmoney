@@ -156,8 +156,12 @@ class TransactionFormController: BaseFormController {
     }
     
     @objc override func didChangeText(_ notification: Notification) {
-        DispatchQueue.main.async {
-            self.removeRedBorderTo(control: self.sumTextField)
+        
+        // swiftlint:disable next force_cast
+        let textField = notification.object as! UITextField
+        
+        DispatchQueue.main.async {            
+            self.removeRedBorderTo(control: textField)
             self.animateSlideUpPromt(completion: nil)
         }
     }

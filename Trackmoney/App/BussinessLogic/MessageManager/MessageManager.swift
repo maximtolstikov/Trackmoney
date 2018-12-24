@@ -70,7 +70,7 @@ struct MessageManager {
         dictionary[.name] = nameCategory
         dictionary[.type] = type.rawValue
         dictionary[.icon] = iconCategory
-        if parent != NSLocalizedString("chooseParentButton", comment: "") {
+        if parent != NSLocalizedString("chooseParentTitle", comment: "") {
             dictionary[.parent] = parent
         }
         if id != nil {

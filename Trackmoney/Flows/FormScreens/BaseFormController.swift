@@ -141,8 +141,11 @@ class BaseFormController: UIViewController {
     //показывает вью с подсказкой
     func showPromptView(with text: String) {
         
-        promptView = PromptView(for: self.view, with: text)
-        animateSlideDownPromt(view: promptView)
+        if !(promptView is PromptView) {
+            
+            promptView = PromptView(for: self.view, with: text)
+            animateSlideDownPromt(view: promptView)
+        }
     }
     
     //уничтожает вью с подсказкой

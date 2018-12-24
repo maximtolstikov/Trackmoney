@@ -14,13 +14,16 @@ class AccountFormDataProvider: DataProviderProtocol {
         } else {
             result = dbManager?.create(message).1
         }
+        
+        guard let controller = controller else { return }
 
-        if let error = result, let controller = controller {
+        if let error = result {
             NeedCancelAlert().show(
                 controller: controller,
                 title: error.description,
                 body: nil)
         }
+        
     }
     
     func delete(with id: String, completion: @escaping (Bool) -> Void) {}
