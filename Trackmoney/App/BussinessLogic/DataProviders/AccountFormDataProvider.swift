@@ -23,9 +23,7 @@ class AccountFormDataProvider: DataProviderProtocol {
         }
     }
     
-    func delete(with id: String) -> Bool {
-        return false
-    }
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {}
     
     func loadData() {}
     

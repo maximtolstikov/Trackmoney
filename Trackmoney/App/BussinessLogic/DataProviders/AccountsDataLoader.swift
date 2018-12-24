@@ -26,8 +26,6 @@ class AccountsDataLoader: DataProviderProtocol {
     
     func save(message: [MessageKeyType: Any]) {}
     
-    func delete(with id: String) -> Bool {
-        return false
-    }
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {}
     
 }

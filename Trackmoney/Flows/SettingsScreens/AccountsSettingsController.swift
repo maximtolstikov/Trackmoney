@@ -158,14 +158,13 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                 guard let item = self?.accounts[indexPath.row],
                     let array = self?.accounts else { return }
                 
-                let result = self?.dataProvider?.delete(with: item.id)
-                
-                if result != nil, result == true {
+                self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                     
-                    self?.sortManager.remove(element: item, in: array)
-                    self?.accounts.remove(at: indexPath.row)
-                    
-                    tableView.reloadData()
+                    if flag {
+                        self?.sortManager.remove(element: item, in: array)
+                        self?.accounts.remove(at: indexPath.row)
+                        tableView.reloadData()
+                    }
                 }
         }
         

@@ -6,8 +6,6 @@ class CategorySettingsDataProvider: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: CategorySettingsController?
     
-    var deleted = false
-    
     func loadData() {
         
         let all = NSPredicate(value: true)
@@ -63,9 +61,9 @@ class CategorySettingsDataProvider: DataProviderProtocol {
 
     }
     
-    func delete(with id: String) -> Bool {
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {
         
-        guard let controller = controller else { return false }
+        guard let controller = controller else { return }
         
         AcceptAlert().show(controller: controller,
                            title: NSLocalizedString("acceptDeleteTitle",
@@ -75,13 +73,14 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                                 let error = self.dbManager?.delete(id)
                                 
                                 if error == nil {
-                                    
-                                    self.deleted = true
+
                                     ShortAlert().show(
                                         controller: controller,
                                         title: NSLocalizedString("categoryDelete", comment: ""),
                                         body: nil,
                                         style: .alert)
+                                    
+                                    completion(true)
                                     
                                 } else {
                                     if error != nil {
@@ -93,7 +92,6 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                                 }
                             }
         }
-        return deleted
     }
     
 }

@@ -143,7 +143,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return incomeCategories.count
         } else {
-             return expenseCategories.count
+            return expenseCategories.count
         }
     }
     
@@ -214,14 +214,14 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                         return
                     }
                     
-                    let result = self?.dataProvider?.delete(with: item.id)
-                    
-                    if result != nil, result == true {
+                    self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
-                        self?.incomeSortManager.remove(element: item,
-                                                       in: self!.incomeCategories)
-                        self?.incomeCategories.remove(at: indexPath.row)
-                        self?.tableView.reloadData()
+                        if flag {
+                            self?.incomeSortManager.remove(element: item,
+                                                           in: self!.incomeCategories)
+                            self?.incomeCategories.remove(at: indexPath.row)
+                            self?.tableView.reloadData()
+                        }
                     }
                 } else {
                     
@@ -230,14 +230,14 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                         return
                     }
                     
-                    let result = self?.dataProvider?.delete(with: item.id)
-                    
-                    if result != nil, result == true {
+                    self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
-                        self?.expenseSortManager.remove(element: item,
-                                                        in: self!.expenseCategories)
-                        self?.expenseCategories.remove(at: indexPath.row)
-                        self?.tableView.reloadData()
+                        if flag {
+                            self?.expenseSortManager.remove(element: item,
+                                                            in: self!.expenseCategories)
+                            self?.expenseCategories.remove(at: indexPath.row)
+                            self?.tableView.reloadData()
+                        }
                     }
                 }
         }

@@ -6,8 +6,6 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: AccountsSettingsController?
     
-    var deleted = false
-    
     func loadData() {
         
         let all = NSPredicate(value: true)
@@ -52,9 +50,9 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         
     }
     
-    func delete(with id: String) -> Bool {
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {
         
-        guard let controller = controller else { return false }
+        guard let controller = controller else { return }
         
         AcceptAlert().show(controller: controller,
                            title: NSLocalizedString("acceptDeleteTitle",
@@ -64,8 +62,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
                                 let error = self.dbManager?.delete(id)
                                 
                                 if error == nil {
-                                    
-                                    self.deleted = true
+  
                                     ShortAlert().show(
                                         controller: controller,
                                         title: NSLocalizedString("accountDelete", comment: ""),
@@ -82,7 +79,6 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
                                 }
                             }
         }
-        return deleted
     }
     
 }

@@ -7,5 +7,5 @@ protocol DataProviderProtocol: AnyObject {
     
     func loadData()
     func save(message: [MessageKeyType: Any])
-    func delete(with id: String) -> Bool
+    func delete(with id: String, completion: @escaping (Bool) -> Void)
 }

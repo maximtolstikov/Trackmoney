@@ -93,10 +93,8 @@ class TransactionFormController: BaseFormController {
     // Создает текстовое поле для ввода суммы
     func createSumTextField() {
         
-        viewOnScroll.addSubview(sumTextField)
-        
+        viewOnScroll.addSubview(sumTextField)        
         sumTextField.becomeFirstResponder()
-        
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = "sum"

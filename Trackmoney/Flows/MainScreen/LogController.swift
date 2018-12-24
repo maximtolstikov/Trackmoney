@@ -123,6 +123,7 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    //swiftlint:disable next closure_end_indentation
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -130,14 +131,14 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             style: .default,
             title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
-                guard let id = self?.transactions[indexPath.row].id else { return }
-                let result = self?.dataProvider?.delete(with: id)
-                
-                if result != nil, result == true {
-                    self?.transactions.remove(at: indexPath.row)
-                    tableView.reloadData()
+            guard let id = self?.transactions[indexPath.row].id else { return }
+                self?.dataProvider?.delete(with: id) { [weak self] flag in
+                    if flag {
+                        self?.transactions.remove(at: indexPath.row)
+                        tableView.reloadData()
+                    }
                 }
-        }
+           }
         
         let edit = UITableViewRowAction(
             style: .default,
