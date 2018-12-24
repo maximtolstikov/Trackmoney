@@ -5,7 +5,7 @@ class CategoryFormDataProvider: DataProviderProtocol {
     var dbManager: DBManagerProtocol?
     weak var controller: CategoryFormController?
     
-    func save(message: [MessageKeyType: Any]) {
+    func save(message: [MessageKeyType: Any], completion: @escaping Result) {
         
         let result: DBError?
         
@@ -14,15 +14,7 @@ class CategoryFormDataProvider: DataProviderProtocol {
         } else {
             result = dbManager?.create(message).1
         }
-        
-        guard let controller = controller else { return }
-        
-        if let error = result {
-            NeedCancelAlert().show(
-                controller: controller,
-                title: error.description,
-                body: nil)
-        }
+        completion(result)
     }
     
     func delete(with id: String, completion: @escaping (Bool) -> Void) {}

@@ -210,8 +210,6 @@ class TransactionFormController: BaseFormController {
                 if bottomButtonValidateResult.isEmpty {
                     
                     sendMessage()
-                    dismiss(animated: false, completion: nil)
-                    
                 } else {
                     showPromptError(result: bottomButtonValidateResult,
                                     field: self.bottomChooseButton)
@@ -250,7 +248,15 @@ class TransactionFormController: BaseFormController {
                                      bottomButton: bottomButtonText,
                                      note: text,
                                      id: transactionID)
-        dataProvider?.save(message: message)
+        
+        dataProvider?.save(message: message, completion: { [unowned self] (error) in
+            
+            guard error == nil else {
+                NeedCancelAlert().show(controller: self, title: error?.localizedDescription, body: nil)
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     // Вызываем окно подсказки и делаем красную рамку

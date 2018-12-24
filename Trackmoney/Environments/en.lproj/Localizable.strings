@@ -60,5 +60,5 @@
 "messageHaventRequireValue" = "Error BD 1!";
 "noName" = "Error BD 0!";
 "objectCanntGetFromBase" = "Error BD 2!";
-"objectIsExistAlready" = "The object is exist already Объект уже существует!";
-"objectIsNotExist" = "The object is not exist Объект не сущестувует!";
+"objectIsExistAlready" = "The object with name is exist already!";
+"objectIsNotExist" = "The object is not exist!";

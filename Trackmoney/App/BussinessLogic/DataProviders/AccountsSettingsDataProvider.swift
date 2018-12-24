@@ -26,29 +26,7 @@ class AccountsSettingsDataProvider: DataProviderProtocol {
         controller?.accounts = objects as? [Account]
     }
     
-    func save(message: [MessageKeyType: Any]) {
-        
-//        let result = dbManager?.create(message)
-//        
-//        if result?.0 != nil, controller != nil {
-//            
-//            ShortAlert().show(
-//                controller: controller!,
-//                title: NSLocalizedString("accountCreate", comment: ""),
-//                body: nil, style: .alert)
-//            
-//            loadData()
-//            
-//        } else {
-//            if result?.1 != nil, controller != nil {
-//                NeedCancelAlert().show(
-//                    controller: controller!,
-//                    title: result?.1?.description,
-//                    body: nil)
-//            }
-//        }
-        
-    }
+    func save(message: [MessageKeyType: Any], completion: @escaping Result) {}
     
     func delete(with id: String, completion: @escaping (Bool) -> Void) {
         

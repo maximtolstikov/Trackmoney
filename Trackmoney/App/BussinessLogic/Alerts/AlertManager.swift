@@ -4,7 +4,7 @@ import UIKit
 class AlertManager {
     
     var alertController: UIAlertController!
-    let timeIntervalShortNotification = 1000
+    let timeIntervalShortNotification = 700
     
     // отложенно выполняет closure
     func delay(_ delay: Int, closure: @escaping () -> Void) {

@@ -135,8 +135,14 @@ class CategoryFormController: BaseFormController {
                                       parent: topChooseButton.titleLabel?.text,
                                       id: categotyForUpdate?.id)
             
-            dataProvider?.save(message: message)            
-            dismiss(animated: true, completion: nil)
+            dataProvider?.save(message: message, completion: { [weak self] (error) in
+                
+                guard error == nil else {
+                    NeedCancelAlert().show(controller: self!, title: error?.description, body: nil)
+                    return
+                }
+                self!.dismiss(animated: true, completion: nil)
+            })            
             
         } else {
             
