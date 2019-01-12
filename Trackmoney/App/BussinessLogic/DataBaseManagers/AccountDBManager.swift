@@ -78,7 +78,6 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         if mManager.isExistValue(for: .name, in: message) {
             
             let newName = message[.name] as! String
-            
             let predicate = NSPredicate(format: "mainAccount = %@", account.name)
             let result = transactionDBManager.get(predicate)
             
@@ -109,30 +108,28 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate)
  
-        guard let object = result?.first else {
+        guard let account = result?.first as? Account else {
             return DBError.objectIsNotExist
         }
         
-        let account = object as! Account
+        // Код проверял имеются ли транзакции сваязанные со счетом
         
-        let transactionPredicate = NSPredicate(format: "mainAccount = %@", account.name)
-        let response = transactionDBManager.get(transactionPredicate)
-        
-        if let objects = response, !objects.isEmpty {
-            
-            var dates = [String]()
-            let transactions = objects as! [Transaction]
-            let dateFormat = DateFormat()
-            
-            for transaction in transactions {
-                
-                let date = transaction.date as Date
-                let string = dateFormat.dateFormatter.string(from: date)
-                dates.append(string)
-            }
-            return DBError.accountHaveTransaction(dates)
-        }
-        
+//        let account = object as! Account
+//        let transactionPredicate = NSPredicate(format: "mainAccount = %@", account.name)
+//        let response = transactionDBManager.get(transactionPredicate)
+//
+//        if let objects = response, !objects.isEmpty {
+//            var dates = [String]()
+//            let transactions = objects as! [Transaction]
+//            let dateFormat = DateFormat()
+//
+//            for transaction in transactions {
+//                let date = transaction.date as Date
+//                let string = dateFormat.dateFormatter.string(from: date)
+//                dates.append(string)
+//            }
+//            return DBError.accountHaveTransaction(dates)
+//        }
         context.delete(account)
         
         do {
