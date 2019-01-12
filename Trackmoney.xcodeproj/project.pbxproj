@@ -384,7 +384,6 @@
 				94858AF22146D13300498DCF /* App */,
 				94858B0A2146D1E200498DCF /* Core */,
 				94858B0C2146D21000498DCF /* Environments */,
-				94858B0D2146D22400498DCF /* Flows */,
 				94858B0B2146D1F600498DCF /* Resources */,
 			);
 			path = Trackmoney;
@@ -397,6 +396,7 @@
 				94858B092146D1BC00498DCF /* Asembly */,
 				94858AF32146D15B00498DCF /* BussinessLogic */,
 				94858B072146D19800498DCF /* Entity */,
+				94858B0D2146D22400498DCF /* Flows */,
 			);
 			path = App;
 			sourceTree = "<group>";
