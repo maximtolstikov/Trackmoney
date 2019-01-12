@@ -318,12 +318,12 @@
 				942888502168C7F0002E3DCC /* AlertManager.swift */,
 				94C905FF21C283E8000531D4 /* AcceptAlert.swift */,
 				9446623D21A044B700C9FFCF /* ChooseTransactionAlert.swift */,
-				9446624021A04D6900C9FFCF /* ShortAlert.swift */,
-				9446624221A04EA300C9FFCF /* NeedCancelAlert.swift */,
 				9446624421A04FD700C9FFCF /* ChooseAccountAlert.swift */,
 				9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */,
 				9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */,
+				9446624221A04EA300C9FFCF /* NeedCancelAlert.swift */,
 				9444221E21A8756C0005DA0B /* NoteAlert.swift */,
+				9446624021A04D6900C9FFCF /* ShortAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
