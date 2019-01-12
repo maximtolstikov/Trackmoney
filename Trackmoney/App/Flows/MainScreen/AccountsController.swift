@@ -110,7 +110,8 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         
         ChooseTransactionAlert().show(
             controller: self,
-            nameAccount: accounts[indexPath.row].name)
+            nameAccount: accounts[indexPath.row].name,
+            isTransfer: accounts.count > 1)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

@@ -318,12 +318,12 @@
 				942888502168C7F0002E3DCC /* AlertManager.swift */,
 				94C905FF21C283E8000531D4 /* AcceptAlert.swift */,
 				9446623D21A044B700C9FFCF /* ChooseTransactionAlert.swift */,
-				9446624021A04D6900C9FFCF /* ShortAlert.swift */,
-				9446624221A04EA300C9FFCF /* NeedCancelAlert.swift */,
 				9446624421A04FD700C9FFCF /* ChooseAccountAlert.swift */,
 				9446624621A0551A00C9FFCF /* ChooseCategoryAlert.swift */,
 				9446624821A0569900C9FFCF /* ChooseTypeCategoryAlert.swift */,
+				9446624221A04EA300C9FFCF /* NeedCancelAlert.swift */,
 				9444221E21A8756C0005DA0B /* NoteAlert.swift */,
+				9446624021A04D6900C9FFCF /* ShortAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -384,7 +384,6 @@
 				94858AF22146D13300498DCF /* App */,
 				94858B0A2146D1E200498DCF /* Core */,
 				94858B0C2146D21000498DCF /* Environments */,
-				94858B0D2146D22400498DCF /* Flows */,
 				94858B0B2146D1F600498DCF /* Resources */,
 			);
 			path = Trackmoney;
@@ -397,6 +396,7 @@
 				94858B092146D1BC00498DCF /* Asembly */,
 				94858AF32146D15B00498DCF /* BussinessLogic */,
 				94858B072146D19800498DCF /* Entity */,
+				94858B0D2146D22400498DCF /* Flows */,
 			);
 			path = App;
 			sourceTree = "<group>";
