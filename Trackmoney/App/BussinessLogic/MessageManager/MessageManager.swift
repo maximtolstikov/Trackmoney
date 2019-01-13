@@ -6,8 +6,8 @@ struct MessageManager {
     let iconExpenseTransaction = "Minus"
     let iconIncomeTransaction = "Plus"
     let iconTransferTransaction = "Transfer"
-    let iconAccount = ""
-    let iconCategory = ""
+    let iconAccount = "accountIcon"
+    let iconCategory = "categoryIcon"
     
     // создает сообщение для формы транзакции
     //swiftlint:disable next function_parameter_count

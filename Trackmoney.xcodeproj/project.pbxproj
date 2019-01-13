@@ -52,6 +52,8 @@
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
 		945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A992179FF1300AF0B86 /* LogCell.swift */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
+		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
+		947D32A921EA317D0004D265 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManager.swift */; };
 		94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC12146CDF900498DCF /* AppDelegate.swift */; };
 		94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */; };
 		94858ACC2146CDFA00498DCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94858ACB2146CDFA00498DCF /* Assets.xcassets */; };
@@ -172,6 +174,8 @@
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
 		945C7A992179FF1300AF0B86 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
+		947D32A821EA317D0004D265 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
 		94858ABE2146CDF900498DCF /* Trackmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackmoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94858AC12146CDF900498DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94858AC92146CDF900498DCF /* Trackmoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trackmoney.xcdatamodel; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9441172921B7047C0015B38C /* AverageValues.swift */,
+				947D32A821EA317D0004D265 /* CSVManager.swift */,
 				94CC8136214FDBB30027913C /* DBError.swift */,
 				94DC094E21BACF970043DC53 /* StartDataFill.swift */,
 			);
@@ -609,8 +614,9 @@
 				9424E8132163D8F300BE756D /* CreateControllersSpec */,
 				94D89E4C216260300090D192 /* DBManagerSpec */,
 				94F67391216142EA00A51190 /* Info.plist */,
-				94A24910216145D900BE71FE /* MethodsBDD.swift */,
 				942888522168F284002E3DCC /* AlertMenagerSpec.swift */,
+				947D32A621EA307C0004D265 /* CSVSpec.swift */,
+				94A24910216145D900BE71FE /* MethodsBDD.swift */,
 			);
 			path = TrackmoneyTests;
 			sourceTree = "<group>";
@@ -870,6 +876,7 @@
 				94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */,
 				94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */,
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
+				947D32A921EA317D0004D265 /* CSVManager.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
@@ -898,6 +905,7 @@
 				9424E8042163872000BE756D /* DeleteTransactionDBManagerSpec.swift in Sources */,
 				9424E8082163997D00BE756D /* ChangeTransactionDBManagetSpec.swift in Sources */,
 				9424E80621638F1B00BE756D /* GetTransactionDBManagerSpec.swift in Sources */,
+				947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */,
 				94D89E5021626F640090D192 /* CategoryDBManagerSpec.swift in Sources */,
 				9424E8012163651600BE756D /* CreateTransactionDBManagerSpec.swift in Sources */,
 				94A24911216145D900BE71FE /* MethodsBDD.swift in Sources */,
