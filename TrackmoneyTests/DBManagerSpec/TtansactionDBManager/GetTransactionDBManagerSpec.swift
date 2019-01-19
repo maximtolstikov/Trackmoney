@@ -34,8 +34,8 @@ class GetTransactionDBManager: XCTestCase {
     }
     
     override func tearDown() {
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
         managerA = nil
         managerT = nil
     }

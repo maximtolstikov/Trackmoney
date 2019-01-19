@@ -47,13 +47,13 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             XCTAssertEqual(accountMain?.sum, 130)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(messageT[.id] as! String)
+            _ = managerT.delete(messageT[.id] as! String, force: false)
         })
         try then("sum Account equal 100 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
         })
         
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
         
     }
     
@@ -73,13 +73,13 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             XCTAssertEqual(accountMain?.sum, 70)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(messageT[.id] as! String)
+            _ = managerT.delete(messageT[.id] as! String, force: false)
         })
         try then("sum Account equal 100 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
         })
         
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
         
     }
     
@@ -111,15 +111,15 @@ class DeleteTransactionDBManagetSpec: XCTestCase {
             XCTAssertEqual(accountCor?.sum, 80)
         })
         try when("delete transaction", closure: {
-            _ = managerT.delete(messageT[.id] as! String)
+            _ = managerT.delete(messageT[.id] as! String, force: false)
         })
         try then("sum AccountMain equal 100 and sum Cor 50 again", closure: {
             XCTAssertEqual(accountMain.sum, 100)
             XCTAssertEqual(accountCor.sum, 50)
         })
         
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
         
     }
     

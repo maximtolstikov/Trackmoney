@@ -74,8 +74,8 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(note, "test note")
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCreateExpenseTransaction() throws {
@@ -101,8 +101,8 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(account?.sum, 70)
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCreateTransferTransaction() throws {
@@ -139,9 +139,9 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(account?.sum, 80)
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
     }
     
 }

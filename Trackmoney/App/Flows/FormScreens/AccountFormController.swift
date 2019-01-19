@@ -135,7 +135,8 @@ class AccountFormController: BaseFormController {
     private func sendMessage(with name: String, and sum: Int32) {
         
         let message = MessageManager()
-            .craftAccounеMessage(nameAccount: name,
+            .craftAccounеMessage(icon: nil,
+                                  nameAccount: name,
                                   sumAccount: sum,
                                   id: accountForUpdate?.id)
         

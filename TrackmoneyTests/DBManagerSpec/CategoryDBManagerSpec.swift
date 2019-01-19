@@ -67,8 +67,8 @@ class CategoryDBManagerSpec: XCTestCase {
         })
 
 
-        _ = manager.delete(message[.id] as! String)
-        _ = manager.delete(message[.id] as! String)
+        _ = manager.delete(message[.id] as! String, force: false)
+        _ = manager.delete(message[.id] as! String, force: false)
 
     }
     
@@ -93,7 +93,7 @@ class CategoryDBManagerSpec: XCTestCase {
             }
         })
         
-        _ = manager.delete(message[.id] as! String)        
+        _ = manager.delete(message[.id] as! String, force: false)
     }
     
     // MARK: - delete
@@ -107,7 +107,7 @@ class CategoryDBManagerSpec: XCTestCase {
             message[.id] = resultCreate.0?.id
         })
         try when("delete Category", closure: {
-            resultDelete = manager.delete(message[.id] as! String)
+            resultDelete = manager.delete(message[.id] as! String, force: false)
         })
         try then("result should correspond nil", closure: {
             XCTAssertNil(resultDelete)
@@ -133,7 +133,7 @@ class CategoryDBManagerSpec: XCTestCase {
             XCTAssertEqual(category.name, "newName")
         })
         
-        _ = manager.delete(message[.id] as! String)        
+        _ = manager.delete(message[.id] as! String, force: false)        
     }
     
 }

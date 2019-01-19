@@ -17,42 +17,43 @@ struct DeleteTransaction {
     }
     
     
-    func execute() -> Bool {
+    func execute(force: Bool) -> Bool {
         
-        let accountDBManager = AccountDBManager()
-        let predicate = NSPredicate(format: "name = %@", transaction.mainAccount)
-        let result = accountDBManager.get(predicate) as! [Account]?
-        
-        guard let mainAccount = result?.first else {
-            return false }
-        
-        guard let type = TransactionType(
-            rawValue: transaction.type) else {
-                assertionFailure()
-                return false }
-
-        let sum = transaction.sum
-
-        switch type {
-        case .expense:
-            accountDBManager.add(for: mainAccount, sum: sum)
-        case .income:
-            accountDBManager.substract(for: mainAccount, sum: sum)
-        case .transfer:
-            let predicate = NSPredicate(format: "name = %@", transaction.corAccount!)
+        if !force {
+            let accountDBManager = AccountDBManager()
+            let predicate = NSPredicate(format: "name = %@", transaction.mainAccount)
             let result = accountDBManager.get(predicate) as! [Account]?
             
-            guard let corAccount = result?.first else {
-                assertionFailure()
+            guard let mainAccount = result?.first else {
                 return false }
-
-            accountDBManager.move(fromAccount: corAccount,
-                                  toAccount: mainAccount,
-                                  sum: sum)
-        }
-
+            
+            guard let type = TransactionType(
+                rawValue: transaction.type) else {
+                    assertionFailure()
+                    return false }
+            
+            let sum = transaction.sum
+            
+            switch type {
+            case .expense:
+                accountDBManager.add(for: mainAccount, sum: sum)
+            case .income:
+                accountDBManager.substract(for: mainAccount, sum: sum)
+            case .transfer:
+                let predicate = NSPredicate(format: "name = %@", transaction.corAccount!)
+                let result = accountDBManager.get(predicate) as! [Account]?
+                
+                guard let corAccount = result?.first else {
+                    assertionFailure()
+                    return false }
+                
+                accountDBManager.move(fromAccount: corAccount,
+                                      toAccount: mainAccount,
+                                      sum: sum)
+            }
+        }        
         context.delete(transaction)
-
+        
         do {
             try context.save()
             return true

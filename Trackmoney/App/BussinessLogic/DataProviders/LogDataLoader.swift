@@ -31,7 +31,7 @@ class LogDataLoader: DataProviderProtocol {
                            title: NSLocalizedString("acceptDeleteTitle", comment: ""),
                            body: nil) { [unowned self] (flag) in
                             if flag {
-                                let error = self.dbManager?.delete(id)
+                                let error = self.dbManager?.delete(id, force: false)
                                 
                                 if error == nil {
                                     

@@ -103,7 +103,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func delete(_ id: String) -> DBError? {
+    func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate)

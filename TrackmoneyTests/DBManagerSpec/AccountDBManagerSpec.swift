@@ -36,7 +36,7 @@ class AccountDBManagerSpec: XCTestCase {
             XCTAssertEqual(result.0?.name, message[.name] as? String)
         })
         
-        _ = manager.delete(message[.id] as! String)
+        _ = manager.delete(message[.id] as! String, force: false)
         
     }
 
@@ -51,7 +51,7 @@ class AccountDBManagerSpec: XCTestCase {
             message[.id] = resultCreate.0?.id
         })
         try when("delete Account", closure: {
-            resultDelete = manager.delete(message[.id] as! String)
+            resultDelete = manager.delete(message[.id] as! String, force: false)
         })
         try then("result should correspond nil", closure: {
             XCTAssertNil(resultDelete)
@@ -87,7 +87,7 @@ class AccountDBManagerSpec: XCTestCase {
                 XCTAssertEqual(count, 1)
             })
     
-            _ = manager.delete(message[.id] as! String)
+            _ = manager.delete(message[.id] as! String, force: false)
         }
 
     // MARK: - update
@@ -111,7 +111,7 @@ class AccountDBManagerSpec: XCTestCase {
             XCTAssertEqual(account.icon, "newIcon")
         })
         
-        _ = manager.delete(message[.id] as! String)
+        _ = manager.delete(message[.id] as! String, force: false)
         
     }
     

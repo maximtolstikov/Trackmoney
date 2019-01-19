@@ -61,7 +61,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         return DBError.noName
     }
     
-    func delete(_ id: String) -> DBError? {
+    func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate) as! [Transaction]?
@@ -74,7 +74,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
                     return DBError.objectIsNotExist
         }
         
-        return deleteTransaction.execute() ? nil : DBError.contextDoNotBeSaved
+        return deleteTransaction.execute(force: force) ? nil : DBError.contextDoNotBeSaved
     }
 
 }

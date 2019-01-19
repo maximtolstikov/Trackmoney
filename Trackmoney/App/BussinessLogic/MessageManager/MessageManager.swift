@@ -46,22 +46,28 @@ struct MessageManager {
     }
     
     // Создает сообщение для счета
-    func craftAccounеMessage(nameAccount: String,
+    func craftAccounеMessage(icon: String?,
+                             nameAccount: String,
                              sumAccount: Int32,
                              id: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameAccount
         dictionary[.sum] = sumAccount
-        dictionary[.icon] = iconAccount
         if id != nil {
             dictionary[.id] = id
+        }
+        if icon != nil {
+            dictionary[.icon] = icon
+        } else {
+            dictionary[.icon] = iconAccount
         }
         return dictionary        
     }
     
     // Создает сообщение для Категории
-    func craftCategoryMessage(nameCategory: String,
+    func craftCategoryMessage(icon: String?,
+                              nameCategory: String,
                               type: CategoryType,
                               parent: String?,
                               id: String?) -> [MessageKeyType: Any] {
@@ -69,12 +75,17 @@ struct MessageManager {
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameCategory
         dictionary[.type] = type.rawValue
-        dictionary[.icon] = iconCategory
+        
         if parent != NSLocalizedString("chooseParentTitle", comment: "") {
             dictionary[.parent] = parent
         }
         if id != nil {
             dictionary[.id] = id
+        }
+        if icon != nil {
+            dictionary[.icon] = icon
+        } else {
+            dictionary[.icon] = iconCategory
         }
         
         return dictionary

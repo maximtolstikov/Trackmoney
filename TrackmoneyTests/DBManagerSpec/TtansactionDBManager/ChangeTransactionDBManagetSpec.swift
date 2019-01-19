@@ -60,8 +60,8 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCangeExpenseTransaction() throws {
@@ -86,8 +86,8 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCangeTransferTransaction() throws {
@@ -124,9 +124,9 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)        
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
     }
     
     func testCangeCorAccountTransaction() throws {
@@ -164,9 +164,9 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
 
         messageT[.sum] = Int32(30)
 
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)
-        _ = managerA.delete(messageACtwo[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
+        _ = managerA.delete(messageACtwo[.id] as! String, force: false)
     }
 }
