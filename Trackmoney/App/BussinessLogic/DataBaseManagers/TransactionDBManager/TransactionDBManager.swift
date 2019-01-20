@@ -3,19 +3,17 @@ import CoreData
 
 class TransactionDBManager: DBManager, DBManagerProtocol {
     
+    
     func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
         
-        guard let createTransaction = CreateTransaction(
+        let createTransaction = CreateTransaction(
             context: context,
             mManager: mManager,
-            message: message
-            ) else {
-                assertionFailure()
-                return (nil, DBError.messageHaventRequireValue)
-        }
-        
+            message: message)
+
         return createTransaction.execute()
     }
+    
     
     func get(_ predicate: NSPredicate) -> [DBEntity]? {
         
@@ -29,6 +27,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
             return nil
         }
     }
+    
     
     func update(_ message: [MessageKeyType: Any]) -> DBError? {
         
@@ -61,6 +60,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         return DBError.noName
     }
     
+    
     func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
@@ -73,7 +73,6 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
                     assertionFailure()
                     return DBError.objectIsNotExist
         }
-        
         return deleteTransaction.execute(force: force) ? nil : DBError.contextDoNotBeSaved
     }
 

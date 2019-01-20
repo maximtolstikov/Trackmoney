@@ -9,14 +9,16 @@ struct MessageManager {
     let iconAccount = "accountIcon"
     let iconCategory = "categoryIcon"
     
-    // создает сообщение для формы транзакции
+    // Cоздает сообщение для формы транзакции
     //swiftlint:disable next function_parameter_count
-    func craftTransactionMessage(transactionType: TransactionType,
-                                 topButton: String,
-                                 sum: Int32,
-                                 bottomButton: String,
-                                 note: String,
-                                 id: String?) -> [MessageKeyType: Any] {
+    func craftTransactionMessage(
+        transactionType: TransactionType,
+        topButton: String,
+        sum: Int32,
+        bottomButton: String,
+        note: String,
+        id: String?,
+        date: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.type] = transactionType.rawValue
@@ -25,6 +27,9 @@ struct MessageManager {
  
         if id != nil {
             dictionary[.id] = id
+        }
+        if date != nil {
+            dictionary[.date] = date
         }
         if note != "" {
             dictionary[.note] = note
@@ -46,10 +51,11 @@ struct MessageManager {
     }
     
     // Создает сообщение для счета
-    func craftAccounеMessage(icon: String?,
-                             nameAccount: String,
-                             sumAccount: Int32,
-                             id: String?) -> [MessageKeyType: Any] {
+    func craftAccounеMessage(
+        icon: String?,
+        nameAccount: String,
+        sumAccount: Int32,
+        id: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameAccount
@@ -66,11 +72,12 @@ struct MessageManager {
     }
     
     // Создает сообщение для Категории
-    func craftCategoryMessage(icon: String?,
-                              nameCategory: String,
-                              type: CategoryType,
-                              parent: String?,
-                              id: String?) -> [MessageKeyType: Any] {
+    func craftCategoryMessage(
+        icon: String?,
+        nameCategory: String,
+        type: CategoryType,
+        parent: String?,
+        id: String?) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.name] = nameCategory

@@ -135,10 +135,11 @@ class AccountFormController: BaseFormController {
     private func sendMessage(with name: String, and sum: Int32) {
         
         let message = MessageManager()
-            .craftAccounеMessage(icon: nil,
-                                  nameAccount: name,
-                                  sumAccount: sum,
-                                  id: accountForUpdate?.id)
+            .craftAccounеMessage(
+                icon: nil,
+                nameAccount: name,
+                sumAccount: sum,
+                id: accountForUpdate?.id)
         
         dataProvider?.save(message: message, completion: { [weak self] (error) in
             

@@ -80,6 +80,7 @@
 		94A7FDFF217C820A009E5C4B /* CategorySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */; };
 		94A7FE01217C8CF1009E5C4B /* CategorySettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */; };
 		94A7FE03217C908E009E5C4B /* CategorySettingsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */; };
+		94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3257B21F45ECE0063BD78 /* DateSetter.swift */; };
 		94C553C12164FAFA00C0F628 /* LogControllreBillder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */; };
 		94C553C32165004A00C0F628 /* LogDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C22165004A00C0F628 /* LogDataLoader.swift */; };
 		94C553C5216514A900C0F628 /* ToolsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */; };
@@ -206,6 +207,7 @@
 		94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsController.swift; sourceTree = "<group>"; };
 		94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsDataProvider.swift; sourceTree = "<group>"; };
 		94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsControllerBuilder.swift; sourceTree = "<group>"; };
+		94B3257B21F45ECE0063BD78 /* DateSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSetter.swift; sourceTree = "<group>"; };
 		94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogControllreBillder.swift; sourceTree = "<group>"; };
 		94C553C22165004A00C0F628 /* LogDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDataLoader.swift; sourceTree = "<group>"; };
 		94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsControllerBuilder.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				9470D44621B44DF100FF07B1 /* DateManager.swift */,
 				94EC74F621B5584A002476AC /* Period.swift */,
 				94EC74F821B5593C002476AC /* SupplierDates.swift */,
+				94B3257B21F45ECE0063BD78 /* DateSetter.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
 				947D32A921EA317D0004D265 /* CSVManager.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
+				94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,

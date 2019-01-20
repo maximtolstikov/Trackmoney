@@ -1,28 +1,3 @@
-// Account
-//@NSManaged public var icon: String
-//@NSManaged public var name: String
-//@NSManaged public var sum: Int32
-//@NSManaged public var type: String?  // на будущее
-//@NSManaged public var id: String
-// Category
-//@NSManaged public var icon: String
-//@NSManaged public var id: String
-//@NSManaged public var name: String
-//@NSManaged public var type: String
-//@NSManaged public var child: NSSet?
-//@NSManaged public var parent: CategoryTransaction?
-// Transaction
-//@NSManaged public var category: String?
-//@NSManaged public var corAccount: String?
-//@NSManaged public var date: NSDate
-//@NSManaged public var icon: String
-//@NSManaged public var mainAccount: String
-//@NSManaged public var note: String?
-//@NSManaged public var sum: Int32
-//@NSManaged public var type: Int16
-//@NSManaged public var id: String
-
-
 import Foundation
 
 protocol AbstractCSVManager {
@@ -56,7 +31,7 @@ struct CSVManager: AbstractCSVManager {
             print(text)
 
             let creator = CreaterEntitysFromString()
-            creator.restore(from: text)            
+            creator.restore(from: text)
             
         } catch let error {
             print(error.localizedDescription)

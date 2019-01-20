@@ -1,4 +1,4 @@
-//
+//swiftlint:disable force_unwrapping
 //  CreaterEntitysFromFile.swift
 //  Trackmoney
 //
@@ -23,7 +23,9 @@ struct CreaterEntitysFromString {
     }
     
     func restore(from: String) {
-    
+   
+        print("From::::::: \(from)")
+        
         cleanDataBase()
         
         let array = from.components(separatedBy: ";")
@@ -34,7 +36,8 @@ struct CreaterEntitysFromString {
         let stringsTransactions = array[2].components(separatedBy: "\n")
         
         guard createAccounts(stringsAccounts),
-            createCategories(stringsCategories) else {
+            createCategories(stringsCategories),
+            createTransactions(stringsTransactions) else {
                 assertionFailure()
                 return
         }
@@ -85,6 +88,10 @@ struct CreaterEntitysFromString {
     
     
     private func createCategories(_ array: [String]) -> Bool {
+        if array.first == "" {
+            return true
+        }
+        
         for string in array {
             let components = string.components(separatedBy: ",")
             var parent: String? {
@@ -94,7 +101,7 @@ struct CreaterEntitysFromString {
             guard let type = CategoryType(rawValue: components[2]) else { return false }
             
             let message = messageManager.craftCategoryMessage(
-                icon:components[0],
+                icon: components[0],
                 nameCategory: components[1],
                 type: type,
                 parent: parent,
@@ -106,4 +113,41 @@ struct CreaterEntitysFromString {
         }
         return true
     }
+    
+    private func createTransactions(_ array: [String]) -> Bool {
+        let formater = DateFormat().dateFormatter
+        if array.first == "" {
+            return true
+        }
+        
+        for string in array {
+            let companents = string.components(separatedBy: ",")
+            var category: String? {
+                return companents[0] == "nil" ? nil : companents[0]
+            }
+            var corAccount: String? {
+                return companents[1] == "nil" ? nil : companents[1]
+            }
+
+            guard let number = Int16(companents[7]),
+                let type = TransactionType(rawValue: number),
+                let sum = Int32(companents[6]) else { return false }
+
+            let message = messageManager.craftTransactionMessage(
+                transactionType: type,
+                topButton: companents[5],
+                sum: sum,
+                bottomButton: category ?? corAccount!,
+                note: companents[6],
+                id: nil,
+                date: companents[3])
+
+            let result = transactionDBManager.create(message)
+            if result.0 == nil {
+                return false
+            }
+        }
+        return true
+    }
+
 }

@@ -59,21 +59,6 @@ class CSVSpec: XCTestCase {
             let fileExist = fileManager.fileExists(atPath: (url?.path)!)
             XCTAssert(fileExist)
         })
-//        try when("remove all entity from dataBase", closure: {
-//            csvManager.cleanDataBase()
-//            let count = getQuantityEntities()
-//            XCTAssertEqual(count, 0)
-//        })
-//        try then("file is exist", closure: {
-//            let path = try fileManager.url(for: .documentDirectory,
-//                                           in: .allDomainsMask,
-//                                           appropriateFor: nil,
-//                                           create: false)
-//            let fileURL = path.appendingPathComponent(fileName)
-//            url = fileURL
-//            let fileExist = fileManager.fileExists(atPath: (url?.path)!)
-//            XCTAssert(fileExist)
-//        })
         try when("restor data, quantity entiry again", closure: {
             csvManager.restorFrom(file: fileName)
             let count = getQuantityEntities()
