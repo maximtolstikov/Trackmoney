@@ -1,62 +1,12 @@
-import Foundation
+//
+//  CSVManager.swift
+//  Trackmoney
+//
+//  Created by Maxim Tolstikov on 21/01/2019.
+//  Copyright © 2019 Maxim Tolstikov. All rights reserved.
+//
 
-protocol AbstractCSVManager {
-    func create(with name: String) -> URL?
+protocol CSVManager {
+    func create() -> String?
     func restorFrom(file name: String)
-}
-
-/// Упаковывает и извлекает данные в/из CSV файл
-struct CSVManager: AbstractCSVManager {
-    
-    let fileManager = FileManager.default
-    
-    
-    // Упаковывает данные в файл
-    func create(with name: String) -> URL? {
-        
-        guard let csvString = CreaterStringsFromEntity().string() else { return nil }
-        return writeToFile(string: csvString, withName: name)
-    }
-    
-    // Востанавливает данные из файла
-    func restorFrom(file name: String) {
-        
-        do {
-            let path = try fileManager.url(for: .documentDirectory,
-                                           in: .allDomainsMask,
-                                           appropriateFor: nil,
-                                           create: false)
-            let fileURL = path.appendingPathComponent(name)
-            guard let text = try? String(contentsOf: fileURL) else { return }
-            print(text)
-
-            let creator = CreaterEntitysFromString()
-            creator.restore(from: text)
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    // MARK: - Записываем строковое представление данных в файл
-    
-    private func writeToFile(string: String, withName: String) -> URL? {
-        do {
-            let path = try fileManager.url(
-                for: .documentDirectory,
-                in: .allDomainsMask,
-                appropriateFor: nil,
-                create: false)
-            
-            let fileURL = path.appendingPathComponent(withName)
-            print(fileURL)
-            try string.write(to: fileURL, atomically: true, encoding: .utf8)
-            
-            return fileURL
-        } catch {
-            print("error creating file")
-            return nil
-        }
-    }
-    
 }

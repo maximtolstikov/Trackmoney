@@ -53,9 +53,11 @@
 		945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A992179FF1300AF0B86 /* LogCell.swift */; };
 		94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC521F5C49D007AECA9 /* SettingsList.swift */; };
 		94654BCA21F5D4AA007AECA9 /* RepositoryActionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */; };
+		94654BCC21F5E9B0007AECA9 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCB21F5E9B0007AECA9 /* CSVManager.swift */; };
+		94654BD021F5EFB4007AECA9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCF21F5EFB4007AECA9 /* String.swift */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
 		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
-		947D32A921EA317D0004D265 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManager.swift */; };
+		947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManagerImpl.swift */; };
 		94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC12146CDF900498DCF /* AppDelegate.swift */; };
 		94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */; };
 		94858ACC2146CDFA00498DCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94858ACB2146CDFA00498DCF /* Assets.xcassets */; };
@@ -180,9 +182,11 @@
 		945C7A992179FF1300AF0B86 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		94654BC521F5C49D007AECA9 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
 		94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryActionList.swift; sourceTree = "<group>"; };
+		94654BCB21F5E9B0007AECA9 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
+		94654BCF21F5EFB4007AECA9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
-		947D32A821EA317D0004D265 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
+		947D32A821EA317D0004D265 /* CSVManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManagerImpl.swift; sourceTree = "<group>"; };
 		94858ABE2146CDF900498DCF /* Trackmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackmoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94858AC12146CDF900498DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94858AC92146CDF900498DCF /* Trackmoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trackmoney.xcdatamodel; sourceTree = "<group>"; };
@@ -379,6 +383,22 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		94654BCD21F5EF6E007AECA9 /* Foundarion */ = {
+			isa = PBXGroup;
+			children = (
+				94654BCF21F5EFB4007AECA9 /* String.swift */,
+			);
+			path = Foundarion;
+			sourceTree = "<group>";
+		};
+		94654BCE21F5EF83007AECA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				94654BCD21F5EF6E007AECA9 /* Foundarion */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9470D44521B44DBC00FF07B1 /* Date */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +538,7 @@
 		94858B0A2146D1E200498DCF /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				94654BCE21F5EF83007AECA9 /* Extensions */,
 				9470D44521B44DBC00FF07B1 /* Date */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
@@ -607,7 +628,8 @@
 		94CC272221F38791006B2F9B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				947D32A821EA317D0004D265 /* CSVManager.swift */,
+				94654BCB21F5E9B0007AECA9 /* CSVManager.swift */,
+				947D32A821EA317D0004D265 /* CSVManagerImpl.swift */,
 				94CC272321F388CA006B2F9B /* CreaterStringsFromEntity.swift */,
 				94CC272521F390CD006B2F9B /* CreaterEntitysFromString.swift */,
 			);
@@ -861,6 +883,7 @@
 				9446622A219D9E0800C9FFCF /* CorAccountButtonValidator.swift in Sources */,
 				9424E8102163BA4C00BE756D /* DataProviderProtocol.swift in Sources */,
 				94D166892199A88500C5D091 /* NegativeSumRule.swift in Sources */,
+				94654BD021F5EFB4007AECA9 /* String.swift in Sources */,
 				9417B1602181A092001E88AA /* PromptView.swift in Sources */,
 				94858B062146D15B00498DCF /* TransactionType.swift in Sources */,
 				94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */,
@@ -917,11 +940,12 @@
 				94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */,
 				94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */,
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
-				947D32A921EA317D0004D265 /* CSVManager.swift in Sources */,
+				947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */,
 				94654BCA21F5D4AA007AECA9 /* RepositoryActionList.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
+				94654BCC21F5E9B0007AECA9 /* CSVManager.swift in Sources */,
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
 				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,

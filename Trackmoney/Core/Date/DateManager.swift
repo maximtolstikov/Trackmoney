@@ -18,8 +18,7 @@ class DateManager: SupplierDates {
         
         setCurrentComponentsBy(date)
         
-        switch what {
-            
+        switch what {            
         case .current:
             setCurrentDates(period)
         case .next:

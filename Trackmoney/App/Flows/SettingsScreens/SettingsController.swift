@@ -140,13 +140,24 @@ extension SettingsController: UITableViewDelegate {
                 self.navigationController?.pushViewController(controller, animated: true)
             }
             
-        } else {
-            let csvManager = CSVManager()
+            // FIXME: - убрать зависимости
             
+        } else if indexPath.section == 1 {
+            let csvManager = CSVManagerImpl()
+            let alert = NeedCancelAlert()
+            guard let nameFile = csvManager.create() else {                
+                alert.show(controller: self,
+                           title: "Архив создать не удалось!",
+                           body: nil)
+                return
+            }
+            alert.show(controller: self,
+                       title: "Архив создан!",
+                       body: nameFile)
             if indexPath.row == 0 {
-                _ = csvManager.create(with: "Test")
+                _ = csvManager.create()
             } else {
-                csvManager.restorFrom(file: "Test")
+                
             }
         }
     }

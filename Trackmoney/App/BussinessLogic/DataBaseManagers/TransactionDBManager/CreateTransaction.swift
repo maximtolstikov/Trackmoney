@@ -75,8 +75,7 @@ struct CreateTransaction {
     // Устанавливает дату
     private func setDate() -> NSDate {
         let date = mManager
-            .isExistValue(for: .date, in: message) ? nil : message[.date] as? String
-        
+            .isExistValue(for: .date, in: message) ? nil : message[.date] as? String        
         return DateSetter().date(stringDate: date)
     }
     
