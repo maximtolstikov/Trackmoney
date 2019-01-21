@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trackmoney/App/BussinessLogic/DataBaseManagers/TransactionDBManager/CreateTransaction.swift"
-            timestampString = "569766180.877723"
+            timestampString = "569781195.135601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"

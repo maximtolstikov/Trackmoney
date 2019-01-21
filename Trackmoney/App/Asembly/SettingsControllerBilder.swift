@@ -5,6 +5,7 @@ class SettigsControllerBuilder {
     func viewController() -> UIViewController {
         
         let settingsController = SettingsController()
+        settingsController.csvManager = CSVManagerImpl()
         settingsController.navigationItem
             .title = NSLocalizedString("settings", comment: "")
         settingsController.categorySettings = createCategoryList()

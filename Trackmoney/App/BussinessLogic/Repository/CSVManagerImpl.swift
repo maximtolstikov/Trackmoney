@@ -32,6 +32,17 @@ struct CSVManagerImpl: CSVManager {
         }
     }
     
+    // Возвращает список файлов архивов в папке Документы
+    func archivesList() -> [String]? {
+        
+        guard let url = fileManager.urls(for: .documentDirectory,
+                                         in: .allDomainsMask).first,
+            let enumerator = fileManager.enumerator(atPath: url.path),
+            let paths = enumerator.allObjects as? [String] else { return nil }
+        
+        return paths.filter { $0.contains("trackmoney") && $0.contains("csv") }
+    }
+    
     // Записывает строковое представление данных в файл
     private func writeToFile(string: String, withName: String) -> String? {
         do {

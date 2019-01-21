@@ -9,4 +9,5 @@
 protocol CSVManager {
     func create() -> String?
     func restorFrom(file name: String)
+    func archivesList() -> [String]?
 }

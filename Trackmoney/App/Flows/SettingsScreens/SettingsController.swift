@@ -1,5 +1,3 @@
-// Для настройки контроллера Настроек
-
 import UIKit
 
 class SettingsController: UIViewController {
@@ -9,6 +7,7 @@ class SettingsController: UIViewController {
     var categorySettings: [String]!
     var entitiesList: [String]!
     var repositoryActions: [String]!
+    var csvManager: CSVManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,24 +139,22 @@ extension SettingsController: UITableViewDelegate {
                 self.navigationController?.pushViewController(controller, animated: true)
             }
             
-            // FIXME: - убрать зависимости
-            
         } else if indexPath.section == 1 {
-            let csvManager = CSVManagerImpl()
             let alert = NeedCancelAlert()
-            guard let nameFile = csvManager.create() else {                
-                alert.show(controller: self,
-                           title: "Архив создать не удалось!",
-                           body: nil)
-                return
-            }
-            alert.show(controller: self,
-                       title: "Архив создан!",
-                       body: nameFile)
             if indexPath.row == 0 {
-                _ = csvManager.create()
-            } else {
                 
+                guard let csvManager = csvManager,
+                    let nameFile = csvManager.create() else {
+                    alert.show(controller: self,
+                               title: "Архив создать не удалось!",
+                               body: nil)
+                    return }
+                alert.show(controller: self,
+                           title: "Архив создан!",
+                           body: nameFile)
+            } else {
+                let controller = ArchivesListControllerBuilder().viewController()
+                navigationController?.pushViewController(controller, animated: true)
             }
         }
     }
