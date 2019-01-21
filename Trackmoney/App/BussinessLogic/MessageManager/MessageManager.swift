@@ -18,12 +18,14 @@ struct MessageManager {
         bottomButton: String,
         note: String,
         id: String?,
-        date: String?) -> [MessageKeyType: Any] {
+        date: String?,
+        isRestore: Bool) -> [MessageKeyType: Any] {
         
         var dictionary = [MessageKeyType: Any]()
         dictionary[.type] = transactionType.rawValue
         dictionary[.mainAccount] = topButton
         dictionary[.sum] = sum
+        dictionary[.isRestore] = isRestore
  
         if id != nil {
             dictionary[.id] = id

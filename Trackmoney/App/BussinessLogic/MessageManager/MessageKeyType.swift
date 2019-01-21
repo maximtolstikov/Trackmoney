@@ -12,4 +12,5 @@ enum MessageKeyType: String {
     case parent
     case sum
     case type
+    case isRestore
 }

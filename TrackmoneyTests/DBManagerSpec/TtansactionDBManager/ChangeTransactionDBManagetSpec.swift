@@ -24,7 +24,8 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
     var messageT: [MessageKeyType: Any] = [
         .sum: Int32(30),
         .mainAccount: "testMainName",
-        .icon: "iconString"]
+        .icon: "iconString",
+        .isRestore: false]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!

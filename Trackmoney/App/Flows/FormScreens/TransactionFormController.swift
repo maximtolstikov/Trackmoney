@@ -249,7 +249,8 @@ class TransactionFormController: BaseFormController {
                 bottomButton: bottomButtonText,
                 note: text,
                 id: transactionID,
-                date: nil)
+                date: nil,
+                isRestore: false)
         
         dataProvider?.save(message: message, completion: { [unowned self] (error) in
             

@@ -57,16 +57,18 @@ struct CreateTransaction {
             transaction.corAccount = corAccount?.name
         }
         
-        switch type {
-        case .expense:
-            accountDBManager.substract(for: mainAccount, sum: sum)
-        case .income:
-            accountDBManager.add(for: mainAccount, sum: sum)
-        case .transfer:
-            accountDBManager.move(
-                fromAccount: mainAccount,
-                toAccount: corAccount!,
-                sum: sum)
+        if message[.isRestore] as! Bool == false {
+            switch type {
+            case .expense:
+                accountDBManager.substract(for: mainAccount, sum: sum)
+            case .income:
+                accountDBManager.add(for: mainAccount, sum: sum)
+            case .transfer:
+                accountDBManager.move(
+                    fromAccount: mainAccount,
+                    toAccount: corAccount!,
+                    sum: sum)
+            }            
         }
         
         do {

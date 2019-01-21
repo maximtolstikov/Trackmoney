@@ -44,10 +44,10 @@ class CSVSpec: XCTestCase {
     }
     
     func testLoad() throws {
-        
+
         var url: URL?
         var quantityEntity = 0
-        
+
         try given("quantity entity", closure: {
             quantityEntity = getQuantityEntities()
             let path = try fileManager.url(for: .documentDirectory,
@@ -64,7 +64,7 @@ class CSVSpec: XCTestCase {
             let count = getQuantityEntities()
             XCTAssertEqual(count, quantityEntity)
         })
-        
+
         try then("delete testFile", closure: {
             try? fileManager.removeItem(at: url!)
             XCTAssertFalse(fileManager.fileExists(atPath: (url?.path)!))

@@ -135,15 +135,17 @@ struct CreaterEntitysFromString {
 
             let message = messageManager.craftTransactionMessage(
                 transactionType: type,
-                topButton: companents[5],
+                topButton: companents[4],
                 sum: sum,
                 bottomButton: category ?? corAccount!,
-                note: companents[6],
+                note: companents[5],
                 id: nil,
-                date: companents[3])
+                date: companents[2],
+                isRestore: true)
 
             let result = transactionDBManager.create(message)
             if result.0 == nil {
+                assertionFailure()
                 return false
             }
         }
