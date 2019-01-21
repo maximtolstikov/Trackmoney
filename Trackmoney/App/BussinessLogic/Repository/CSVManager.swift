@@ -10,4 +10,5 @@ protocol CSVManager {
     func create() -> String?
     func restorFrom(file name: String)
     func archivesList() -> [String]?
+    func deleteItems(_ list: [String], completion: @escaping () -> Void)
 }

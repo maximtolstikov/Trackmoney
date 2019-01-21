@@ -41,6 +41,7 @@
 "repositoryHeaderTitle" = "Хранилище";
 "saveBaseTitle" = "Сохранить базу";
 "restoreBaseTitile" = "Восстановить базу";
+"archiveListControllerTitle" = "Архивы";
 
 //Validate error
 "errorTextFormEmpty" = "Не введено значение!";

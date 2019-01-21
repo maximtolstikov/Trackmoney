@@ -321,13 +321,13 @@
 				9424E8112163C11F00BE756D /* AccountsDataLoader.swift */,
 				94A7FDF1217AF234009E5C4B /* AccountFormDataProvider.swift */,
 				94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */,
+				94654BD521F6247C007AECA9 /* ArchivesListDataProviderImpl.swift */,
 				94A7FDF3217AF3D7009E5C4B /* CategoryFormDataProvider.swift */,
 				94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */,
 				94C553C22165004A00C0F628 /* LogDataLoader.swift */,
 				9441172721B66A380015B38C /* ToolsDataProviderProtocol.swift */,
 				94C553C62165158A00C0F628 /* ToolsDataProvider.swift */,
 				945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */,
-				94654BD521F6247C007AECA9 /* ArchivesListDataProviderImpl.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";

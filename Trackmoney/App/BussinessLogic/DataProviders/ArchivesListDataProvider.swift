@@ -12,6 +12,6 @@ protocol ArchivesListDataProvider {
     
     init(manager: CSVManager)
     
-    func load(completion: @escaping ([String]?) -> Void)
+    func load()
     func delete(_ list: [String])
 }

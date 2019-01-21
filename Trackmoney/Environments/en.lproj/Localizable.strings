@@ -42,6 +42,7 @@
 "repositoryHeaderTitle" = "Repository";
 "saveBaseTitle" = "Save base";
 "restoreBaseTitile" = "Restore base";
+"archiveListControllerTitle" = "Archives";
 
 //Validate error
 "errorTextFormEmpty" = "Field hasn't value!";
