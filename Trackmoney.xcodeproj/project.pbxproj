@@ -51,6 +51,8 @@
 		945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */; };
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
 		945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A992179FF1300AF0B86 /* LogCell.swift */; };
+		94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC521F5C49D007AECA9 /* SettingsList.swift */; };
+		94654BCA21F5D4AA007AECA9 /* RepositoryActionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
 		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
 		947D32A921EA317D0004D265 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManager.swift */; };
@@ -105,7 +107,7 @@
 		94EC435F21661E12009C6BF3 /* AccountsSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC435E21661E12009C6BF3 /* AccountsSettingsController.swift */; };
 		94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */; };
 		94EC4365216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */; };
-		94EC436721664492009C6BF3 /* SettingListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436621664492009C6BF3 /* SettingListType.swift */; };
+		94EC436721664492009C6BF3 /* EntitiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC436621664492009C6BF3 /* EntitiesList.swift */; };
 		94EC74F721B5584A002476AC /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F621B5584A002476AC /* Period.swift */; };
 		94EC74F921B5593C002476AC /* SupplierDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC74F821B5593C002476AC /* SupplierDates.swift */; };
 		94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */; };
@@ -176,6 +178,8 @@
 		945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormControllerBuilder.swift; sourceTree = "<group>"; };
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
 		945C7A992179FF1300AF0B86 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		94654BC521F5C49D007AECA9 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
+		94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryActionList.swift; sourceTree = "<group>"; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
 		947D32A821EA317D0004D265 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
@@ -234,7 +238,7 @@
 		94EC435E21661E12009C6BF3 /* AccountsSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsController.swift; sourceTree = "<group>"; };
 		94EC436021662018009C6BF3 /* AccountsSettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsDataProvider.swift; sourceTree = "<group>"; };
 		94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSettingsControllerBilder.swift; sourceTree = "<group>"; };
-		94EC436621664492009C6BF3 /* SettingListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListType.swift; sourceTree = "<group>"; };
+		94EC436621664492009C6BF3 /* EntitiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesList.swift; sourceTree = "<group>"; };
 		94EC74F621B5584A002476AC /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		94EC74F821B5593C002476AC /* SupplierDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDates.swift; sourceTree = "<group>"; };
 		94EEA27921803D0400F19496 /* NameTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextFieldValidate.swift; sourceTree = "<group>"; };
@@ -357,6 +361,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		94654BC321F5BD75007AECA9 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				94E908EB21AD3F6F00E7A31D /* NoteViewController.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		94654BC421F5C3E0007AECA9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				94EC436621664492009C6BF3 /* EntitiesList.swift */,
+				94654BC521F5C49D007AECA9 /* SettingsList.swift */,
+				94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		9470D44521B44DBC00FF07B1 /* Date */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,12 +437,13 @@
 		94858AF32146D15B00498DCF /* BussinessLogic */ = {
 			isa = PBXGroup;
 			children = (
-				94CC272221F38791006B2F9B /* Repository */,
 				9446623F21A04D4600C9FFCF /* Alerts */,
 				94A0EE8121A5528F004B66E1 /* CustomSort */,
 				94858AF52146D15B00498DCF /* DataBaseManagers */,
 				9424E80E2163BA0F00BE756D /* DataProviders */,
 				94858AFB2146D15B00498DCF /* MessageManager */,
+				94CC272221F38791006B2F9B /* Repository */,
+				94654BC421F5C3E0007AECA9 /* Settings */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9441172921B7047C0015B38C /* AverageValues.swift */,
 				94CC8136214FDBB30027913C /* DBError.swift */,
@@ -496,7 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				9470D44521B44DBC00FF07B1 /* Date */,
-				94EC436621664492009C6BF3 /* SettingListType.swift */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
 			);
 			path = Core;
@@ -527,7 +549,7 @@
 				94A7FDFD217C81C3009E5C4B /* FormScreens */,
 				94A7FDFB217C8198009E5C4B /* MainScreen */,
 				94A7FDFC217C81AD009E5C4B /* SettingsScreens */,
-				94E908EB21AD3F6F00E7A31D /* NoteViewController.swift */,
+				94654BC321F5BD75007AECA9 /* Note */,
 				945C7A982179FEED00AF0B86 /* Views */,
 			);
 			path = Flows;
@@ -847,7 +869,7 @@
 				94C553C32165004A00C0F628 /* LogDataLoader.swift in Sources */,
 				94466220219C705000C9FFCF /* DifferentAccountRule.swift in Sources */,
 				94C553C72165158A00C0F628 /* ToolsDataProvider.swift in Sources */,
-				94EC436721664492009C6BF3 /* SettingListType.swift in Sources */,
+				94EC436721664492009C6BF3 /* EntitiesList.swift in Sources */,
 				94A0EE8021A55214004B66E1 /* CustomSortManager.swift in Sources */,
 				94858B012146D15B00498DCF /* DBManager.swift in Sources */,
 				94F7F205217F66BD00359B01 /* EmptyRule.swift in Sources */,
@@ -896,6 +918,7 @@
 				94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */,
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
 				947D32A921EA317D0004D265 /* CSVManager.swift in Sources */,
+				94654BCA21F5D4AA007AECA9 /* RepositoryActionList.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
@@ -908,6 +931,7 @@
 				9446624921A0569900C9FFCF /* ChooseTypeCategoryAlert.swift in Sources */,
 				94C553C92165323C00C0F628 /* SettingsController.swift in Sources */,
 				94858AFF2146D15B00498DCF /* AccountDBManager.swift in Sources */,
+				94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */,
 				94A7FE03217C908E009E5C4B /* CategorySettingsControllerBuilder.swift in Sources */,
 				9446623521A03D6400C9FFCF /* Transaction+CoreDataClass.swift in Sources */,
 				9424E80D2163B54100BE756D /* AccountsControllerBuilder.swift in Sources */,

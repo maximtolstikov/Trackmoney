@@ -6,7 +6,9 @@ class SettingsController: UIViewController {
     
     var tableView = UITableView()
     let cellIndentifire = "myCell"
-    var arrayPoint: [String]!
+    var categorySettings: [String]!
+    var entitiesList: [String]!
+    var repositoryActions: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,6 @@ class SettingsController: UIViewController {
     }
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-        
         if sender.direction == .down {
             dismissBack()
         }
@@ -54,7 +55,6 @@ class SettingsController: UIViewController {
     }
     
     @objc func closeController() {
-        
         let controller = MainTabBarControllerBuilder().viewController()
         present(controller, animated: true)
     }
@@ -76,16 +76,33 @@ class SettingsController: UIViewController {
     
 }
 
+// MARK: - UITableViewDataSource
 
-extension SettingsController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return arrayPoint.count
+        return categorySettings.count
     }
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0:
+            return entitiesList.count
+        case 1:
+            return repositoryActions.count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return NSLocalizedString("entitiesHeaderTitle", comment: "")
+        } else {
+            return NSLocalizedString("repositoryHeaderTitle", comment: "")
+        }
     }
     
     func tableView(_ tableView: UITableView,
@@ -95,22 +112,42 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "myCell",
             for: indexPath)
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = arrayPoint[indexPath.section]
-        
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = entitiesList?[indexPath.row]
+        case 1:
+            cell.textLabel?.text = repositoryActions[indexPath.row]
+        default:
+            break
+        }
         return cell
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension SettingsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            
-            let controller = AccountsSettingsControllerBuilder().viewController()
-            self.navigationController?.pushViewController(controller, animated: true)
+            if indexPath.row == 0 {
+                let controller = AccountsSettingsControllerBuilder().viewController()
+                self.navigationController?.pushViewController(controller, animated: true)
+            } else {
+                let controller = CategorySettingsControllerBuilder().viewController()
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
             
         } else {
+            let csvManager = CSVManager()
             
-            let controller = CategorySettingsControllerBuilder().viewController()
-            self.navigationController?.pushViewController(controller, animated: true)
+            if indexPath.row == 0 {
+                _ = csvManager.create(with: "Test")
+            } else {
+                csvManager.restorFrom(file: "Test")
+            }
         }
     }
     

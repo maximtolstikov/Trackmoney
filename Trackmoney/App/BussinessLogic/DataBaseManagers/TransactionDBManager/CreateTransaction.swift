@@ -23,7 +23,6 @@ struct CreateTransaction {
     
     
     func execute() -> (DBEntity?, DBError?) {
-        
         let transaction = Transaction(context: context)
         transaction.id = UUID().uuidString
         transaction.date = setDate()
@@ -32,20 +31,16 @@ struct CreateTransaction {
         transaction.icon = message[.icon] as! String
         transaction.note = message[.note] as? String
         transaction.category = setCategory()
-        
-        guard let type = TransactionType(
-            rawValue: message[.type] as! Int16) else {
-                assertionFailure()
-                return (nil, DBError.messageHaventRequireValue) }
+        guard let type = TransactionType(rawValue: message[.type] as! Int16) else {
+                return (nil, DBError.messageHaventRequireValue)
+        }
         transaction.type = type.rawValue
-        
         guard let mainAccount = accountDBManager
             .get(predicate(by: message[.mainAccount] as! String))?
             .first as? Account else {
                 return (nil, DBError.objectIsNotExist)
         }
         transaction.mainAccount = mainAccount.name
-        
         var corAccount: Account? = nil
         if mManager.isExistValue(for: .corAccount, in: message) {
             guard let account = accountDBManager
@@ -56,7 +51,6 @@ struct CreateTransaction {
             corAccount = account
             transaction.corAccount = corAccount?.name
         }
-        
         if message[.isRestore] as! Bool == false {
             switch type {
             case .expense:
@@ -68,9 +62,8 @@ struct CreateTransaction {
                     fromAccount: mainAccount,
                     toAccount: corAccount!,
                     sum: sum)
-            }            
+            }
         }
-        
         do {
             try context.save()
             return (transaction as DBEntity, nil)
@@ -85,14 +78,6 @@ struct CreateTransaction {
             .isExistValue(for: .date, in: message) ? nil : message[.date] as? String
         
         return DateSetter().date(stringDate: date)
-    }
-    
-    // Проверяет существует ли Account
-    private func isAccount(name: String) -> Bool {
-        
-        let predicate = NSPredicate(format: "name = %@", name)
-        guard accountDBManager.get(predicate)?.first != nil else { return false }
-        return true
     }
     
     // Устанавливает категорию
@@ -119,4 +104,11 @@ struct CreateTransaction {
         return NSPredicate(format: "name = %@", name)
     }
     
+    // Проверяет существует ли Account
+    private func isAccount(name: String) -> Bool {
+        
+        let predicate = NSPredicate(format: "name = %@", name)
+        guard accountDBManager.get(predicate)?.first != nil else { return false }
+        return true
+    }
 }

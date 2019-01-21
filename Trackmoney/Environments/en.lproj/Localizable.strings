@@ -36,7 +36,12 @@
 "accountSettingsTitle" = "Accounts";
 "categoriSettingsTitile" = "Categories";
 "settingsAccounts" = "Accounts";
-"settingsCategories" = "Categories Settings";
+"settingsCategories" = "Categories";
+"settings" = "Settings";
+"entitiesHeaderTitle" = "Objects";
+"repositoryHeaderTitle" = "Repository";
+"saveBaseTitle" = "Save base";
+"restoreBaseTitile" = "Restore base";
 
 //Validate error
 "errorTextFormEmpty" = "Field hasn't value!";

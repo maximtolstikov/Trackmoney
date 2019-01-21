@@ -23,8 +23,6 @@ struct CreaterEntitysFromString {
     }
     
     func restore(from: String) {
-   
-        print("From::::::: \(from)")
         
         cleanDataBase()
         

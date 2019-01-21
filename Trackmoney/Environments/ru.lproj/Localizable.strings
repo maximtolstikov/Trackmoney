@@ -35,7 +35,12 @@
 "accountSettingsTitle" = "Счета";
 "categoriSettingsTitile" = "Категории";
 "settingsAccounts" = "Счета";
-"settingsCategories" = "Настройки Категорий";
+"settingsCategories" = "Категории";
+"settings" = "Настройки";
+"entitiesHeaderTitle" = "Объекты";
+"repositoryHeaderTitle" = "Хранилище";
+"saveBaseTitle" = "Сохранить базу";
+"restoreBaseTitile" = "Восстановить базу";
 
 //Validate error
 "errorTextFormEmpty" = "Не введено значение!";

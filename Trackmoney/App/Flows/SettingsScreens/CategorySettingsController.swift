@@ -129,7 +129,9 @@ class CategorySettingsController: UIViewController {
     
 }
 
-extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension CategorySettingsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -137,9 +139,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        
         guard incomeCategories?.count != nil else { return 0 }
-        
         if section == 0 {
             return incomeCategories.count
         } else {
@@ -158,7 +158,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "myCell",
             for: indexPath)
@@ -178,7 +177,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 textInCell = expenseCategories[indexPath.row].name
             }
         }
-        
         cell.textLabel?.text = textInCell
         return cell
     }
@@ -187,6 +185,12 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                    editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension CategorySettingsController: UITableViewDelegate {
     
     // Свайп по ячейке
     func tableView(_ tableView: UITableView,
@@ -217,24 +221,23 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                     self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
                         if flag {
-                            self?.incomeSortManager.remove(element: item,
-                                                           in: self!.incomeCategories)
+                            self?.incomeSortManager.remove(
+                                element: item,
+                                in: self!.incomeCategories)
                             self?.incomeCategories.remove(at: indexPath.row)
                             self?.tableView.reloadData()
                         }
                     }
                 } else {
-                    
                     guard let item = self?.expenseCategories[indexPath.row] else {
                         assertionFailure()
                         return
                     }
-                    
                     self?.dataProvider?.delete(with: item.id) { [weak self] flag in
-                        
                         if flag {
-                            self?.expenseSortManager.remove(element: item,
-                                                            in: self!.expenseCategories)
+                            self?.expenseSortManager.remove(
+                                element: item,
+                                in: self!.expenseCategories)
                             self?.expenseCategories.remove(at: indexPath.row)
                             self?.tableView.reloadData()
                         }
@@ -274,7 +277,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    canMoveRowAt indexPath: IndexPath) -> Bool {
-        
         return tableView.isEditing
     }
     
