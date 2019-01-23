@@ -49,7 +49,9 @@ class ArchivesListController: UIViewController {
     @objc func deleteItem() {
         var list = [String]()
         for (index, value) in isSelected.enumerated() {
-            if value { list.append(archives[index])}
+            if value {
+                list.append(archives[index])
+            }
         }
         dataProvider?.delete(list)
     }

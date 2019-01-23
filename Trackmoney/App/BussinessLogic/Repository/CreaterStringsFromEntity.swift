@@ -21,21 +21,25 @@ struct CreaterStringsFromEntity {
         transactionDBManager = TransactionDBManager()
     }
     
-    func string() -> String? {
+    func string(completionHandler: @escaping (String?) -> Void) {
         
         let predicate = NSPredicate(value: true)
         guard let accounts = accountDBManager.get(predicate) as? [Account],
             let categories = categoryDBManager.get(predicate) as? [CategoryTransaction],
-            let tratsactions = transactionDBManager.get(predicate) as? [Transaction] else { return nil }
+            let tratsactions = transactionDBManager.get(predicate) as? [Transaction] else {
+                completionHandler(nil)
+                return }        
         
         var csvString: String = ""
-        csvString.append(stringFrom(accounts: accounts))
+        csvString.append(self.stringFrom(accounts: accounts))
         csvString.append(";")
-        csvString.append(stringFrom(categoryies: categories))
+        csvString.append(self.stringFrom(categoryies: categories))
         csvString.append(";")
-        csvString.append(stringFrom(transactions: tratsactions))
+        csvString.append(self.stringFrom(transactions: tratsactions))
         
-        return csvString
+        sleep(5)
+        
+        completionHandler(csvString)
     }
     
     private func stringFrom(accounts: [Account]) -> String {

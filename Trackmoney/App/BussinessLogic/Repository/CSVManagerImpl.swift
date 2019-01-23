@@ -4,14 +4,21 @@ import Foundation
 struct CSVManagerImpl: CSVManager {
     
     let fileManager = FileManager.default
-
+    
     
     // Упаковывает данные в файл
-    func create() -> String? {
+    func create(completionHandler: @escaping (String?) -> Void) {
         
-        guard let csvString = CreaterStringsFromEntity().string() else { return nil }
+        let createrString = CreaterStringsFromEntity()
         let name = currentName()
-        return writeToFile(string: csvString, withName: name)
+        
+        createrString.string { (csvString) in
+            guard let string = csvString,
+                let nameFile = self.writeToFile(string: string, withName: name) else {
+                    completionHandler(nil)
+                    return }
+            completionHandler(nameFile)
+        }
     }
     
     

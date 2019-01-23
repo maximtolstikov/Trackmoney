@@ -51,6 +51,7 @@
 		945C7A9221799C7900AF0B86 /* TransactionFormControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */; };
 		945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */; };
 		945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C7A992179FF1300AF0B86 /* LogCell.swift */; };
+		9461161221F84CA300AD2590 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461161121F84CA300AD2590 /* UserNotificationManager.swift */; };
 		94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC521F5C49D007AECA9 /* SettingsList.swift */; };
 		94654BCA21F5D4AA007AECA9 /* RepositoryActionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */; };
 		94654BCC21F5E9B0007AECA9 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCB21F5E9B0007AECA9 /* CSVManager.swift */; };
@@ -184,6 +185,7 @@
 		945C7A9121799C7900AF0B86 /* TransactionFormControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormControllerBuilder.swift; sourceTree = "<group>"; };
 		945C7A932179A13100AF0B86 /* TransactionFormDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDataProvider.swift; sourceTree = "<group>"; };
 		945C7A992179FF1300AF0B86 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		9461161121F84CA300AD2590 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		94654BC521F5C49D007AECA9 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
 		94654BC921F5D4AA007AECA9 /* RepositoryActionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryActionList.swift; sourceTree = "<group>"; };
 		94654BCB21F5E9B0007AECA9 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
@@ -375,6 +377,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9461161021F84C6E00AD2590 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				9461161121F84CA300AD2590 /* UserNotificationManager.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		94654BC321F5BD75007AECA9 /* Note */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +559,7 @@
 		94858B0A2146D1E200498DCF /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9461161021F84C6E00AD2590 /* Notifications */,
 				94654BCE21F5EF83007AECA9 /* Extensions */,
 				9470D44521B44DBC00FF07B1 /* Date */,
 				945B921121AFF7F200A1A791 /* StatusBarType.swift */,
@@ -878,6 +889,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94A7FDEE217AF10E009E5C4B /* AccountFormControllerBuilder.swift in Sources */,
+				9461161221F84CA300AD2590 /* UserNotificationManager.swift in Sources */,
 				94858B042146D15B00498DCF /* MessageKeyType.swift in Sources */,
 				94EC74F921B5593C002476AC /* SupplierDates.swift in Sources */,
 				9446624321A04EA300C9FFCF /* NeedCancelAlert.swift in Sources */,

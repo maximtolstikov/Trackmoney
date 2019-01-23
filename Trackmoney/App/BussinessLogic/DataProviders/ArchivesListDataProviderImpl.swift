@@ -17,8 +17,14 @@ class ArchivesListDataProviderImpl: ArchivesListDataProvider {
     }
     
     func load() {
-        guard let list = csvManager.archivesList() else { return }
-        controller?.archives = list
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        
+        queue.async {
+            guard let list = self.csvManager.archivesList() else { return }
+            DispatchQueue.main.async {
+                self.controller?.archives = list
+            }
+        }        
     }
     
     func delete(_ list: [String]) {

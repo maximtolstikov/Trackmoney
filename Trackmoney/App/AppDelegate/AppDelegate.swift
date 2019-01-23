@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        UserNotificationManager.shared.registerNotification()
+        
         var start = StartDataFill()
         start.checkData()
         

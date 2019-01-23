@@ -79,19 +79,22 @@ struct StartDataFill {
                                              .icon: "Plus",
                                              .type: TransactionType.income.rawValue,
                                              .category: "💰 Income",
-                                             .note: ""]
+                                             .note: "",
+                                             .isRestore: false]
         let firstEexpense: [MessageKeyType: Any] = [.sum: Int32(15),
                                             .mainAccount: "Debit card",
                                             .icon: "Minus",
                                             .type: TransactionType.expense.rawValue,
                                             .category: "🚙 Car",
-                                            .note: ""]
+                                            .note: "",
+                                            .isRestore: false]
         let secondEexpense: [MessageKeyType: Any] = [.sum: Int32(15),
                                                 .mainAccount: "Cash",
                                                 .icon: "Minus",
                                                 .type: TransactionType.expense.rawValue,
                                                 .category: "🍉 Food",
-                                                .note: ""]
+                                                .note: "",
+                                                .isRestore: false]
         
         _ = transactionDBManager.create(income)
         _ = transactionDBManager.create(firstEexpense)
