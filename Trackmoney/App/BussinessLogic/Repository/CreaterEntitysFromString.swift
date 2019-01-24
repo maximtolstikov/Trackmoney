@@ -22,12 +22,12 @@ struct CreaterEntitysFromString {
         transactionDBManager = TransactionDBManager()
     }
     
-    func restore(from: String) {
+    func restore(from: String) -> Bool {
         
         cleanDataBase()
         
         let array = from.components(separatedBy: ";")
-        guard array.count == 3 else { return }
+        guard array.count == 3 else { return false }
         
         let stringsAccounts = array[0].components(separatedBy: "\n")
         let stringsCategories = array[1].components(separatedBy: "\n")
@@ -37,13 +37,13 @@ struct CreaterEntitysFromString {
             createCategories(stringsCategories),
             createTransactions(stringsTransactions) else {
                 assertionFailure()
-                return
+                return false
         }
+        return true
     }
     
-    // MARK: - Отчищает базу перед востановлением
-    
-    func cleanDataBase() {
+    // Отчищает базу перед востановлением
+    private func cleanDataBase() {
         let predicate = NSPredicate(value: true)
         let accountDBManager = AccountDBManager()
         let categoryDBManager = CategoryDBManager()
@@ -64,7 +64,7 @@ struct CreaterEntitysFromString {
         }
     }
     
-    // MARK: - Создаем сущьности из csv
+    // Создает сущьности из csv
     
     private func createAccounts(_ array: [String]) -> Bool {
         for string in array {

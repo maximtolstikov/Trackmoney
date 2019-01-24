@@ -23,7 +23,7 @@ struct CSVManagerImpl: CSVManager {
     
     
     // Востанавливает данные из файла
-    func restorFrom(file name: String) {
+    func restorFrom(file name: String, completionHandler: @escaping (Bool) -> Void) {
         
         do {
             let url = try fileManager.url(
@@ -31,27 +31,32 @@ struct CSVManagerImpl: CSVManager {
                 in: .allDomainsMask,
                 appropriateFor: nil,
                 create: false)
-            
             let fileURL = url.appendingPathComponent(name)
             guard let text = try? String(contentsOf: fileURL) else { return }
             let creator = CreaterEntitysFromString()
-            creator.restore(from: text)
+            let result = creator.restore(from: text)
+            completionHandler(result)
             
         } catch let error {
             print(error.localizedDescription)
+            completionHandler(false)
         }
     }
     
     
     // Возвращает список файлов архивов в папке Документы
-    func archivesList() -> [String]? {
+    func archivesList(completionHandler: @escaping ([String]?) -> Void) {
         
-        guard let url = fileManager.urls(for: .documentDirectory,
-                                         in: .allDomainsMask).first,
+        guard let url = fileManager.urls(
+            for: .documentDirectory,
+            in: .allDomainsMask).first,
             let enumerator = fileManager.enumerator(atPath: url.path),
-            let paths = enumerator.allObjects as? [String] else { return nil }
+            let paths = enumerator.allObjects as? [String] else {
+                completionHandler(nil)
+                return }
         
-        return paths.filter { $0.contains("trackmoney") && $0.contains("csv") }
+        let archives = paths.filter { $0.contains("trackmoney") && $0.contains("csv") }
+        completionHandler(archives)
     }
     
     

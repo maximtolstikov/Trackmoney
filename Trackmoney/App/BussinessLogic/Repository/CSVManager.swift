@@ -8,7 +8,7 @@
 
 protocol CSVManager {
     func create(completionHandler: @escaping (String?) -> Void)
-    func restorFrom(file name: String)
-    func archivesList() -> [String]?
+    func restorFrom(file name: String, completionHandler: @escaping (Bool) -> Void)
+    func archivesList(completionHandler: @escaping ([String]?) -> Void)
     func deleteItems(_ list: [String], completion: @escaping () -> Void)
 }

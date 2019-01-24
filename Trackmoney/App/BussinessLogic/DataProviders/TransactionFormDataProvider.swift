@@ -63,11 +63,8 @@ class TransactionFormDataProvider: DataProviderProtocol {
         let result: DBError?
         
         if message[.id] != nil {
-            
             result = dbManager?.update(message)
-            
-        } else {
-            
+        } else {            
             result = dbManager?.create(message).1
         }
         completion(result)

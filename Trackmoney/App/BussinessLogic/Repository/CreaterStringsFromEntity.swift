@@ -37,8 +37,6 @@ struct CreaterStringsFromEntity {
         csvString.append(";")
         csvString.append(self.stringFrom(transactions: tratsactions))
         
-        sleep(5)
-        
         completionHandler(csvString)
     }
     

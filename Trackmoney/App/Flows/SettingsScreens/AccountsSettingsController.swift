@@ -16,8 +16,6 @@ class AccountsSettingsController: UIViewController {
             }
         }
     }
-    
-    
     var sortEditButton = UIBarButtonItem()
     
     override func viewDidLoad() {

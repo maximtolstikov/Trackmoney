@@ -38,7 +38,7 @@
 "settingsCategories" = "Категории";
 "settings" = "Настройки";
 "entitiesHeaderTitle" = "Объекты";
-"repositoryHeaderTitle" = "Хранилище";
+"archivesTitle" = "Архивы";
 "saveBaseTitle" = "Сохранить базу";
 "restoreBaseTitile" = "Восстановить базу";
 "archiveListControllerTitle" = "Архивы";

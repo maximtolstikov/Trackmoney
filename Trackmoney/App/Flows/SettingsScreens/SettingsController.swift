@@ -4,10 +4,11 @@ class SettingsController: UIViewController {
     
     var tableView = UITableView()
     let cellIndentifire = "myCell"
-    var categorySettings: [String]!
-    var entitiesList: [String]!
-    var repositoryActions: [String]!
+    var categorySettings = [String]()
+    var entitiesList = [String]()
+    var archivesList = [String]()
     var csvManager: CSVManager?
+    var dataProvider: SettingsControllerDataProvider?
     var backgroundTaskID: UIBackgroundTaskIdentifier?
     
     override func viewDidLoad() {
@@ -15,6 +16,7 @@ class SettingsController: UIViewController {
         
         setBarButtons()
         addTable()
+        dataProvider?.loadData()
         setupSwipeDown()
     }
     
@@ -90,20 +92,20 @@ extension SettingsController: UITableViewDataSource {
         case 0:
             return entitiesList.count
         case 1:
-            return repositoryActions.count
+            return archivesList.count
         default:
             return 0
         }
     }
     
-    func tableView(_ tableView: UITableView,
-                   titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return NSLocalizedString("entitiesHeaderTitle", comment: "")
-        } else {
-            return NSLocalizedString("repositoryHeaderTitle", comment: "")
-        }
-    }
+//    func tableView(_ tableView: UITableView,
+//                   titleForHeaderInSection section: Int) -> String? {
+//        if section == 0 {
+//            return NSLocalizedString("entitiesHeaderTitle", comment: "")
+//        } else {
+//            return NSLocalizedString("repositoryHeaderTitle", comment: "")
+//        }
+//    }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,9 +116,9 @@ extension SettingsController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = entitiesList?[indexPath.row]
+            cell.textLabel?.text = entitiesList[indexPath.row]
         case 1:
-            cell.textLabel?.text = repositoryActions[indexPath.row]
+            cell.textLabel?.text = archivesList[indexPath.row]
         default:
             break
         }
@@ -141,17 +143,17 @@ extension SettingsController: UITableViewDelegate {
             }
             
         } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                createArchive()
-            } else {
+//            if indexPath.row == 0 {
+//                createArchive()
+//            } else {
                 let controller = ArchivesListControllerBuilder().viewController()
                 navigationController?.pushViewController(controller, animated: true)
-            }
+//            }
         }
     }
     
     // FIXME: - Убрать текст в NSLocalizedString
-    
+    //swiftlint:disable force_unwrapping
     // Создает архив даже если приложение свернуто
     private func createArchive() {
         guard let csvManager = self.csvManager else {

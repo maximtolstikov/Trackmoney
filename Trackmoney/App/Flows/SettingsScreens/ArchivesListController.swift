@@ -25,15 +25,18 @@ class ArchivesListController: UIViewController {
             tableView.reloadData()
         }
     }
-
-    var dataProvider: ArchivesListDataProvider?
+    var csvManager: CSVManager?
+    
+    // MARK: - Lifecycle controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTable()
         setBarButtons()
-        dataProvider?.load()
+        loadData()
     }
+    
+    // MARK: - Configure controller
 
     private func setBarButtons() {
         
@@ -46,6 +49,17 @@ class ArchivesListController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    private func addTable() {
+        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIndentifire)
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
+    }
+    
+    // MARK: - Button action
+    
+    //swiftlint:disable for_where next
     @objc func deleteItem() {
         var list = [String]()
         for (index, value) in isSelected.enumerated() {
@@ -53,15 +67,18 @@ class ArchivesListController: UIViewController {
                 list.append(archives[index])
             }
         }
-        dataProvider?.delete(list)
+        csvManager?.deleteItems(list, completion: {
+            self.loadData()
+        })
     }
     
-    private func addTable() {
-        tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIndentifire)
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
+    // MARK: - Private methods
+    
+    private func loadData() {
+        csvManager?.archivesList(completionHandler: { archives in
+            guard let archives = archives else { return }
+            self.archives = archives
+        })
     }
     
 }
@@ -99,6 +116,28 @@ extension ArchivesListController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath)
         isSelected[indexPath.row] = !isSelected[indexPath.row]
         cell?.accessoryType = isSelected[indexPath.row] ? .checkmark : .none
+    }
+    
+    // Свайп по ячейке
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let restore = UITableViewRowAction(
+            style: .default,
+            title: NSLocalizedString("restoreBaseTitile", comment: "")) { [weak self] (action, indexPath) in
+                
+                
+//                self?.dataProvider?.delete(with: item.id) { [weak self] flag in
+//                    
+//                    if flag {
+//                        self?.sortManager.remove(element: item, in: array)
+//                        self?.accounts.remove(at: indexPath.row)
+//                        tableView.reloadData()
+//                    }
+//                }
+        }
+        restore.backgroundColor = UIColor.red
+        return [restore]
     }
     
 }

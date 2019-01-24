@@ -39,7 +39,7 @@
 "settingsCategories" = "Categories";
 "settings" = "Settings";
 "entitiesHeaderTitle" = "Objects";
-"repositoryHeaderTitle" = "Repository";
+"archivesTitle" = "Archives";
 "saveBaseTitle" = "Save base";
 "restoreBaseTitile" = "Restore base";
 "archiveListControllerTitle" = "Archives";
