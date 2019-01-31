@@ -7,9 +7,8 @@ class SettingsController: UIViewController {
     var categorySettings = [String]()
     var entitiesList = [String]()
     var archivesList = [String]()
-    var csvManager: CSVManager?
     var dataProvider: SettingsControllerDataProvider?
-    var backgroundTaskID: UIBackgroundTaskIdentifier?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,15 +97,6 @@ extension SettingsController: UITableViewDataSource {
         }
     }
     
-//    func tableView(_ tableView: UITableView,
-//                   titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return NSLocalizedString("entitiesHeaderTitle", comment: "")
-//        } else {
-//            return NSLocalizedString("repositoryHeaderTitle", comment: "")
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -143,40 +133,8 @@ extension SettingsController: UITableViewDelegate {
             }
             
         } else if indexPath.section == 1 {
-//            if indexPath.row == 0 {
-//                createArchive()
-//            } else {
-                let controller = ArchivesListControllerBuilder().viewController()
-                navigationController?.pushViewController(controller, animated: true)
-//            }
-        }
-    }
-    
-    // FIXME: - Убрать текст в NSLocalizedString
-    //swiftlint:disable force_unwrapping
-    // Создает архив даже если приложение свернуто
-    private func createArchive() {
-        guard let csvManager = self.csvManager else {
-            NeedCancelAlert().show(controller: self,
-                                   title: "Архив создать не удалось!",
-                                   body: nil)
-            return }
-        
-        DispatchQueue.global().async {
-            // Request the task assertion and save the ID.
-            self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "Finish create archive tasks") {
-                UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
-                self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
-            }
-            
-            csvManager.create { (nameFile) in
-                guard let name = nameFile else { return }
-                UserNotificationManager.shared
-                    .addNotification(title: "Архив создан", body: name)
-            }
-            
-            UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
-            self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+            let controller = ArchivesListControllerBuilder().viewController()
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
     

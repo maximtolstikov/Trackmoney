@@ -15,7 +15,9 @@ class ArchivesListControllerBuilder {
         controller.title = NSLocalizedString("archiveListControllerTitle",
                                              comment: "")
         let csvManager = CSVManagerImpl()
+        let alert = NeedCancelAlert()
         controller.csvManager = csvManager
+        controller.alert = alert
         
         return controller
     }

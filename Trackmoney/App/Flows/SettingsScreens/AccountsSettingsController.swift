@@ -17,6 +17,8 @@ class AccountsSettingsController: UIViewController {
         }
     }
     var sortEditButton = UIBarButtonItem()
+
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,8 @@ class AccountsSettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = true
     }
     
+    // MARK: - Configure controller
+    
     private func setBarButton() {
         
         let rightButton = UIBarButtonItem(
@@ -48,12 +52,6 @@ class AccountsSettingsController: UIViewController {
             action: #selector(closeController))
         
         self.navigationItem.rightBarButtonItem = rightButton
-    }
-    
-    @objc func closeController() {
-        
-        let controller = MainTabBarControllerBuilder().viewController()
-        present(controller, animated: true)
     }
     
     // Настраивает и добавляет контроллер таблицы
@@ -77,11 +75,11 @@ class AccountsSettingsController: UIViewController {
             target: self,
             action: #selector(addAccount))
         
-        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
-                                                                  comment: ""),
-                                         style: .done,
-                                         target: self,
-                                         action: #selector(sortDeleteAccount))
+        sortEditButton = UIBarButtonItem(
+            title: NSLocalizedString("sortTitle", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(sortDeleteAccount))
         
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
@@ -96,9 +94,15 @@ class AccountsSettingsController: UIViewController {
         self.setToolbarItems(buttons, animated: true)
     }
     
+    // MARK: - Button action
+    
+    @objc func closeController() {
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
+    }
+    
     // Вызывает контроллер формы счета
     @objc func addAccount() {
-        
         let controller = AccountFormControllerBuilder().viewController()
         present(controller, animated: true, completion: nil)
     }
@@ -106,8 +110,7 @@ class AccountsSettingsController: UIViewController {
     // Включает режим редактирования списка
     @objc func sortDeleteAccount() {
         
-        if self.tableView.isEditing {
-            
+        if self.tableView.isEditing {            
             sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
             
@@ -119,6 +122,7 @@ class AccountsSettingsController: UIViewController {
     
 }
 
+// MARK: - UITableViewDataSource
 
 extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource {
     
@@ -144,6 +148,12 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                    editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension AccountsSettingsController {
     
     // Свайп по ячейке
     func tableView(_ tableView: UITableView,
@@ -177,7 +187,6 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
                 
                 self?.present(controller, animated: true, completion: nil)
         }
-        
         delete.backgroundColor = UIColor.red
         rename.backgroundColor = UIColor.blue
         
@@ -186,7 +195,6 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    canMoveRowAt indexPath: IndexPath) -> Bool {
-        
         return tableView.isEditing
     }
     

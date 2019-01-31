@@ -8,9 +8,10 @@
 
 import UIKit
 
-/// Контроллер списка архивов
+/// Контроллер управления архивами. Здесь можно создать, удалить и восстановить архив.
 class ArchivesListController: UIViewController {
     
+    var backgroundTaskID: UIBackgroundTaskIdentifier?
     var tableView = UITableView()
     var rightBarButton = UIBarButtonItem()
     let cellIndentifire = "myCell"
@@ -22,24 +23,38 @@ class ArchivesListController: UIViewController {
     var archives = [String]() {
         didSet {
             isSelected = [Bool](repeating: false, count: archives.count)
-            tableView.reloadData()
+                self.tableView.reloadData()
         }
     }
     var csvManager: CSVManager?
+    var alert: NeedCancelAlert?
     
-    // MARK: - Lifecycle controller
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTable()
         setBarButtons()
+        setToolbar()
         loadData()
+    }
+    
+    // Показываем и прячем экран
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        self.navigationController?.isToolbarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.navigationController?.isToolbarHidden = true
     }
     
     // MARK: - Configure controller
 
     private func setBarButtons() {
-        
         rightBarButton = UIBarButtonItem(
             title: NSLocalizedString("deleteTitle", comment: ""),
             style: .done,
@@ -51,10 +66,32 @@ class ArchivesListController: UIViewController {
     
     private func addTable() {
         tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIndentifire)
+        tableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
+    }
+    
+    private func setToolbar() {
+        
+        let create = UIBarButtonItem(
+            title: NSLocalizedString("createTitle", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(createArchive))
+        
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil)
+        
+        let buttons = [
+            flexSpace,
+            create,
+            flexSpace]
+        
+        self.setToolbarItems(buttons, animated: true)
     }
     
     // MARK: - Button action
@@ -72,6 +109,40 @@ class ArchivesListController: UIViewController {
         })
     }
     
+    //swiftlint:disable force_unwrapping
+    // Создает архив даже если приложение свернуто
+    @objc func createArchive() {
+        guard let csvManager = self.csvManager else {
+            alert?.show(
+                controller: self,
+                title: NSLocalizedString("unfortunateCreateArchiveTitile", comment: ""),
+                body: nil)
+            return }
+        
+        DispatchQueue.global().async {
+            // Request the task assertion and save the ID.
+            
+            self.backgroundTaskID = UIApplication.shared
+                .beginBackgroundTask(withName: "Finish create archive tasks") {
+                    UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
+                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+                }
+            DispatchQueue.main.async {
+                csvManager.create { [weak self] (nameFile) in
+                    guard let name = nameFile else { return }
+                    UserNotificationManager.shared
+                        .addNotification(
+                            title: NSLocalizedString("successfulCreateArchiveTitile", comment: ""),
+                            body: name)
+                    self?.archives.append(name)
+                }
+            }            
+            
+            UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
+            self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+        }
+    }
+    
     // MARK: - Private methods
     
     private func loadData() {
@@ -80,6 +151,8 @@ class ArchivesListController: UIViewController {
             self.archives = archives
         })
     }
+    
+    
     
 }
 
@@ -136,7 +209,7 @@ extension ArchivesListController: UITableViewDelegate {
 //                    }
 //                }
         }
-        restore.backgroundColor = UIColor.red
+        restore.backgroundColor = UIColor.green
         return [restore]
     }
     

@@ -1,6 +1,9 @@
 // Russian
 
 //Titles
+"successfulCreateArchiveTitile" = "Архив создан!";
+"unfortunateCreateArchiveTitile" = "Архив создать не удалось! 🤷‍♂️";
+"createTitle" = "Создать";
 "cancelTitle" = "Закрыть";
 "saveTitle" = "Сохранить";
 "okTitle" = "Ok";

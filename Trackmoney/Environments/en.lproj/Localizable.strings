@@ -1,6 +1,9 @@
 // English
 
 //Titles
+"successfulCreateArchiveTitile" = "Archive created!";
+"unfortunateCreateArchiveTitile" = "Archive couldn't be created! 🤷‍♂️";
+"createTitle" = "Create";
 "cancelTitle" = "Close";
 "saveTitle" = "Save";
 "okTitle" = "Ok";
