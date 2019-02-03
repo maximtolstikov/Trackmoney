@@ -37,7 +37,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
         
     }
     
-    func save(message: [MessageKeyType: Any], completion: @escaping Result) {}
+    func save(message: Message, completion: @escaping Result) {}
     
     func delete(with id: String, completion: @escaping (Bool) -> Void) {
         

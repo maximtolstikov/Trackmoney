@@ -6,7 +6,7 @@ import XCTest
 
 class CategoryDBManagerSpec: XCTestCase {
     
-    var message: [MessageKeyType: Any] = [.name: "testNameCategory",
+    var message: Message = [.name: "testNameCategory",
                                           .icon: "iconString",
                                           .type: CategoryType.expense.rawValue]
     var manager: CategoryDBManager!
@@ -24,7 +24,7 @@ class CategoryDBManagerSpec: XCTestCase {
 
         var result: (CategoryTransaction?, DBError?)!
         var childResult: (CategoryTransaction?, DBError?)!
-        var childMessage: [MessageKeyType: Any]!
+        var childMessage: Message!
 
         try when("create Category", closure: {
             result = (manager.create(message) as! (CategoryTransaction?, DBError?))

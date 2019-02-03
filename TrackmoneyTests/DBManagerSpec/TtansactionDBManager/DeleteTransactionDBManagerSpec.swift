@@ -6,15 +6,15 @@ import XCTest
 
 class DeleteTransactionDBManagetSpec: XCTestCase {
     
-    var messageAM: [MessageKeyType: Any] = [
+    var messageAM: Message = [
         .name: "testMainName",
         .icon: "iconString",
         .sum: Int32(100)]
-    var messageAC: [MessageKeyType: Any] = [
+    var messageAC: Message = [
         .name: "testCorName",
         .icon: "iconString",
         .sum: Int32(50)]
-    var messageT: [MessageKeyType: Any] = [
+    var messageT: Message = [
         .sum: Int32(30),
         .mainAccount: "testMainName",
         .icon: "iconString",

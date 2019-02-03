@@ -7,12 +7,12 @@ struct CreateTransaction {
     var context: NSManagedObjectContext
     var mManager: MessageManager
     var accountDBManager: AccountDBManager
-    let message: [MessageKeyType: Any]
+    let message: Message
     
     init(
         context: NSManagedObjectContext,
         mManager: MessageManager,
-        message: [MessageKeyType: Any]
+        message: Message
         ) {
         
         self.context = context

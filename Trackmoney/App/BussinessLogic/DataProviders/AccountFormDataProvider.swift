@@ -4,7 +4,7 @@ class AccountFormDataProvider: DataProviderProtocol {
 
     var dbManager: DBManagerProtocol?
       
-    func save(message: [MessageKeyType: Any], completion: @escaping Result) {
+    func save(message: Message, completion: @escaping Result) {
         
         let result: DBError?
         

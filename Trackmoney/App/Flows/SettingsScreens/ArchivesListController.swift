@@ -136,7 +136,7 @@ class ArchivesListController: UIViewController {
                             body: name)
                     self?.archives.append(name)
                 }
-            }            
+            }
             
             UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
             self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
@@ -150,9 +150,7 @@ class ArchivesListController: UIViewController {
             guard let archives = archives else { return }
             self.archives = archives
         })
-    }
-    
-    
+    }    
     
 }
 
@@ -199,15 +197,12 @@ extension ArchivesListController: UITableViewDelegate {
             style: .default,
             title: NSLocalizedString("restoreBaseTitile", comment: "")) { [weak self] (action, indexPath) in
                 
+                let cell = tableView.cellForRow(at: indexPath)
+                guard let name = cell?.textLabel?.text else { return }
                 
-//                self?.dataProvider?.delete(with: item.id) { [weak self] flag in
-//                    
-//                    if flag {
-//                        self?.sortManager.remove(element: item, in: array)
-//                        self?.accounts.remove(at: indexPath.row)
-//                        tableView.reloadData()
-//                    }
-//                }
+                self?.csvManager?.restorFrom(file: name, completionHandler: { (result) in
+                    print(result)
+                })
         }
         restore.backgroundColor = UIColor.green
         return [restore]

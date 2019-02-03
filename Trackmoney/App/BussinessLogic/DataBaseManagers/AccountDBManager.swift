@@ -7,7 +7,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     lazy var sortManager = CustomSortManager(.accounts)
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
+    func create(_ message: Message) -> (DBEntity?, DBError?) {
         
         // Проверка что объекта с таким именем нет в базе
         guard let name = message[.name] else {
@@ -66,7 +66,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func update(_ message: [MessageKeyType: Any]) -> DBError? {
+    func update(_ message: Message) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
         let result = get(predicate) as! [Account]?

@@ -7,7 +7,7 @@ import XCTest
 
 class AccountDBManagerSpec: XCTestCase {
     
-    var message: [MessageKeyType: Any] = [.name: "testMainName",
+    var message: Message = [.name: "testMainName",
                                           .icon: "icon",
                                           .sum: Int32(100)]
     var manager: AccountDBManager!

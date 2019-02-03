@@ -6,11 +6,11 @@ struct ChangeTransactionManager {
     
     var accountDBManager: AccountDBManager
     var transaction: Transaction
-    var message: [MessageKeyType: Any]
+    var message: Message
     
     init(
         transaction: Transaction,
-        message: [MessageKeyType: Any]
+        message: Message
         ) {
         
         self.accountDBManager = AccountDBManager()

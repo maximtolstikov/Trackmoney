@@ -1,5 +1,7 @@
 import CoreData
 
+typealias Message = [MessageKeyType: Any]
+
 /// Создает сообщения для отправки в базу
 struct MessageManager {
     
@@ -19,9 +21,9 @@ struct MessageManager {
         note: String,
         id: String?,
         date: String?,
-        isRestore: Bool) -> [MessageKeyType: Any] {
+        isRestore: Bool) -> Message {
         
-        var dictionary = [MessageKeyType: Any]()
+        var dictionary = Message()
         dictionary[.type] = transactionType.rawValue
         dictionary[.mainAccount] = topButton
         dictionary[.sum] = sum
@@ -57,9 +59,9 @@ struct MessageManager {
         icon: String?,
         nameAccount: String,
         sumAccount: Int32,
-        id: String?) -> [MessageKeyType: Any] {
+        id: String?) -> Message {
         
-        var dictionary = [MessageKeyType: Any]()
+        var dictionary = Message()
         dictionary[.name] = nameAccount
         dictionary[.sum] = sumAccount
         if id != nil {
@@ -79,9 +81,9 @@ struct MessageManager {
         nameCategory: String,
         type: CategoryType,
         parent: String?,
-        id: String?) -> [MessageKeyType: Any] {
+        id: String?) -> Message {
         
-        var dictionary = [MessageKeyType: Any]()
+        var dictionary = Message()
         dictionary[.name] = nameCategory
         dictionary[.type] = type.rawValue
         
@@ -103,7 +105,7 @@ struct MessageManager {
     //Проверяет есть ли значение по ключу в словаре
     func isExistValue(
         for key: MessageKeyType,
-        in dictionary: [MessageKeyType: Any]
+        in dictionary: Message
         ) -> Bool {
         
         return (dictionary.index(forKey: key) != nil)

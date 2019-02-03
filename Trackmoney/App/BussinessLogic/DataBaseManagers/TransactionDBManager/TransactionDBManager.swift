@@ -4,7 +4,7 @@ import CoreData
 class TransactionDBManager: DBManager, DBManagerProtocol {
     
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
+    func create(_ message: Message) -> (DBEntity?, DBError?) {
         
         let createTransaction = CreateTransaction(
             context: context,
@@ -29,7 +29,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
     }
     
     
-    func update(_ message: [MessageKeyType: Any]) -> DBError? {
+    func update(_ message: Message) -> DBError? {
         
         guard let id = message[.id] else {
             return DBError.messageHaventRequireValue
