@@ -128,8 +128,8 @@ class ArchivesListController: UIViewController {
                     self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 }
             DispatchQueue.main.async {
-                csvManager.create { [weak self] (nameFile) in
-                    guard let name = nameFile else { return }
+                csvManager.create { [weak self] (url) in
+                    guard let name = url?.lastPathComponent else { return }
                     UserNotificationManager.shared
                         .addNotification(
                             title: NSLocalizedString("successfulCreateArchiveTitile", comment: ""),

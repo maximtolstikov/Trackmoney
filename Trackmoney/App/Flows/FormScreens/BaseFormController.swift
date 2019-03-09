@@ -2,20 +2,10 @@ import UIKit
 
 class BaseFormController: UIViewController {
     
+    // MARK: - Public properties
+    
     var scrollView = UIScrollView()
     var viewOnScroll = UIView()
-    
-    var promptView: UIView!
-    var tapOnViewGesture: UITapGestureRecognizer!
-    
-    var cancelButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle(NSLocalizedString("cancelTitle", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     let saveButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.setTitle(NSLocalizedString("saveTitle", comment: ""), for: .normal)
@@ -23,6 +13,21 @@ class BaseFormController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
+    // MARK: - Private properties
+    
+    private var promptView: UIView!
+    private var tapOnViewGesture: UITapGestureRecognizer!
+    
+    private var cancelButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.setTitle(NSLocalizedString("cancelTitle", comment: ""), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +39,12 @@ class BaseFormController: UIViewController {
         createSaveCancelButtons()
         registerForKeyboardNotification()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Configure controller
     
     //создаем скролл
     func createScrollView() {
@@ -85,12 +96,9 @@ class BaseFormController: UIViewController {
     
     @objc func tapSaveButton() {}
     
+    // MARK: - Private methods
+    
     // MARK: - методы управления сдвигом при появлении клавиатуры
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     func registerForKeyboardNotification() {
         NotificationCenter.default.addObserver(
             self,
@@ -183,7 +191,6 @@ class BaseFormController: UIViewController {
     @objc func animateSlideUpPromt(completion: (() -> Void)?) {
         
         if promptView != nil {
-            
             UIView.animate(withDuration: 0.2,
                            animations: {
                             self.promptView.frame.origin.y = -100
@@ -198,8 +205,7 @@ class BaseFormController: UIViewController {
         }
     }
     
-    // MARK: - добавление/удаление красной рамки вокруг TextField
-    
+    // MARK: - Public methods
     
     //добавляет красную рамку вокруг textField
     func addRedBorderTo(control: UIControl) {

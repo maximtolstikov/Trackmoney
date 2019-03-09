@@ -1,23 +1,24 @@
 import Foundation
 
 /// Упаковывает и извлекает данные в/из CSV файл
-struct CSVManagerImpl: CSVManager {
+class CSVManagerImpl: CSVManager {
     
     let fileManager = FileManager.default
-    
+    let iCloud = ICloudManagerImpl()
     
     // Упаковывает данные в файл
-    func create(completionHandler: @escaping (String?) -> Void) {
+    func create(completionHandler: @escaping (URL?) -> Void) {
         
         let createrString = CreaterStringsFromEntity()
         let name = currentName()
         
-        createrString.string { (csvString) in
+        createrString.string { [weak self] (csvString) in
             guard let string = csvString,
-                let nameFile = self.writeToFile(string: string, withName: name) else {
+                let url = self?.writeToFile(string: string, withName: name) else {
                     completionHandler(nil)
                     return }
-            completionHandler(nameFile)
+            self?.iCloud.save(record: url)
+            completionHandler(url)
         }
     }
     
@@ -83,7 +84,7 @@ struct CSVManagerImpl: CSVManager {
     
     
     // Записывает строковое представление данных в файл
-    private func writeToFile(string: String, withName: String) -> String? {
+    private func writeToFile(string: String, withName: String) -> URL? {
         do {
             let path = try fileManager.url(
                 for: .documentDirectory,
@@ -94,7 +95,7 @@ struct CSVManagerImpl: CSVManager {
             let fileURL = path.appendingPathComponent(withName)
             try string.write(to: fileURL, atomically: true, encoding: .utf8)
             
-            return withName
+            return fileURL
         } catch {
             print("error creating file")
             return nil
@@ -103,7 +104,7 @@ struct CSVManagerImpl: CSVManager {
     
     // Возвращает имя с текущим временем
     private func currentName() -> String {
-        let date = DateSetter().date()
+        let date = DateSetter().date().replacingOccurrences(of: ",", with: ".")
         return "trackmoney" + "\(date)" + ".csv"
     }
     

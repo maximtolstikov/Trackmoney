@@ -10,8 +10,10 @@
  Содержит основные настройки приложения
  */
 
-struct Configure {
+struct Configuration {
     
     // Идентификатор контейнера iCloud
-    let containtrIcloud = "iCloud.X37P9Q6XJNme.trackmoney.Trackmoney"
+    let containerIcloud = "iCloud.X37P9Q6XJNme.trackmoney.Trackmoney"
+    // Запись в iCloud
+    let identifierRecord = "ArchiveRecordType"
 }

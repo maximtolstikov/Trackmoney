@@ -60,6 +60,11 @@
 		94654BD021F5EFB4007AECA9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCF21F5EFB4007AECA9 /* String.swift */; };
 		94654BD221F62107007AECA9 /* ArchivesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD121F62107007AECA9 /* ArchivesListController.swift */; };
 		94654BD421F62391007AECA9 /* ArchivesListControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */; };
+		94677DD322075D21009CA584 /* iCloudManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD222075D21009CA584 /* iCloudManagerImpl.swift */; };
+		94677DD5220762FB009CA584 /* iCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD4220762FB009CA584 /* iCloudManager.swift */; };
+		94677DD7220763F5009CA584 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD6220763F5009CA584 /* Configuration.swift */; };
+		94677DDA220765F4009CA584 /* iCloudErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD9220765F4009CA584 /* iCloudErrors.swift */; };
+		94677DDC22082312009CA584 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94677DDB22082312009CA584 /* CloudKit.framework */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
 		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
 		947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManagerImpl.swift */; };
@@ -194,6 +199,12 @@
 		94654BCF21F5EFB4007AECA9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94654BD121F62107007AECA9 /* ArchivesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListController.swift; sourceTree = "<group>"; };
 		94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListControllerBilder.swift; sourceTree = "<group>"; };
+		94677DCD22072433009CA584 /* Trackmoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Trackmoney.entitlements; sourceTree = "<group>"; };
+		94677DD222075D21009CA584 /* iCloudManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManagerImpl.swift; sourceTree = "<group>"; };
+		94677DD4220762FB009CA584 /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
+		94677DD6220763F5009CA584 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		94677DD9220765F4009CA584 /* iCloudErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrors.swift; sourceTree = "<group>"; };
+		94677DDB22082312009CA584 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
 		947D32A821EA317D0004D265 /* CSVManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManagerImpl.swift; sourceTree = "<group>"; };
@@ -277,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11888F6C3D29AD44D631BDDA /* Pods_Trackmoney.framework in Frameworks */,
+				94677DDC22082312009CA584 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +431,35 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		94677DD022075CD1009CA584 /* CSVManager */ = {
+			isa = PBXGroup;
+			children = (
+				94654BCB21F5E9B0007AECA9 /* CSVManager.swift */,
+				947D32A821EA317D0004D265 /* CSVManagerImpl.swift */,
+				94CC272321F388CA006B2F9B /* CreaterStringsFromEntity.swift */,
+				94CC272521F390CD006B2F9B /* CreaterEntitysFromString.swift */,
+			);
+			path = CSVManager;
+			sourceTree = "<group>";
+		};
+		94677DD122075CED009CA584 /* iCloud */ = {
+			isa = PBXGroup;
+			children = (
+				94677DD4220762FB009CA584 /* iCloudManager.swift */,
+				94677DD222075D21009CA584 /* iCloudManagerImpl.swift */,
+			);
+			path = iCloud;
+			sourceTree = "<group>";
+		};
+		94677DD8220765D1009CA584 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				94CC8136214FDBB30027913C /* DBError.swift */,
+				94677DD9220765F4009CA584 /* iCloudErrors.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		9470D44521B44DBC00FF07B1 /* Date */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,12 +522,12 @@
 				94A0EE8121A5528F004B66E1 /* CustomSort */,
 				94858AF52146D15B00498DCF /* DataBaseManagers */,
 				9424E80E2163BA0F00BE756D /* DataProviders */,
+				94677DD8220765D1009CA584 /* Errors */,
 				94858AFB2146D15B00498DCF /* MessageManager */,
 				94CC272221F38791006B2F9B /* Repository */,
 				94654BC421F5C3E0007AECA9 /* Settings */,
 				94F7F1FF217F5E0D00359B01 /* ValidatorsForms */,
 				9441172921B7047C0015B38C /* AverageValues.swift */,
-				94CC8136214FDBB30027913C /* DBError.swift */,
 				94DC094E21BACF970043DC53 /* StartDataFill.swift */,
 			);
 			path = BussinessLogic;
@@ -580,8 +621,10 @@
 			isa = PBXGroup;
 			children = (
 				94858AD02146CDFA00498DCF /* Info.plist */,
+				94677DCD22072433009CA584 /* Trackmoney.entitlements */,
 				94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */,
 				94DD1B702178FCB100FF2853 /* Localizable.strings */,
+				94677DD6220763F5009CA584 /* Configuration.swift */,
 			);
 			path = Environments;
 			sourceTree = "<group>";
@@ -651,10 +694,8 @@
 		94CC272221F38791006B2F9B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				94654BCB21F5E9B0007AECA9 /* CSVManager.swift */,
-				947D32A821EA317D0004D265 /* CSVManagerImpl.swift */,
-				94CC272321F388CA006B2F9B /* CreaterStringsFromEntity.swift */,
-				94CC272521F390CD006B2F9B /* CreaterEntitysFromString.swift */,
+				94677DD122075CED009CA584 /* iCloud */,
+				94677DD022075CD1009CA584 /* CSVManager */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -723,6 +764,7 @@
 		E9F1B1F9FFDEEAB5A7083479 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94677DDB22082312009CA584 /* CloudKit.framework */,
 				723C2C45923E505B7069F1FF /* Pods_Trackmoney.framework */,
 				BCBF7BB3211B4E7E33BA6896 /* Pods_TrackmoneyTests.framework */,
 				EF2FC793D9B36922B5A90A79 /* Pods_TrackmoneyUITests.framework */,
@@ -784,6 +826,14 @@
 					94858ABD2146CDF900498DCF = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					94F67385216142C100A51190 = {
 						CreatedOnToolsVersion = 10.0;
@@ -898,6 +948,7 @@
 				9446624521A04FD700C9FFCF /* ChooseAccountAlert.swift in Sources */,
 				94858B022146D15B00498DCF /* DBManagerProtocol.swift in Sources */,
 				9441172A21B7047C0015B38C /* AverageValues.swift in Sources */,
+				94677DD5220762FB009CA584 /* iCloudManager.swift in Sources */,
 				9446623E21A044B700C9FFCF /* ChooseTransactionAlert.swift in Sources */,
 				9441172C21B707DE0015B38C /* AverageCategory.swift in Sources */,
 				9417B16621820722001E88AA /* TextToNumberRule.swift in Sources */,
@@ -938,6 +989,7 @@
 				9446622C219DA51600C9FFCF /* CategoryButtonValidator.swift in Sources */,
 				94EC436121662018009C6BF3 /* AccountsSettingsDataProvider.swift in Sources */,
 				94C553C5216514A900C0F628 /* ToolsControllerBuilder.swift in Sources */,
+				94677DDA220765F4009CA584 /* iCloudErrors.swift in Sources */,
 				94C553CB2165327E00C0F628 /* SettingsControllerBilder.swift in Sources */,
 				94CC272621F390CD006B2F9B /* CreaterEntitysFromString.swift in Sources */,
 				94A7FDF6217B4E8A009E5C4B /* AccountsCell.swift in Sources */,
@@ -945,11 +997,13 @@
 				9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */,
 				9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */,
 				9417B1622181C914001E88AA /* BaseFormController.swift in Sources */,
+				94677DD322075D21009CA584 /* iCloudManagerImpl.swift in Sources */,
 				94466224219C767200C9FFCF /* TransferValidator.swift in Sources */,
 				9441172821B66A380015B38C /* ToolsDataProviderProtocol.swift in Sources */,
 				945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */,
 				94CC272421F388CA006B2F9B /* CreaterStringsFromEntity.swift in Sources */,
 				9444221F21A8756C0005DA0B /* NoteAlert.swift in Sources */,
+				94677DD7220763F5009CA584 /* Configuration.swift in Sources */,
 				9446624121A04D6900C9FFCF /* ShortAlert.swift in Sources */,
 				94A7FDF0217AF1B6009E5C4B /* AccountFormController.swift in Sources */,
 				94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */,
@@ -1166,6 +1220,7 @@
 			baseConfigurationReference = 4B771A0E68CD1C303BE92499 /* Pods-Trackmoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Trackmoney/Trackmoney.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;
@@ -1189,6 +1244,7 @@
 			baseConfigurationReference = DB7C7CAE116CDCC9EE5640C9 /* Pods-Trackmoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Trackmoney/Trackmoney.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;

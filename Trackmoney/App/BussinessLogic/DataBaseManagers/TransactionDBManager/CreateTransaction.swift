@@ -1,5 +1,4 @@
 //swiftlint:disable force_cast
-//swiftlint:disable force_unwrapping
 import CoreData
 
 struct CreateTransaction {
@@ -21,11 +20,12 @@ struct CreateTransaction {
         self.message = message
     }
     
-    
+    // swiftlint:disable function_body_length
     func execute() -> (DBEntity?, DBError?) {
+        
         let transaction = Transaction(context: context)
         transaction.id = UUID().uuidString
-        transaction.date = setDate()
+        
         let sum = message[.sum] as! Int32
         transaction.sum = sum
         transaction.icon = message[.icon] as! String
@@ -35,23 +35,28 @@ struct CreateTransaction {
                 return (nil, DBError.messageHaventRequireValue)
         }
         transaction.type = type.rawValue
-        guard let mainAccount = accountDBManager
-            .get(predicate(by: message[.mainAccount] as! String))?
-            .first as? Account else {
-                return (nil, DBError.objectIsNotExist)
-        }
-        transaction.mainAccount = mainAccount.name
-        var corAccount: Account? = nil
-        if mManager.isExistValue(for: .corAccount, in: message) {
-            guard let account = accountDBManager
-                .get(predicate(by: message[.corAccount] as! String))?
+        
+        if !(message[.isRestore] as! Bool) {
+            transaction.date = setDate()
+            
+            guard let mainAccount = accountDBManager
+                .get(predicate(by: message[.mainAccount] as! String))?
                 .first as? Account else {
                     return (nil, DBError.objectIsNotExist)
             }
-            corAccount = account
-            transaction.corAccount = corAccount?.name
-        }
-        if message[.isRestore] as! Bool == false {
+            transaction.mainAccount = mainAccount.name
+            
+            var corAccount: Account?
+            if mManager.isExistValue(for: .corAccount, in: message) {
+                guard let account = accountDBManager
+                    .get(predicate(by: message[.corAccount] as! String))?
+                    .first as? Account else {
+                        return (nil, DBError.objectIsNotExist)
+                }
+                corAccount = account
+                transaction.corAccount = corAccount?.name
+            }
+            // swiftlint:disable next force_unwrapping
             switch type {
             case .expense:
                 accountDBManager.substract(for: mainAccount, sum: sum)
@@ -63,7 +68,21 @@ struct CreateTransaction {
                     toAccount: corAccount!,
                     sum: sum)
             }
+        } else {
+            let date: NSDate
+            let formater = DateFormat().dateFormatter
+            if let restoreDate = formater.date(from: message[.date] as! String) {
+                date = restoreDate as NSDate
+            } else {
+                date = Date() as NSDate
+            }
+            transaction.date = date
+            transaction.mainAccount = message[.mainAccount] as! String
+            if mManager.isExistValue(for: .corAccount, in: message) {
+                transaction.corAccount = message[.corAccount] as? String
+            }
         }
+        
         do {
             try context.save()
             return (transaction as DBEntity, nil)

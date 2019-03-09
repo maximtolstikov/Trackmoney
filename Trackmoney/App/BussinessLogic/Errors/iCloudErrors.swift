@@ -6,4 +6,7 @@
 //  Copyright © 2019 Maxim Tolstikov. All rights reserved.
 //
 
-import Foundation
+/// Описывает ошибки связянные с iCloud
+enum ICloudError: Error {
+    case unsuccessSave
+}

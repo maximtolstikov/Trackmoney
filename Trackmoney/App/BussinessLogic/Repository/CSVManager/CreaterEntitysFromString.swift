@@ -143,8 +143,9 @@ struct CreaterEntitysFromString {
 
             let result = transactionDBManager.create(message)
             if result.0 == nil {
+                print("Транзакция не может быть восстановлена!")
                 assertionFailure()
-                return false
+                return true
             }
         }
         return true
