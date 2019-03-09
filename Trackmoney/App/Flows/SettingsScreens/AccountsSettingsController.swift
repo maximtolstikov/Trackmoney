@@ -2,12 +2,19 @@ import UIKit
 
 /// Описывает контроллер "Насторойки счетов"
 class AccountsSettingsController: UIViewController {
+
+    // MARK: - Identifiers
+
+    let cellIndentifire = "myCell"
+    
+    // MARK: - Dependency
     
     var dataProvider: DataProviderProtocol!
     var sortManager: CustomSortManager!
-    
+
+    // MARK: - Private properties
+
     var tableView = UITableView()
-    let cellIndentifire = "myCell"
     var accounts: [Account]! {
         didSet {
             accounts = sortManager.sortedArray(accounts)
@@ -18,43 +25,39 @@ class AccountsSettingsController: UIViewController {
     }
     var sortEditButton = UIBarButtonItem()
 
-    // MARK: - Lifecycle
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setBarButton()
+        setupBarButton()
         addTable()
         addBottomToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         dataProvider.loadData()
         self.navigationController?.isToolbarHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
         self.navigationController?.isToolbarHidden = true
     }
     
     // MARK: - Configure controller
     
-    private func setBarButton() {
-        
+    // Устанавливает кнопки на NavigationBar
+    private func setupBarButton() {
         let rightButton = UIBarButtonItem(
             title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
-            action: #selector(closeController))
-        
+            action: #selector(closeSettings))
         self.navigationItem.rightBarButtonItem = rightButton
     }
     
-    // Настраивает и добавляет контроллер таблицы
+    // Добавляет TableView
     private func addTable() {
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
@@ -62,62 +65,56 @@ class AccountsSettingsController: UIViewController {
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
-        
         self.view.addSubview(tableView)
     }
     
     // Настраивает и добавляет тулБар снизу
     private func addBottomToolBar() {
-        
         let addAccountButtom = UIBarButtonItem(
             title: NSLocalizedString("addTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(addAccount))
-        
         sortEditButton = UIBarButtonItem(
             title: NSLocalizedString("sortTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(sortDeleteAccount))
-        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
-        
         let buttons = [
             addAccountButtom,
             flexSpace,
             sortEditButton]
-        
         self.setToolbarItems(buttons, animated: true)
     }
     
-    // MARK: - Button action
+    // MARK: - Private methods
     
-    @objc func closeController() {
+    // Включает режим редактирования списка
+    @objc private func sortDeleteAccount() {
+        if self.tableView.isEditing {            
+            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
+            self.tableView.setEditing(false, animated: true)
+        } else {
+            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
+            self.tableView.setEditing(true, animated: true)
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    @objc private func closeSettings() {
         let controller = MainTabBarControllerBuilder().viewController()
         present(controller, animated: true)
     }
     
     // Вызывает контроллер формы счета
-    @objc func addAccount() {
+    @objc private func addAccount() {
         let controller = AccountFormControllerBuilder().viewController()
         present(controller, animated: true, completion: nil)
-    }
-    
-    // Включает режим редактирования списка
-    @objc func sortDeleteAccount() {
-        
-        if self.tableView.isEditing {            
-            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
-            self.tableView.setEditing(false, animated: true)
-            
-        } else {
-            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
-            self.tableView.setEditing(true, animated: true)
-        }
     }
     
 }

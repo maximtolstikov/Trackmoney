@@ -51,7 +51,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                                 let error = self.dbManager?.delete(id, force: false)
                                 
                                 if error == nil {
-
+                                    
                                     ShortAlert().show(
                                         controller: controller,
                                         title: NSLocalizedString("categoryDelete", comment: ""),

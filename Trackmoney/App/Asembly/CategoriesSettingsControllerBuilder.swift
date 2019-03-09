@@ -1,6 +1,6 @@
 import UIKit
 
-class CategorySettingsControllerBuilder {
+class CategoriesSettingsControllerBuilder {
     
     func viewController() -> UIViewController {
         

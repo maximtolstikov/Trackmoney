@@ -14,7 +14,7 @@ class CSVManagerImpl: CSVManager {
         
         createrString.string { [weak self] (csvString) in
             guard let string = csvString,
-                let url = self?.writeToFile(string: string, withName: name) else {
+                let url = self?.writeToFile(line: string, withName: name) else {
                     completionHandler(nil)
                     return }
             self?.iCloud.save(record: url)
@@ -82,22 +82,27 @@ class CSVManagerImpl: CSVManager {
         }
     }
     
-    
-    // Записывает строковое представление данных в файл
-    private func writeToFile(string: String, withName: String) -> URL? {
+    /// Записывает строку в файл
+    ///
+    /// - Parameters:
+    ///   - string: Строка для записи
+    ///   - withName: Имя файла
+    /// - Returns: URL к созданному файлу или nil
+    private func writeToFile(line: String, withName: String) -> URL? {
         do {
             let path = try fileManager.url(
                 for: .documentDirectory,
                 in: .allDomainsMask,
                 appropriateFor: nil,
-                create: false)
+                create: true)
             
             let fileURL = path.appendingPathComponent(withName)
-            try string.write(to: fileURL, atomically: true, encoding: .utf8)
+            try line.write(to: fileURL, atomically: true, encoding: .utf8)
             
             return fileURL
-        } catch {
-            print("error creating file")
+            
+        } catch let error {
+            print(error.localizedDescription)
             return nil
         }
     }
@@ -105,6 +110,7 @@ class CSVManagerImpl: CSVManager {
     // Возвращает имя с текущим временем
     private func currentName() -> String {
         let date = DateSetter().date().replacingOccurrences(of: ",", with: ".")
+        
         return "trackmoney" + "\(date)" + ".csv"
     }
     

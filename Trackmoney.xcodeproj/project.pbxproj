@@ -64,7 +64,6 @@
 		94677DD5220762FB009CA584 /* iCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD4220762FB009CA584 /* iCloudManager.swift */; };
 		94677DD7220763F5009CA584 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD6220763F5009CA584 /* Configuration.swift */; };
 		94677DDA220765F4009CA584 /* iCloudErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD9220765F4009CA584 /* iCloudErrors.swift */; };
-		94677DDC22082312009CA584 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94677DDB22082312009CA584 /* CloudKit.framework */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
 		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
 		947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManagerImpl.swift */; };
@@ -93,8 +92,9 @@
 		94A7FDFA217B51EB009E5C4B /* CategoryFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FDF9217B51EB009E5C4B /* CategoryFormController.swift */; };
 		94A7FDFF217C820A009E5C4B /* CategorySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */; };
 		94A7FE01217C8CF1009E5C4B /* CategorySettingsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */; };
-		94A7FE03217C908E009E5C4B /* CategorySettingsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */; };
+		94A7FE03217C908E009E5C4B /* CategoriesSettingsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7FE02217C908E009E5C4B /* CategoriesSettingsControllerBuilder.swift */; };
 		94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3257B21F45ECE0063BD78 /* DateSetter.swift */; };
+		94C418FB223400AA00C18412 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C418FA223400AA00C18412 /* CloudKit.framework */; };
 		94C553C12164FAFA00C0F628 /* LogControllreBillder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */; };
 		94C553C32165004A00C0F628 /* LogDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C22165004A00C0F628 /* LogDataLoader.swift */; };
 		94C553C5216514A900C0F628 /* ToolsControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */; };
@@ -204,7 +204,6 @@
 		94677DD4220762FB009CA584 /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
 		94677DD6220763F5009CA584 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		94677DD9220765F4009CA584 /* iCloudErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrors.swift; sourceTree = "<group>"; };
-		94677DDB22082312009CA584 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
 		947D32A821EA317D0004D265 /* CSVManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManagerImpl.swift; sourceTree = "<group>"; };
@@ -235,8 +234,9 @@
 		94A7FDF9217B51EB009E5C4B /* CategoryFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormController.swift; sourceTree = "<group>"; };
 		94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsController.swift; sourceTree = "<group>"; };
 		94A7FE00217C8CF1009E5C4B /* CategorySettingsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsDataProvider.swift; sourceTree = "<group>"; };
-		94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsControllerBuilder.swift; sourceTree = "<group>"; };
+		94A7FE02217C908E009E5C4B /* CategoriesSettingsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSettingsControllerBuilder.swift; sourceTree = "<group>"; };
 		94B3257B21F45ECE0063BD78 /* DateSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSetter.swift; sourceTree = "<group>"; };
+		94C418FA223400AA00C18412 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogControllreBillder.swift; sourceTree = "<group>"; };
 		94C553C22165004A00C0F628 /* LogDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDataLoader.swift; sourceTree = "<group>"; };
 		94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsControllerBuilder.swift; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11888F6C3D29AD44D631BDDA /* Pods_Trackmoney.framework in Frameworks */,
-				94677DDC22082312009CA584 /* CloudKit.framework in Frameworks */,
+				94C418FB223400AA00C18412 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +588,7 @@
 				94EC4364216634B8009C6BF3 /* AccountsSettingsControllerBilder.swift */,
 				94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */,
 				94A7FDF7217B519A009E5C4B /* CategoryFormControllerBuilder.swift */,
-				94A7FE02217C908E009E5C4B /* CategorySettingsControllerBuilder.swift */,
+				94A7FE02217C908E009E5C4B /* CategoriesSettingsControllerBuilder.swift */,
 				94C553C02164FAFA00C0F628 /* LogControllreBillder.swift */,
 				94C553CA2165327E00C0F628 /* SettingsControllerBilder.swift */,
 				94C553C4216514A900C0F628 /* ToolsControllerBuilder.swift */,
@@ -764,7 +764,7 @@
 		E9F1B1F9FFDEEAB5A7083479 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				94677DDB22082312009CA584 /* CloudKit.framework */,
+				94C418FA223400AA00C18412 /* CloudKit.framework */,
 				723C2C45923E505B7069F1FF /* Pods_Trackmoney.framework */,
 				BCBF7BB3211B4E7E33BA6896 /* Pods_TrackmoneyTests.framework */,
 				EF2FC793D9B36922B5A90A79 /* Pods_TrackmoneyUITests.framework */,
@@ -1038,7 +1038,7 @@
 				94C553C92165323C00C0F628 /* SettingsController.swift in Sources */,
 				94858AFF2146D15B00498DCF /* AccountDBManager.swift in Sources */,
 				94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */,
-				94A7FE03217C908E009E5C4B /* CategorySettingsControllerBuilder.swift in Sources */,
+				94A7FE03217C908E009E5C4B /* CategoriesSettingsControllerBuilder.swift in Sources */,
 				9446623521A03D6400C9FFCF /* Transaction+CoreDataClass.swift in Sources */,
 				9424E80D2163B54100BE756D /* AccountsControllerBuilder.swift in Sources */,
 				94F613732147F0A700BED9A5 /* CreateTransaction.swift in Sources */,
@@ -1220,9 +1220,9 @@
 			baseConfigurationReference = 4B771A0E68CD1C303BE92499 /* Pods-Trackmoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Trackmoney/Trackmoney.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Trackmoney/Environments/Trackmoney.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Trackmoney/Environments/Info.plist";
@@ -1233,7 +1233,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.trackmoney.Trackmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvisioningProfileTrackmoneyDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1244,9 +1244,9 @@
 			baseConfigurationReference = DB7C7CAE116CDCC9EE5640C9 /* Pods-Trackmoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Trackmoney/Trackmoney.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = Trackmoney/Environments/Trackmoney.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X37P9Q6XJN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Trackmoney/Environments/Info.plist";
@@ -1257,7 +1257,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.trackmoney.Trackmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvisioningProfileTrackmoneyDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

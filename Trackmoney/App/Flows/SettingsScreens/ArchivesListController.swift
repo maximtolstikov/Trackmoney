@@ -10,51 +10,60 @@ import UIKit
 
 /// Контроллер управления архивами. Здесь можно создать, удалить и восстановить архив.
 class ArchivesListController: UIViewController {
+
+    // MARK: - Identifiers
+    
+    let cellIndentifire = "myCell"
+
+    // MARK: - Dependency
+    
+    var csvManager: CSVManager?
+    var alert: NeedCancelAlert?
+
+    // MARK: - Public properties
     
     var backgroundTaskID: UIBackgroundTaskIdentifier?
-    var tableView = UITableView()
-    var rightBarButton = UIBarButtonItem()
-    let cellIndentifire = "myCell"
-    var isSelected = [Bool]() {
+    
+    // MARK: - Private properties
+    
+    private var tableView = UITableView()
+    private var rightBarButton = UIBarButtonItem()
+    private var isSelected = [Bool]() {
         didSet {
             rightBarButton.isEnabled = isSelected.contains(true) ? true : false
         }
     }
-    var archives = [String]() {
+    private var archives = [String]() {
         didSet {
             isSelected = [Bool](repeating: false, count: archives.count)
-                self.tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
-    var csvManager: CSVManager?
-    var alert: NeedCancelAlert?
-    
-    // MARK: - Lifecycle
+
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTable()
-        setBarButtons()
+        setupBarButtons()
         setToolbar()
         loadData()
     }
     
-    // Показываем и прячем экран
+    // Показываем и прячем тулбар
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
         self.navigationController?.isToolbarHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
         self.navigationController?.isToolbarHidden = true
     }
     
     // MARK: - Configure controller
 
-    private func setBarButtons() {
+    private func setupBarButtons() {
         rightBarButton = UIBarButtonItem(
             title: NSLocalizedString("deleteTitle", comment: ""),
             style: .done,
@@ -74,27 +83,23 @@ class ArchivesListController: UIViewController {
     }
     
     private func setToolbar() {
-        
         let create = UIBarButtonItem(
             title: NSLocalizedString("createTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(createArchive))
-        
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
-        
         let buttons = [
             flexSpace,
             create,
             flexSpace]
-        
         self.setToolbarItems(buttons, animated: true)
     }
     
-    // MARK: - Button action
+    // MARK: - Private methods
     
     //swiftlint:disable for_where next
     @objc func deleteItem() {
@@ -143,14 +148,14 @@ class ArchivesListController: UIViewController {
         }
     }
     
-    // MARK: - Private methods
-    
     private func loadData() {
         csvManager?.archivesList(completionHandler: { archives in
             guard let archives = archives else { return }
             self.archives = archives
         })
-    }    
+    }
+    
+    // MARK: - Navigation
     
 }
 
