@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Создает строки из сущьностей
-struct CreaterStringsFromEntity {
+/// Создает строку из сущьностей
+class CreaterStringsFromEntity {
     
     let accountDBManager: AccountDBManager
     let categoryDBManager: CategoryDBManager
@@ -21,6 +21,9 @@ struct CreaterStringsFromEntity {
         transactionDBManager = TransactionDBManager()
     }
     
+    /// Создает строку архива
+    ///
+    /// - Parameter completionHandler: опциональная страка
     func string(completionHandler: @escaping (String?) -> Void) {
         
         let predicate = NSPredicate(value: true)

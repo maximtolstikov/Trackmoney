@@ -1,10 +1,13 @@
 import Foundation
 
 /// Упаковывает и извлекает данные в/из CSV файл
-class CSVManagerImpl: CSVManager {
+class LocalArchiveManagerImpl: LocalArchiveManager {
+    
+    // MARK: - Constants
     
     let fileManager = FileManager.default
-    let iCloud = ICloudManagerImpl()
+
+    // MARK: - Public methods
     
     // Упаковывает данные в файл
     func create(completionHandler: @escaping (URL?) -> Void) {
@@ -17,7 +20,6 @@ class CSVManagerImpl: CSVManager {
                 let url = self?.writeToFile(line: string, withName: name) else {
                     completionHandler(nil)
                     return }
-            self?.iCloud.save(record: url)
             completionHandler(url)
         }
     }
@@ -81,6 +83,8 @@ class CSVManagerImpl: CSVManager {
             print(error.localizedDescription)
         }
     }
+
+    // MARK: - Private methods
     
     /// Записывает строку в файл
     ///

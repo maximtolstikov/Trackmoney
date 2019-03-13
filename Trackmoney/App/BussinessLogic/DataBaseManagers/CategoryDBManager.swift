@@ -120,7 +120,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             newParent.addToChild(category)
         }
         
-        if mManager.isExistValue(for: .name, in: message) {
+        if messageManager.isExistValue(for: .name, in: message) {
             
             let newName = message[.name] as! String
             
@@ -137,7 +137,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             category.name = newName
         }
         
-        if mManager.isExistValue(for: .icon, in: message) {
+        if messageManager.isExistValue(for: .icon, in: message) {
             category.icon = message[.icon] as! String
         }
         

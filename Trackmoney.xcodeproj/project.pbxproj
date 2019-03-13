@@ -10,6 +10,7 @@
 		11888F6C3D29AD44D631BDDA /* Pods_Trackmoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723C2C45923E505B7069F1FF /* Pods_Trackmoney.framework */; };
 		940908B821F99DFD00F15192 /* SettingsControllerDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940908B721F99DFD00F15192 /* SettingsControllerDataProvider.swift */; };
 		940908BA21F99ED500F15192 /* SettingsControllerDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940908B921F99ED500F15192 /* SettingsControllerDataProviderImpl.swift */; };
+		94155E4822392FFC00140766 /* ExpectationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94155E4722392FFC00140766 /* ExpectationViewController.swift */; };
 		9417B1602181A092001E88AA /* PromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B15F2181A092001E88AA /* PromptView.swift */; };
 		9417B1622181C914001E88AA /* BaseFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B1612181C914001E88AA /* BaseFormController.swift */; };
 		9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B16321820622001E88AA /* SumTextFieldValidate.swift */; };
@@ -56,17 +57,15 @@
 		9461161221F84CA300AD2590 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461161121F84CA300AD2590 /* UserNotificationManager.swift */; };
 		94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC521F5C49D007AECA9 /* SettingsList.swift */; };
 		94654BCA21F5D4AA007AECA9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC921F5D4AA007AECA9 /* Repository.swift */; };
-		94654BCC21F5E9B0007AECA9 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCB21F5E9B0007AECA9 /* CSVManager.swift */; };
+		94654BCC21F5E9B0007AECA9 /* LocalArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */; };
 		94654BD021F5EFB4007AECA9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCF21F5EFB4007AECA9 /* String.swift */; };
 		94654BD221F62107007AECA9 /* ArchivesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD121F62107007AECA9 /* ArchivesListController.swift */; };
 		94654BD421F62391007AECA9 /* ArchivesListControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */; };
-		94677DD322075D21009CA584 /* iCloudManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD222075D21009CA584 /* iCloudManagerImpl.swift */; };
-		94677DD5220762FB009CA584 /* iCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD4220762FB009CA584 /* iCloudManager.swift */; };
+		94677DD322075D21009CA584 /* iCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD222075D21009CA584 /* iCloudManager.swift */; };
 		94677DD7220763F5009CA584 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD6220763F5009CA584 /* Configuration.swift */; };
 		94677DDA220765F4009CA584 /* iCloudErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD9220765F4009CA584 /* iCloudErrors.swift */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
-		947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A621EA307C0004D265 /* CSVSpec.swift */; };
-		947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* CSVManagerImpl.swift */; };
+		947D32A921EA317D0004D265 /* LocalArchiveManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */; };
 		94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC12146CDF900498DCF /* AppDelegate.swift */; };
 		94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */; };
 		94858ACC2146CDFA00498DCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94858ACB2146CDFA00498DCF /* Assets.xcassets */; };
@@ -110,6 +109,7 @@
 		94D435142148DA6F003ED596 /* ChangeTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */; };
 		94D89E4E216260780090D192 /* AccountDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D89E4D216260780090D192 /* AccountDBManagerSpec.swift */; };
 		94D89E5021626F640090D192 /* CategoryDBManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D89E4F21626F640090D192 /* CategoryDBManagerSpec.swift */; };
+		94D92A262235476B00584B41 /* ArchivesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D92A252235476B00584B41 /* ArchivesManager.swift */; };
 		94DC094F21BACF970043DC53 /* StartDataFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC094E21BACF970043DC53 /* StartDataFill.swift */; };
 		94DD1B6E2178FCB100FF2853 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94DD1B702178FCB100FF2853 /* Localizable.strings */; };
 		94DE545E215EA0C6006CAC9D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */; };
@@ -149,6 +149,7 @@
 		780CD5C36C133E5DE051008D /* Pods-TrackmoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackmoneyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrackmoneyTests/Pods-TrackmoneyTests.release.xcconfig"; sourceTree = "<group>"; };
 		940908B721F99DFD00F15192 /* SettingsControllerDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerDataProvider.swift; sourceTree = "<group>"; };
 		940908B921F99ED500F15192 /* SettingsControllerDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerDataProviderImpl.swift; sourceTree = "<group>"; };
+		94155E4722392FFC00140766 /* ExpectationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectationViewController.swift; sourceTree = "<group>"; };
 		9417B15F2181A092001E88AA /* PromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptView.swift; sourceTree = "<group>"; };
 		9417B1612181C914001E88AA /* BaseFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormController.swift; sourceTree = "<group>"; };
 		9417B16321820622001E88AA /* SumTextFieldValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumTextFieldValidate.swift; sourceTree = "<group>"; };
@@ -195,18 +196,16 @@
 		9461161121F84CA300AD2590 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		94654BC521F5C49D007AECA9 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
 		94654BC921F5D4AA007AECA9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		94654BCB21F5E9B0007AECA9 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
+		94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArchiveManager.swift; sourceTree = "<group>"; };
 		94654BCF21F5EFB4007AECA9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94654BD121F62107007AECA9 /* ArchivesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListController.swift; sourceTree = "<group>"; };
 		94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListControllerBilder.swift; sourceTree = "<group>"; };
 		94677DCD22072433009CA584 /* Trackmoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Trackmoney.entitlements; sourceTree = "<group>"; };
-		94677DD222075D21009CA584 /* iCloudManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManagerImpl.swift; sourceTree = "<group>"; };
-		94677DD4220762FB009CA584 /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
+		94677DD222075D21009CA584 /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
 		94677DD6220763F5009CA584 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		94677DD9220765F4009CA584 /* iCloudErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrors.swift; sourceTree = "<group>"; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
-		947D32A621EA307C0004D265 /* CSVSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVSpec.swift; sourceTree = "<group>"; };
-		947D32A821EA317D0004D265 /* CSVManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManagerImpl.swift; sourceTree = "<group>"; };
+		947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArchiveManagerImpl.swift; sourceTree = "<group>"; };
 		94858ABE2146CDF900498DCF /* Trackmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackmoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94858AC12146CDF900498DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94858AC92146CDF900498DCF /* Trackmoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trackmoney.xcdatamodel; sourceTree = "<group>"; };
@@ -252,6 +251,7 @@
 		94D435132148DA6F003ED596 /* ChangeTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTransactionManager.swift; sourceTree = "<group>"; };
 		94D89E4D216260780090D192 /* AccountDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDBManagerSpec.swift; sourceTree = "<group>"; };
 		94D89E4F21626F640090D192 /* CategoryDBManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDBManagerSpec.swift; sourceTree = "<group>"; };
+		94D92A252235476B00584B41 /* ArchivesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesManager.swift; sourceTree = "<group>"; };
 		94DC094E21BACF970043DC53 /* StartDataFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDataFill.swift; sourceTree = "<group>"; };
 		94DD1B62217895F300FF2853 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		94DD1B6F2178FCB100FF2853 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -429,26 +429,6 @@
 				94654BCD21F5EF6E007AECA9 /* Foundarion */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		94677DD022075CD1009CA584 /* CSVManager */ = {
-			isa = PBXGroup;
-			children = (
-				94654BCB21F5E9B0007AECA9 /* CSVManager.swift */,
-				947D32A821EA317D0004D265 /* CSVManagerImpl.swift */,
-				94CC272321F388CA006B2F9B /* CreaterStringsFromEntity.swift */,
-				94CC272521F390CD006B2F9B /* CreaterEntitysFromString.swift */,
-			);
-			path = CSVManager;
-			sourceTree = "<group>";
-		};
-		94677DD122075CED009CA584 /* iCloud */ = {
-			isa = PBXGroup;
-			children = (
-				94677DD4220762FB009CA584 /* iCloudManager.swift */,
-				94677DD222075D21009CA584 /* iCloudManagerImpl.swift */,
-			);
-			path = iCloud;
 			sourceTree = "<group>";
 		};
 		94677DD8220765D1009CA584 /* Errors */ = {
@@ -676,6 +656,7 @@
 				94654BD121F62107007AECA9 /* ArchivesListController.swift */,
 				94A7FDFE217C820A009E5C4B /* CategorySettingsController.swift */,
 				94C553C82165323C00C0F628 /* SettingsController.swift */,
+				94155E4722392FFC00140766 /* ExpectationViewController.swift */,
 			);
 			path = SettingsScreens;
 			sourceTree = "<group>";
@@ -694,8 +675,10 @@
 		94CC272221F38791006B2F9B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				94677DD122075CED009CA584 /* iCloud */,
-				94677DD022075CD1009CA584 /* CSVManager */,
+				94D92A252235476B00584B41 /* ArchivesManager.swift */,
+				94677DD222075D21009CA584 /* iCloudManager.swift */,
+				94E9CF6F22362DFD00094434 /* CSV */,
+				94E9CF6E22362D7A00094434 /* LocalArchives */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -733,6 +716,24 @@
 			path = DBManagerSpec;
 			sourceTree = "<group>";
 		};
+		94E9CF6E22362D7A00094434 /* LocalArchives */ = {
+			isa = PBXGroup;
+			children = (
+				94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */,
+				947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */,
+			);
+			path = LocalArchives;
+			sourceTree = "<group>";
+		};
+		94E9CF6F22362DFD00094434 /* CSV */ = {
+			isa = PBXGroup;
+			children = (
+				94CC272321F388CA006B2F9B /* CreaterStringsFromEntity.swift */,
+				94CC272521F390CD006B2F9B /* CreaterEntitysFromString.swift */,
+			);
+			path = CSV;
+			sourceTree = "<group>";
+		};
 		94F67390216142EA00A51190 /* TrackmoneyTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,7 +741,6 @@
 				94D89E4C216260300090D192 /* DBManagerSpec */,
 				94F67391216142EA00A51190 /* Info.plist */,
 				942888522168F284002E3DCC /* AlertMenagerSpec.swift */,
-				947D32A621EA307C0004D265 /* CSVSpec.swift */,
 				94A24910216145D900BE71FE /* MethodsBDD.swift */,
 			);
 			path = TrackmoneyTests;
@@ -948,7 +948,6 @@
 				9446624521A04FD700C9FFCF /* ChooseAccountAlert.swift in Sources */,
 				94858B022146D15B00498DCF /* DBManagerProtocol.swift in Sources */,
 				9441172A21B7047C0015B38C /* AverageValues.swift in Sources */,
-				94677DD5220762FB009CA584 /* iCloudManager.swift in Sources */,
 				9446623E21A044B700C9FFCF /* ChooseTransactionAlert.swift in Sources */,
 				9441172C21B707DE0015B38C /* AverageCategory.swift in Sources */,
 				9417B16621820722001E88AA /* TextToNumberRule.swift in Sources */,
@@ -994,10 +993,12 @@
 				94CC272621F390CD006B2F9B /* CreaterEntitysFromString.swift in Sources */,
 				94A7FDF6217B4E8A009E5C4B /* AccountsCell.swift in Sources */,
 				940908BA21F99ED500F15192 /* SettingsControllerDataProviderImpl.swift in Sources */,
+				94D92A262235476B00584B41 /* ArchivesManager.swift in Sources */,
 				9417B16421820622001E88AA /* SumTextFieldValidate.swift in Sources */,
+				94155E4822392FFC00140766 /* ExpectationViewController.swift in Sources */,
 				9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */,
 				9417B1622181C914001E88AA /* BaseFormController.swift in Sources */,
-				94677DD322075D21009CA584 /* iCloudManagerImpl.swift in Sources */,
+				94677DD322075D21009CA584 /* iCloudManager.swift in Sources */,
 				94466224219C767200C9FFCF /* TransferValidator.swift in Sources */,
 				9441172821B66A380015B38C /* ToolsDataProviderProtocol.swift in Sources */,
 				945C7A9A2179FF1300AF0B86 /* LogCell.swift in Sources */,
@@ -1021,12 +1022,12 @@
 				94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */,
 				94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */,
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
-				947D32A921EA317D0004D265 /* CSVManagerImpl.swift in Sources */,
+				947D32A921EA317D0004D265 /* LocalArchiveManagerImpl.swift in Sources */,
 				94654BCA21F5D4AA007AECA9 /* Repository.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
-				94654BCC21F5E9B0007AECA9 /* CSVManager.swift in Sources */,
+				94654BCC21F5E9B0007AECA9 /* LocalArchiveManager.swift in Sources */,
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
 				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,
@@ -1055,7 +1056,6 @@
 				9424E8042163872000BE756D /* DeleteTransactionDBManagerSpec.swift in Sources */,
 				9424E8082163997D00BE756D /* ChangeTransactionDBManagetSpec.swift in Sources */,
 				9424E80621638F1B00BE756D /* GetTransactionDBManagerSpec.swift in Sources */,
-				947D32A721EA307C0004D265 /* CSVSpec.swift in Sources */,
 				94D89E5021626F640090D192 /* CategoryDBManagerSpec.swift in Sources */,
 				9424E8012163651600BE756D /* CreateTransactionDBManagerSpec.swift in Sources */,
 				94A24911216145D900BE71FE /* MethodsBDD.swift in Sources */,

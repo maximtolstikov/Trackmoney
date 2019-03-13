@@ -7,7 +7,7 @@
 //
 import Foundation
 
-protocol CSVManager: AnyObject {
+protocol LocalArchiveManager: AnyObject {
     func create(completionHandler: @escaping (URL?) -> Void)
     func restorFrom(file name: String, completionHandler: @escaping (Bool) -> Void)
     func archivesList(completionHandler: @escaping ([String]?) -> Void)

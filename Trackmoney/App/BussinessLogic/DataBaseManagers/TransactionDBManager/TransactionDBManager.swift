@@ -8,7 +8,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         
         let createTransaction = CreateTransaction(
             context: context,
-            mManager: mManager,
+            mManager: messageManager,
             message: message)
 
         return createTransaction.execute()

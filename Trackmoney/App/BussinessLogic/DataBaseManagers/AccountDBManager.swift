@@ -75,7 +75,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             return DBError.objectIsNotExist
         }
         
-        if mManager.isExistValue(for: .name, in: message) {
+        if messageManager.isExistValue(for: .name, in: message) {
             
             let newName = message[.name] as! String
             let predicate = NSPredicate(format: "mainAccount = %@", account.name)
@@ -91,7 +91,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             account.name = newName
         }
         
-        if mManager.isExistValue(for: .icon, in: message) {
+        if messageManager.isExistValue(for: .icon, in: message) {
             account.icon = message[.icon] as! String
         }
         

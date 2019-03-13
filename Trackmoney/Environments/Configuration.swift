@@ -14,6 +14,10 @@ struct Configuration {
     
     // Идентификатор контейнера iCloud
     let containerIcloud = "iCloud.X37P9Q6XJNme.trackmoney.Trackmoney"
-    // Запись в iCloud
-    let identifierRecord = "ArchiveRecordType"
+    // Тип записи в iCloud
+    let typeRecord = "ArchiveType"
+    // Ключ для хранения файла в записи
+    let assetKey = "Archive"
+    // Имя фоновой задачи создания архива
+    let createArchiveBackgroundName = "createArchiveBackgroundName"
 }

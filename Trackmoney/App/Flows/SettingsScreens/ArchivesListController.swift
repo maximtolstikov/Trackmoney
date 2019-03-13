@@ -14,15 +14,10 @@ class ArchivesListController: UIViewController {
     // MARK: - Identifiers
     
     let cellIndentifire = "myCell"
-
+    
     // MARK: - Dependency
     
-    var csvManager: CSVManager?
-    var alert: NeedCancelAlert?
-
-    // MARK: - Public properties
-    
-    var backgroundTaskID: UIBackgroundTaskIdentifier?
+    var archiveManager: ArchivesManager?
     
     // MARK: - Private properties
     
@@ -36,17 +31,23 @@ class ArchivesListController: UIViewController {
     private var archives = [String]() {
         didSet {
             isSelected = [Bool](repeating: false, count: archives.count)
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
             self.tableView.reloadData()
         }
     }
+    private var activityIndicator = UIActivityIndicatorView()
 
     // MARK: - ViewController lifecycle
+    
+    // TODO: - Сделать проверку на доступность iCloud
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTable()
         setupBarButtons()
         setToolbar()
+        addActivityIndicator()
         loadData()
     }
     
@@ -99,60 +100,71 @@ class ArchivesListController: UIViewController {
         self.setToolbarItems(buttons, animated: true)
     }
     
+    private func addActivityIndicator() {
+        activityIndicator.style = .gray
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
     // MARK: - Private methods
     
     //swiftlint:disable for_where next
-    @objc func deleteItem() {
+    // Удаляет выделенные в списке архивы
+    @objc private func deleteItem() {
         var list = [String]()
         for (index, value) in isSelected.enumerated() {
             if value {
                 list.append(archives[index])
             }
         }
-        csvManager?.deleteItems(list, completion: {
+        
+        archiveManager?.deleteList(archives: list, completion: {
             self.loadData()
         })
     }
     
-    //swiftlint:disable force_unwrapping
+    
     // Создает архив даже если приложение свернуто
-    @objc func createArchive() {
-        guard let csvManager = self.csvManager else {
-            alert?.show(
-                controller: self,
-                title: NSLocalizedString("unfortunateCreateArchiveTitile", comment: ""),
-                body: nil)
-            return }
+    @objc private func createArchive() {
         
-        DispatchQueue.global().async {
-            // Request the task assertion and save the ID.
-            
-            self.backgroundTaskID = UIApplication.shared
-                .beginBackgroundTask(withName: "Finish create archive tasks") {
-                    UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
-                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
-                }
-            DispatchQueue.main.async {
-                csvManager.create { [weak self] (url) in
-                    guard let name = url?.lastPathComponent else { return }
-                    UserNotificationManager.shared
-                        .addNotification(
-                            title: NSLocalizedString("successfulCreateArchiveTitile", comment: ""),
-                            body: name)
+        let expectationController = ExpectationViewController(type: .archiving)
+        
+        present(expectationController, animated: true) {
+            self.archiveManager?.create(completion: { [weak self] (name) in
+                DispatchQueue.main.async {
                     self?.archives.append(name)
                 }
-            }
-            
-            UIApplication.shared.endBackgroundTask(self.backgroundTaskID!)
-            self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+                sleep(3)
+                expectationController.dismiss(animated: true, completion: nil)
+            })
         }
     }
     
+    // Обновляет данные при появлении контроллера
     private func loadData() {
-        csvManager?.archivesList(completionHandler: { archives in
-            guard let archives = archives else { return }
-            self.archives = archives
+        
+        archiveManager?.archivesList(completion: { [weak self] list in
+            guard let listName = list else { return }
+            DispatchQueue.main.async {
+                self?.archives = []
+                self?.archives = listName
+            }
         })
+    }
+    
+    // Восстанавливает базу из архива
+    private func restoreBy(name: String) {
+        
+        let expectationController = ExpectationViewController(type: .restoring)
+        
+        present(expectationController, animated: true) {
+            self.archiveManager?.restore(name: name, completion: { (result) in
+                sleep(3)
+                expectationController.dismiss(animated: true, completion: nil)
+                print(result)
+            })
+        }
     }
     
     // MARK: - Navigation
@@ -204,10 +216,7 @@ extension ArchivesListController: UITableViewDelegate {
                 
                 let cell = tableView.cellForRow(at: indexPath)
                 guard let name = cell?.textLabel?.text else { return }
-                
-                self?.csvManager?.restorFrom(file: name, completionHandler: { (result) in
-                    print(result)
-                })
+                self?.restoreBy(name: name)
         }
         restore.backgroundColor = UIColor.green
         return [restore]
