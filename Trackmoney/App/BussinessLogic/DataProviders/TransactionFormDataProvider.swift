@@ -58,35 +58,21 @@ class TransactionFormDataProvider: DataProviderProtocol {
     }
     
     // смотрит если есть id, то это изменение иначе создание
-    func save(message: [MessageKeyType: Any]) {
+    func save(message: [MessageKeyType: Any], completion: @escaping Result) {
+        
+        let result: DBError?
         
         if message[.id] != nil {
             
-            if let result = dbManager?.update(message) {
-                showError(error: result)
-            }
+            result = dbManager?.update(message)
             
         } else {
             
-            let result = dbManager?.create(message)
-            if let error = result?.1 {
-                showError(error: error)
-            }
-        }        
+            result = dbManager?.create(message).1
+        }
+        completion(result)
     }
     
-    func delete(with id: String) -> Bool {
-        return false
-    }
-    
-    private func showError(error: DBError) {
-        
-        guard let controller = controller else { return }
-        
-        NeedCancelAlert().show(
-            controller: controller,
-            title: error.description,
-            body: nil)
-    }
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {}
     
 }

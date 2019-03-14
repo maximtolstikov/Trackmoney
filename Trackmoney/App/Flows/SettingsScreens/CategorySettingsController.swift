@@ -26,6 +26,11 @@ class CategorySettingsController: UIViewController {
         }
     }
     
+    var sortEditButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +55,7 @@ class CategorySettingsController: UIViewController {
     private func setBarButton() {
         
         let rightButton = UIBarButtonItem(
-            title: NSLocalizedString("cancelButton", comment: ""),
+            title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(closeController))
@@ -79,16 +84,16 @@ class CategorySettingsController: UIViewController {
     private func addBottomToolBar() {
         
         let addCategoryButtom = UIBarButtonItem(
-            title: NSLocalizedString("titleAdd", comment: ""),
+            title: NSLocalizedString("addTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(addCategory))
         
-        let editCategoryButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSort", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteCategory))
+        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
+                                                                  comment: ""),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(sortDeleteCategory))
         
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
@@ -98,21 +103,26 @@ class CategorySettingsController: UIViewController {
         let buttoms = [
             addCategoryButtom,
             flexSpace,
-            editCategoryButton]
+            sortEditButton]
         
         self.setToolbarItems(buttoms, animated: true)
     }
     
-    // Добавляет Категорию
+    // Вызывает контроллер формы категории
     @objc func addCategory() {
         ChooseTypeCategoryAlert().show(controller: self)        
     }
     
     // Включает режим редактирования списка
     @objc func sortDeleteCategory() {
+        
         if self.tableView.isEditing {
+            
+            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
         } else {
+            
+            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
             self.tableView.setEditing(true, animated: true)
         }
     }
@@ -133,7 +143,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return incomeCategories.count
         } else {
-             return expenseCategories.count
+            return expenseCategories.count
         }
     }
     
@@ -195,7 +205,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         let delete = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 if indexPath.section == 0 {
                     
@@ -204,14 +214,14 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                         return
                     }
                     
-                    let result = self?.dataProvider?.delete(with: item.id)
-                    
-                    if result != nil, result == true {
+                    self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
-                        self?.incomeSortManager.remove(element: item,
-                                                       in: self!.incomeCategories)
-                        self?.incomeCategories.remove(at: indexPath.row)
-                        self?.tableView.reloadData()
+                        if flag {
+                            self?.incomeSortManager.remove(element: item,
+                                                           in: self!.incomeCategories)
+                            self?.incomeCategories.remove(at: indexPath.row)
+                            self?.tableView.reloadData()
+                        }
                     }
                 } else {
                     
@@ -220,14 +230,14 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                         return
                     }
                     
-                    let result = self?.dataProvider?.delete(with: item.id)
-                    
-                    if result != nil, result == true {
+                    self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
-                        self?.expenseSortManager.remove(element: item,
-                                                        in: self!.expenseCategories)
-                        self?.expenseCategories.remove(at: indexPath.row)
-                        self?.tableView.reloadData()
+                        if flag {
+                            self?.expenseSortManager.remove(element: item,
+                                                            in: self!.expenseCategories)
+                            self?.expenseCategories.remove(at: indexPath.row)
+                            self?.tableView.reloadData()
+                        }
                     }
                 }
         }
@@ -238,7 +248,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         let rename = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("renameTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 let category: CategoryTransaction?
                 
@@ -275,12 +285,17 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
         
         if sourceIndexPath.section == 0 {
             
+            guard destinationIndexPath.section == sourceIndexPath.section else { return }
+            
             let item = incomeCategories[sourceIndexPath.row]
             incomeCategories.remove(at: sourceIndexPath.row)
             incomeCategories.insert(item, at: destinationIndexPath.row)
             incomeSortManager.swapElement(array: incomeCategories)
             tableView.reloadData()
+            
         } else {
+            
+            guard destinationIndexPath.section == sourceIndexPath.section else { return }
             
             let item = expenseCategories[sourceIndexPath.row]
             expenseCategories.remove(at: sourceIndexPath.row)

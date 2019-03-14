@@ -31,9 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-            
-        let tabBarController = MainTabBarControllerBuilder().viewController()
-        self.window?.rootViewController = tabBarController
+        
+        // swiftlint:disable next force_cast
+        let controller = self.window?.rootViewController as! MainTabBarController
+        controller.selectedIndex = 0
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

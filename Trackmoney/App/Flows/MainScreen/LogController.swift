@@ -123,25 +123,26 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    //swiftlint:disable next closure_end_indentation
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
-                guard let id = self?.transactions[indexPath.row].id else { return }
-                let result = self?.dataProvider?.delete(with: id)
-                
-                if result != nil, result == true {
-                    self?.transactions.remove(at: indexPath.row)
-                    tableView.reloadData()
+            guard let id = self?.transactions[indexPath.row].id else { return }
+                self?.dataProvider?.delete(with: id) { [weak self] flag in
+                    if flag {
+                        self?.transactions.remove(at: indexPath.row)
+                        tableView.reloadData()
+                    }
                 }
-        }
+           }
         
         let edit = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleEditButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("editTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let transaction = self?.transactions[indexPath.row],
                     let type = TransactionType(rawValue: transaction.type)  else { return }

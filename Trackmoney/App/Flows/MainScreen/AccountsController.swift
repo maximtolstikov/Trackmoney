@@ -51,7 +51,6 @@ class AccountsController: UIViewController {
         tableView.register(AccountsCell.self, forCellReuseIdentifier: cellIndentifire)
         
         self.view.addSubview(tableView)
-        
     }
     
     // настраивает высоту ячейки
@@ -100,10 +99,8 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         //swiftlint:disable next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifire,
                                                  for: indexPath) as! AccountsCell
-        
         cell.accountNameLable.text = accounts[indexPath.row].name
-        cell.sumLable.text = String(accounts[indexPath.row].sum)
-        
+        cell.sumLable.text = String(accounts[indexPath.row].sum)        
         return cell
     }
     
@@ -113,7 +110,8 @@ extension AccountsController: UITableViewDelegate, UITableViewDataSource {
         
         ChooseTransactionAlert().show(
             controller: self,
-            nameAccount: accounts[indexPath.row].name)
+            nameAccount: accounts[indexPath.row].name,
+            isTransfer: accounts.count > 1)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

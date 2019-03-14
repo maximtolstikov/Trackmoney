@@ -10,7 +10,7 @@ class BaseFormController: UIViewController {
     
     var cancelButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle(NSLocalizedString("cancelButton", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("cancelTitle", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -18,7 +18,7 @@ class BaseFormController: UIViewController {
     
     let saveButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle(NSLocalizedString("titleSaveButton", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("saveTitle", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -40,8 +40,7 @@ class BaseFormController: UIViewController {
         
         scrollView = UIScrollView(frame: self.view.bounds)
         self.scrollView.contentSize = self.view.bounds.size
-        self.view.addSubview(self.scrollView)
-        
+        self.view.addSubview(self.scrollView)        
     }
     
     //создаем вью на скролл куда добавим все видимые элементы экрана
@@ -142,8 +141,11 @@ class BaseFormController: UIViewController {
     //показывает вью с подсказкой
     func showPromptView(with text: String) {
         
-        promptView = PromptView(for: self.view, with: text)
-        animateSlideDownPromt(view: promptView)
+        if !(promptView is PromptView) {
+            
+            promptView = PromptView(for: self.view, with: text)
+            animateSlideDownPromt(view: promptView)
+        }
     }
     
     //уничтожает вью с подсказкой
@@ -171,8 +173,8 @@ class BaseFormController: UIViewController {
                        animations: {
                         self.promptView.frame.origin.y = 0
         },
-                       completion: { (finish) in
-                        self.tapOnScreen()
+                       completion: { [weak self] (finish) in
+                        self!.tapOnScreen()
         })
         
     }
@@ -186,11 +188,11 @@ class BaseFormController: UIViewController {
                            animations: {
                             self.promptView.frame.origin.y = -100
             },
-                           completion: { (finish) in
-                            self.view.removeGestureRecognizer(self.tapOnViewGesture)
-                            if let gestures = self.view.gestureRecognizers,
+                           completion: { [weak self] (finish) in
+                            self?.view.removeGestureRecognizer(self!.tapOnViewGesture)
+                            if let gestures = self?.view.gestureRecognizers,
                                 gestures.isEmpty {
-                                self.destroyPromptView()
+                                self?.destroyPromptView()
                             }
             })
         }

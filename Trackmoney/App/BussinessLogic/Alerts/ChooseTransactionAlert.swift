@@ -3,7 +3,7 @@ import UIKit
 /// Показывает выбор типа транзакции
 class ChooseTransactionAlert: AlertManager {
     
-    func show(controller: UIViewController, nameAccount: String) {
+    func show(controller: UIViewController, nameAccount: String, isTransfer: Bool) {
         
         guard nameAccount != "" else { return }
         
@@ -12,12 +12,11 @@ class ChooseTransactionAlert: AlertManager {
             message: nil,
             preferredStyle: .actionSheet)
         
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                             comment: ""),
                                    style: .cancel) { _ in
                                        self.alertController = nil
         }
-        
         let expense = UIAlertAction(title: NSLocalizedString("expenseTitle", comment: ""),
                                     style: .default,
                                     handler: { _ in
@@ -25,7 +24,6 @@ class ChooseTransactionAlert: AlertManager {
                                                      type: TransactionType.expense,
                                                      name: nameAccount)
         })
-        
         let income = UIAlertAction(title: NSLocalizedString("incomeTitle", comment: ""),
                                    style: .default,
                                    handler: { _ in
@@ -35,19 +33,21 @@ class ChooseTransactionAlert: AlertManager {
                                     
         })
         
-        let transfer = UIAlertAction(title: NSLocalizedString("transferTitle", comment: ""),
-                                     style: .default,
-                                     handler: {_ in
-                                        self.present(controller: controller,
-                                                     type: TransactionType.transfer,
-                                                     name: nameAccount)
-        })
-        
         alertController.addAction(expense)
         alertController.addAction(income)
-        alertController.addAction(transfer)
-        alertController.addAction(cancel)
         
+        if isTransfer {
+            let transfer = UIAlertAction(title: NSLocalizedString("transferTitle", comment: ""),
+                                         style: .default,
+                                         handler: { _ in
+                                            self.present(controller: controller,
+                                                         type: TransactionType.transfer,
+                                                         name: nameAccount)
+            })
+            alertController.addAction(transfer)
+        }
+        
+        alertController.addAction(cancel)        
         controller.present(alertController, animated: true, completion: nil)
     }
     

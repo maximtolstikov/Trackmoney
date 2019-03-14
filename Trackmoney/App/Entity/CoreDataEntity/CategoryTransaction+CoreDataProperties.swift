@@ -1,3 +1,13 @@
+//
+//  CategoryTransaction+CoreDataProperties.swift
+//  Trackmoney
+//
+//  Created by Maxim Tolstikov on 11/01/2019.
+//  Copyright © 2019 Maxim Tolstikov. All rights reserved.
+//
+//
+
+
 import CoreData
 import Foundation
 
@@ -8,9 +18,9 @@ extension CategoryTransaction {
     }
 
     @NSManaged public var icon: String
+    @NSManaged public var id: String
     @NSManaged public var name: String
     @NSManaged public var type: String
-    @NSManaged public var id: String
     @NSManaged public var child: NSSet?
     @NSManaged public var parent: CategoryTransaction?
 

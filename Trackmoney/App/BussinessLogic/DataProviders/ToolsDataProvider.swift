@@ -34,8 +34,8 @@ class ToolsDataProvider: ToolsDataProviderProtocol {
             let resultAll = manager.get(all)
             
             guard let objectsTransaction = resultByDates,
+                !objectsTransaction.isEmpty,
                 let objectsCategory = resultAll else {
-                assertionFailure()
                 return
             }
             

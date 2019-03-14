@@ -51,7 +51,6 @@ class TransactionFormController: BaseFormController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataProvider?.loadData()
         createBottomChoseButton()
         createSumTextField()
         createTopChoseButton()
@@ -62,8 +61,9 @@ class TransactionFormController: BaseFormController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        dataProvider?.loadData()
         DispatchQueue.main.async {
-            self.sumTextField.becomeFirstResponder()
+            //self.sumTextField.becomeFirstResponder()
         }
     }
     
@@ -93,7 +93,8 @@ class TransactionFormController: BaseFormController {
     // Создает текстовое поле для ввода суммы
     func createSumTextField() {
         
-        viewOnScroll.addSubview(sumTextField)
+        viewOnScroll.addSubview(sumTextField)        
+        sumTextField.becomeFirstResponder()
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = "sum"
@@ -155,8 +156,12 @@ class TransactionFormController: BaseFormController {
     }
     
     @objc override func didChangeText(_ notification: Notification) {
-        DispatchQueue.main.async {
-            self.removeRedBorderTo(control: self.sumTextField)
+        
+        // swiftlint:disable next force_cast
+        let textField = notification.object as! UITextField
+        
+        DispatchQueue.main.async {            
+            self.removeRedBorderTo(control: textField)
             self.animateSlideUpPromt(completion: nil)
         }
     }
@@ -205,8 +210,6 @@ class TransactionFormController: BaseFormController {
                 if bottomButtonValidateResult.isEmpty {
                     
                     sendMessage()
-                    dismiss(animated: false, completion: nil)
-                    
                 } else {
                     showPromptError(result: bottomButtonValidateResult,
                                     field: self.bottomChooseButton)
@@ -245,7 +248,15 @@ class TransactionFormController: BaseFormController {
                                      bottomButton: bottomButtonText,
                                      note: text,
                                      id: transactionID)
-        dataProvider?.save(message: message)
+        
+        dataProvider?.save(message: message, completion: { [unowned self] (error) in
+            
+            guard error == nil else {
+                NeedCancelAlert().show(controller: self, title: error?.localizedDescription, body: nil)
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     // Вызываем окно подсказки и делаем красную рамку
@@ -298,7 +309,16 @@ class TransactionFormController: BaseFormController {
                 return
             }
             
+            let categoryType: CategoryType
+            
+            if transactionType == .expense {
+                categoryType = .expense
+            } else {
+                categoryType = .income
+            }
+            
             ChooseCategoryAlert().show(categories: array,
+                                       type: categoryType,
                                        controller: self) { [weak self] (name) in
                                         self?.bottomChooseButton.setTitle(name, for: .normal)
             }

@@ -5,6 +5,7 @@ class AccountsSettingsController: UIViewController {
     
     var dataProvider: DataProviderProtocol!
     var sortManager: CustomSortManager!
+    
     var tableView = UITableView()
     let cellIndentifire = "myCell"
     var accounts: [Account]! {
@@ -14,7 +15,10 @@ class AccountsSettingsController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-    }    
+    }
+    
+    
+    var sortEditButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +44,7 @@ class AccountsSettingsController: UIViewController {
     private func setBarButton() {
         
         let rightButton = UIBarButtonItem(
-            title: NSLocalizedString("cancelButton", comment: ""),
+            title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(closeController))
@@ -70,31 +74,31 @@ class AccountsSettingsController: UIViewController {
     private func addBottomToolBar() {
         
         let addAccountButtom = UIBarButtonItem(
-            title: NSLocalizedString("titleAdd", comment: ""),
+            title: NSLocalizedString("addTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(addAccount))
         
-        let deleteAccountButton = UIBarButtonItem(
-            title: NSLocalizedString("titleSort", comment: ""),
-            style: .done,
-            target: self,
-            action: #selector(sortDeleteAccount))
+        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
+                                                                  comment: ""),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(sortDeleteAccount))
         
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
         
-        let buttoms = [
+        let buttons = [
             addAccountButtom,
             flexSpace,
-            deleteAccountButton]
+            sortEditButton]
         
-        self.setToolbarItems(buttoms, animated: true)
+        self.setToolbarItems(buttons, animated: true)
     }
     
-    // Добавляет Счет
+    // Вызывает контроллер формы счета
     @objc func addAccount() {
         
         let controller = AccountFormControllerBuilder().viewController()
@@ -106,9 +110,11 @@ class AccountsSettingsController: UIViewController {
         
         if self.tableView.isEditing {
             
+            sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
-        } else {
             
+        } else {
+            sortEditButton.title = NSLocalizedString("editTitle", comment: "")
             self.tableView.setEditing(true, animated: true)
         }
     }
@@ -147,25 +153,24 @@ extension AccountsSettingsController: UITableViewDelegate, UITableViewDataSource
         
         let delete = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleDeleteButton", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("deleteTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 guard let item = self?.accounts[indexPath.row],
                     let array = self?.accounts else { return }
                 
-                let result = self?.dataProvider?.delete(with: item.id)
-                
-                if result != nil, result == true {
+                self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                     
-                    self?.sortManager.remove(element: item, in: array)
-                    self?.accounts.remove(at: indexPath.row)
-                    
-                    tableView.reloadData()
+                    if flag {
+                        self?.sortManager.remove(element: item, in: array)
+                        self?.accounts.remove(at: indexPath.row)
+                        tableView.reloadData()
+                    }
                 }
         }
         
         let rename = UITableViewRowAction(
             style: .default,
-            title: NSLocalizedString("titleRename", comment: "")) { [weak self] (action, indexPath) in
+            title: NSLocalizedString("renameTitle", comment: "")) { [weak self] (action, indexPath) in
                 
                 let item = self!.accounts[indexPath.row]
                 let controller = AccountFormControllerBuilder()

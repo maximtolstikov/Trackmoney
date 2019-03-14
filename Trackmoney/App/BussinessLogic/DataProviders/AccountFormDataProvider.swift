@@ -3,9 +3,8 @@ import CoreData
 class AccountFormDataProvider: DataProviderProtocol {
 
     var dbManager: DBManagerProtocol?
-    weak var controller: AccountFormController?
-  
-    func save(message: [MessageKeyType: Any]) {
+      
+    func save(message: [MessageKeyType: Any], completion: @escaping Result) {
         
         let result: DBError?
         
@@ -14,18 +13,10 @@ class AccountFormDataProvider: DataProviderProtocol {
         } else {
             result = dbManager?.create(message).1
         }
-
-        if let error = result, let controller = controller {
-            NeedCancelAlert().show(
-                controller: controller,
-                title: error.description,
-                body: nil)
-        }
+        completion(result)
     }
     
-    func delete(with id: String) -> Bool {
-        return false
-    }
+    func delete(with id: String, completion: @escaping (Bool) -> Void) {}
     
     func loadData() {}
     

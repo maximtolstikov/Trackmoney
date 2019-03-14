@@ -1,20 +1,21 @@
 // English
 
-//Buttons
-"cancelButton" = "Cancel";
-"titleSaveButton" = "Save";
-"titleOkButton" = "Ok";
-"titleRename" = "Rename";
-"titleDeleteButton" = "Delete";
-"titleEditButton" = "Edit";
-"titleAdd" = "Add";
-"titleSort" = "Sort";
-"chooseParentButton" = "parent";
+//Titles
+"cancelTitle" = "Close";
+"saveTitle" = "Save";
+"okTitle" = "Ok";
+"renameTitle" = "Rename";
+"deleteTitle" = "Delete";
+"editTitle" = "Edit";
+"addTitle" = "Add";
+"sortTitle" = "Sort";
+"chooseParentTitle" = "parent";
 "emptyTitle" = "-----------";
-"decline" = "No";
-"approve" = "Yes";
+"declineTitle" = "No";
+"approveTitle" = "Yes";
 
 //Alert
+"acceptDeleteTitle" = "Do you want to delete?";
 "listAccountsAlertTitle" = "Accounts";
 "listCategoriesAlertTitle" = "Categories";
 "chooseTypeCategory" = "Please chose type!";
@@ -29,6 +30,7 @@
 "categoryDelete" = "Category deleted!";
 "transactionCreate" = "Transaction created!";
 "transactionDelete" = "Transaction deleted!";
+"addCategory" = "Add";
 
 //Settings
 "accountSettingsTitle" = "Accounts";
@@ -58,5 +60,5 @@
 "messageHaventRequireValue" = "Error BD 1!";
 "noName" = "Error BD 0!";
 "objectCanntGetFromBase" = "Error BD 2!";
-"objectIsExistAlready" = "The object is exist already Объект уже существует!";
-"objectIsNotExist" = "The object is not exist Объект не сущестувует!";
+"objectIsExistAlready" = "The object with name is exist already!";
+"objectIsNotExist" = "The object is not exist!";

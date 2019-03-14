@@ -15,7 +15,7 @@ class ChooseAccountAlert: AlertManager {
         self.alertController = UIAlertController(
             title: titleAllert,
             message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelButton",
+        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
                                                      comment: ""),
                                    style: .cancel, handler: { _ in
                                     self.alertController = nil

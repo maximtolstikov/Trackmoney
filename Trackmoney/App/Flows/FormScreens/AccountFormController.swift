@@ -1,5 +1,3 @@
-// Для описания контроллера формы сущьности
-
 import UIKit
 
 class AccountFormController: BaseFormController {
@@ -13,19 +11,8 @@ class AccountFormController: BaseFormController {
         }
     }
     
-    let nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .line
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    let sumTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .line
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    let nameTextField = UITextField()
+    let sumTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +31,15 @@ class AccountFormController: BaseFormController {
     }
     
     // создает текстовое поле для ввода суммы
-    func createSumTextField() {
+    private func createSumTextField() {
         
         viewOnScroll.addSubview(sumTextField)
         if let account = accountForUpdate {
             sumTextField.isHidden = true
             sumTextField.text = String(account.sum)
         }
+        sumTextField.borderStyle = .line
+        sumTextField.translatesAutoresizingMaskIntoConstraints = false
         sumTextField.keyboardType = UIKeyboardType.numberPad
         sumTextField.textAlignment = .center
         sumTextField.placeholder = NSLocalizedString("sumTextFildPlaceholder", comment: "")
@@ -66,9 +55,11 @@ class AccountFormController: BaseFormController {
     }
     
     // создает текстовое поле для ввода имени счета
-    func createNameTextField() {
+    private func createNameTextField() {
         
         viewOnScroll.addSubview(nameTextField)
+        nameTextField.borderStyle = .line
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.textAlignment = .center
         nameTextField.placeholder = NSLocalizedString("nameTextFildPlaceholder", comment: "")
         
@@ -118,7 +109,6 @@ class AccountFormController: BaseFormController {
                 }
                 
                 sendMessage(with: nameText, and: sum)
-                dismiss(animated: true, completion: nil)
                 
             } else {
                 showPromptError(result: sumTextFieldValidateResult,
@@ -148,7 +138,15 @@ class AccountFormController: BaseFormController {
             .craftAccounеMessage(nameAccount: name,
                                   sumAccount: sum,
                                   id: accountForUpdate?.id)
-        dataProvider?.save(message: message)
+        
+        dataProvider?.save(message: message, completion: { [weak self] (error) in
+            
+            guard error == nil else {
+                NeedCancelAlert().show(controller: self!, title: error?.description, body: nil)
+                return
+            }
+            self!.dismiss(animated: true, completion: nil)
+        })
     }
  
     // MARK: - Методы уведомления TextField
@@ -159,12 +157,12 @@ class AccountFormController: BaseFormController {
     
     @objc override func didChangeText(_ notification: Notification) {
         
+        // swiftlint:disable next force_cast
+        let textField = notification.object as! UITextField
+        
         DispatchQueue.main.async {
-            guard self.promptView != nil else {
-                return
-            }
             self.animateSlideUpPromt(completion: nil)
-            self.removeRedBorderTo(control: self.nameTextField)
+            self.removeRedBorderTo(control: textField)
         }
     }
     

@@ -91,7 +91,7 @@ class CategoryFormController: BaseFormController {
         
         if categotyForUpdate == nil {
             topChooseButton
-                .setTitle(NSLocalizedString("chooseParentButton", comment: ""),
+                .setTitle(NSLocalizedString("chooseParentTitle", comment: ""),
                           for: .normal)
         } else {
             topChooseButton.setTitle(categotyForUpdate?.parent?.name, for: .normal)
@@ -135,9 +135,14 @@ class CategoryFormController: BaseFormController {
                                       parent: topChooseButton.titleLabel?.text,
                                       id: categotyForUpdate?.id)
             
-                dataProvider?.save(message: message)
-
-            dismiss(animated: true, completion: nil)
+            dataProvider?.save(message: message, completion: { [weak self] (error) in
+                
+                guard error == nil else {
+                    NeedCancelAlert().show(controller: self!, title: error?.description, body: nil)
+                    return
+                }
+                self!.dismiss(animated: true, completion: nil)
+            })            
             
         } else {
             
@@ -146,9 +151,7 @@ class CategoryFormController: BaseFormController {
                 addRedBorderTo(control: self.nameTextField)
                 break
             }
-            
         }
-        
     }
     
     @objc func tapTopChooseButton() {
@@ -159,6 +162,7 @@ class CategoryFormController: BaseFormController {
         }
         
         ChooseCategoryAlert().show(categories: list,
+                                   type: typeCategory,
                                    controller: self) { [weak self] (name) in
                                     self?.topChooseButton.setTitle(name, for: .normal)
         }
@@ -171,13 +175,13 @@ class CategoryFormController: BaseFormController {
     }
     
     @objc override func didChangeText(_ notification: Notification) {
+        
+        // swiftlint:disable next force_cast
+        let textField = notification.object as! UITextField
+        
         DispatchQueue.main.async {
-            
-            guard self.promptView != nil else {
-                return
-            }
             self.animateSlideUpPromt(completion: nil)
-            self.removeRedBorderTo(control: self.nameTextField)
+            self.removeRedBorderTo(control: textField)
         }
     }
     
