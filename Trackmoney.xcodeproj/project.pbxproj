@@ -57,7 +57,6 @@
 		9461161221F84CA300AD2590 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461161121F84CA300AD2590 /* UserNotificationManager.swift */; };
 		94654BC621F5C49D007AECA9 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC521F5C49D007AECA9 /* SettingsList.swift */; };
 		94654BCA21F5D4AA007AECA9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BC921F5D4AA007AECA9 /* Repository.swift */; };
-		94654BCC21F5E9B0007AECA9 /* LocalArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */; };
 		94654BD021F5EFB4007AECA9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BCF21F5EFB4007AECA9 /* String.swift */; };
 		94654BD221F62107007AECA9 /* ArchivesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD121F62107007AECA9 /* ArchivesListController.swift */; };
 		94654BD421F62391007AECA9 /* ArchivesListControllerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */; };
@@ -65,7 +64,6 @@
 		94677DD7220763F5009CA584 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD6220763F5009CA584 /* Configuration.swift */; };
 		94677DDA220765F4009CA584 /* iCloudErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677DD9220765F4009CA584 /* iCloudErrors.swift */; };
 		9470D44721B44DF100FF07B1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470D44621B44DF100FF07B1 /* DateManager.swift */; };
-		947D32A921EA317D0004D265 /* LocalArchiveManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */; };
 		94858AC22146CDF900498DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC12146CDF900498DCF /* AppDelegate.swift */; };
 		94858ACA2146CDF900498DCF /* Trackmoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94858AC82146CDF900498DCF /* Trackmoney.xcdatamodeld */; };
 		94858ACC2146CDFA00498DCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94858ACB2146CDFA00498DCF /* Assets.xcassets */; };
@@ -196,7 +194,6 @@
 		9461161121F84CA300AD2590 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		94654BC521F5C49D007AECA9 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
 		94654BC921F5D4AA007AECA9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArchiveManager.swift; sourceTree = "<group>"; };
 		94654BCF21F5EFB4007AECA9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94654BD121F62107007AECA9 /* ArchivesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListController.swift; sourceTree = "<group>"; };
 		94654BD321F62391007AECA9 /* ArchivesListControllerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesListControllerBilder.swift; sourceTree = "<group>"; };
@@ -205,7 +202,6 @@
 		94677DD6220763F5009CA584 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		94677DD9220765F4009CA584 /* iCloudErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrors.swift; sourceTree = "<group>"; };
 		9470D44621B44DF100FF07B1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
-		947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArchiveManagerImpl.swift; sourceTree = "<group>"; };
 		94858ABE2146CDF900498DCF /* Trackmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackmoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94858AC12146CDF900498DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94858AC92146CDF900498DCF /* Trackmoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trackmoney.xcdatamodel; sourceTree = "<group>"; };
@@ -678,7 +674,6 @@
 				94D92A252235476B00584B41 /* ArchivesManager.swift */,
 				94677DD222075D21009CA584 /* iCloudManager.swift */,
 				94E9CF6F22362DFD00094434 /* CSV */,
-				94E9CF6E22362D7A00094434 /* LocalArchives */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -714,15 +709,6 @@
 				94D89E4F21626F640090D192 /* CategoryDBManagerSpec.swift */,
 			);
 			path = DBManagerSpec;
-			sourceTree = "<group>";
-		};
-		94E9CF6E22362D7A00094434 /* LocalArchives */ = {
-			isa = PBXGroup;
-			children = (
-				94654BCB21F5E9B0007AECA9 /* LocalArchiveManager.swift */,
-				947D32A821EA317D0004D265 /* LocalArchiveManagerImpl.swift */,
-			);
-			path = LocalArchives;
 			sourceTree = "<group>";
 		};
 		94E9CF6F22362DFD00094434 /* CSV */ = {
@@ -1022,12 +1008,10 @@
 				94A0EE7E21A54DE7004B66E1 /* DBEntity.swift in Sources */,
 				94466222219C730400C9FFCF /* EmptyAccountRule.swift in Sources */,
 				945C7A942179A13100AF0B86 /* TransactionFormDataProvider.swift in Sources */,
-				947D32A921EA317D0004D265 /* LocalArchiveManagerImpl.swift in Sources */,
 				94654BCA21F5D4AA007AECA9 /* Repository.swift in Sources */,
 				9424E80B2163B4A400BE756D /* MainTabBarControllerBuilder.swift in Sources */,
 				94B3257C21F45ECE0063BD78 /* DateSetter.swift in Sources */,
 				94F7F201217F5E4400359B01 /* ValidatorProtocol.swift in Sources */,
-				94654BCC21F5E9B0007AECA9 /* LocalArchiveManager.swift in Sources */,
 				945B921221AFF7F200A1A791 /* StatusBarType.swift in Sources */,
 				94A7FDF8217B519A009E5C4B /* CategoryFormControllerBuilder.swift in Sources */,
 				94E908EC21AD3F6F00E7A31D /* NoteViewController.swift in Sources */,
