@@ -6,15 +6,16 @@ import XCTest
 
 class GetTransactionDBManager: XCTestCase {
     
-    var messageAM: [MessageKeyType: Any] = [
+    var messageAM: Message = [
         .name: "testMainName",
         .icon: "iconString",
         .sum: Int32(100)]
     
-    var messageT: [MessageKeyType: Any] = [
+    var messageT: Message = [
         .sum: Int32(30),
         .mainAccount: "testMainName",
-        .icon: "iconString"]
+        .icon: "iconString",
+        .isRestore: false]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!
@@ -34,8 +35,8 @@ class GetTransactionDBManager: XCTestCase {
     }
     
     override func tearDown() {
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
         managerA = nil
         managerT = nil
     }

@@ -242,12 +242,15 @@ class TransactionFormController: BaseFormController {
         let text = note ?? ""
         
         let message = MessageManager()
-            .craftTransactionMessage(transactionType: type,
-                                     topButton: topButtonText,
-                                     sum: sum,
-                                     bottomButton: bottomButtonText,
-                                     note: text,
-                                     id: transactionID)
+            .craftTransactionMessage(
+                transactionType: type,
+                topButton: topButtonText,
+                sum: sum,
+                bottomButton: bottomButtonText,
+                note: text,
+                id: transactionID,
+                date: nil,
+                isRestore: false)
         
         dataProvider?.save(message: message, completion: { [unowned self] (error) in
             

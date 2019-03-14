@@ -1,8 +1,7 @@
-// Для определения списка настроек
+import Foundation
 
-import UIKit
-
-enum SettingListType: String, CaseIterable {
+/// Определяет список сущьностей для настройки
+enum EntitiesList: String, CaseIterable {
     
     case accountsSetting = "accountSettingsTitle"
     case categoriesSettings = "categoriSettingsTitile"
@@ -11,7 +10,7 @@ enum SettingListType: String, CaseIterable {
         return NSLocalizedString(self.rawValue, comment: "")
     }
     
-    static func getTitleFor(title: SettingListType) -> String {
+    static func getTitleFor(title: EntitiesList) -> String {
         return title.localizedString()
     }
     

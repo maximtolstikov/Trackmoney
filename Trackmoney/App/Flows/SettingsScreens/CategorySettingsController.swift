@@ -1,13 +1,19 @@
 import UIKit
 
-/// Класс контроллера Нстроек Категорий
+/// Нстроеки Категорий
 class CategorySettingsController: UIViewController {
+
+    // MARK: - Identifiers
     
-    var dataProvider: DataProviderProtocol!
-    var tableView = UITableView()
     let cellIndentifire = "myCell"
+
+    // MARK: - Dependency
+    
     var incomeSortManager: CustomSortManager!
     var expenseSortManager: CustomSortManager!
+    var dataProvider: DataProviderProtocol!
+
+    // MARK: - Public properties
     
     var incomeCategories: [CategoryTransaction]! {
         didSet {
@@ -26,15 +32,20 @@ class CategorySettingsController: UIViewController {
         }
     }
     
-    var sortEditButton: UIBarButtonItem = {
+    // MARK: - Private properties
+    
+    private var tableView = UITableView()
+    private var sortEditButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         return button
     }()
     
+    // MARK: - ViewController lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBarButton()
+        setupBarButton()
         addTable()
         addBottomToolBar()
     }
@@ -52,61 +63,54 @@ class CategorySettingsController: UIViewController {
         self.navigationController?.isToolbarHidden = true
     }
     
-    private func setBarButton() {
-        
+    // MARK: - Configure controller
+    
+    // Устанавливает кнопки на NavigationBar
+    private func setupBarButton() {
         let rightButton = UIBarButtonItem(
             title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
-            action: #selector(closeController))
+            action: #selector(closeSettings))
         
         self.navigationItem.rightBarButtonItem = rightButton
     }
     
-    @objc func closeController() {
-        
-        let controller = MainTabBarControllerBuilder().viewController()
-        present(controller, animated: true)
-    }
-    
+    // Дабавляет ТableView
     private func addTable() {
-        
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(
             UITableViewCell.self,
             forCellReuseIdentifier: cellIndentifire)
         tableView.delegate = self
         tableView.dataSource = self
-        
         self.view.addSubview(tableView)
     }
     
+    // Добавляет кнопки в Toolbar
     private func addBottomToolBar() {
-        
         let addCategoryButtom = UIBarButtonItem(
             title: NSLocalizedString("addTitle", comment: ""),
             style: .done,
             target: self,
             action: #selector(addCategory))
-        
-        sortEditButton = UIBarButtonItem(title: NSLocalizedString("sortTitle",
-                                                                  comment: ""),
-                                         style: .done,
-                                         target: self,
-                                         action: #selector(sortDeleteCategory))
-        
+        sortEditButton = UIBarButtonItem(
+            title: NSLocalizedString("sortTitle", comment: ""),
+            style: .done,
+            target: self,
+            action: #selector(sortDeleteCategory))
         let flexSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil)
-        
         let buttoms = [
             addCategoryButtom,
             flexSpace,
             sortEditButton]
-        
         self.setToolbarItems(buttoms, animated: true)
     }
+    
+    // MARK: - Private methods
     
     // Вызывает контроллер формы категории
     @objc func addCategory() {
@@ -115,21 +119,27 @@ class CategorySettingsController: UIViewController {
     
     // Включает режим редактирования списка
     @objc func sortDeleteCategory() {
-        
         if self.tableView.isEditing {
-            
             sortEditButton.title = NSLocalizedString("sortTitle", comment: "")
             self.tableView.setEditing(false, animated: true)
         } else {
-            
             sortEditButton.title = NSLocalizedString("editTitle", comment: "")
             self.tableView.setEditing(true, animated: true)
         }
     }
     
+    // MARK: - Navigation
+    
+    @objc func closeSettings() {
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
+    }
+    
 }
 
-extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension CategorySettingsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -137,9 +147,7 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        
         guard incomeCategories?.count != nil else { return 0 }
-        
         if section == 0 {
             return incomeCategories.count
         } else {
@@ -158,7 +166,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "myCell",
             for: indexPath)
@@ -178,7 +185,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                 textInCell = expenseCategories[indexPath.row].name
             }
         }
-        
         cell.textLabel?.text = textInCell
         return cell
     }
@@ -187,6 +193,12 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                    editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension CategorySettingsController: UITableViewDelegate {
     
     // Свайп по ячейке
     func tableView(_ tableView: UITableView,
@@ -217,24 +229,23 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
                     self?.dataProvider?.delete(with: item.id) { [weak self] flag in
                         
                         if flag {
-                            self?.incomeSortManager.remove(element: item,
-                                                           in: self!.incomeCategories)
+                            self?.incomeSortManager.remove(
+                                element: item,
+                                in: self!.incomeCategories)
                             self?.incomeCategories.remove(at: indexPath.row)
                             self?.tableView.reloadData()
                         }
                     }
                 } else {
-                    
                     guard let item = self?.expenseCategories[indexPath.row] else {
                         assertionFailure()
                         return
                     }
-                    
                     self?.dataProvider?.delete(with: item.id) { [weak self] flag in
-                        
                         if flag {
-                            self?.expenseSortManager.remove(element: item,
-                                                            in: self!.expenseCategories)
+                            self?.expenseSortManager.remove(
+                                element: item,
+                                in: self!.expenseCategories)
                             self?.expenseCategories.remove(at: indexPath.row)
                             self?.tableView.reloadData()
                         }
@@ -274,7 +285,6 @@ extension CategorySettingsController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView,
                    canMoveRowAt indexPath: IndexPath) -> Bool {
-        
         return tableView.isEditing
     }
     

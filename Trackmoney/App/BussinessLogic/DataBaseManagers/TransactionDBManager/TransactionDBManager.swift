@@ -3,19 +3,17 @@ import CoreData
 
 class TransactionDBManager: DBManager, DBManagerProtocol {
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
+    
+    func create(_ message: Message) -> (DBEntity?, DBError?) {
         
-        guard let createTransaction = CreateTransaction(
+        let createTransaction = CreateTransaction(
             context: context,
-            mManager: mManager,
-            message: message
-            ) else {
-                assertionFailure()
-                return (nil, DBError.messageHaventRequireValue)
-        }
-        
+            mManager: messageManager,
+            message: message)
+
         return createTransaction.execute()
     }
+    
     
     func get(_ predicate: NSPredicate) -> [DBEntity]? {
         
@@ -30,7 +28,8 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func update(_ message: [MessageKeyType: Any]) -> DBError? {
+    
+    func update(_ message: Message) -> DBError? {
         
         guard let id = message[.id] else {
             return DBError.messageHaventRequireValue
@@ -61,7 +60,8 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
         return DBError.noName
     }
     
-    func delete(_ id: String) -> DBError? {
+    
+    func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate) as! [Transaction]?
@@ -73,8 +73,7 @@ class TransactionDBManager: DBManager, DBManagerProtocol {
                     assertionFailure()
                     return DBError.objectIsNotExist
         }
-        
-        return deleteTransaction.execute() ? nil : DBError.contextDoNotBeSaved
+        return deleteTransaction.execute(force: force) ? nil : DBError.contextDoNotBeSaved
     }
 
 }

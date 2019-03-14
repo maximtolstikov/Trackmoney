@@ -20,7 +20,7 @@ class LogDataLoader: DataProviderProtocol {
         controller.transactions = transactions?.reversed()
     }
     
-    func save(message: [MessageKeyType: Any], completion: @escaping Result) {}
+    func save(message: Message, completion: @escaping Result) {}
     
     //swiftlint:disable force_unwrapping
     func delete(with id: String, completion: @escaping (Bool) -> Void) {
@@ -31,7 +31,7 @@ class LogDataLoader: DataProviderProtocol {
                            title: NSLocalizedString("acceptDeleteTitle", comment: ""),
                            body: nil) { [unowned self] (flag) in
                             if flag {
-                                let error = self.dbManager?.delete(id)
+                                let error = self.dbManager?.delete(id, force: false)
                                 
                                 if error == nil {
                                     

@@ -6,7 +6,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
     
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
+    func create(_ message: Message) -> (DBEntity?, DBError?) {
         
         // Проверка что объекта с таким именем нет в базе
         guard let name = message[.name] else {
@@ -86,7 +86,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func update(_ message: [MessageKeyType: Any]) -> DBError? {
+    func update(_ message: Message) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
         let result = get(predicate) as! [CategoryTransaction]?
@@ -120,7 +120,7 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             newParent.addToChild(category)
         }
         
-        if mManager.isExistValue(for: .name, in: message) {
+        if messageManager.isExistValue(for: .name, in: message) {
             
             let newName = message[.name] as! String
             
@@ -137,14 +137,14 @@ class CategoryDBManager: DBManager, DBManagerProtocol {
             category.name = newName
         }
         
-        if mManager.isExistValue(for: .icon, in: message) {
+        if messageManager.isExistValue(for: .icon, in: message) {
             category.icon = message[.icon] as! String
         }
         
         return saveContext()
     }
     
-    func delete(_ id: String) -> DBError? {
+    func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate) as! [CategoryTransaction]?

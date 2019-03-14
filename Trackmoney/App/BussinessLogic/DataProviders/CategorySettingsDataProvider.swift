@@ -37,7 +37,7 @@ class CategorySettingsDataProvider: DataProviderProtocol {
         
     }
     
-    func save(message: [MessageKeyType: Any], completion: @escaping Result) {}
+    func save(message: Message, completion: @escaping Result) {}
     
     func delete(with id: String, completion: @escaping (Bool) -> Void) {
         
@@ -48,10 +48,10 @@ class CategorySettingsDataProvider: DataProviderProtocol {
                                                     comment: ""),
                            body: nil) { [unowned self] (flag) in
                             if flag {
-                                let error = self.dbManager?.delete(id)
+                                let error = self.dbManager?.delete(id, force: false)
                                 
                                 if error == nil {
-
+                                    
                                     ShortAlert().show(
                                         controller: controller,
                                         title: NSLocalizedString("categoryDelete", comment: ""),

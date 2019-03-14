@@ -1,37 +1,51 @@
-// Для настройки контроллера Настроек
-
 import UIKit
 
 class SettingsController: UIViewController {
+
+    // MARK: - Identifiers
+    
+    let cellIndentifire = "myCell"
+    
+    // MARK: - Constants
     
     var tableView = UITableView()
-    let cellIndentifire = "myCell"
-    var arrayPoint: [String]!
+    var categorySettings = [String]()
+    var entitiesList = [String]()
+    var archivesList = [String]()
+    
+    // MARK: - Dependency
+    
+    var dataProvider: SettingsControllerDataProvider?
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setBarButtons()
+        setupBarButtons()
         addTable()
-        setupSwipeDown()
+        dataProvider?.loadData()
+        setupSwipeDownGesture()
     }
     
-    func setupSwipeDown() {
+    // MARK: - Configure controller
     
-        let gestre = UISwipeGestureRecognizer(
+    // Добавляет жест свайп вниз для закрытия
+    private func setupSwipeDownGesture() {
+        
+        let gesture = UISwipeGestureRecognizer(
             target: self, action: #selector(handleSwipes(_ :)))
-        gestre.direction = .down
-        self.view.addGestureRecognizer(gestre)
+        gesture.direction = .down
+        self.view.addGestureRecognizer(gesture)
     }
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-        
         if sender.direction == .down {
             dismissBack()
         }
     }
     
-    private func setBarButtons() {
+    // Устанавливает кнопки на NavigationBar
+    private func setupBarButtons() {
         
         let leftBackButton = UIBarButtonItem(
             image: UIImage(named: "Arrow_down"),
@@ -43,23 +57,13 @@ class SettingsController: UIViewController {
             title: NSLocalizedString("cancelTitle", comment: ""),
             style: .done,
             target: self,
-            action: #selector(closeController))
+            action: #selector(closeSettings))
         
         self.navigationItem.leftBarButtonItem = leftBackButton
         self.navigationItem.rightBarButtonItem = rightButton
     }
     
-    @objc func dismissBack() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func closeController() {
-        
-        let controller = MainTabBarControllerBuilder().viewController()
-        present(controller, animated: true)
-    }
-    
-    //настраиваем и добавляем контроллер таблицы
+    // Добавляет TableView
     private func addTable() {
         self.tableView = UITableView(frame: view.bounds, style: .grouped)
         
@@ -74,18 +78,52 @@ class SettingsController: UIViewController {
         self.view.addSubview(tableView)
     }
     
+    // MARK: - Navigation
+    
+    @objc func dismissBack() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func closeSettings() {
+        let controller = MainTabBarControllerBuilder().viewController()
+        present(controller, animated: true)
+    }
+    
+    private func presentAccountsSettings() {
+        let controller = AccountsSettingsControllerBuilder().viewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    private func presentCategoriesSettings() {
+        let controller = CategoriesSettingsControllerBuilder().viewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    private func presentArchivesSettings() {
+        let controller = ArchivesListControllerBuilder().viewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
 }
 
+// MARK: - UITableViewDataSource
 
-extension SettingsController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return arrayPoint.count
+        return categorySettings.count
     }
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0:
+            return entitiesList.count
+        case 1:
+            return archivesList.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView,
@@ -95,22 +133,33 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "myCell",
             for: indexPath)
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = arrayPoint[indexPath.section]
-        
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = entitiesList[indexPath.row]
+        case 1:
+            cell.textLabel?.text = archivesList[indexPath.row]
+        default:
+            break
+        }
         return cell
     }
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension SettingsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            
-            let controller = AccountsSettingsControllerBuilder().viewController()
-            self.navigationController?.pushViewController(controller, animated: true)
-            
-        } else {
-            
-            let controller = CategorySettingsControllerBuilder().viewController()
-            self.navigationController?.pushViewController(controller, animated: true)
+            if indexPath.row == 0 {
+                presentAccountsSettings()
+            } else {
+                presentCategoriesSettings()
+            }
+        } else if indexPath.section == 1 {
+            presentArchivesSettings()
         }
     }
     

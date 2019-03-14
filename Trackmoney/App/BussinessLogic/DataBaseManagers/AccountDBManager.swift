@@ -7,7 +7,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
     lazy var sortManager = CustomSortManager(.accounts)
     lazy var transactionDBManager = TransactionDBManager()
     
-    func create(_ message: [MessageKeyType: Any]) -> (DBEntity?, DBError?) {
+    func create(_ message: Message) -> (DBEntity?, DBError?) {
         
         // Проверка что объекта с таким именем нет в базе
         guard let name = message[.name] else {
@@ -66,7 +66,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func update(_ message: [MessageKeyType: Any]) -> DBError? {
+    func update(_ message: Message) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", message[.id] as! String)
         let result = get(predicate) as! [Account]?
@@ -75,7 +75,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             return DBError.objectIsNotExist
         }
         
-        if mManager.isExistValue(for: .name, in: message) {
+        if messageManager.isExistValue(for: .name, in: message) {
             
             let newName = message[.name] as! String
             let predicate = NSPredicate(format: "mainAccount = %@", account.name)
@@ -91,7 +91,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
             account.name = newName
         }
         
-        if mManager.isExistValue(for: .icon, in: message) {
+        if messageManager.isExistValue(for: .icon, in: message) {
             account.icon = message[.icon] as! String
         }
         
@@ -103,7 +103,7 @@ class AccountDBManager: DBManager, DBManagerProtocol {
         }
     }
     
-    func delete(_ id: String) -> DBError? {
+    func delete(_ id: String, force: Bool) -> DBError? {
         
         let predicate = NSPredicate(format: "id = %@", id)
         let result = get(predicate)

@@ -7,18 +7,19 @@ import XCTest
 
 class CreateTransactionDBManagerSpec: XCTestCase {
     
-    var messageAM: [MessageKeyType: Any] = [
+    var messageAM: Message = [
         .name: "testMainName",
         .icon: "icon",
         .sum: Int32(100)]
-    var messageAC: [MessageKeyType: Any] = [
+    var messageAC: Message = [
         .name: "testCorName",
         .icon: "iconString",
         .sum: Int32(50)]
-    var messageT: [MessageKeyType: Any] = [
+    var messageT: Message = [
         .sum: Int32(30),
         .mainAccount: "testMainName",
-        .icon: "iconString"]
+        .icon: "iconString",
+        .isRestore: false]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!
@@ -74,8 +75,8 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(note, "test note")
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCreateExpenseTransaction() throws {
@@ -101,8 +102,8 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(account?.sum, 70)
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCreateTransferTransaction() throws {
@@ -139,9 +140,9 @@ class CreateTransactionDBManagerSpec: XCTestCase {
             XCTAssertEqual(account?.sum, 80)
         })
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
     }
     
 }

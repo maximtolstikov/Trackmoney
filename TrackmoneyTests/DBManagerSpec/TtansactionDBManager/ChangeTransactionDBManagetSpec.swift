@@ -6,25 +6,26 @@ import XCTest
 
 class UpdateTransactionDBManagetSpec: XCTestCase {
     
-    var messageAM: [MessageKeyType: Any] = [
+    var messageAM: Message = [
         .name: "testMainName",
         .icon: "iconString",
         .sum: Int32(100)]
     
-    var messageAC: [MessageKeyType: Any] = [
+    var messageAC: Message = [
         .name: "testCorName",
         .icon: "iconString",
         .sum: Int32(50)]
     
-    var messageACtwo: [MessageKeyType: Any] = [
+    var messageACtwo: Message = [
         .name: "twoCorName",
         .icon: "icon",
         .sum: Int32(150)]
     
-    var messageT: [MessageKeyType: Any] = [
+    var messageT: Message = [
         .sum: Int32(30),
         .mainAccount: "testMainName",
-        .icon: "iconString"]
+        .icon: "iconString",
+        .isRestore: false]
     
     var managerA: AccountDBManager!
     var managerT: TransactionDBManager!
@@ -60,8 +61,8 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCangeExpenseTransaction() throws {
@@ -86,8 +87,8 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
     }
     
     func testCangeTransferTransaction() throws {
@@ -124,9 +125,9 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
         
         messageT[.sum] = Int32(30)
         
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)        
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
     }
     
     func testCangeCorAccountTransaction() throws {
@@ -164,9 +165,9 @@ class UpdateTransactionDBManagetSpec: XCTestCase {
 
         messageT[.sum] = Int32(30)
 
-        _ = managerT.delete(messageT[.id] as! String)
-        _ = managerA.delete(messageAM[.id] as! String)
-        _ = managerA.delete(messageAC[.id] as! String)
-        _ = managerA.delete(messageACtwo[.id] as! String)
+        _ = managerT.delete(messageT[.id] as! String, force: false)
+        _ = managerA.delete(messageAM[.id] as! String, force: false)
+        _ = managerA.delete(messageAC[.id] as! String, force: false)
+        _ = managerA.delete(messageACtwo[.id] as! String, force: false)
     }
 }

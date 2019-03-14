@@ -1,9 +1,13 @@
 import UIKit
 
 class AccountFormController: BaseFormController {
+
+    // MARK: - Dependency
     
-    //поставщик данных
     var dataProvider: DataProviderProtocol?
+    
+    // MARK: - Public properties
+    
     var accountForUpdate: Account? {
         didSet {
             nameTextField.text = accountForUpdate?.name
@@ -11,14 +15,17 @@ class AccountFormController: BaseFormController {
         }
     }
     
-    let nameTextField = UITextField()
-    let sumTextField = UITextField()
+    // MARK: - Private properties
+    
+    private let nameTextField = UITextField()
+    private let sumTextField = UITextField()
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-                createSumTextField()
-                createNameTextField()
+        createSumTextField()
+        createNameTextField()
     }
     
     // делает текстовое поле активным и вызывается клавиатура
@@ -29,6 +36,8 @@ class AccountFormController: BaseFormController {
             self.nameTextField.becomeFirstResponder()
         }
     }
+    
+    // MARK: - Private methods
     
     // создает текстовое поле для ввода суммы
     private func createSumTextField() {
@@ -66,7 +75,7 @@ class AccountFormController: BaseFormController {
         nameTextField.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor)
             .isActive = true
         nameTextField.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor,
-                                            multiplier: 2 / 3).isActive = true
+                                             multiplier: 2 / 3).isActive = true
         nameTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: sumTextField.topAnchor,
                                               constant: -40).isActive = true
@@ -78,8 +87,7 @@ class AccountFormController: BaseFormController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc override func tapSaveButton() {
-
+    @objc override func tapSaveButton() {        
         validate()
     }
     
@@ -102,19 +110,15 @@ class AccountFormController: BaseFormController {
                     .validate()
             }
             if sumTextFieldValidateResult.isEmpty {
-                
                 guard let sum = Int32(sumText) else {
                     assertionFailure()
                     return
                 }
-                
                 sendMessage(with: nameText, and: sum)
-                
             } else {
                 showPromptError(result: sumTextFieldValidateResult,
                                 field: self.sumTextField)                
             }
-            
         } else {
             showPromptError(result: nameTextFieldValidateResult,
                             field: self.nameTextField)
@@ -130,17 +134,18 @@ class AccountFormController: BaseFormController {
             addRedBorderTo(control: field)
         }
     }
-
+    
     // Отправляет данные на сохранение
     private func sendMessage(with name: String, and sum: Int32) {
         
         let message = MessageManager()
-            .craftAccounеMessage(nameAccount: name,
-                                  sumAccount: sum,
-                                  id: accountForUpdate?.id)
+            .craftAccounеMessage(
+                icon: nil,
+                nameAccount: name,
+                sumAccount: sum,
+                id: accountForUpdate?.id)
         
         dataProvider?.save(message: message, completion: { [weak self] (error) in
-            
             guard error == nil else {
                 NeedCancelAlert().show(controller: self!, title: error?.description, body: nil)
                 return
@@ -148,7 +153,7 @@ class AccountFormController: BaseFormController {
             self!.dismiss(animated: true, completion: nil)
         })
     }
- 
+    
     // MARK: - Методы уведомления TextField
     
     @objc override func responseTextField(_ notification: Notification) {
@@ -156,10 +161,8 @@ class AccountFormController: BaseFormController {
     }
     
     @objc override func didChangeText(_ notification: Notification) {
-        
         // swiftlint:disable next force_cast
         let textField = notification.object as! UITextField
-        
         DispatchQueue.main.async {
             self.animateSlideUpPromt(completion: nil)
             self.removeRedBorderTo(control: textField)

@@ -1,15 +1,18 @@
 //swiftlint:disable force_cast
 import UIKit
 
-/// Для описания контроллера журнала
+/// Контроллер журнала
 class LogController: UIViewController {
+
+    // MARK: - Identifiers
+    
+    let cellIndentifire = "logCell"
+    
+    // MARK: - Public properties
     
     lazy var popViewController = NoteViewController()
-    
     var tableView = UITableView()
-    let cellIndentifire = "logCell"
     let dateFormat = DateFormat()
-    
     var transactions: [Transaction]! {
         didSet {
             DispatchQueue.main.async {
@@ -17,17 +20,20 @@ class LogController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Dependency
+    
     var dataProvider: DataProviderProtocol?
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         dataProvider?.loadData()
     }
     
@@ -36,6 +42,8 @@ class LogController: UIViewController {
         
         popViewController.dismiss(animated: false)
     }
+    
+    // MARK: - Private methods
     
     private func addTable() {
         
@@ -52,7 +60,9 @@ class LogController: UIViewController {
     
 }
 
-extension LogController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension LogController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -93,13 +103,17 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
             cell.categoryNameLable.text = transaction.category
         case 2:
             cell.sumLable.textColor = UIColor.darkGray
-            //swiftlint:disable next force_unwrapping
             cell.categoryNameLable.text = "\(transaction.mainAccount)"
-                + "/" + "\(String(describing: transaction.corAccount!))"
+                + "/" + "\(String(describing: transaction.corAccount ?? ""))"
         default:
             break
         }        
     }
+}
+    
+// MARK: - UITableViewDelegate
+    
+extension LogController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -171,10 +185,11 @@ extension LogController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
+
 extension LogController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        
         return .none
     }
 }

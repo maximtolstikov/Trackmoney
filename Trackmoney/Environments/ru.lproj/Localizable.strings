@@ -1,6 +1,9 @@
 // Russian
 
 //Titles
+"successfulCreateArchiveTitile" = "Архив создан!";
+"unfortunateCreateArchiveTitile" = "Архив создать не удалось! 🤷‍♂️";
+"createTitle" = "Создать";
 "cancelTitle" = "Закрыть";
 "saveTitle" = "Сохранить";
 "okTitle" = "Ok";
@@ -35,7 +38,13 @@
 "accountSettingsTitle" = "Счета";
 "categoriSettingsTitile" = "Категории";
 "settingsAccounts" = "Счета";
-"settingsCategories" = "Настройки Категорий";
+"settingsCategories" = "Категории";
+"settings" = "Настройки";
+"entitiesHeaderTitle" = "Объекты";
+"archivesTitle" = "Архивы";
+"saveBaseTitle" = "Сохранить базу";
+"restoreBaseTitile" = "Восстановить базу";
+"archiveListControllerTitle" = "Архивы";
 
 //Validate error
 "errorTextFormEmpty" = "Не введено значение!";

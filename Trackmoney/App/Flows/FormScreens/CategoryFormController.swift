@@ -130,7 +130,8 @@ class CategoryFormController: BaseFormController {
         if checkRule.isEmpty {
             
             let message = MessageManager()
-                .craftCategoryMessage(nameCategory: nameText,
+                .craftCategoryMessage(icon: nil,
+                                      nameCategory: nameText,
                                       type: typeCategory,
                                       parent: topChooseButton.titleLabel?.text,
                                       id: categotyForUpdate?.id)

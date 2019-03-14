@@ -5,21 +5,12 @@ class SettigsControllerBuilder {
     func viewController() -> UIViewController {
         
         let settingsController = SettingsController()
-        settingsController.navigationItem.title = "Settings"
-        settingsController.arrayPoint = createSettingsList()
+        let dataProvider = SettingsControllerDataProviderImpl()
+        dataProvider.controller = settingsController
+        settingsController.dataProvider = dataProvider
+        settingsController.navigationItem
+            .title = NSLocalizedString("settings", comment: "")
         
         return settingsController
     }
-    
-    private func createSettingsList() -> [String] {
-        
-        var array = [String]()
-        
-        for item in SettingListType.allCases {
-            array.append(SettingListType.getTitleFor(title: item))
-        }
-        
-        return array
-    }
-    
 }

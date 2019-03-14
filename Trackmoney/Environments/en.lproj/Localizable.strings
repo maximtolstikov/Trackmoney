@@ -1,6 +1,9 @@
 // English
 
 //Titles
+"successfulCreateArchiveTitile" = "Archive created!";
+"unfortunateCreateArchiveTitile" = "Archive couldn't be created! 🤷‍♂️";
+"createTitle" = "Create";
 "cancelTitle" = "Close";
 "saveTitle" = "Save";
 "okTitle" = "Ok";
@@ -36,7 +39,13 @@
 "accountSettingsTitle" = "Accounts";
 "categoriSettingsTitile" = "Categories";
 "settingsAccounts" = "Accounts";
-"settingsCategories" = "Categories Settings";
+"settingsCategories" = "Categories";
+"settings" = "Settings";
+"entitiesHeaderTitle" = "Objects";
+"archivesTitle" = "Archives";
+"saveBaseTitle" = "Save base";
+"restoreBaseTitile" = "Restore base";
+"archiveListControllerTitle" = "Archives";
 
 //Validate error
 "errorTextFormEmpty" = "Field hasn't value!";
