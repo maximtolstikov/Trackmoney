@@ -10,6 +10,7 @@
 		11888F6C3D29AD44D631BDDA /* Pods_Trackmoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723C2C45923E505B7069F1FF /* Pods_Trackmoney.framework */; };
 		940908B821F99DFD00F15192 /* SettingsControllerDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940908B721F99DFD00F15192 /* SettingsControllerDataProvider.swift */; };
 		940908BA21F99ED500F15192 /* SettingsControllerDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940908B921F99ED500F15192 /* SettingsControllerDataProviderImpl.swift */; };
+		940971EA223CE6AB0096F0DA /* LogUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940971E9223CE6AB0096F0DA /* LogUITableView.swift */; };
 		94155E4822392FFC00140766 /* ExpectationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94155E4722392FFC00140766 /* ExpectationViewController.swift */; };
 		9417B1602181A092001E88AA /* PromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B15F2181A092001E88AA /* PromptView.swift */; };
 		9417B1622181C914001E88AA /* BaseFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B1612181C914001E88AA /* BaseFormController.swift */; };
@@ -147,6 +148,7 @@
 		780CD5C36C133E5DE051008D /* Pods-TrackmoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackmoneyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrackmoneyTests/Pods-TrackmoneyTests.release.xcconfig"; sourceTree = "<group>"; };
 		940908B721F99DFD00F15192 /* SettingsControllerDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerDataProvider.swift; sourceTree = "<group>"; };
 		940908B921F99ED500F15192 /* SettingsControllerDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerDataProviderImpl.swift; sourceTree = "<group>"; };
+		940971E9223CE6AB0096F0DA /* LogUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUITableView.swift; sourceTree = "<group>"; };
 		94155E4722392FFC00140766 /* ExpectationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectationViewController.swift; sourceTree = "<group>"; };
 		9417B15F2181A092001E88AA /* PromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptView.swift; sourceTree = "<group>"; };
 		9417B1612181C914001E88AA /* BaseFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,15 @@
 				B77297DBC59BE89A720C0638 /* Pods-TrackmoneyUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		940971E8223CE6280096F0DA /* LogController */ = {
+			isa = PBXGroup;
+			children = (
+				94FA33F5215FB88200689061 /* LogController.swift */,
+				940971E9223CE6AB0096F0DA /* LogUITableView.swift */,
+			);
+			path = LogController;
 			sourceTree = "<group>";
 		};
 		9424E8022163656E00BE756D /* TtansactionDBManager */ = {
@@ -638,7 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				94DE545F215EA4B2006CAC9D /* AccountsController.swift */,
-				94FA33F5215FB88200689061 /* LogController.swift */,
+				940971E8223CE6280096F0DA /* LogController */,
 				94DE545D215EA0C6006CAC9D /* MainTabBarController.swift */,
 				94DE5461215EAB56006CAC9D /* ToolsController.swift */,
 			);
@@ -994,6 +1005,7 @@
 				9446624121A04D6900C9FFCF /* ShortAlert.swift in Sources */,
 				94A7FDF0217AF1B6009E5C4B /* AccountFormController.swift in Sources */,
 				94EEA27A21803D0400F19496 /* NameTextFieldValidate.swift in Sources */,
+				940971EA223CE6AB0096F0DA /* LogUITableView.swift in Sources */,
 				94F82414216B3CE5003DEE00 /* TransactionFormController.swift in Sources */,
 				9446623421A03D6400C9FFCF /* Account+CoreDataProperties.swift in Sources */,
 				94858B052146D15B00498DCF /* MessageManager.swift in Sources */,

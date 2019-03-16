@@ -173,7 +173,6 @@ class TransactionFormController: BaseFormController {
     }
     
     @objc override func tapSaveButton() {
-        
         validate()
     }
     
@@ -239,15 +238,13 @@ class TransactionFormController: BaseFormController {
                 return
         }
         
-        let text = note ?? ""
-        
         let message = MessageManager()
             .craftTransactionMessage(
                 transactionType: type,
                 topButton: topButtonText,
                 sum: sum,
                 bottomButton: bottomButtonText,
-                note: text,
+                note: note,
                 id: transactionID,
                 date: nil,
                 isRestore: false)
@@ -320,18 +317,17 @@ class TransactionFormController: BaseFormController {
                 categoryType = .income
             }
             
-            ChooseCategoryAlert().show(categories: array,
-                                       type: categoryType,
-                                       controller: self) { [weak self] (name) in
-                                        self?.bottomChooseButton.setTitle(name, for: .normal)
+            ChooseCategoryAlert()
+                .show(categories: array,
+                      type: categoryType,
+                      controller: self) { [weak self] (name) in
+                        self?.bottomChooseButton.setTitle(name, for: .normal)
             }
         }
     }
     
     @objc func tapNoteButton() {
-        
         let text = note ?? ""
-        
         NoteAlert().show(controller: self, text: text) { (string) in
             self.note = string
         }

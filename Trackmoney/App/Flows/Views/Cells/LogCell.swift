@@ -1,55 +1,56 @@
-// Для настройки ячейки журнала
-
 import UIKit
 
+/// Ячейка таблицы журнала
 class LogCell: UITableViewCell {
+    
+    // MARK: - Constants
+    
+    let dateFormat = DateFormat()
 
-    var typeImage: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    // MARK: - Identifiers
     
-    var background: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    static let reuseId = "LogCell"
     
-    var accountNameLable: UILabel = {
-        let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
-    }()
+    // MARK: - Public properties
     
     var sumLable: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
+
+    // MARK: - Private properties
     
-    var categoryNameLable: UILabel = {
+    private var typeImage: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var background: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var accountNameLable: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    private var categoryNameLable: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    private var dateLable: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
     
-    var dateLable: UILabel = {
-        let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
-    }()
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(background)
-        background.addSubview(accountNameLable)
-        background.addSubview(sumLable)
-        background.addSubview(categoryNameLable)
-        background.addSubview(dateLable)
-        background.addSubview(typeImage)
-        
         setupBackgroundView()
         setupTypeImage()
         setupAccountNameLable()
@@ -61,9 +62,40 @@ class LogCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Public methods
+
+    public func configure(transaction: Transaction) {
+        
+        let date = transaction.date as Date
+        let stringFromDate = dateFormat.dateFormatter.string(from: date)
+        
+        accountNameLable.text = transaction.mainAccount
+        sumLable.text = String(transaction.sum)
+        dateLable.text = stringFromDate
+        typeImage.image = UIImage(named: transaction.icon)
+        
+        let type = transaction.type
+        switch type {
+        case 0:
+            sumLable.textColor = #colorLiteral(red: 0.7835699556, green: 0.2945081919, blue: 0.07579417304, alpha: 1)
+            categoryNameLable.text = transaction.category
+        case 1:
+            sumLable.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+            categoryNameLable.text = transaction.category
+        case 2:
+            sumLable.textColor = UIColor.darkGray
+            categoryNameLable.text = "\(transaction.mainAccount)"
+                + "/" + "\(String(describing: transaction.corAccount ?? ""))"
+        default:
+            break
+        }
+    }
+    
+    // MARK: - Private methods
     
     private func setupBackgroundView() {
-        
+        contentView.addSubview(background)
         background.backgroundColor = UIColor(red: CGFloat(11) / 225.0,
                                              green: CGFloat(154) / 225.0,
                                              blue: CGFloat(117) / 225.0,
@@ -90,7 +122,7 @@ class LogCell: UITableViewCell {
     }
     
     private func setupTypeImage() {
-        
+        background.addSubview(typeImage)
         typeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
         typeImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
         typeImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
@@ -100,7 +132,7 @@ class LogCell: UITableViewCell {
     }
     
     private func setupAccountNameLable() {
-        
+        background.addSubview(accountNameLable)
         accountNameLable.font = UIFont.systemFont(ofSize: 18)
         
         accountNameLable.topAnchor.constraint(equalTo: contentView.topAnchor,
@@ -114,7 +146,7 @@ class LogCell: UITableViewCell {
     }
     
     private func setupSumLable() {
-        
+        background.addSubview(sumLable)
         sumLable.font = UIFont.systemFont(ofSize: 18)
         sumLable.textAlignment = .right
         
@@ -128,7 +160,7 @@ class LogCell: UITableViewCell {
     }
     
     private func setupCategoryNameLable() {
-        
+        background.addSubview(categoryNameLable)
         categoryNameLable.font = UIFont.systemFont(ofSize: 14)
         categoryNameLable.textColor = UIColor.gray
         
@@ -143,7 +175,7 @@ class LogCell: UITableViewCell {
     }
     
     private func setupDateLable() {
-        
+        background.addSubview(dateLable)
         dateLable.font = UIFont.italicSystemFont(ofSize: 12)
         dateLable.textColor = UIColor.gray
         
@@ -157,5 +189,5 @@ class LogCell: UITableViewCell {
             .constraint(equalTo: contentView.widthAnchor,
                         multiplier: 1 / 2).isActive = true
     }
-    
+
 }

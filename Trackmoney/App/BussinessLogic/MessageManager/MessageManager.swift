@@ -18,7 +18,7 @@ struct MessageManager {
         topButton: String,
         sum: Int32,
         bottomButton: String,
-        note: String,
+        note: String?,
         id: String?,
         date: String?,
         isRestore: Bool) -> Message {
@@ -35,7 +35,7 @@ struct MessageManager {
         if date != nil {
             dictionary[.date] = date
         }
-        if note != "" {
+        if note != nil {
             dictionary[.note] = note
         }
         

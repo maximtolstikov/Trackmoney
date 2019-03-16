@@ -6,23 +6,21 @@ class NoteAlert: AlertManager {
     func show(controller: UIViewController,
               text: String,
               completion: @escaping (String?) -> Void) {
-        
-        alertController = UIAlertController(title: NSLocalizedString("noteTitle",
-                                                                     comment: ""),
-                                            message: "",
-                                            preferredStyle: .alert)
-        let cancel = UIAlertAction(title: NSLocalizedString("cancelTitle",
-                                                            comment: ""),
-                                   style: .cancel) { _ in
-                                    self.alertController = nil
+        alertController = UIAlertController(
+            title: NSLocalizedString("noteTitle", comment: ""),
+            message: "",
+            preferredStyle: .alert)
+        let cancel = UIAlertAction(
+            title: NSLocalizedString("cancelTitle", comment: ""),
+            style: .cancel) { _ in
+                self.alertController = nil
         }
-        let save = UIAlertAction(title: NSLocalizedString("okTitle",
-                                                          comment: ""),
-                                 style: .default) { _ in
-                                    guard let textField = self.alertController.textFields?.first else { return }
-                                    
-                                    completion(textField.text)
-                                    self.alertController = nil
+        let save = UIAlertAction(
+            title: NSLocalizedString("okTitle", comment: ""),
+            style: .default) { _ in
+                guard let textField = self.alertController.textFields?.first else { return }
+                completion(textField.text)
+                self.alertController = nil
         }
         
         alertController.addTextField { (textField) in
@@ -30,8 +28,7 @@ class NoteAlert: AlertManager {
             textField.textAlignment = .center
             textField.text = text
             textField.delegate = self.alertController
-        }
-        
+        }        
         alertController.addAction(cancel)
         alertController.addAction(save)
         
