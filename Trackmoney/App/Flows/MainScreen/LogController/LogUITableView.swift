@@ -73,8 +73,10 @@ extension LogUITableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? LogCell,
-              let note = transactions[indexPath.row].note else { return }
-
+              let note = transactions[indexPath.row].note,
+              note != ""
+        else { return }
+        
         controller.showNote(on: cell, text: note)
     }
     

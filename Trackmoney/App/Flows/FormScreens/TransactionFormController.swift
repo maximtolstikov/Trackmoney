@@ -44,6 +44,7 @@ class TransactionFormController: BaseFormController {
     let noteButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.setTitle("✏️ ", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -70,20 +71,16 @@ class TransactionFormController: BaseFormController {
     // Создаем нижнюю кнопку выбора Счета или Категории
     func createBottomChoseButton() {
         
-        bottomChooseButton.setTitle(NSLocalizedString("emptyTitle", comment: ""),
-                                    for: .normal)
+        bottomChooseButton.setTitle(NSLocalizedString("emptyTitle", comment: ""), for: .normal)
         if let name = bottomChooseButtonText {
             bottomChooseButton.setTitle(name, for: .normal)
         }
         viewOnScroll.addSubview(bottomChooseButton)
-        
         bottomChooseButton.centerXAnchor.constraint(equalTo: viewOnScroll.centerXAnchor).isActive = true
         bottomChooseButton.widthAnchor.constraint(equalTo: viewOnScroll.widthAnchor, multiplier: 2 / 3).isActive = true
         bottomChooseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        bottomChooseButton.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
-                                                   constant: -40).isActive = true
-        bottomChooseButton.addTarget(self, action: #selector(tapBottomChooseButton),
-                                     for: .touchUpInside)
+        bottomChooseButton.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -40).isActive = true
+        bottomChooseButton.addTarget(self, action: #selector(tapBottomChooseButton), for: .touchUpInside)
         if let text = bottomChooseButtonText {
             bottomChooseButton.titleLabel?.text = text
         }
@@ -136,8 +133,7 @@ class TransactionFormController: BaseFormController {
     // Создает верхнюю кнопку вызова заметки
     func createNoteButton() {
         
-        noteButton.setTitle(NSLocalizedString("noteTitle", comment: ""),
-                            for: .normal)
+        
         viewOnScroll.addSubview(noteButton)
         
         noteButton.leftAnchor.constraint(equalTo: topChooseButton.rightAnchor,
@@ -322,7 +318,7 @@ class TransactionFormController: BaseFormController {
                       type: categoryType,
                       controller: self) { [weak self] (name) in
                         self?.bottomChooseButton.setTitle(name, for: .normal)
-            }
+                }
         }
     }
     
