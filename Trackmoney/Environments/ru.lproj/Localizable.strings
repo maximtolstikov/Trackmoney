@@ -25,7 +25,6 @@
 "expenseTitle" = "Расход";
 "incomeTitle" = "Доход";
 "transferTitle" = "Перевод";
-"noteTitle" = "✏️";
 "renameTitle" = "Переименовать?";
 "accountCreate" = "Счет создан!";
 "accountDelete" = "Счет удален!";

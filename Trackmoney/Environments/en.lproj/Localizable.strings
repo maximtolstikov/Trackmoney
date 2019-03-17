@@ -25,7 +25,6 @@
 "expenseTitle" = "Expense";
 "incomeTitle" = "Income";
 "transferTitle" = "Transfer";
-"noteTitle" = "✏️ ";
 "renameTitle" = "Rename?";
 "accountCreate" = "Account created!";
 "accountDelete" = "Account deleted!";

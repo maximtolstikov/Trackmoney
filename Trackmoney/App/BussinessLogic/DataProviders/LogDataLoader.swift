@@ -11,13 +11,13 @@ class LogDataLoader: DataProviderProtocol {
         let all = NSPredicate(value: true)
         let result = dbManager?.get(all)
         
-        guard let objects = result, let controller = controller else {
+        guard let objects = result as? [Transaction], let controller = controller else {
             assertionFailure()
             return
         }
         
-        let transactions = objects as? [Transaction]
-        controller.transactions = transactions?.reversed()
+        let reversedList = objects.reversed() as [Transaction]
+        controller.tableView.set(transactions: reversedList )
     }
     
     func save(message: Message, completion: @escaping Result) {}

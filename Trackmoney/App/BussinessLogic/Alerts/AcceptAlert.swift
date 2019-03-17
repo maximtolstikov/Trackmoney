@@ -15,9 +15,7 @@ class AcceptAlert: AlertManager {
         
         let decline = UIAlertAction(title: NSLocalizedString("declineTitle",
                                                             comment: ""),
-                                   style: .cancel) { [unowned self] _ in
-                                    self.deinitAlert()
-        }
+                                   style: .cancel) { _ in }
         
         let accept = UIAlertAction(title: NSLocalizedString("approveTitle",
                                                             comment: ""),
